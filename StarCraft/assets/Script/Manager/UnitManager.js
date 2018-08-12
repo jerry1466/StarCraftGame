@@ -7,15 +7,9 @@ import PrefabUtil from "PrefabUtil";
 let instance
 export default class UnitManager {
     constructor() {
-        this.player = null
-        this.enemy = null
-        this.myWood = null
-        this.enemyWood = null
-        this.bricks = []
-        this.walls = []
+        this.BrokeSpList = []
     }
-
-
+    
     static GetInstance() {
         if (instance == null) {
             instance = new UnitManager()

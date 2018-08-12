@@ -17,14 +17,12 @@ export default class ModuleConstant {
 
     register(){
         this.moduleNames["PanelMask"] = "Panel/PanelMask"
-        this.moduleNames["MissionPanel"] = "Panel/MissionPanel"
-        this.moduleNames["GameResultPanel"] = "Panel/GameResultPanel"
+        this.moduleNames["StarListPanel"] = "Panel/StarListPanel"
         this.moduleNames["RankPanel"] = "Panel/RankPanel"
         this.moduleNames["SimpleRankPanel"] = "Panel/SimpleRankPanel"
         this.moduleNames["AdPanel"] = "Panel/AdPanel"
         this.moduleNames["LoginPanel"] = "Panel/LoginPanel"
         this.moduleNames["Guide"] = "Panel/Guide"
-        this.moduleNames["MissionSelectPanel"] = "Panel/MissionSelectPanel"
         this.moduleNames["IntroducePanel"] = "Panel/IntroducePanel"
     }
 

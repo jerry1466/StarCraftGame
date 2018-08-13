@@ -17,7 +17,6 @@ cc.Class({
     },
 
     onLoad() {
-        //console.log(databus.cfgData.set.love_game_ad.type, databus.cfgData.set.love_game_ad.poster)
         wx.previewImage({
             urls:[ArrayUtil.GetRandomValue(databus.cfgData.set.more_game_ad.poster).img],
             success:function(res){

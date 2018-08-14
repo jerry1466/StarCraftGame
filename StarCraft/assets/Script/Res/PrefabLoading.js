@@ -4,7 +4,6 @@ import PrefabUtil from 'PrefabUtil';
 
 let PrefabInitNum = 4
 cc.Class({
-    name:PrefabLoading,
     extends:BasicResLoading,
     Load(){
         this._loadedIndex = 0;

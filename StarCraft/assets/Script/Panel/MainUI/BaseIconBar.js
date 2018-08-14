@@ -7,10 +7,9 @@ import EventUtil from 'EventUtil'
 import PrefabUtil from 'PrefabUtil'
 
 cc.Class({
-    name:BaseIconBar,
     extends: BaseFrame,
     properties: {
-        
+
     },
 
     AddFunction(iconCfg){

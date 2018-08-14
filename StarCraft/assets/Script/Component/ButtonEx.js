@@ -9,9 +9,9 @@ cc.Class({
     extends: cc.Component,
     properties: {
         target:cc.Node,
-        component:string,
-        handler:string,
-        customEventData:string,
+        component:"",
+        handler:"",
+        customEventData:"",
         clickSound:cc.AudioSource
     },
 

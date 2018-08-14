@@ -7,9 +7,8 @@ import BaseIconBar from 'BaseIconBar'
 
 let databus = new Databus()
 cc.Class({
-    name:LeftBar,
     extends: BaseIconBar,
     properties: {
-        
+
     },
 })

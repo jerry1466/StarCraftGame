@@ -32,7 +32,7 @@ export default class FindMeteor {
 		return this.planet
 	}
 
-	CreateMeteor(num) {
+	spliteScreenToBlock(num) {
 		//假设屏幕的坐标原点在屏幕底部正中间
 		var block = {top:databus.screenHeight, left:(0 - databus.screenWidth / 2), right:(databus.screenWidth / 2), buttom:0}
 		var blockList = new Array()
@@ -57,6 +57,12 @@ export default class FindMeteor {
 			}
 		}
 
+		return blockList
+	}
+
+	CreateMeteor(num) {
+		var blockList = this.spliteScreenToBlock(num)
+
 		//在每个分块里面随机出来一个流星
 		var meteor = null
 		for (var i = blockList.length - 1; i > 0; i--) {
@@ -78,6 +84,20 @@ export default class FindMeteor {
         {
             this.RemoveMeteor(this.meteorList[i]);
         }
+    }
+
+    CreateBlackHole(num) {
+		var blockList = this.spliteScreenToBlock(num)
+
+		var blackhole = null
+		for (var i = blockList.length - 1; i > 0; i--) {
+			this.loadRes("blackhole", function(instance) {
+				blackhole = instance.addComponent("blackhole")
+			})
+			blocktmp = blockList[i]
+			blackhole.Init(blocktmp.top, blocktmp.buttom, blocktmp.left, blocktmp.right)
+			this.blackholeList.push(blackhole)
+		}
     }
 
     loadRes(resName, callback) {

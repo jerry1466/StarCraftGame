@@ -1005,7 +1005,7 @@
     "_cascadeOpacityEnabled": true,
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0.5,
+      "x": 0,
       "y": 0.5
     },
     "_contentSize": {
@@ -1019,7 +1019,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 0,
+      "x": -480,
       "y": -410
     },
     "_skewX": 0,
@@ -1981,53 +1981,15 @@
     "bgm": {
       "__id__": 4
     },
-    "bgmSelectSound": {
-      "__id__": 6
-    },
-    "bgmWipeOff": {
-      "__id__": 8
-    },
-    "bgmWin": {
-      "__id__": 12
-    },
-    "bgmLose": {
-      "__id__": 14
-    },
-    "bgmExplod": {
-      "__id__": 10
-    },
-    "bg": {
-      "__id__": 16
-    },
-    "borderTop": {
-      "__id__": 24
-    },
-    "borderBottom": {
-      "__id__": 27
-    },
-    "borderLeft": {
-      "__id__": 18
-    },
-    "borderRight": {
-      "__id__": 21
-    },
-    "player": {
-      "__id__": 33
-    },
-    "enemy": {
-      "__id__": 36
-    },
-    "itemBar": {
-      "__id__": 45
-    },
-    "clickArea": {
-      "__id__": 39
-    },
+    "btnMyStars": null,
+    "btnFix": null,
+    "btnSearch": null,
+    "hud": null,
+    "leftBar": null,
+    "bottomBar": null,
+    "star": null,
     "subFieldView": {
       "__id__": 38
-    },
-    "cutScene": {
-      "__id__": 44
     }
   }
 ]

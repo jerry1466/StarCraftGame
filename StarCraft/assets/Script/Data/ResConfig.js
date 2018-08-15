@@ -13,6 +13,16 @@ let res=
 }
 
 export default class ResConfig{
+    static GetAllRes(){
+        var resList = [];
+        for(var mainKey in res){
+            for(var subKey in res[mainKey]){
+                resList.push(res[mainKey][subKey])
+            }
+        }
+        return resList;
+    }
+
     static MainBg(){
         return res["bg"]["main"]
     }

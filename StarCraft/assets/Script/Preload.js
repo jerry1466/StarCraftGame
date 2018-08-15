@@ -22,17 +22,7 @@ cc.Class({
             type:cc.Button,
         },
 
-        btnRule: {
-            default: null,
-            type:cc.Button,
-        },
-
         btnShare: {
-            default: null,
-            type:cc.Button
-        },
-
-        btnBook:{
             default: null,
             type:cc.Button
         },
@@ -140,38 +130,12 @@ cc.Class({
         new LevelManager().SwitchLevel("battle", databus.startMission)
     },
 
-    onRuleClick(){
-        ModuleManager.GetInstance().ShowModule("RuleTipPanel")
-    },
-
-    onMissionSelectClick(){
-        if(this.trickClickCount == null || this.trickClickCount == 0)
-        {
-            this.trickClickCount = 1
-        }
-        else
-        {
-            this.trickClickCount += 1
-        }
-        if(this.trickClickCount == 10)
-        {
-            ModuleManager.GetInstance().ShowModule("MissionSelectPanel")
-            this.trickClickCount = 0
-        }
-        var _this = this
-        setTimeout(function(){_this.trickClickCount = 0}, 3000)
-    },
-
     onShareClick(){
         InterfaceManager.GetInstance().ShareWithImg()
     },
 
     onRankClick(){
         ModuleManager.GetInstance().ShowModule("SimpleRankPanel")
-    },
-
-    onBookClick(){
-        ModuleManager.GetInstance().ShowModule("MissionSelectPanel")
     },
 
     onAiWanClick(){

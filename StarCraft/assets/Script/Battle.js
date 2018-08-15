@@ -4,6 +4,7 @@
  **/
 import GameInfo from 'GameInfo'
 import EventUtil from 'EventUtil'
+import MoneyUtil from 'MoneyUtil'
 import Databus from 'Databus'
 import SceneManager from 'SceneManager'
 import TweenScale from 'TweenScale'
@@ -20,6 +21,7 @@ import StarModel from 'StarModel';
 import UnitManager from "UnitManager";
 import ResourceManager from "ResourceManager";
 import ResConfig from 'ResConfig';
+import StarConfig from "./Data/StarConfig";
 
 let databus = new Databus()
 cc.Class({
@@ -85,7 +87,13 @@ cc.Class({
     },
 
     onFixClick(){
-
+        var fixCost = StarConfig.GetStarBrokeList(databus.userInfo.brokeFixIndex + 1);
+        var moneyType = 2;
+        MoneyUtil.Spend(moneyType, fixCost, "修复该星球破损吗？", function(success){
+            if(success){
+                databus.AddMoney(moneyType, 0-fixCost);
+            }
+        })
     },
 
     refreshStar(){

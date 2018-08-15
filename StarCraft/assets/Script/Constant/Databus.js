@@ -32,6 +32,50 @@ export default class Databus {
         }
     }
 
+    Reset(){
+        this.passGuide = false;
+        this.guide1 = false;
+        this.guide2 = false;
+        this.guide3 = false;
+    }
+
+    GetMoneyNum(moneyType){
+        if(moneyType == 1)
+        {
+            return this.userInfo.diamond;
+        }
+        else if(moneyType == 2)
+        {
+            return this.userInfo.meteor;
+        }
+    }
+
+    GetMoneyName(moneyType){
+        if(moneyType == 1)
+        {
+            return "钻石";
+        }
+        else if(moneyType == 2)
+        {
+            return "流星";
+        }
+    }
+
+    AddMoney(moneyType, num){
+        if(moneyType == 1){
+            this.userInfo.diamond += num;
+            if(this.userInfo.diamond < 0){
+                this.userInfo.diamond = 0;
+            }
+        }
+        else if(moneyType == 2){
+            this.userInfo.meteor += num;
+            if(this.userInfo.meteor < 0){
+                this.userInfo.meteor = 0;
+            }
+        }
+    }
+
     GetInstance() {
         if (instance == null) {
             instance = new Databus()

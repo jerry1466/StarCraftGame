@@ -31,24 +31,28 @@ cc.Class({
 		this.meteorNum = 0
 
 		var _this = this
-        EventUtil.GetInstance().AddEventListener("CANVAS_TOUCH_START", function(x:number, y:number){
-			//here x refers to e.touch._point.x
-			_this.setPosition(x, y);
-		})
-
-		EventUtil.GetInstance().AddEventListener("CANVAS_TOUCH_MOVE", function(x:number, y:number){
-			//here x refers to e.touch._point.x
-			_this.setPosition(x, y);
-		})
+        EventUtil.GetInstance().AddEventListener("CANVAS_TOUCH_START", function() {
+			EventUtil.GetInstance().AddEventListener("CANVAS_TOUCH_MOVE", onTouchMove)
+			EventUtil.GetInstance().AddEventListener("CANVAS_TOUCH_END", onTouchEnd)
+        })
     },
+
+	onTouchMove(x, y) {
+    	this.setPosition(x, y)
+	},
+
+	onTouchEnd() {
+		EventUtil.GetInstance().RemoveEventListener("CANVAS_TOUCH_MOVE", onTouchMove)
+		EventUtil.GetInstance().RemoveEventListener("CANVAS_TOUCH_END", onTouchEnd)
+	},
 
     GetOneMeteor() {
 		this.meteorNum += 1
-    }
+    },
 
 	ReduceLife() {
 		this.lift -= 1
-	}
+	},
 
 	setPosition(x, y) {
 		this.node.x = x

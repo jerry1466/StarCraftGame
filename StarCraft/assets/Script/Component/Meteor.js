@@ -17,11 +17,11 @@ cc.Class({
     	if (!this.is_valid) {
 			return
     	}
-		var planet = FindMeteor.GetPlanet()
+		var planet = FindMeteor.GetInstance().GetPlanet()
 		if (MathUtil.HitTest(this, planet)) {
 			this.is_valid = false
-			FindMeteor.RemoveMeteor(this)
-			planet.GetMeteor()
+			FindMeteor.GetInstance().RemoveMeteor(this)
+			planet.GetOneMeteor()
 		}
     },
 

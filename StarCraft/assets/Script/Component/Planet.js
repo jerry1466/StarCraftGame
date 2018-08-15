@@ -50,6 +50,10 @@ cc.Class({
 		this.meteorNum += 1
     },
 
+    GetMeteorNum() {
+		return this.meteorNum
+    },
+
 	ReduceLife() {
 		this.lift -= 1
 	},

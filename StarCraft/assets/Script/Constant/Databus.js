@@ -16,6 +16,10 @@ export default class Databus {
         this.soundEnable = true
         this.screenWidth = 375
         this.screenHeight = 812
+        this.screenTop = databus.screenHeight
+        this.screenButtom = 0
+        this.screeLeft = 0 - databus.screenWidth / 2
+        this.screeRight = databus.screenWidth / 2
         this.screenRatio = 1
         this.adHeight = 110
         this.gameRegion = cc.v2(370, 550)

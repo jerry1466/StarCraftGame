@@ -56,7 +56,7 @@ export default class FindMeteor {
     ClearAllMeteor() {
         for(var i = this.meteorList.length - 1; i >= 0; i--)
         {
-            this.RemoveMeteor(this.meteorList[i]);
+            this.RemoveMeteor(this.meteorList[i])
         }
     }
 
@@ -73,6 +73,18 @@ export default class FindMeteor {
 			this.blackholeList.push(blackhole)
 		}
     }
+
+	
+	RemoveBlackHole(blackhole) {
+		this.blackholeList.splice(this.blackholeList.indexOf(blackhole), 1)
+	}
+    
+	ClearAllBlackHole() {
+		for(var i = this.blackholeList.length - 1; i >= 0; i--)
+		{
+			this.RemoveBlackHole(this.blackholeList[i]);
+		}
+	}
 
     loadRes(resName, callback) {
         PrefabUtil.GetPrefabInstance(resName, function(success, instance){

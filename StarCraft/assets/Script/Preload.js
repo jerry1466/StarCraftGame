@@ -54,6 +54,10 @@ cc.Class({
                 success:function(res){
                     databus.screenWidth = res.windowWidth
                     databus.screenHeight = res.windowHeight
+                    databus.screenTop = databus.screenHeight
+                    databus.screenButtom = 0
+                    databus.screeLeft = 0 - databus.screenWidth / 2
+                    databus.screeRight = databus.screenWidth / 2
                     databus.isIphoneX = (databus.screenWidth == 375) && (databus.screenHeight == 812)
                     //temp.bg.node.width = res.windowWidth
                     //temp.bg.node.height = res.windowHeight

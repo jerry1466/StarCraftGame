@@ -20,6 +20,7 @@ cc.Class({
 
 		if (this.life <= 0) {
 			this.is_valid = false
+			FindMeteor.GetInstance().GameOver()
 		}
     },
 
@@ -55,7 +56,7 @@ cc.Class({
     },
 
 	ReduceLife() {
-		this.lift -= 1
+		this.life -= 1
 	},
 
 	setPosition(x, y) {

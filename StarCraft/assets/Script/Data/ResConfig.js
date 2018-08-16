@@ -3,12 +3,12 @@ let res=
     "bg":
     {
         "main":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-
+		"findmeteor":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png"
     },
     "icon":
     {
         "diamond":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png",
-        "meteor":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png"
+        "meteor":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png",
     }
 }
 
@@ -33,5 +33,17 @@ export default class ResConfig{
 
     static MeteorIcon(){
         return res["icon"]["meteor"]
+    }
+
+    static FindMeteorBg() {
+		return res["bg"]["findmeteor"]
+    }
+
+    static BlackHoleIcon() {
+		return res["icon"]["blackhole"]
+    }
+
+    static PlanetIcon() {
+		return res["icon"]["planet"]
     }
 }

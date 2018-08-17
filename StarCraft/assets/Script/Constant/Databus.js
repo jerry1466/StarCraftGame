@@ -23,6 +23,8 @@ export default class Databus {
         this.screenRatio = 1
         this.adHeight = 110
         this.gameRegion = cc.v2(370, 550)
+        this.mazeRow = 15
+        this.mazeColumn = 10
         /**************用户数据*************/
         this.userInfo = {
             curStarId:1001,

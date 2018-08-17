@@ -2,6 +2,7 @@ let data =
 {
     "1001":
     {
+        "id":1001,
         "name":"水星",
         "appearance":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "icon":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
@@ -16,6 +17,7 @@ let data =
     },
     "1002":
     {
+        "id":1002,
         "name":"金星",
         "appearance":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "icon":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
@@ -30,6 +32,7 @@ let data =
     },
     "1003":
     {
+        "id":1003,
         "name":"地球",
         "appearance":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "icon":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",

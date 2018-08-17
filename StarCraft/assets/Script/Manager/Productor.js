@@ -26,11 +26,15 @@ export default class Productor{
     Update(){
         if(this._produce)
         {
-            databus.AddMoney(2, this.GetProductivity())
+            databus.AddMoney(2, this.GetTotalProductivity())
         }
     }
 
-    GetProductivity(){
+    GetTotalProductivity(){
         return 10;
+    }
+
+    GetStarProductivity(config, brokeFixIndex){
+        return config["singleProduct"] * (brokeFixIndex + 1);
     }
 }

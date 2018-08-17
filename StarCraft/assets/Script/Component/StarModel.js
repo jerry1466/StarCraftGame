@@ -55,5 +55,9 @@ cc.Class({
             this._brokeFixIndex = databus.userInfo.brokeFixIndex;
             TweenAlpha.begin(this._brokeSpList[databus.userInfo.brokeFixIndex], 1, 0, 0.5, 1);
         }
+    },
+
+    Switch(){
+
     }
 })

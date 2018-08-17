@@ -76,14 +76,20 @@ cc.Class({
 
     registerEventHandler(){
         EventUtil.GetInstance().AddEventListener("RefreshStar", this.refreshStar)
+        EventUtil.GetInstance().AddEventListener("SwitchStar", this.switchStar)
     },
     
     unRegisterEventHandler(){
         EventUtil.GetInstance().RemoveEventListener("RefreshStar", this.refreshStar)
+        EventUtil.GetInstance().RemoveEventListener("SwitchStar", this.switchStar)
+    },
+
+    onMyStarList(){
+        ModuleManager.GetInstance().ShowModule("StarListPanel")
     },
 
     onSearchClick(){
-        ModuleManager.GetInstance().ShowModule("StarListPanel")
+        LevelManager.GetInstance().SwitchLevel("Maze")
     },
 
     onFixClick(){
@@ -98,5 +104,9 @@ cc.Class({
 
     refreshStar(){
         this.star.Refresh()
+    },
+
+    switchStar(){
+        this.star.Switch()
     }
 })    

@@ -21,18 +21,19 @@ export default class GameAffair {
         return instance
     }
 
+    InitMap(){
+        for(var i = 0; i < databus.mazeRow; i++)
+            for(var j = 0; j < databus.mazeColumn; j++)
+            {
+
+            }
+    }
+
+    AffairHappen(row, column){
+
+    }
+
     Happen(temp, targetGridY, targetGridX, sourceGridY, sourceGridX, explod) {
-        /*
-        var array = []
-        if(explod){
-            array.concat(this.surround(targetGridX, targetGridY))
-            array.concat(this.surround(sourceGridX, sourceGridY))
-        }
-        else{
-            array.push(cc.v2(targetGridX, targetGridY))
-            array.push(cc.v2(sourceGridX, sourceGridY))
-        }
-        */
         var affairType = databus.GetNextAffair()
         if(affairType == AffairConstant.AffairEnum().UP_MOVE)
         {
@@ -205,71 +206,6 @@ export default class GameAffair {
             }
         }
     }
-    /*
-    upMove(temp, points){
-        points.sort(function(a, b){
-            return b.y - a.y
-        })
-        for(var i = 0; i < points.length; i++)
-        {
-            var x = points[i].x
-            var y = points[i].y
-            for(var j = x; j <= databus.gridRow - 2; j++)
-            {
-                var replaceType = temp.unitList[j + 1][y].type
-                temp.unitList[j][y].ChangeType(replaceType)
-            }
-        }
-    }
-
-    downMove(temp, points){
-        points.sort(function(a, b){
-            return a.y - b.y
-        })
-        for(var i = 0; i < points.length; i++)
-        {
-            var x = points[i].x
-            var y = points[i].y
-            for(var j = x; j >= 1; j--)
-            {
-                var replaceType = temp.unitList[j - 1][y].type
-                temp.unitList[j][y].ChangeType(replaceType)
-            }
-        }
-    }
-
-    leftMove(temp, points){
-        points.sort(function(a, b){
-            return b.x - a.x
-        })
-        for(var i = 0; i < points.length; i++)
-        {
-            var x = points[i].x
-            var y = points[i].y
-            for(var j = y; j <= databus.gridColumn - 2; j++)
-            {
-                var replaceType = temp.unitList[x][j + 1].type
-                temp.unitList[x][j].ChangeType(replaceType)
-            }
-        }
-    }
-
-    rightMove(temp, points){
-        points.sort(function(a, b){
-            return a.x - b.x
-        })
-        for(var i = 0; i < points.length; i++)
-        {
-            var x = points[i].x
-            var y = points[i].y
-            for(var j = y; j >= 1; j--)
-            {
-                var replaceType = temp.unitList[x][j - 1].type
-                temp.unitList[x][j].ChangeType(replaceType)
-            }
-        }
-    }
-    */
 
     fill(targetGridY, targetGridX, sourceGridY, sourceGridX){
         var temp = GameInfo.GetInstance()

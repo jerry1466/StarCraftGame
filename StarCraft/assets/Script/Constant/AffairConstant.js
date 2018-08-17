@@ -4,11 +4,17 @@
  */
 let instance
 let affairEnum = {
-    UP_MOVE: "up_move",
-    DOWN_MOVE: "down_move",
-    LEFT_MOVE: "left_move",
-    RIGHT_MOVE: "right_move",
-    FILL: "fill"
+    NONE:"none",
+    REWARD: "reward",
+    BACK_ORIGIN: "back_origin",
+    GAME: "game",
+}
+
+let affairRate = {
+    NONE:0,
+    REWARD:65,
+    BACK_ORIGIN:10,
+    GAME:25,
 }
 
 export default class AffairConstant {
@@ -18,5 +24,9 @@ export default class AffairConstant {
 
     static AffairEnum(){
         return affairEnum
+    }
+
+    static AffairRate(){
+        return affairRate
     }
 }

@@ -3,7 +3,9 @@ let res=
     "bg":
     {
         "main":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-		"findmeteor":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png"
+		"findmeteor":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "messagebox":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "introBg":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
     },
     "icon":
     {
@@ -37,6 +39,14 @@ export default class ResConfig{
 
     static FindMeteorBg() {
 		return res["bg"]["findmeteor"]
+    }
+
+    static MessageBoxBg() {
+        return res["bg"]["messagebox"]
+    }
+
+    static IntroBg(){
+        return res["bg"]["introBg"]
     }
 
     static BlackHoleIcon() {

@@ -40,6 +40,7 @@ cc.Class({
     },
 
     onLoad () {
+        SceneManager.GetInstance().rootCanvas = this.node
         this.tex = new cc.Texture2D();
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MainBg())
 

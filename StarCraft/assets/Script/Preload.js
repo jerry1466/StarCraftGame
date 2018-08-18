@@ -37,7 +37,7 @@ cc.Class({
 
     onLoad:function(){
         var temp = this
-        SceneManager.GetInstance().rootCanvas = temp.node
+        SceneManager.GetInstance().rootCanvas = this.node
         if(CC_WECHATGAME)
         {
             wx.getSystemInfo({

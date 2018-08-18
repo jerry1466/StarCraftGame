@@ -32,8 +32,8 @@ cc.Class({
     },
 
     update(dt) {
-        this.DiamondCon.UpdateCoin(databus.diamond);
-        this.MeteorCon.UpdateCoin(databus.meteor);
+        this.DiamondCon.UpdateCoin(databus.userInfo.diamond);
+        this.MeteorCon.UpdateCoin(databus.userInfo.meteor);
     },
 
     onDestroy() {

@@ -15,14 +15,14 @@ export default class FindMeteor {
         this.meteorList = new Array()
         this.blackholeList = new Array()
         this.gameOver = false
-    },
+    }
 
     static GetInstance() {
         if (instance == null) {
             instance = new FindMeteor()
         }
         return instance
-    },
+    }
 
 	CreatePlanet() {
 		var _this = this
@@ -31,11 +31,11 @@ export default class FindMeteor {
 			planet.init()
 			_this.planet = planet
 		})
-	},
+	}
 
 	GetPlanet() {
 		return this.planet
-	},
+	}
 
 	CreateMeteor(num) {
 		var blockList = MathUtil.spliteScreenToBlock(num)
@@ -51,18 +51,18 @@ export default class FindMeteor {
 			meteor.Init(blocktmp.top, blocktmp.buttom, blocktmp.left, blocktmp.right)
 			_this.meteorList.push(meteor)
 		}
-	},
+	}
 
     RemoveMeteor(meteor) {
         this.meteorList.splice(this.meteorList.indexOf(meteor), 1)
-    },
+    }
 
     ClearAllMeteor() {
         for(var i = this.meteorList.length - 1; i >= 0; i--)
         {
             this.RemoveMeteor(this.meteorList[i])
         }
-    },
+    }
 
     CreateBlackHole(num) {
 		var blockList = MathUtil.spliteScreenToBlock(num)
@@ -77,19 +77,19 @@ export default class FindMeteor {
 			blackhole.Init(blocktmp.top, blocktmp.buttom, blocktmp.left, blocktmp.right)
 			_this.blackholeList.push(blackhole)
 		}
-    },
+    }
 
 	
 	RemoveBlackHole(blackhole) {
 		this.blackholeList.splice(this.blackholeList.indexOf(blackhole), 1)
-	},
+	}
     
 	ClearAllBlackHole() {
 		for(var i = this.blackholeList.length - 1; i >= 0; i--)
 		{
 			this.RemoveBlackHole(this.blackholeList[i]);
 		}
-	},
+	}
 
     loadRes(resName, callback) {
         PrefabUtil.GetPrefabInstance(resName, function(success, instance){
@@ -101,7 +101,7 @@ export default class FindMeteor {
                 }
             }
         })
-    },
+    }
 
     GameOver() {
 		this.gameOver = true

@@ -1,4 +1,6 @@
 import Databus from "Databus";
+import UIUtil from "UIUtil";
+import SceneManager from "SceneManager"
 
 let instance
 let databus = new Databus()
@@ -26,7 +28,10 @@ export default class Productor{
     Update(){
         if(this._produce)
         {
-            databus.AddMoney(2, this.GetTotalProductivity())
+            var moneyType = 2
+            var moneyNum = this.GetTotalProductivity()
+            databus.AddMoney(moneyType, moneyNum)
+            UIUtil.ShowMoneyNotice(moneyType, moneyNum, SceneManager.GetInstance().rootCanvas, cc.v2(0, 300))
         }
     }
 

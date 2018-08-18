@@ -5,7 +5,9 @@
 import LevelManager from 'LevelManager'
 import ResourceManager from 'ResourceManager'
 import Databus from 'Databus'
-import ResConfig from "ResConfig";
+import ImageLoading from 'ImageLoading'
+import PrefabLoading from "PrefabLoading"
+import SceneManager from 'SceneManager'
 
 let databus = new Databus()
 cc.Class({
@@ -16,16 +18,13 @@ cc.Class({
         lbCompany:""
     },
 
-    update() {
-
-    },
-
     onDestroy() {
 
     },
 
 
     onLoad() {
+        SceneManager.GetInstance().rootCanvas = this.node
         ResourceManager.LoadRemoteSprite(this.spBg, "https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png")
         var that = this
         wx.request({
@@ -48,18 +47,39 @@ cc.Class({
                 console.log("index.js wx.request CheckCallUser fail");
             },
         })
+        this.lbCompany.string = "有來有趣网络科技"
     },
 
     startLoad(){
-        cc.loader.load(ResConfig.GetAllRes(), this.progressCallback.bind(this), this.completeCallback.bind(this))
+        this.loadList = [new ImageLoading(), new PrefabLoading()]
+        this.loadIndex = 0;
+        this.doLoad();
     },
 
-    progressCallback(completeCount, totalCount, res) {
-        var progress = completeCount / totalCount;
-        this.barloading.progress = progress;
+    doLoad(){
+        if(this.loadIndex >= this.loadList.length){
+            new LevelManager().SwitchLevel("preload", 0)
+        }
+        else{
+            this.loadList[this.loadIndex].Load()
+        }
     },
 
-    completeCallback(){
-        new LevelManager().SwitchLevel("preload", 0)
-    }
+    update() {
+        var blockPercent = 1 / this.loadList.length;
+        if(this.loadIndex < this.loadList.length){
+            var currentResLoading = this.loadList[this.loadIndex];
+            var totalPerent = (this.loadIndex - 1) * blockPercent + currentResLoading.GetProgress();
+            this.barloading.progress = totalPerent;
+        }
+        else{
+            this.barloading.progress = 1
+        }
+
+        if(currentResLoading.IsComplete())
+        {
+            this.loadIndex++;
+            this.doLoad();
+        }
+    },
 })    

@@ -9,7 +9,7 @@ import SceneManager from "SceneManager";
 import EventUtil from "EventUtil";
 import MazeManager from "MazeManager";
 import ModuleManager from "ModuleManager";
-import EffectUtil from "./Lib/EffectUtil";
+import EffectUtil from "EffectUtil";
 
 let databus = new Databus()
 cc.Class({

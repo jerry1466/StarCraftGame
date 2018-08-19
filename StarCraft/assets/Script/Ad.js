@@ -5,6 +5,7 @@
 import Databus from 'Databus'
 import ArrayUtil from "ArrayUtil"
 import LevelManager from "LevelManager"
+import BuffBase from "BuffBase";
 
 let databus = new Databus()
 cc.Class({
@@ -26,7 +27,7 @@ cc.Class({
     },
 
     update() {
-
+        BuffBase.Update();
     },
 
     onDestroy() {

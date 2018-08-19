@@ -8,6 +8,7 @@ import Databus from 'Databus'
 import ImageLoading from 'ImageLoading'
 import PrefabLoading from "PrefabLoading"
 import SceneManager from 'SceneManager'
+import BuffBase from "BuffBase";
 
 let databus = new Databus()
 cc.Class({
@@ -66,6 +67,7 @@ cc.Class({
     },
 
     update() {
+        BuffBase.Update();
         var blockPercent = 1 / this.loadList.length;
         if(this.loadIndex < this.loadList.length){
             var currentResLoading = this.loadList[this.loadIndex];

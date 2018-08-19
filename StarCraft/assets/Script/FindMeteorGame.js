@@ -14,7 +14,7 @@ import UnitManager from "UnitManager";
 import ResourceManager from "ResourceManager";
 import FindMeteor from "FindMeteor";
 import ResConfig from 'ResConfig';
-
+import BuffBase from "BuffBase";
 
 let databus = new Databus()
 cc.Class({
@@ -36,6 +36,7 @@ cc.Class({
     },
 
     update() {
+        BuffBase.Update();
     },
 
     onDestroy() {

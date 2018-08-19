@@ -7,6 +7,7 @@ import ArrayUtil from "ArrayUtil"
 import EventUtil from "EventUtil";
 import StatisticManager from "StatisticManager";
 import TweenPosition from "TweenPosition"
+import BuffBase from "BuffBase";
 
 let databus = new Databus()
 
@@ -99,6 +100,10 @@ cc.Class({
 
 
         //this.tweenStage1()
+    },
+
+    update(){
+        BuffBase.Update();
     },
 
     tweenStage1(){

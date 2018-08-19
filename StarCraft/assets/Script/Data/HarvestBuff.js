@@ -1,31 +1,21 @@
-import BuffBase from "BuffBase"
+import BasicBuff from "BasicBuff"
+import BuffBase from "BuffBase";
+import Productor from "Productor";
 
-export default class Harvest {
-	extends: BasePanel,
-
-	onLoad() {
-		this.lastTime = 30 * 60
-		this.active = false
-    },
-
-    Active() {
-		this.active = true
-		this.endTime = getTime() + this.lastTime
-		BuffBase.AddBuff(this)
-    },
-
-    Timeout() {
-		if (getTime() >= this.endTime) {
-			this.active = false
-			BuffBase.DelBuff(this)
-		}
+export default class Harvest extends BasicBuff {
+	constructor(buffId) {
+		super(buffId);
     }
 
-    Buffing(param) {
-		if (this.active) {
-			return param * 20 / 100
-		}
+    Active(startTime){
+		super.Active();
+        Productor.GetInstance().accerlate *= 1.2;
+	}
 
-		return param	
+    UnActive() {
+        Productor.GetInstance().accerlate /= 1.2;
+        super.UnActive();
     }
 }
+
+BuffBase.RegisterBuff(1, new Harvest(1));

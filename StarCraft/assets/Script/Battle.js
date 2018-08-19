@@ -22,6 +22,7 @@ import UnitManager from "UnitManager";
 import ResourceManager from "ResourceManager";
 import ResConfig from 'ResConfig';
 import StarConfig from "StarConfig";
+import BuffBase from "BuffBase";
 
 let databus = new Databus()
 cc.Class({
@@ -57,6 +58,7 @@ cc.Class({
     },
 
     update() {
+        BuffBase.Update();
         if(databus.showNextGoal)
         {
             this.subFieldView.node.active = true;

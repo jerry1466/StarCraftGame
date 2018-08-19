@@ -1,13 +1,12 @@
 import Databus from "Databus";
 import UIUtil from "UIUtil";
 import SceneManager from "SceneManager"
-import HarvestBuff from "HarvestBuff"
 
 let instance
 let databus = new Databus()
 export default class Productor{
     constructor(){
-
+        this.accerlate = 1;
     }
 
     static GetInstance(){
@@ -30,8 +29,7 @@ export default class Productor{
         if(this._produce)
         {
             var moneyType = 2
-            var moneyNum = this.GetTotalProductivity()
-            moneyNum = HarvestBuff.Buffing(moneyNum)
+            var moneyNum = this.GetTotalProductivity() * this.accerlate;
             databus.AddMoney(moneyType, moneyNum)
             UIUtil.ShowMoneyNotice(moneyType, moneyNum, SceneManager.GetInstance().rootCanvas, cc.v2(0, 300))
         }

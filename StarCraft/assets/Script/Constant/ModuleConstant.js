@@ -24,6 +24,7 @@ export default class ModuleConstant {
         this.moduleNames["LoginPanel"] = "Panel/LoginPanel";
         this.moduleNames["Guide"] = "Panel/Guide";
         this.moduleNames["IntroducePanel"] = "Panel/IntroducePanel";
+        this.moduleNames["DiamondRewardBox"] = "Panel/DiamondRewardBox";
         this.moduleNames["MeteorRewardBox"] = "Panel/MeteorRewardBox";
         this.moduleNames["RobBox"] = "Panel/RobBox";
     }

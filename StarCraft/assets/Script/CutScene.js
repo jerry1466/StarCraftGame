@@ -8,6 +8,7 @@ import SceneManager from 'SceneManager'
 import ResConfig from "ResConfig";
 import EffectUtil from 'EffectUtil';
 import LevelManager from "LevelManager";
+import BuffBase from "BuffBase";
 
 let databus = new Databus()
 cc.Class({
@@ -27,4 +28,8 @@ cc.Class({
             LevelManager.GetInstance().SwitchNextLevel()
         });
     },
+
+    update() {
+        BuffBase.Update();
+    }
 })

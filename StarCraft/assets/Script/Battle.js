@@ -21,7 +21,7 @@ import StarModel from 'StarModel';
 import UnitManager from "UnitManager";
 import ResourceManager from "ResourceManager";
 import ResConfig from 'ResConfig';
-import StarConfig from "./Data/StarConfig";
+import StarConfig from "StarConfig";
 
 let databus = new Databus()
 cc.Class({

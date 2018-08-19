@@ -26,5 +26,25 @@ export default class EffectUtil {
         })
     }
 
-
+    static PlayFullScreenEffect(effectName, anim, parentNode, position, callback) {
+        PrefabUtil.GetPrefabInstance("Effect/" + effectName, function(success, instance){
+            if(success)
+            {
+                instance.parent = parentNode
+                instance.x = position.x
+                instance.y = position.y
+                var animationCom = instance.getComponent(cc.Animation);
+                animationCom.once('finished', function(){
+                    if(callback)
+                    {
+                        instance.removeFromParent();
+                        instance.destroy();
+                        instance = null;
+                        callback();
+                    }
+                });
+                animationCom.play(anim);
+            }
+        })
+    }
 }

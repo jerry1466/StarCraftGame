@@ -4,17 +4,17 @@
  */
 let instance
 let affairEnum = {
-    NONE:"none",
-    REWARD: "reward",
-    BACK_ORIGIN: "back_origin",
-    GAME: "game",
+    NONE:0,
+    REWARD:1,
+    ROB:2,
+    GAME:11,
+    FREEZE:111
 }
 
-let affairRate = {
-    NONE:0,
-    REWARD:65,
-    BACK_ORIGIN:10,
-    GAME:25,
+let affairHardLevel = {
+    Easy:10,
+    Common:100,
+    Hard:1000,
 }
 
 export default class AffairConstant {
@@ -26,7 +26,19 @@ export default class AffairConstant {
         return affairEnum
     }
 
-    static AffairRate(){
-        return affairRate
+    static AffairLevelIndex(affairType){
+        if(affairType <= affairHardLevel.Easy)
+        {
+            return 1;
+        }
+        else if(affairType <= affairHardLevel.Common)
+        {
+            return 2;
+        }
+        else if(affairType <= affairHardLevel.Hard)
+        {
+            return 3;
+        }
+        return 0;
     }
 }

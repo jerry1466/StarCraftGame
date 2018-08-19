@@ -9,24 +9,26 @@ export default class ModuleConstant {
         {
             return instance
         }
-        instance = new ModuleConstant()
-        instance.moduleNames = {}
-        instance.register()
+        instance = new ModuleConstant();
+        instance.moduleNames = {};
+        instance.register();
         return instance
     }
 
     register(){
-        this.moduleNames["PanelMask"] = "Panel/PanelMask"
-        this.moduleNames["StarListPanel"] = "Panel/StarListPanel"
-        this.moduleNames["RankPanel"] = "Panel/RankPanel"
-        this.moduleNames["SimpleRankPanel"] = "Panel/SimpleRankPanel"
-        this.moduleNames["AdPanel"] = "Panel/AdPanel"
-        this.moduleNames["LoginPanel"] = "Panel/LoginPanel"
-        this.moduleNames["Guide"] = "Panel/Guide"
-        this.moduleNames["IntroducePanel"] = "Panel/IntroducePanel"
+        this.moduleNames["PanelMask"] = "Panel/PanelMask";
+        this.moduleNames["StarListPanel"] = "Panel/StarListPanel";
+        this.moduleNames["RankPanel"] = "Panel/RankPanel";
+        this.moduleNames["SimpleRankPanel"] = "Panel/SimpleRankPanel";
+        this.moduleNames["AdPanel"] = "Panel/AdPanel";
+        this.moduleNames["LoginPanel"] = "Panel/LoginPanel";
+        this.moduleNames["Guide"] = "Panel/Guide";
+        this.moduleNames["IntroducePanel"] = "Panel/IntroducePanel";
+        this.moduleNames["MeteorRewardBox"] = "Panel/MeteorRewardBox";
+        this.moduleNames["RobBox"] = "Panel/RobBox";
     }
 
     GetModuleUrl(moduleName){
-        return this.moduleNames[moduleName]
+        return this.moduleNames[moduleName];
     }
 }

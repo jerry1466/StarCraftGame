@@ -6,17 +6,19 @@ let res=
 		"findmeteor":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "messagebox":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "introBg":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "cutscene":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png"
     },
     "icon":
     {
         "diamond":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png",
         "meteor":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png",
+        "blackhole":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png",
+        "planet":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png"
     }
 }
 
 export default class ResConfig{
     static GetAllRes(){
-        var resList = [];
         for(var mainKey in res){
             for(var subKey in res[mainKey]){
                 resList.push(res[mainKey][subKey])
@@ -47,6 +49,10 @@ export default class ResConfig{
 
     static IntroBg(){
         return res["bg"]["introBg"]
+    }
+
+    static CutSceneBg(){
+        return res["bg"]["cutscene"]
     }
 
     static BlackHoleIcon() {

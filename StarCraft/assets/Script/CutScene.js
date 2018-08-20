@@ -2,17 +2,17 @@
  * CutScene
  * @author lijun
  **/
+import Scene from 'Scene'
 import ResourceManager from 'ResourceManager'
 import Databus from 'Databus'
 import SceneManager from 'SceneManager'
 import ResConfig from "ResConfig";
 import EffectUtil from 'EffectUtil';
 import LevelManager from "LevelManager";
-import BuffBase from "BuffBase";
 
 let databus = new Databus()
 cc.Class({
-    extends: cc.Component,
+    extends: Scene,
     properties: {
         spBg:cc.Sprite,
     },
@@ -30,6 +30,6 @@ cc.Class({
     },
 
     update() {
-        BuffBase.Update();
+        super.update();
     }
 })

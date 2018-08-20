@@ -1,3 +1,4 @@
+import Scene from 'Scene'
 import LevelManager from 'LevelManager'
 import SceneManager from "SceneManager";
 import InterfaceManager from "InterfaceManager";
@@ -7,12 +8,11 @@ import ArrayUtil from "ArrayUtil"
 import EventUtil from "EventUtil";
 import StatisticManager from "StatisticManager";
 import TweenPosition from "TweenPosition"
-import BuffBase from "BuffBase";
 
 let databus = new Databus()
 
 cc.Class({
-    extends: cc.Component,
+    extends: Scene,
     properties: {
         bg:{
             default: null,
@@ -103,7 +103,7 @@ cc.Class({
     },
 
     update(){
-        BuffBase.Update();
+        super.update();
     },
 
     tweenStage1(){

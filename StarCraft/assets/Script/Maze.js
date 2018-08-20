@@ -2,6 +2,7 @@
  * Maze
  * @author lijun
  **/
+import Scene from 'Scene'
 import HUD from 'HUD'
 import Databus from 'Databus'
 import LevelManager from "LevelManager";
@@ -13,7 +14,7 @@ import EffectUtil from "EffectUtil";
 
 let databus = new Databus()
 cc.Class({
-    extends: cc.Component,
+    extends: Scene,
     properties: {
         hud: HUD,
         btnExit:cc.Button,
@@ -27,7 +28,7 @@ cc.Class({
     },
 
     update() {
-
+        super.update();
     },
 
     onDestroy() {

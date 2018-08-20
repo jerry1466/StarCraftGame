@@ -2,6 +2,7 @@
  * 寻找流星游戏场景
  * @author lijun
  **/
+import Scene from 'Scene'
 import GameInfo from 'GameInfo'
 import EventUtil from 'EventUtil'
 import Databus from 'Databus'
@@ -14,11 +15,10 @@ import UnitManager from "UnitManager";
 import ResourceManager from "ResourceManager";
 import FindMeteor from "FindMeteor";
 import ResConfig from 'ResConfig';
-import BuffBase from "BuffBase";
 
 let databus = new Databus()
 cc.Class({
-    extends: cc.Component,
+    extends: Scene,
     properties: {
         bgm: {
             default: null,
@@ -36,7 +36,7 @@ cc.Class({
     },
 
     update() {
-        BuffBase.Update();
+        super.update();
     },
 
     onDestroy() {

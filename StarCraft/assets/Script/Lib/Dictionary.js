@@ -1,7 +1,7 @@
 export default class Dictionary{
     constructor() {
-        this.add = add;
         this.datastore = new Array();
+        this.add = add;
         this.find = find;
         this.remove = remove;
         this.showAll = showAll;

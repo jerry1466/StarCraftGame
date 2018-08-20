@@ -3,12 +3,17 @@
  * @author lijun
  **/
 import Dictionary from "Dictionary";
+import HarvestBuff from "HarvestBuff";
 
-let buffDic = new Dictionary();
 let buffList = new Array();
+let buffDic;
 export default class BuffBase{
-	static RegisterBuff(buffId, buffInstance){
-		buffDic.add(buffId, buffInstance)
+	static Init(){
+	    if(buffDic == null)
+        {
+            buffDic = new Dictionary();
+        }
+	    buffDic.add(1, new HarvestBuff(1));
 	}
 
 	static Update(){

@@ -2,14 +2,14 @@
  * Ad
  * @author lijun
  **/
+import Scene from 'Scene'
 import Databus from 'Databus'
 import ArrayUtil from "ArrayUtil"
 import LevelManager from "LevelManager"
-import BuffBase from "BuffBase";
 
 let databus = new Databus()
 cc.Class({
-    extends: cc.Component,
+    extends: Scene,
     properties: {
         spAd: {
             default: null,
@@ -27,7 +27,7 @@ cc.Class({
     },
 
     update() {
-        BuffBase.Update();
+        super.update();
     },
 
     onDestroy() {

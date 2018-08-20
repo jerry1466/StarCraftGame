@@ -1,9 +1,8 @@
 import BasicBuff from "BasicBuff"
-import BuffBase from "BuffBase";
 import Productor from "Productor";
 
-export default class Harvest extends BasicBuff {
-	constructor(buffId) {
+export default class HarvestBuff extends BasicBuff {
+    constructor(buffId) {
 		super(buffId);
     }
 
@@ -16,6 +15,5 @@ export default class Harvest extends BasicBuff {
         Productor.GetInstance().accerlate /= 1.2;
         super.UnActive();
     }
-}
 
-BuffBase.RegisterBuff(1, new Harvest(1));
+}

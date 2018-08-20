@@ -2,6 +2,7 @@
  * Index
  * @author lijun
  **/
+import Scene from 'Scene'
 import LevelManager from 'LevelManager'
 import ResourceManager from 'ResourceManager'
 import Databus from 'Databus'
@@ -12,7 +13,7 @@ import BuffBase from "BuffBase";
 
 let databus = new Databus()
 cc.Class({
-    extends: cc.Component,
+    extends: Scene,
     properties: {
         spBg:cc.Sprite,
         barloading:cc.ProgressBar,
@@ -49,6 +50,7 @@ cc.Class({
             },
         })
         this.lbCompany.string = "有來有趣网络科技"
+        BuffBase.Init();
     },
 
     startLoad(){
@@ -67,7 +69,7 @@ cc.Class({
     },
 
     update() {
-        BuffBase.Update();
+        super.update();
         var blockPercent = 1 / this.loadList.length;
         if(this.loadIndex < this.loadList.length){
             var currentResLoading = this.loadList[this.loadIndex];

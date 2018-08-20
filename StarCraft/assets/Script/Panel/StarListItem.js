@@ -16,8 +16,8 @@ cc.Class({
     properties: {
         spIcon:cc.Sprite,
         spIntro:cc.Sprite,
-        lbName:"",
-        lbIntro:"",
+        lbName:cc.Label,
+        lbIntro:cc.Label,
         rtProductivity:cc.RichText,
         lbStatus:cc.Label,
         btnView:cc.Button

@@ -7,7 +7,8 @@ let res=
         "messagebox":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "introBg":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "mazeBg":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "cutscene":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png"
+        "cutscene":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "starListPanel":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png"
     },
     "icon":
     {
@@ -58,6 +59,10 @@ export default class ResConfig{
 
     static CutSceneBg(){
         return res["bg"]["cutscene"]
+    }
+
+    static StarListPanelBg(){
+        return res["bg"]["starListPanel"]
     }
 
     static BlackHoleIcon() {

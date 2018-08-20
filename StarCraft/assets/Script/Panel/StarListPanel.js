@@ -6,15 +6,19 @@ import BasePanel from 'BasePanel'
 import EventUtil from 'EventUtil'
 import ModuleManager from 'ModuleManager'
 import Productor from "Productor";
+import ResourceManager from "ResourceManager";
+import ResConfig from "ResConfig";
 
 cc.Class({
     extends: BasePanel,
     properties: {
+        bg:cc.Sprite,
         rtProductivity:cc.RichText,
         scrollView:cc.ScrollView
     },
 
     onLoad(){
+        ResourceManager.LoadRemoteSprite(this.bg, ResConfig.StarListPanelBg())
     },
 
     update() {

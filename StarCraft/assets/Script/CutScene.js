@@ -25,7 +25,7 @@ cc.Class({
         SceneManager.GetInstance().rootCanvas = this.node;
         ResourceManager.LoadRemoteSprite(this.spBg, ResConfig.CutSceneBg());
         EffectUtil.PlayFullScreenEffect("CutScene", "default", this.node, cc.v2(0, 0), function(){
-            LevelManager.GetInstance().SwitchNextLevel()
+            new LevelManager().SwitchNextLevel()
         });
     },
 

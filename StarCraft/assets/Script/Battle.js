@@ -92,7 +92,7 @@ cc.Class({
     },
 
     onSearchClick(){
-        LevelManager.GetInstance().SwitchLevel("Maze")
+        new LevelManager().SwitchLevel("Maze")
     },
 
     onFixClick(){

@@ -60,7 +60,7 @@ cc.Class({
     },
 
     onExit(){
-        LevelManager.GetInstance().SwitchLevel("Battle")
+        new LevelManager().SwitchLevel("Battle")
     },
 
     onMapClick(event){
@@ -107,8 +107,8 @@ cc.Class({
     },
 
     triggerGameHandler(affair){
-        LevelManager.GetInstance().PushNextLevel("Game", affair);
-        LevelManager.GetInstance().SwitchLevel("CutScene");
+        new LevelManager().PushNextLevel("Game", affair);
+        new LevelManager().SwitchLevel("CutScene");
     },
 
 })    

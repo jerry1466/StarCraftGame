@@ -6,6 +6,7 @@ let res=
 		"findmeteor":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "messagebox":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "introBg":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "mazeBg":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "cutscene":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png"
     },
     "icon":
@@ -49,6 +50,10 @@ export default class ResConfig{
 
     static IntroBg(){
         return res["bg"]["introBg"]
+    }
+
+    static MazeBg(){
+        return res["bg"]["mazeBg"]
     }
 
     static CutSceneBg(){

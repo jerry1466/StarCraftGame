@@ -10,7 +10,7 @@ cc.Class({
         var that = this;
         for(var i = 0; i < this.PrefabInitNum; i++)
         {
-            PrefabUtil.GetPrefabInstance("broke", function(instance){
+            PrefabUtil.GetPrefabInstance("Broke", function(instance){
                 if(instance){
                     that._loadedIndex++;
                     UnitManager.GetInstance().BrokeSpList.push(instance);

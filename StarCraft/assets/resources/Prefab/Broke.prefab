@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Wood",
+    "_name": "Root",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -19,13 +19,10 @@
     "_components": [
       {
         "__id__": 2
-      },
-      {
-        "__id__": 3
       }
     ],
     "_prefab": {
-      "__id__": 4
+      "__id__": 3
     },
     "_id": "",
     "_opacity": 255,
@@ -44,8 +41,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
-      "height": 20
+      "width": 30,
+      "height": 30
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -72,7 +69,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "af0878ba-f5cf-4cab-b95a-a2479cbf5679"
+      "__uuid__": "a24a87c6-1303-4ed4-843b-2c9a026484f5"
     },
     "_type": 0,
     "_sizeMode": 0,
@@ -90,24 +87,14 @@
     "_atlas": null
   },
   {
-    "__type__": "891a3QQjHJBCp64Uq1gVigY",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 1
-    },
-    "_enabled": true,
-    "xDirection": 1
-  },
-  {
     "__type__": "cc.PrefabInfo",
     "root": {
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "dc7cae7d-adbe-4d32-a371-ff20eb8b2ccd"
+      "__uuid__": "e9ddbbe6-d8fe-4bf8-aaa7-faf1381097c2"
     },
-    "fileId": "e7X5blRidCuKxHiPte72ZG",
+    "fileId": "d81RXsoQ5LvovZi0/DRInC",
     "sync": false
   }
 ]

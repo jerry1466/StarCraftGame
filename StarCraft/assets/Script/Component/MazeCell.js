@@ -14,6 +14,8 @@ let databus = new Databus()
 cc.Class({
     extends: cc.Component,
     properties: {
+        bg:cc.Sprite,
+        icon:cc.Sprite,
         row:-1,
         column:-1,
     },

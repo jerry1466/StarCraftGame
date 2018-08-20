@@ -11,11 +11,14 @@ import EventUtil from "EventUtil";
 import MazeManager from "MazeManager";
 import ModuleManager from "ModuleManager";
 import EffectUtil from "EffectUtil";
+import ResourceManager from "ResourceManager";
+import ResConfig from "ResConfig";
 
 let databus = new Databus()
 cc.Class({
     extends: Scene,
     properties: {
+        bg:cc.Sprite,
         hud: HUD,
         btnExit:cc.Button,
         map:cc.Node,
@@ -23,6 +26,7 @@ cc.Class({
     },
 
     onLoad(){
+        ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MazeBg())
         SceneManager.GetInstance().rootCanvas = this.node
         this.registerEventHandler();
     },

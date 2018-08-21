@@ -29,10 +29,15 @@ cc.Class({
     onLoad() {
     	//加载流星平原背景
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.FindMeteorBg())
+        var param = new LevelManager().CurrentLevelParam
         this.findMeteor = FindMeteor.GetInstance()
         this.findMeteor.CreatePlanet()
-        this.findMeteor.CreateMeteor()
-        this.findMeteor.CreateBlackHole()
+        this.findMeteor.CreateMeteor(10)
+        var blackholeNum = para["level"] * 2 + 3
+        if (blackholeNum > 9) {
+			blackholeNum = 9
+        }
+        this.findMeteor.CreateBlackHole(blackholeNum)
     },
 
     update() {

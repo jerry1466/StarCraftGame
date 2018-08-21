@@ -14,6 +14,7 @@ export default class BuffBase{
             buffDic = new Dictionary();
         }
 	    buffDic.add(1, new HarvestBuff(1));
+	    buffDic.add(2, new FrozenBuff(2));
 	}
 
 	static Update(){

@@ -33,6 +33,7 @@ export default class MazeManager{
         var playerNode = this.node.getChildByName("Player")
         this.player = playerNode.getComponent("Player")
         this.loadCell(0, this, container);
+        this.frozen = false
     }
 
     Move(dir) {
@@ -71,7 +72,7 @@ export default class MazeManager{
                     }
                     break;
             }
-            if(moveEnable)
+            if(moveEnable && !this.frozen)
             {
                 this.TouchEnable = false;
                 var tarCell = this.cells[row][column];

@@ -13,6 +13,7 @@ import ModuleManager from "ModuleManager";
 import EffectUtil from "EffectUtil";
 import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig";
+import BuffBase from 'BuffBase'
 
 let databus = new Databus()
 cc.Class({
@@ -101,7 +102,8 @@ cc.Class({
     triggerFreezeHandler(affair){
         EffectUtil.PlayFullScreenEffect("AffairFullScreenEffect", "freeze", this.node, cc.v2(0, 0), function(){
             EventUtil.GetInstance().DispatchEvent("FreeTouch");
-            //TODO 给玩家增加冰冻buff
+            //给玩家增加冰冻buff
+			BuffBase.AddBuff(2)
         })
     },
 

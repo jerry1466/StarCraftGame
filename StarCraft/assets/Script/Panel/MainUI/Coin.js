@@ -22,6 +22,10 @@ cc.Class({
         this._coinType = 0;
     },
 
+    Init(resBg){
+        ResourceManager.LoadRemoteSprite(this.spBg, resBg);
+    },
+
     UpdateCoin(coinNum){
         this.lbNum.string = coinNum;
         if(coinNum > this._coinNum)

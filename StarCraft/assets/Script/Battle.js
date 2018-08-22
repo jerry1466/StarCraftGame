@@ -14,7 +14,6 @@ import PrefabUtil from 'PrefabUtil'
 import ModuleManager from 'ModuleManager'
 import LevelManager from "LevelManager";
 import HUD from 'HUD'
-import ButtonEx from 'ButtonEx'
 import LeftBar from 'LeftBar';
 import BottomBar from 'BottomBar';
 import StarModel from 'StarModel';
@@ -23,15 +22,18 @@ import ResourceManager from "ResourceManager";
 import ResConfig from 'ResConfig';
 import StarConfig from "StarConfig";
 import BuffBase from "BuffBase";
+import Coin from 'Coin'
 
 let databus = new Databus()
 cc.Class({
     extends: cc.Component,
     properties: {
         bgm: cc.AudioSource,
-        btnMyStars: ButtonEx,
-        btnFix: ButtonEx,
-        btnSearch: ButtonEx,
+        bg:cc.Sprite,
+        MeteorCon:Coin,
+        btnMyStars: cc.Button,
+        btnFix: cc.Button,
+        btnSearch: cc.Button,
         hud: HUD,
         leftBar: LeftBar,
         bottomBar: BottomBar,
@@ -44,6 +46,7 @@ cc.Class({
         SceneManager.GetInstance().rootCanvas = this.node
         this.tex = new cc.Texture2D();
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MainBg())
+        this.MeteorCon.Init(ResConfig.MeteorConBg());
 
         this.registerEventHandler();
     },
@@ -103,6 +106,10 @@ cc.Class({
                 databus.AddMoney(moneyType, 0-fixCost);
             }
         })
+    },
+
+    onExitClick(){
+        new LevelManager().SwitchLevel("Preload");
     },
 
     refreshStar(){

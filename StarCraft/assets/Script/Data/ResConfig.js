@@ -3,6 +3,9 @@ let res=
     "bg":
     {
         "main":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "diamondCon":"https://cdn-game.2zhuji.cn/uploads/wdxq/diamondCon_bg.png",
+        "productivityCon":"https://cdn-game.2zhuji.cn/uploads/wdxq/productivityCon_bg.png",
+        "meteorCon":"https://cdn-game.2zhuji.cn/uploads/wdxq/meteorCon_bg.png",
 		"findmeteor":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "messagebox":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "introBg":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
@@ -31,6 +34,18 @@ export default class ResConfig{
 
     static MainBg(){
         return res["bg"]["main"]
+    }
+
+    static DiamondConBg(){
+        return res["bg"]["diamondCon"]
+    }
+
+    static ProductivityConBg(){
+        return res["bg"]["productivityCon"]
+    }
+
+    static MeteorConBg(){
+        return res["bg"]["meteorCon"]
     }
     
     static DiamondIcon(){

@@ -3,6 +3,7 @@ cc.Class({
         type:0,
         meteor:0,
         level:0,
-        cost:0
+        cost:0,
+        triggered:false
     }
 })

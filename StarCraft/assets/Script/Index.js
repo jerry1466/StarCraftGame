@@ -69,21 +69,24 @@ cc.Class({
     },
 
     update() {
-        super.update();
-        var blockPercent = 1 / this.loadList.length;
-        if(this.loadIndex < this.loadList.length){
-            var currentResLoading = this.loadList[this.loadIndex];
-            var totalPerent = (this.loadIndex - 1) * blockPercent + currentResLoading.GetProgress();
-            this.barloading.progress = totalPerent;
-        }
-        else{
-            this.barloading.progress = 1
-        }
-
-        if(currentResLoading.IsComplete())
+        BuffBase.Update();
+        if(this.loadList)
         {
-            this.loadIndex++;
-            this.doLoad();
+            var blockPercent = 1 / this.loadList.length;
+            if(this.loadIndex < this.loadList.length){
+                var currentResLoading = this.loadList[this.loadIndex];
+                var totalPerent = (this.loadIndex - 1) * blockPercent + currentResLoading.GetProgress();
+                this.barloading.progress = totalPerent;
+            }
+            else{
+                this.barloading.progress = 1
+            }
+
+            if(currentResLoading.IsComplete())
+            {
+                this.loadIndex++;
+                this.doLoad();
+            }
         }
     },
 })    

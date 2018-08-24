@@ -48,6 +48,14 @@ cc.Class({
         ResourceManager.LoadRemoteSprite(this.icon, ResConfig.FoxIcon());
     },
 
+    GetAffair(){
+        return this.affair;
+    },
+
+    RemoveFog(){
+        this.fog.node.active = false;
+    },
+
     Trigger(){
         if(this.affair.type == AffairConstant.AffairEnum().REWARD)
         {

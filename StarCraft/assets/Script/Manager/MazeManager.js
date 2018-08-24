@@ -101,6 +101,12 @@ export default class MazeManager{
             {
                 this.TouchEnable = false;
                 var tarCell = this.cells[row][column];
+                var affair = tarCell.GetAffair();
+                if(affair.type != AffairConstant.AffairEnum().NONE)
+                {
+                    databus.AddMoney(affair.cost);
+                }
+                tarCell.RemoveFog();
                 this.player.Move(tarCell, function(){
                     tarCell.Trigger();
                 })

@@ -3,25 +3,25 @@
  * @author lijun
  **/
 import Databus from 'Databus'
-import GameInfo from "GameInfo"
-import TweenAlpha from "TweenAlpha"
-import MissionConfig from "MissionConfig";
-import ModuleManager from "ModuleManager";
 import AffairConstant from "AffairConstant";
 import EventUtil from "EventUtil";
+import ResourceManager from "ResourceManager";
+import ResConfig from "ResConfig";
 
 let databus = new Databus()
 cc.Class({
     extends: cc.Component,
     properties: {
         bg:cc.Sprite,
+        fog:cc.Sprite,
         icon:cc.Sprite,
         row:-1,
         column:-1,
     },
 
     onLoad(){
-
+        ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MazeCellIcon());
+        ResourceManager.LoadRemoteSprite(this.fog, ResConfig.FoxIcon());
     },
 
     update() {
@@ -39,6 +39,13 @@ cc.Class({
 
     InitAffair(affair){
         this.affair = affair;
+        if(this.affair.triggered){
+            this.fog.node.active = false;
+        }
+        else{
+            this.fog.node.active = true;
+        }
+        ResourceManager.LoadRemoteSprite(this.icon, ResConfig.FoxIcon());
     },
 
     Trigger(){

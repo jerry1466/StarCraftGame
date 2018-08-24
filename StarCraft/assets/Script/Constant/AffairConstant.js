@@ -2,6 +2,8 @@
  * AffairConstant
  * @auhor clairli
  */
+import ArrayUtil from 'ArrayUtil'
+
 let instance
 let affairEnum = {
     NONE:0,
@@ -18,12 +20,20 @@ let affairHardLevel = {
 }
 
 export default class AffairConstant {
-    constructor() {
-
-    }
-
     static AffairEnum(){
         return affairEnum
+    }
+
+    static GenerateAffairMap(){
+        this.affairMap = [[], [], []]
+        for(var key in affairEnum)
+        {
+            if(key != affairEnum.NONE)
+            {
+                var index = this.AffairLevelIndex(affairEnum[key]);
+                this.affairMap[index - 1].push(key);
+            }
+        }
     }
 
     static AffairLevelIndex(affairType){
@@ -40,5 +50,12 @@ export default class AffairConstant {
             return 3;
         }
         return 0;
+    }
+
+    static CreateAffairTypeByLevel(level){
+        if(this.affairMap == null){
+            this.GenerateAffairMap();
+        }
+        return ArrayUtil.GetRandomValue(this.affairMap[level - 1])
     }
 }

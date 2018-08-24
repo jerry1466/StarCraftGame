@@ -11,15 +11,24 @@ let res=
         "introBg":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "mazeBg":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "cutscene":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "starListPanel":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png"
+        "starListPanel":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
     },
     "icon":
     {
         "diamond":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png",
         "meteor":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png",
         "blackhole":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png",
-        "planet":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png"
-    }
+        "planet":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png",
+        "mazeCell":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "fox":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "star_1001":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "star_1002":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "star_1003":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "affair_1":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "affair_2":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "affair_3":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "affair_4":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+    },
 }
 
 export default class ResConfig{
@@ -80,11 +89,27 @@ export default class ResConfig{
         return res["bg"]["starListPanel"]
     }
 
+    static GetStarIcon(id){
+        return res["icon"]["star_" + id]
+    }
+
     static BlackHoleIcon() {
 		return res["icon"]["blackhole"]
     }
 
     static PlanetIcon() {
 		return res["icon"]["planet"]
+    }
+
+    static MazeCellIcon(){
+        return res["icon"]["mazeCell"]
+    }
+
+    static FoxIcon(){
+        return res["icon"]["fox"]
+    }
+
+    static AffairIcon(index){
+        return res["icon"]["affair_" + index];
     }
 }

@@ -41,7 +41,7 @@ cc.Class({
     },
 
     start(){
-        MazeManager.GetInstance().Start();
+        MazeManager.GetInstance().Start(new LevelManager().CurrentLevelParam);
     },
 
     Init() {

@@ -4,6 +4,7 @@
  **/
 import Dictionary from "Dictionary";
 import HarvestBuff from "HarvestBuff";
+import FrozenBuff from "FrozenBuff";
 
 let buffList = new Array();
 let buffDic;

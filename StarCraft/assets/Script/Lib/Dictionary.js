@@ -1,12 +1,6 @@
-export default class Dictionary{
+export default class Dictionary {
     constructor() {
         this.datastore = new Array();
-        this.add = add;
-        this.find = find;
-        this.remove = remove;
-        this.showAll = showAll;
-        this.count = count;
-        this.clear = clear;
     }
 
     add(key, value) {
@@ -43,5 +37,4 @@ export default class Dictionary{
             delete this.datastore[key];
         }
     }
-
 }

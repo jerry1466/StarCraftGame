@@ -26,30 +26,34 @@ cc.Class({
 
 
     onLoad() {
-        SceneManager.GetInstance().rootCanvas = this.node
+    	SceneManager.GetInstance().rootCanvas = this.node
         ResourceManager.LoadRemoteSprite(this.spBg, "https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png")
+
         var that = this
-        wx.request({
-            url: databus.cfgUrl,
-            data: {},
-            method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-            header: {
-                'content-type': 'application/json'
-            },// 设置请求的 header
-            success: function (res) {
-                if (res.statusCode == 200) {
-                    databus.cfgData = res.data
-                    databus.Reset();
-                    that.startLoad();
-                } else {
-                    console.log("index.js wx.request CheckCallUser statusCode" + res.statusCode)
-                }
-            },
-            fail: function () {
-                console.log("index.js wx.request CheckCallUser fail");
-            },
-        })
-        this.lbCompany.string = "有來有趣网络科技"
+        if (CC_WECHATGAME) {
+			wx.request({
+	            url: databus.cfgUrl,
+	            data: {},
+	            method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+	            header: {
+	                'content-type': 'application/json'
+	            },// 设置请求的 header
+	            success: function (res) {
+	                if (res.statusCode == 200) {
+	                    databus.cfgData = res.data
+	                    databus.Reset();
+	                    that.startLoad();
+	                } else {
+	                    console.log("index.js wx.request CheckCallUser statusCode" + res.statusCode)
+	                }
+	            },
+	            fail: function () {
+	                console.log("index.js wx.request CheckCallUser fail");
+	            },
+	        })
+        }
+
+        this.lbCompany = "有來有趣网络科技"
         BuffBase.Init();
     },
 
@@ -70,6 +74,7 @@ cc.Class({
 
     update() {
         BuffBase.Update();
+
         if(this.loadList)
         {
             var blockPercent = 1 / this.loadList.length;

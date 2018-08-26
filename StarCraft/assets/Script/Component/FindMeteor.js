@@ -38,7 +38,7 @@ export default class FindMeteor {
 	}
 
 	CreateMeteor(num) {
-		var blockList = MathUtil.spliteScreenToBlock(num)
+		var blockList = MathUtil.spliteScreenToBlock(data.screenHeight, data,screenWidth, num)
 
 		//在每个分块里面随机出来一个流星
 		var meteor = null

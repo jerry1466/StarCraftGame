@@ -67,9 +67,9 @@ export default class MathUtil {
 			return false
 	}
 
-	static spliteScreenToBlock(num) {
+	static spliteScreenToBlock(screenHeight, screenWidth, num) {
 		//假设屏幕的坐标原点在屏幕底部正中间
-		var block = {top:databus.screenHeight, left:(0 - databus.screenWidth / 2), right:(databus.screenWidth / 2), buttom:0}
+		var block = {top:screenHeight, left:(0 - screenWidth / 2), right:(screenWidth / 2), buttom:0}
 		var blockList = new Array()
 		var blocktmp = null
 		blockList.push(block)

@@ -10,6 +10,7 @@ import ImageLoading from 'ImageLoading'
 import PrefabLoading from "PrefabLoading"
 import SceneManager from 'SceneManager'
 import BuffBase from "BuffBase";
+import NetUtil from "NetUtil";
 
 let databus = new Databus()
 cc.Class({
@@ -17,7 +18,7 @@ cc.Class({
     properties: {
         spBg:cc.Sprite,
         barloading:cc.ProgressBar,
-        lbCompany:""
+        lbCompany:cc.Label,
     },
 
     onDestroy() {
@@ -30,30 +31,12 @@ cc.Class({
         ResourceManager.LoadRemoteSprite(this.spBg, "https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png")
 
         var that = this
-        if (CC_WECHATGAME) {
-			wx.request({
-	            url: databus.cfgUrl,
-	            data: {},
-	            method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-	            header: {
-	                'content-type': 'application/json'
-	            },// 设置请求的 header
-	            success: function (res) {
-	                if (res.statusCode == 200) {
-	                    databus.cfgData = res.data
-	                    databus.Reset();
-	                    that.startLoad();
-	                } else {
-	                    console.log("index.js wx.request CheckCallUser statusCode" + res.statusCode)
-	                }
-	            },
-	            fail: function () {
-	                console.log("index.js wx.request CheckCallUser fail");
-	            },
-	        })
-        }
-
-        this.lbCompany = "有來有趣网络科技"
+        NetUtil.Request(databus.cfgUrl, {}, function(data){
+    	    databus.cfgData = data;
+    	    databus.Reset();
+    	    that.startLoad();
+        });
+        this.lbCompany.string = "有來有趣网络科技"
         BuffBase.Init();
     },
 

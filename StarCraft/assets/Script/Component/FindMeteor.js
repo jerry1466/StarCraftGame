@@ -38,7 +38,7 @@ export default class FindMeteor {
 	}
 
 	CreateMeteor(num) {
-		var blockList = MathUtil.spliteScreenToBlock(data.screenHeight, data,screenWidth, num)
+		var blockList = MathUtil.spliteScreenToBlock(databus.screenHeight, databus.screenWidth, num)
 
 		//在每个分块里面随机出来一个流星
 		var meteor = null
@@ -47,7 +47,7 @@ export default class FindMeteor {
 			this.loadRes("meteor", function(instance) {
 				meteor = instance.addComponent("meteor")
 			})
-			blocktmp = blockList[i]
+			var blocktmp = blockList[i]
 			meteor.Init(blocktmp.top, blocktmp.buttom, blocktmp.left, blocktmp.right)
 			_this.meteorList.push(meteor)
 		}
@@ -73,7 +73,7 @@ export default class FindMeteor {
 			this.loadRes("blackhole", function(instance) {
 				blackhole = instance.addComponent("blackhole")
 			})
-			blocktmp = blockList[i]
+			var blocktmp = blockList[i]
 			blackhole.Init(blocktmp.top, blocktmp.buttom, blocktmp.left, blocktmp.right)
 			_this.blackholeList.push(blackhole)
 		}

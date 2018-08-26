@@ -12,7 +12,7 @@ import LevelManager from "LevelManager";
 
 let databus = new Databus()
 cc.Class({
-    extends: Scene,
+    extends: cc.Component,
     properties: {
         spBg:cc.Sprite,
     },
@@ -22,7 +22,7 @@ cc.Class({
     },
 
     onLoad() {
-        SceneManager.GetInstance().rootCanvas = this.node;
+        SceneManager.GetInstance().SetRoot(this.node);
         ResourceManager.LoadRemoteSprite(this.spBg, ResConfig.CutSceneBg());
         EffectUtil.PlayFullScreenEffect("CutScene", "default", this.node, cc.v2(0, 0), function(){
             new LevelManager().SwitchNextLevel()

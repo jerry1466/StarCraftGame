@@ -8,11 +8,12 @@ import ArrayUtil from "ArrayUtil"
 import EventUtil from "EventUtil";
 import StatisticManager from "StatisticManager";
 import TweenPosition from "TweenPosition"
+import BuffBase from "BuffBase";
 
 let databus = new Databus()
 
 cc.Class({
-    extends: Scene,
+    extends: cc.Component,
     properties: {
         bg:{
             default: null,
@@ -38,7 +39,7 @@ cc.Class({
 
     onLoad:function(){
         var temp = this
-        SceneManager.GetInstance().rootCanvas = this.node
+        SceneManager.GetInstance().SetRoot(this.node);
         if(CC_WECHATGAME)
         {
             wx.getSystemInfo({
@@ -59,51 +60,40 @@ cc.Class({
             EventUtil.GetInstance().AddEventListener("EnterBattle", function(){
                 ModuleManager.GetInstance().HideModule("LoginPanel")
             })
-        }
-        //ResourceManager.LoadRemoteSprite(this.bg, "https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png")
-        this.lbSubscribe.label = databus.cfgData.set.subscribe_text
-        if(databus.cfgData.audit == 1)
-        {
-            this.btnShare.node.active = false
-        }
-        else
-        {
-            this.btnShare.node.active = true
-        }
-        if(new LevelManager().CurrentLevelParam == 1)
-        {
-            if(databus.mission != null && databus.mission > 0)
+            this.lbSubscribe.label = databus.cfgData.set.subscribe_text
+            if(databus.cfgData.audit == 1)
             {
-                databus.startMission = databus.mission
-            }
-        }
-        else
-        {
-            var lastMission = wx.getStorageSync(databus.shortProductName + "_mission")
-            if(lastMission == null || lastMission == 0)
-            {
-                databus.startMission = 1;
+                this.btnShare.node.active = false
             }
             else
             {
-                databus.startMission = lastMission;
+                this.btnShare.node.active = true
+            }
+            if(databus.cfgData.set.wx_bannner != null && databus.cfgData.set.wx_bannner.length > 0)
+            {
+                InterfaceManager.GetInstance().CreateAdBanner(ArrayUtil.GetRandomValue(databus.cfgData.set.wx_bannner))
+            }
+            if(databus.userInfo == null)
+            {
+                StatisticManager.getInstance().statistics()
             }
         }
-        if(databus.cfgData.set.wx_bannner != null && databus.cfgData.set.wx_bannner.length > 0)
-        {
-            InterfaceManager.GetInstance().CreateAdBanner(ArrayUtil.GetRandomValue(databus.cfgData.set.wx_bannner))
+        else{
+            databus.screenWidth = 375;
+            databus.screenHeight = 850;
+            databus.screenTop = databus.screenHeight;
+            databus.screenButtom = 0;
+            databus.screeLeft = 0 - databus.screenWidth / 2;
+            databus.screeRight = databus.screenWidth / 2;
+            databus.isIphoneX = false;
+            this.lbSubscribe.label = "";
+            this.btnShare.node.active = false;
         }
-        if(databus.userInfo == null)
-        {
-            StatisticManager.getInstance().statistics()
-        }
-
-
+        //ResourceManager.LoadRemoteSprite(this.bg, "https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png")
         //this.tweenStage1()
     },
 
     update(){
-        super.update();
     },
 
     tweenStage1(){
@@ -126,9 +116,12 @@ cc.Class({
     },
 
     start(){
-        setTimeout(function(){
-            InterfaceManager.GetInstance().RegisterShareAppMessageHandler()
-        }, 300)
+        if(CC_WECHATGAME)
+        {
+            setTimeout(function(){
+                InterfaceManager.GetInstance().RegisterShareAppMessageHandler()
+            }, 300)
+        }
     },
 
     onEnterClick(){

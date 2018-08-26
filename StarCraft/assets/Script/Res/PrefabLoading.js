@@ -8,16 +8,17 @@ cc.Class({
     Load(){
         this._loadedIndex = 0;
         var that = this;
-        for(var i = 0; i < this.PrefabInitNum; i++)
+        for(var i = 0; i < PrefabInitNum; i++)
         {
-            PrefabUtil.GetPrefabInstance("Broke", function(instance){
+            PrefabUtil.GetPrefabInstance("Broke", function(_, instance){
                 if(instance){
                     that._loadedIndex++;
+                    instance.addComponent("Broke");
                     UnitManager.GetInstance().BrokeSpList.push(instance);
                 }
             })
         }
     },
-    GetProgress(){return this._loadedIndex / this.PrefabInitNum},
-    IsComplete(){return this._loadedIndex >= this.PrefabInitNum}
+    GetProgress(){return this._loadedIndex / PrefabInitNum},
+    IsComplete(){return this._loadedIndex >= PrefabInitNum}
 })

@@ -21,6 +21,8 @@ let res=
         "planet":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png",
         "mazeCell":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "fox":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "brokeUnselect":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "brokeSelect":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "star_1001":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "star_1002":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "star_1003":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
@@ -107,6 +109,14 @@ export default class ResConfig{
 
     static FoxIcon(){
         return res["icon"]["fox"]
+    }
+
+    static BrokeUnselectIcon(){
+        return res["icon"]["brokeUnselect"]
+    }
+
+    static BrokeSelectIcon(){
+        return res["icon"]["brokeSelect"]
     }
 
     static AffairIcon(index){

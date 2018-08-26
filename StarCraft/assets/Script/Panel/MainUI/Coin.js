@@ -22,15 +22,28 @@ cc.Class({
         this._coinType = 0;
     },
 
-    Init(resBg){
+    Init(resBg, measureName){
         ResourceManager.LoadRemoteSprite(this.spBg, resBg);
+        this.tweening = false;
+        this.measureName = measureName || ""
     },
 
-    UpdateCoin(coinNum){
-        this.lbNum.string = coinNum;
-        if(coinNum > this._coinNum)
+    UpdateCoin(coinNum, doTween){
+        if(coinNum == this._coinNum) return;
+        this.lbNum.string = coinNum + this.measureName;
+        if(doTween && this._coinNum > 0 && coinNum > this._coinNum && !this.tweening)
         {
-            TweenScale.begin(this.lbNum, cc.v2(1, 1), cc.v2(1.2, 1.2), 0.2, 1);
+            this.tweening = true;
+            var that = this;
+            var large = cc.v2(0.52, 0.52);
+            var normal = cc.v2(0.5, 0.5);
+            var tweenScale1 = TweenScale.begin(this.lbNum.node, normal, large, 0.35, 1);
+            tweenScale1.onFinishCallBack = function(){
+                // var tweenScale2 = TweenScale.begin(that.lbNum.node, large, normal, 0.35, 1);
+                // tweenScale2.onFinishCallBack = function(){
+                    that.tweening = false;
+                // }
+            }
         }
         this._coinNum = coinNum;
     },

@@ -2,7 +2,6 @@
  * Index
  * @author lijun
  **/
-import Scene from 'Scene'
 import LevelManager from 'LevelManager'
 import ResourceManager from 'ResourceManager'
 import Databus from 'Databus'
@@ -11,13 +10,15 @@ import PrefabLoading from "PrefabLoading"
 import SceneManager from 'SceneManager'
 import BuffBase from "BuffBase";
 import NetUtil from "NetUtil";
+import Productor from "Productor";
 
 let databus = new Databus()
 cc.Class({
-    extends: Scene,
+    extends: cc.Component,
     properties: {
         spBg:cc.Sprite,
         barloading:cc.ProgressBar,
+        lbTip:cc.Label,
         lbCompany:cc.Label,
     },
 
@@ -27,7 +28,7 @@ cc.Class({
 
 
     onLoad() {
-    	SceneManager.GetInstance().rootCanvas = this.node
+        SceneManager.GetInstance().SetRoot(this.node);
         ResourceManager.LoadRemoteSprite(this.spBg, "https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png")
 
         var that = this
@@ -40,8 +41,13 @@ cc.Class({
         BuffBase.Init();
     },
 
+    start(){
+        Productor.GetInstance().Start();
+    },
+
     startLoad(){
-        this.loadList = [new ImageLoading(), new PrefabLoading()]
+        //this.loadList = [new ImageLoading(), new PrefabLoading()]
+        this.loadList = [new PrefabLoading()]
         this.loadIndex = 0;
         this.doLoad();
     },
@@ -56,24 +62,31 @@ cc.Class({
     },
 
     update() {
-        BuffBase.Update();
+        var nowTime = new Date();
+        var lbTipStr = "精彩即将呈现";
+        var dotCnt = Math.floor(nowTime.getSeconds() % 3) + 1;
+        for(var i = 0; i < dotCnt; i++)
+        {
+            lbTipStr = lbTipStr + ".";
+        }
+        this.lbTip.string = lbTipStr;
 
-        if(this.loadList)
+        if(this.loadList && this.loadList.length > 0)
         {
             var blockPercent = 1 / this.loadList.length;
             if(this.loadIndex < this.loadList.length){
                 var currentResLoading = this.loadList[this.loadIndex];
                 var totalPerent = (this.loadIndex - 1) * blockPercent + currentResLoading.GetProgress();
                 this.barloading.progress = totalPerent;
+
+                if(currentResLoading.IsComplete())
+                {
+                    this.loadIndex++;
+                    this.doLoad();
+                }
             }
             else{
                 this.barloading.progress = 1
-            }
-
-            if(currentResLoading.IsComplete())
-            {
-                this.loadIndex++;
-                this.doLoad();
             }
         }
     },

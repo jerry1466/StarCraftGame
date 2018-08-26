@@ -11,6 +11,7 @@ export default class LevelManager {
     }
 
     SwitchLevel(lvName, levelParam){
+        this.CurrentLevelName = lvName;
         this.CurrentLevelParam = levelParam
         console.log("SwitchLevel:" + lvName)
         cc.director.loadScene(lvName)
@@ -33,5 +34,9 @@ export default class LevelManager {
         canvasNode.width = databus.screenWidth;
         canvasNode.height = databus.screenHeight;
         console.log(canvasNode.width, canvasNode.height)
+    }
+
+    IsBattleLevel(){
+        return this.CurrentLevelName == "battle"
     }
 }

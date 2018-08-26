@@ -9,6 +9,7 @@ import FindMeteor from "FindMeteor";
 import ResConfig from 'ResConfig';
 import BuffBase from 'BuffBase'
 import LevelManager from 'LevelManager'
+import SceneManager from 'SceneManager'
 
 let databus = new Databus()
 cc.Class({
@@ -23,6 +24,7 @@ cc.Class({
 
     onLoad() {
     	console.log("FindMeteorGame onLoad")
+        SceneManager.GetInstance().SetRoot(this.node);
     	//加载流星平原背景
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.FindMeteorBg())
         var param = new LevelManager().CurrentLevelParam

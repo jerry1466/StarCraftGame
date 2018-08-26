@@ -18,6 +18,13 @@ export default class SceneManager {
         }
         return instance
     }
+
+    SetRoot(sceneNode){
+        if(sceneNode.getComponent("Scene") == null){
+            sceneNode.addComponent("Scene");
+        }
+        rootCanvas = sceneNode;
+    }
     /*
     static ResizeRootCanvas(canvasNode){
         this.GetInstance().rootCanvas = canvasNode

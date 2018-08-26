@@ -17,7 +17,7 @@ import BuffBase from 'BuffBase'
 
 let databus = new Databus()
 cc.Class({
-    extends: Scene,
+    extends: cc.Component,
     properties: {
         bg:cc.Sprite,
         hud: HUD,
@@ -28,7 +28,7 @@ cc.Class({
 
     onLoad(){
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MazeBg())
-        SceneManager.GetInstance().rootCanvas = this.node
+        SceneManager.GetInstance().SetRoot(this.node);
         this.registerEventHandler();
     },
 

@@ -24,8 +24,13 @@ export default class NetUtil{
         }
         else
         {
+            if(callback){
+                callback(null);
+            }
+            /*
             let request = new XMLHttpRequest();
             request.open("get", url, true);
+            request.withCredentials = true;
             request.setRequestHeader("Content-Type", "application/json");
             request.send(postData);
             request.onreadystatechange = function () {
@@ -45,7 +50,12 @@ export default class NetUtil{
                         console.log("Request " + url + " fail, request:", request);
                     }
                 }
+                else
+                {
+                    console.log("Request " + url + " fail, request:", request);
+                }
             }
+            */
         }
     }
 }

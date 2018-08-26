@@ -4,6 +4,43 @@ import TweenScale from "TweenScale"
 
 let noticeList = []
 export default class UIUtil {
+    static FindNode(root, nodePath) {
+        var nodeArr = nodePath.split('.')
+        var curRoot = root
+        for(var i = 0; i < nodeArr.length; i++)
+        {
+            var child = curRoot.getChildByName(nodeArr[i])
+            if(child)
+            {
+                curRoot = child;
+            }
+        }
+        if(i == nodeArr.length)
+        {
+            return curRoot;
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    static ToWorldCoord(root, nodePath){
+        var nodeArr = nodePath.split('.')
+        var curRoot = root
+        var coord = cc.v2(0, 0)
+        for(var i = 0; i < nodeArr.length; i++)
+        {
+            var child = curRoot.getChildByName(nodeArr[i])
+            if(child)
+            {
+                curRoot = child;
+                coord.x += child.x * child.scaleX;
+                coord.y += child.y * child.scaleY;
+            }
+        }
+        return coord
+    }
 
     static Confirm(tip, confirmHandler){
         ModuleManager.GetInstance().ShowModule("MessageBox",
@@ -16,6 +53,7 @@ export default class UIUtil {
     }
 
     static ShowMoneyNotice(moneyType, moneyNum, parent, offset){
+        if(parent == null) return;
         var moneyIconName;
         if(moneyType == 1)
         {

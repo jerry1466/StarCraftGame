@@ -18,12 +18,12 @@ cc.Class({
 
     onLoad(){
         this.DiamondCon.Init(ResConfig.DiamondConBg());
-        this.ProductivityCon.Init(ResConfig.ProductivityConBg());
+        this.ProductivityCon.Init(ResConfig.ProductivityConBg(), "/秒");
     },
 
     update(dt) {
-        this.DiamondCon.UpdateCoin(databus.userInfo.diamond);
-        this.ProductivityCon.UpdateCoin(Productor.GetInstance().GetTotalProductivity());
+        this.DiamondCon.UpdateCoin(databus.userInfo.diamond, true);
+        this.ProductivityCon.UpdateCoin(Productor.GetInstance().GetTotalProductivity(), true);
     },
 
     onDestroy() {

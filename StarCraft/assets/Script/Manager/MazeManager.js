@@ -4,7 +4,7 @@ import PrefabUtil from 'PrefabUtil'
 import EventUtil from 'EventUtil'
 import Affair from 'Affair'
 import AffairConstant from "AffairConstant";
-import ArrayUtil from "ArrayUtil";
+import MathUtil from "MathUtil";
 import StarConfig from "StarConfig";
 import SceneManager from "SceneManager";
 
@@ -47,7 +47,7 @@ export default class MazeManager{
         {
             this.affairEventList.push(AffairConstant.CreateAffairTypeByLevel(1));
         }
-        ArrayUtil.Shuffle(this.affairEventList);
+        MathUtil.Shuffle(this.affairEventList);
         this.cells = new Array(this.mazeRow);
         for(var i = 0; i < this.mazeRow; i++)
         {

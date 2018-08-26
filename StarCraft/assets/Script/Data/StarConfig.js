@@ -8,9 +8,9 @@ let data =
         "broke":
         [
             [30, 80, 300],
-            [50, 20, 500],
+            [-50, -20, 500],
             [10, 40, 700],
-            [60, 70, 1000]
+            [60, -30, 1000]
         ],
         "unlock":0,
         "mazeCellCost":20,
@@ -24,9 +24,9 @@ let data =
         "broke":
         [
             [30, 80, 300],
-            [50, 20, 500],
+            [-50, -20, 500],
             [10, 40, 700],
-            [60, 70, 1000]
+            [60, -30, 1000]
         ],
         "unlock":3000,
         "mazeCellCost":20,
@@ -40,9 +40,9 @@ let data =
         "broke":
         [
             [30, 80, 300],
-            [50, 20, 500],
+            [-50, -20, 500],
             [10, 40, 700],
-            [60, 70, 1000]
+            [60, -30, 1000]
         ],
         "unlock":10000,
         "mazeCellCost":20,
@@ -58,31 +58,31 @@ let star_base_data =
 
 export default class StarConfig{
     static GetStarName(id){
-        return this.data[id]["name"]
+        return data[id]["name"]
     }
 
     static GetStarAppearance(id){
-        return this.data[id]["appearance"]
+        return data[id]["appearance"]
     }
 
     static GetStarBrokeList(id){
-        return this.data[id]["broke"]
+        return data[id]["broke"]
     }
 
     static GetStarUnlock(id){
-        return this.data[id]["unlock"]
+        return data[id]["unlock"]
     }
 
     static GetStarAffairRate(id){
-        return this.data[id]["affairRate"]
+        return data[id]["affairRate"]
     }
 
     static GetMazeCellCost(id){
-        return this.data[id]["mazeCellCost"]
+        return data[id]["mazeCellCost"]
     }
 
     static GetStarNumScaleDuration(id){
-        return this.data[id]["num_scale_duration"]
+        return data[id]["num_scale_duration"]
     }
 
     static GetBaseAffairReward(){

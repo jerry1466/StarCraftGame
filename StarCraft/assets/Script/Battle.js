@@ -21,8 +21,8 @@ import UnitManager from "UnitManager";
 import ResourceManager from "ResourceManager";
 import ResConfig from 'ResConfig';
 import StarConfig from "StarConfig";
-import BuffBase from "BuffBase";
 import Coin from 'Coin'
+import UIUtil from "./Lib/UIUtil";
 
 let databus = new Databus()
 cc.Class({
@@ -30,8 +30,9 @@ cc.Class({
     properties: {
         bgm: cc.AudioSource,
         bg:cc.Sprite,
-        MeteorCon:Coin,
+        meteorCon:Coin,
         btnMyStars: cc.Button,
+        fixCon:cc.Node,
         btnFix: cc.Button,
         btnSearch: cc.Button,
         hud: HUD,
@@ -43,11 +44,13 @@ cc.Class({
     },
 
     onLoad () {
-        SceneManager.GetInstance().rootCanvas = this.node
+        databus.userInfo.curStarId = "1001";
+        SceneManager.GetInstance().SetRoot(this.node);
         this.tex = new cc.Texture2D();
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MainBg())
-        this.MeteorCon.Init(ResConfig.MeteorConBg());
-
+        this.meteorCon.Init(ResConfig.MeteorConBg());
+        this.meteorCon.SetCoinType(2);
+        this.fixCon.active = false;
         this.registerEventHandler();
     },
 
@@ -61,7 +64,7 @@ cc.Class({
     },
 
     update() {
-        BuffBase.Update();
+        this.meteorCon.UpdateCoin(databus.userInfo.meteor);
         if(databus.showNextGoal)
         {
             this.subFieldView.node.active = true;
@@ -78,16 +81,17 @@ cc.Class({
 
     start() {
         if(databus.soundEnable) this.bgm.play()
+        this.refreshStar();
     },
 
     registerEventHandler(){
-        EventUtil.GetInstance().AddEventListener("RefreshStar", this.refreshStar)
-        EventUtil.GetInstance().AddEventListener("SwitchStar", this.switchStar)
+        EventUtil.GetInstance().AddEventListener("RefreshStar", this.refreshStar.bind(this));
+        EventUtil.GetInstance().AddEventListener("SetFixRelatedBroke", this.setFixRelatedBroke.bind(this));
     },
     
     unRegisterEventHandler(){
-        EventUtil.GetInstance().RemoveEventListener("RefreshStar", this.refreshStar)
-        EventUtil.GetInstance().RemoveEventListener("SwitchStar", this.switchStar)
+        EventUtil.GetInstance().RemoveEventListener("RefreshStar", this.refreshStar.bind(this));
+        EventUtil.GetInstance().RemoveEventListener("SetFixRelatedBroke", this.setFixRelatedBroke.bind(this));
     },
 
     onMyStarList(){
@@ -109,14 +113,16 @@ cc.Class({
     },
 
     onExitClick(){
-        new LevelManager().SwitchLevel("Preload");
+        new LevelManager().SwitchLevel("preload");
     },
 
     refreshStar(){
         this.star.Refresh()
     },
 
-    switchStar(){
-        this.star.Switch()
+    setFixRelatedBroke(brokeIndex){
+        this.fixCon.active = true;
+        var coord = UIUtil.ToWorldCoord(this.node, this.star.node.name + ".Broke" + brokeIndex);
+        this.fixCon.setPosition(coord.x + 50, coord.y + 100);
     }
 })    

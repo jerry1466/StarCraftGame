@@ -17,12 +17,14 @@ cc.Class({
     },
 
     onLoad(){
+        this._curStarId = -1;
         this._brokeFixIndex = databus.userInfo.brokeFixIndex;
         this._brokeSpList = UnitManager.GetInstance().BrokeSpList;
+        this.rotation = 2.5;
     },
 
     update(dt) {
-        this.star.rotation += this.rotation * dt;
+        this.node.rotation += this.rotation * dt;
     },
 
     onDestroy() {
@@ -31,33 +33,48 @@ cc.Class({
     Refresh(){
         var curStarId = databus.userInfo.curStarId;
         var brokeList = StarConfig.GetStarBrokeList(curStarId);
-        ResourceManager.LoadRemoteSprite(this.star, StarConfig.GetStarAppearance());
+        ResourceManager.LoadRemoteSprite(this.star, StarConfig.GetStarAppearance(curStarId));
         for(var i = databus.userInfo.brokeFixIndex + 1; i < brokeList.length; i++)
         {
             var brokeCfg = brokeList[i];
             if(this._brokeSpList[i] != null)
             {
                 this.node.addChild(this._brokeSpList[i]);
+                this._brokeSpList[i].name = "Broke" + i;
                 this._brokeSpList[i].setPosition(cc.v2(brokeCfg[0], brokeCfg[1]));
                 this._brokeSpList[i].active = true;
+                var broke = this._brokeSpList[i].getComponent("Broke");
+                broke.index = i;
+                broke.cost = brokeCfg[2];
             }
         }
         for(var i = 0; i < databus.userInfo.brokeFixIndex; i++)
         {
             this._brokeSpList[i].removeFromParent();
         }
-        if(this._brokeFixIndex == databus.userInfo.brokeFixIndex)
+        if(databus.userInfo.brokeFixIndex >= 0)
         {
-            this._brokeSpList[i].removeFromParent();
+            if(this._brokeFixIndex == databus.userInfo.brokeFixIndex)
+            {
+                this._brokeSpList[i].removeFromParent();
+            }
+            else
+            {
+                this._brokeFixIndex = databus.userInfo.brokeFixIndex;
+                TweenAlpha.begin(this._brokeSpList[databus.userInfo.brokeFixIndex], 1, 0, 0.5, 1);
+            }
         }
-        else
+        if(this._curStarId != curStarId)
         {
-            this._brokeFixIndex = databus.userInfo.brokeFixIndex;
-            TweenAlpha.begin(this._brokeSpList[databus.userInfo.brokeFixIndex], 1, 0, 0.5, 1);
+            for(var i = 0; i < this._brokeSpList.length; i++)
+            {
+                this._brokeSpList[i].getComponent("Broke").Select(i == (databus.userInfo.brokeFixIndex + 1));
+            }
         }
+        this._curStarId = curStarId;
     },
 
     Switch(){
-
+        this.Refresh();
     }
 })

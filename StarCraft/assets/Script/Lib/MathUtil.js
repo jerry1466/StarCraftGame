@@ -68,8 +68,8 @@ export default class MathUtil {
 	}
 
 	static spliteScreenToBlock(screenHeight, screenWidth, num) {
-		//假设屏幕的坐标原点在屏幕底部正中间
-		var block = {top:screenHeight, left:(0 - screenWidth / 2), right:(screenWidth / 2), buttom:0}
+		//假设屏幕的坐标原点在屏幕正中间
+		var block = {top:(screenHeight / 2), left:(0 - screenWidth / 2), right:(screenWidth / 2), buttom:(0 - screenHeight / 2)}
 		var blockList = new Array()
 		var blocktmp = null
 		blockList.push(block)

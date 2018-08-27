@@ -46,8 +46,8 @@ cc.Class({
                 success:function(res){
                     databus.screenWidth = res.windowWidth
                     databus.screenHeight = res.windowHeight
-                    databus.screenTop = databus.screenHeight
-                    databus.screenButtom = 0
+                    databus.screenTop = databus.screenHeight / 2
+                    databus.screenButtom = 0 - databus.screenHeight / 2
                     databus.screeLeft = 0 - databus.screenWidth / 2
                     databus.screeRight = databus.screenWidth / 2
                     databus.isIphoneX = (databus.screenWidth == 375) && (databus.screenHeight == 812)

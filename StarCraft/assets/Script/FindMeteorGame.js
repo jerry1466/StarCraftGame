@@ -29,8 +29,8 @@ cc.Class({
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.FindMeteorBg())
         var param = new LevelManager().CurrentLevelParam
         this.findMeteor = FindMeteor.GetInstance()
-        this.findMeteor.CreatePlanet()
-        this.findMeteor.CreateMeteor(10)
+        //this.findMeteor.CreatePlanet()
+        //this.findMeteor.CreateMeteor(10)
        	/*var blackholeNum = param["level"] * 2 + 3
         if (blackholeNum > 9) {
 			blackholeNum = 9

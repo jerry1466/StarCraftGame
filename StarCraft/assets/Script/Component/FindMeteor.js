@@ -16,6 +16,7 @@ export default class FindMeteor {
         this.meteorList = new Array()
         this.blackholeList = new Array()
         this.gameOver = false
+        this.meteorList = new Array()
     }
 
     static GetInstance() {
@@ -46,13 +47,14 @@ export default class FindMeteor {
 
 		//在每个分块里面随机出来一个流星
 		var meteor = null
-		for (let i = blockList.length - 1; i > 0; i--) {
+		var _this = this
+		for (let i = blockList.length - 1; i >= 0; i--) {
 			this.loadRes("Meteor", function(instance) {
 				meteor = instance.addComponent("Meteor")
 				component.node.addChild(instance)
 				var blocktmp = blockList[i]
 				meteor.Init(blocktmp.top, blocktmp.buttom, blocktmp.left, blocktmp.right)
-				this.meteorList.push(meteor)
+				_this.meteorList.push(meteor)
 			})
 			
 		}

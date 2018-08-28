@@ -74,21 +74,52 @@ export default class MathUtil {
 		var blocktmp = null
 		blockList.push(block)
 
+		console.log("splite", block)
 		while (blockList.length < num) {
 			var blockout = blockList.splice(0, 1)
 			blocktmp = blockout[0]
 			if (blocktmp.top - blocktmp.buttom > blocktmp.right - blocktmp.left) {
+				console.log("-:", blocktmp)
 				//橫着分
-				var new1 = {top:blocktmp.top, left:blocktmp.left, right:blocktmp.right, buttom:(blocktmp.top / 2)}
-				var new2 = {top:blocktmp.top / 2, left:blocktmp.left, right:blocktmp.right, buttom:blocktmp.buttom}
-				blockList.push(new1)
-				blockList.push(new2)
+				if (blocktmp.top > 0) {
+					var index = (blocktmp.top - blocktmp.buttom) / 2
+					var new1 = {top:blocktmp.top, left:blocktmp.left, right:blocktmp.right, buttom:(blocktmp.buttom + index)}
+					var new2 = {top:(blocktmp.buttom + index), left:blocktmp.left, right:blocktmp.right, buttom:blocktmp.buttom}
+					console.log("- new1:", new1, "new2:", new2)
+					blockList.push(new1)
+					blockList.push(new2)
+				}
+	
+				if (blocktmp.top <= 0) {
+					var index = Math.abs(blocktmp.buttom - blocktmp.top) / 2
+					var new1 = {top:blocktmp.top, left:blocktmp.left, right:blocktmp.right, buttom:(blocktmp.top - index)}
+					var new2 = {top:(blocktmp.top - index), left:blocktmp.left, right:blocktmp.right, buttom:blocktmp.buttom}
+					console.log("- new1:", new1, "new2:", new2)
+					blockList.push(new1)
+					blockList.push(new2)
+				}
+				//console.log("-:", blockList)
 			} else {
 				//竖着分
-				var new1 = {top:blocktmp.top, left:blocktmp.left, right:((Math.abs(blocktmp.right) - Math.abs(blocktmp.left)) / 2), buttom:blocktmp.buttom}
-				var new2 = {top:blocktmp.top, left:((Math.abs(blocktmp.right) - Math.abs(blocktmp.left)) / 2), right:blocktmp.right, buttom:blocktmp.buttom}
-				blockList.push(new1)
-				blockList.push(new2)
+				console.log("l:", blocktmp)
+				if (blocktmp.right > 0) {
+					var index = (blocktmp.right - blocktmp.left) / 2
+					var new1 = {top:blocktmp.top, left:blocktmp.left, right:(blocktmp.left + index), buttom:blocktmp.buttom}
+					var new2 = {top:blocktmp.top, left:(blocktmp.left + index), right:blocktmp.right, buttom:blocktmp.buttom}
+					console.log("l new1:", new1, "new2:", new2)
+					blockList.push(new1)
+					blockList.push(new2)
+				}
+
+				if (blocktmp.right <= 0) {
+					var index = Math.abs(blocktmp.left - blocktmp.right) / 2
+					var new1 = {top:blocktmp.top, left:blocktmp.left, right:(blocktmp.right - index), buttom:blocktmp.buttom}
+					var new2 = {top:blocktmp.top, left:(blocktmp.right - index), right:blocktmp.right, buttom:blocktmp.buttom}
+					console.log("l new1:", new1, "new2:", new2)
+					blockList.push(new1)
+					blockList.push(new2)
+				}
+				//console.log("l:", blockList)
 			}
 		}
 

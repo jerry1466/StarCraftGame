@@ -30,7 +30,7 @@ cc.Class({
         var param = new LevelManager().CurrentLevelParam
         this.findMeteor = FindMeteor.GetInstance()
         this.findMeteor.CreatePlanet(this)
-        this.findMeteor.CreateMeteor(this, 10)
+        this.findMeteor.CreateMeteor(this, 5)
        	/*var blackholeNum = param["level"] * 2 + 3
         if (blackholeNum > 9) {
 			blackholeNum = 9

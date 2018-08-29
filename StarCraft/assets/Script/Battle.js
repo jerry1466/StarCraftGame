@@ -22,7 +22,7 @@ import ResourceManager from "ResourceManager";
 import ResConfig from 'ResConfig';
 import StarConfig from "StarConfig";
 import Coin from 'Coin'
-import UIUtil from "./Lib/UIUtil";
+import UIUtil from "UIUtil";
 
 let databus = new Databus()
 cc.Class({
@@ -31,9 +31,9 @@ cc.Class({
         bgm: cc.AudioSource,
         bg:cc.Sprite,
         meteorCon:Coin,
-        btnMyStars: cc.Button,
         fixCon:cc.Node,
-        btnFix: cc.Button,
+        fixCostCon: Coin,
+        btnMyStars: cc.Button,
         btnSearch: cc.Button,
         hud: HUD,
         leftBar: LeftBar,
@@ -44,13 +44,12 @@ cc.Class({
     },
 
     onLoad () {
-        databus.userInfo.curStarId = "1001";
         SceneManager.GetInstance().SetRoot(this.node);
         this.tex = new cc.Texture2D();
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MainBg())
         this.meteorCon.Init(ResConfig.MeteorConBg());
         this.meteorCon.SetCoinType(2);
-        this.fixCon.active = false;
+        this.fixCostCon.Init(ResConfig.FixConBg());
         this.registerEventHandler();
     },
 
@@ -64,7 +63,18 @@ cc.Class({
     },
 
     update() {
-        this.meteorCon.UpdateCoin(databus.userInfo.meteor);
+        this.meteorCon.UpdateCoin(databus.userInfo.meteor, true);
+        if(this._broke){
+            this.fixCon.active = true;
+            if(databus.userInfo.meteor >= this._broke.cost)
+            {
+                this.fixCostCon.UpdateCoin(this._broke.cost);
+            }
+        }
+        else
+        {
+            this.fixCon.active = false;
+        }
         if(databus.showNextGoal)
         {
             this.subFieldView.node.active = true;
@@ -77,21 +87,25 @@ cc.Class({
 
     onDestroy() {
         this.unRegisterEventHandler();
+        this._broke = null;
     },
 
     start() {
-        if(databus.soundEnable) this.bgm.play()
+        // if(databus.soundEnable) this.bgm.play();
+        this.bgm.stop();
         this.refreshStar();
     },
 
     registerEventHandler(){
-        EventUtil.GetInstance().AddEventListener("RefreshStar", this.refreshStar.bind(this));
-        EventUtil.GetInstance().AddEventListener("SetFixRelatedBroke", this.setFixRelatedBroke.bind(this));
+        this.refreshStarHandler = this.refreshStar.bind(this);
+        EventUtil.GetInstance().AddEventListener("RefreshStar", this.refreshStarHandler);
+        this.setFixRelatedBrokeHandler = this.setFixRelatedBroke.bind(this);
+        EventUtil.GetInstance().AddEventListener("SetFixRelatedBroke", this.setFixRelatedBrokeHandler);
     },
     
     unRegisterEventHandler(){
-        EventUtil.GetInstance().RemoveEventListener("RefreshStar", this.refreshStar.bind(this));
-        EventUtil.GetInstance().RemoveEventListener("SetFixRelatedBroke", this.setFixRelatedBroke.bind(this));
+        EventUtil.GetInstance().RemoveEventListener("RefreshStar", this.refreshStarHandler);
+        EventUtil.GetInstance().RemoveEventListener("SetFixRelatedBroke", this.setFixRelatedBrokeHandler);
     },
 
     onMyStarList(){
@@ -99,30 +113,47 @@ cc.Class({
     },
 
     onSearchClick(){
-        new LevelManager().SwitchLevel("Maze")
-    },
-
-    onFixClick(){
-        var fixCost = StarConfig.GetStarBrokeList(databus.userInfo.brokeFixIndex + 1);
-        var moneyType = 2;
-        MoneyUtil.Spend(moneyType, fixCost, "修复该星球破损吗？", function(success){
-            if(success){
-                databus.AddMoney(moneyType, 0-fixCost);
-            }
-        })
+        new LevelManager().SwitchLevel("maze")
     },
 
     onExitClick(){
         new LevelManager().SwitchLevel("preload");
     },
 
-    refreshStar(){
-        this.star.Refresh()
+    onFixClick(){
+        if(this._broke.fixed == false)
+        {
+            var moneyType = 2;
+            var that = this;
+            MoneyUtil.Spend(moneyType, this._broke.cost, "修复该星球破损吗？", function(success){
+                if(success){
+                    that.star.StepNextBroke();
+                }
+            })
+        }
     },
 
-    setFixRelatedBroke(brokeIndex){
-        this.fixCon.active = true;
-        var coord = UIUtil.ToWorldCoord(this.node, this.star.node.name + ".Broke" + brokeIndex);
-        this.fixCon.setPosition(coord.x + 50, coord.y + 100);
+    onGmClick(){
+        if(this._gmClickCount == null)
+        {
+            this._gmClickCount = 1;
+        }
+        else
+        {
+            this._gmClickCount++;
+        }
+        if(this._gmClickCount >= 3)
+        {
+            ModuleManager.GetInstance().ShowModule("CheatPanel");
+            this._gmClickCount = 0;
+        }
+    },
+
+    refreshStar(){
+        this.star.Switch()
+    },
+
+    setFixRelatedBroke(broke){
+        this._broke = broke;
     }
 })    

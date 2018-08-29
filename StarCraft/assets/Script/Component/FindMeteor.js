@@ -27,8 +27,8 @@ export default class FindMeteor {
 	CreatePlanet() {
 		var _this = this
 		this.loadRes("planet", function(instance) {
-			var planet = instance.addComponent("planet")
-			planet.init()
+			var planet = instance.addComponent("Planet")
+			planet.Init()
 			_this.planet = planet
 		})
 	}

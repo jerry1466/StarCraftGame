@@ -2,6 +2,8 @@
  * Databus
  * @auhor clairli
  */
+import StarConfig from "StarConfig";
+
 let instance
 export default class Databus{
     constructor() {
@@ -32,6 +34,8 @@ export default class Databus{
             meteor:0,
             brokeFixIndex:-1
         }
+        /**************微信账号信息*************/
+        this.wxUserInfo = {}
     }
 
     Reset(){
@@ -76,5 +80,10 @@ export default class Databus{
                 this.userInfo.meteor = 0;
             }
         }
+    }
+
+    IsCurStarFixed(){
+        var brokeList = StarConfig.GetStarBrokeList(this.userInfo.curStarId);
+        return this.userInfo.brokeFixIndex == (brokeList.length - 1);
     }
 }

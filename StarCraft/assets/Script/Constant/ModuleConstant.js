@@ -22,11 +22,16 @@ export default class ModuleConstant {
         this.moduleNames["SimpleRankPanel"] = "Panel/SimpleRankPanel";
         this.moduleNames["AdPanel"] = "Panel/AdPanel";
         this.moduleNames["LoginPanel"] = "Panel/LoginPanel";
+        this.moduleNames["CheatPanel"] = "Panel/CheatPanel";
         this.moduleNames["Guide"] = "Panel/Guide";
         this.moduleNames["IntroducePanel"] = "Panel/IntroducePanel";
         this.moduleNames["DiamondRewardBox"] = "Panel/DiamondRewardBox";
         this.moduleNames["MeteorRewardBox"] = "Panel/MeteorRewardBox";
         this.moduleNames["RobBox"] = "Panel/RobBox";
+        this.moduleNames["MessageBox"] = "Panel/MessageBox";
+        this.moduleNames["GuideMeteorBox"] = "Panel/GuideMeteorBox";
+        this.moduleNames["GuideDiamondBox"] = "Panel/GuideDiamondBox";
+        this.moduleNames["FixCompleteBox"] = "Panel/FixCompleteBox";
     }
 
     GetModuleUrl(moduleName){

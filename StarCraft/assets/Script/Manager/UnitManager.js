@@ -7,7 +7,7 @@ import PrefabUtil from "PrefabUtil";
 let instance
 export default class UnitManager {
     constructor() {
-        this.BrokeSpList = []
+        this.BrokePrefab = null;
     }
     
     static GetInstance() {
@@ -87,5 +87,9 @@ export default class UnitManager {
         this.enemyWood.removeFromParent()
         this.enemyWood.destroy()
         this.enemyWood = null
+    }
+
+    FetchBrokeInst(){
+        return cc.instantiate(this.BrokePrefab);
     }
 }

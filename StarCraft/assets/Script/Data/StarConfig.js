@@ -4,6 +4,7 @@ let data =
     {
         "id":1001,
         "name":"水星",
+        "intro":"",
         "appearance":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "broke":
         [
@@ -12,6 +13,7 @@ let data =
             [10, 40, 700],
             [60, -30, 1000]
         ],
+        "singleProduct":5,
         "unlock":0,
         "mazeCellCost":20,
         "num_scale_duration":[1, 1.1],
@@ -20,6 +22,7 @@ let data =
     {
         "id":1002,
         "name":"金星",
+        "intro":"",
         "appearance":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "broke":
         [
@@ -28,6 +31,7 @@ let data =
             [10, 40, 700],
             [60, -30, 1000]
         ],
+        "singleProduct":8,
         "unlock":3000,
         "mazeCellCost":20,
         "num_scale_duration":[1.15, 1.3],
@@ -36,6 +40,7 @@ let data =
     {
         "id":1003,
         "name":"地球",
+        "intro":"",
         "appearance":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "broke":
         [
@@ -44,6 +49,7 @@ let data =
             [10, 40, 700],
             [60, -30, 1000]
         ],
+        "singleProduct":11,
         "unlock":10000,
         "mazeCellCost":20,
         "num_scale_duration":[1.3, 1.6],
@@ -57,32 +63,44 @@ let star_base_data =
 }
 
 export default class StarConfig{
+    static GetStarIds(){
+        var ids = [];
+        for(var id in data){
+            ids.push(id);
+        }
+        return ids;
+    }
+
+    static GetStarConfig(id){
+        return data[id.toString()];
+    }
+
     static GetStarName(id){
-        return data[id]["name"]
+        return data[id.toString()]["name"]
     }
 
     static GetStarAppearance(id){
-        return data[id]["appearance"]
+        return data[id.toString()]["appearance"]
     }
 
     static GetStarBrokeList(id){
-        return data[id]["broke"]
+        return data[id.toString()]["broke"]
     }
 
     static GetStarUnlock(id){
-        return data[id]["unlock"]
+        return data[id.toString()]["unlock"]
     }
 
     static GetStarAffairRate(id){
-        return data[id]["affairRate"]
+        return data[id.toString()]["affairRate"]
     }
 
     static GetMazeCellCost(id){
-        return data[id]["mazeCellCost"]
+        return data[id.toString()]["mazeCellCost"]
     }
 
     static GetStarNumScaleDuration(id){
-        return data[id]["num_scale_duration"]
+        return data[id.toString()]["num_scale_duration"]
     }
 
     static GetBaseAffairReward(){

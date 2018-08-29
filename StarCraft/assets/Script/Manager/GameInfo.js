@@ -62,7 +62,7 @@ export default class GameInfo {
         if(index <= databus.brickPos.length)
         {
             UnitManager.GetInstance().CreateWall(function(wall){
-                SceneManager.GetInstance().rootCanvas.addChild(wall)
+                SceneManager.GetInstance().rootCanvas().addChild(wall)
                 wall.width = databus.wallWidth
                 if (index == 0)
                 {
@@ -92,7 +92,7 @@ export default class GameInfo {
     combineBrick(_this, index, callback){
         if(index < databus.brickPos.length) {
             UnitManager.GetInstance().CreateBrick(index + 1, function (brick) {
-                SceneManager.GetInstance().rootCanvas.addChild(brick)
+                SceneManager.GetInstance().rootCanvas().addChild(brick)
                 brick.width = databus.wallWidth
                 brick.height = databus.brickHeight
                 brick.x = 0
@@ -110,7 +110,7 @@ export default class GameInfo {
 
     combineWood(_this, callback){
         UnitManager.GetInstance().CreateWood(true, function(wood){
-            SceneManager.GetInstance().rootCanvas.addChild(wood)
+            SceneManager.GetInstance().rootCanvas().addChild(wood)
             wood.width = databus.woodWidth
             wood.height = databus.woodHeight
             wood.x = databus.xRightWood
@@ -119,7 +119,7 @@ export default class GameInfo {
             comWood.Init(true, -1, new MissionConfig().GetMissionMyWoodDirection(databus.mission))
 
             UnitManager.GetInstance().CreateWood(false, function(wood){
-                SceneManager.GetInstance().rootCanvas.addChild(wood)
+                SceneManager.GetInstance().rootCanvas().addChild(wood)
                 wood.width = databus.woodWidth
                 wood.height = databus.woodHeight
                 wood.x = databus.xLeftWood

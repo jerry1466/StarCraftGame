@@ -16,7 +16,22 @@ cc.Class({
     },
 
     onLoad(){
-
+        if(CC_WECHATGAME)
+        {
+            let avatarUrl = databus.wxUserInfo.avatarUrl;
+            let image = wx.createImage();
+            var that = this
+            image.onload = () => {
+                try {
+                    let texture = new cc.Texture2D();
+                    texture.initWithElement(image);
+                    texture.handleLoadedTexture();
+                    that.head.spriteFrame = new cc.SpriteFrame(texture);
+                } catch (e) {
+                }
+            };
+            image.src = avatarUrl;
+        }
     },
 
     update() {

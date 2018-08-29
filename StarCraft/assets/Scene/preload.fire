@@ -45,7 +45,7 @@
     "_globalZOrder": 0,
     "_opacityModifyRGB": false,
     "groupIndex": 0,
-    "autoReleaseAssets": false
+    "autoReleaseAssets": true
   },
   {
     "__type__": "cc.Node",
@@ -241,7 +241,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "ba5da7aa-a6d8-405b-829a-299d2ffdaec4"
+      "__uuid__": "212a1d91-84f2-4ebf-9f0d-3953c4d607dc"
     },
     "_type": 0,
     "_sizeMode": 1,
@@ -267,7 +267,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "d73dc025-715f-4d5b-8ae1-057a8be4955a"
+      "__uuid__": "9d3ec3b8-593c-4b94-85b4-3025d3cbe43c"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -414,10 +414,10 @@
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_N$string": "开始游戏",
+    "_N$string": "进入游戏",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
+    "_N$fontFamily": "黑体",
     "_N$overflow": 1
   },
   {
@@ -429,7 +429,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "89e33dbf-8d12-4b46-843b-747ddfe45ea1"
+      "__uuid__": "8f2c28df-e084-40ca-98a8-d16abf54b290"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -928,7 +928,7 @@
     "_N$string": "分享游戏",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
+    "_N$fontFamily": "黑体",
     "_N$overflow": 0
   },
   {
@@ -1055,15 +1055,13 @@
     "_fontSize": 36,
     "_lineHeight": 36,
     "_enableWrapText": true,
-    "_N$file": {
-      "__uuid__": "65060b77-30a4-42b0-8801-02264ec9963a"
-    },
-    "_isSystemFontUsed": false,
+    "_N$file": null,
+    "_isSystemFontUsed": true,
     "_spacingX": 0,
     "_N$string": "得奖励",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
-    "_N$fontFamily": "Arial",
+    "_N$fontFamily": "黑体",
     "_N$overflow": 0
   },
   {
@@ -1121,7 +1119,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "89e33dbf-8d12-4b46-843b-747ddfe45ea1"
+      "__uuid__": "8f2c28df-e084-40ca-98a8-d16abf54b290"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -1184,9 +1182,7 @@
       "b": 255,
       "a": 255
     },
-    "_N$normalSprite": {
-      "__uuid__": "89e33dbf-8d12-4b46-843b-747ddfe45ea1"
-    },
+    "_N$normalSprite": null,
     "_N$pressedSprite": null,
     "pressedSprite": null,
     "_N$hoverSprite": null,
@@ -1595,7 +1591,7 @@
     "_N$string": "搜索公众号“玩会儿游戏”，优先体验更多小游戏",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
-    "_N$fontFamily": "宋体",
+    "_N$fontFamily": "黑体",
     "_N$overflow": 0
   },
   {

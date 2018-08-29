@@ -1,21 +1,28 @@
-import ResourceManager from "ResourceManager"
-import ResConfig from "ResConfig";
+import Databus from "Databus"
 import EventUtil from "EventUtil";
+import ResourceManager from "ResourceManager";
+import ResConfig from "ResConfig";
 
+let databus = new Databus();
 cc.Class({
     extends:cc.Component,
     properties: {
-        index:-1,
-        cost:0,
+        fixed:false,
     },
 
     onLoad(){
-        this.nodeSp = this.node.getComponent(cc.Sprite);
+        this.icon = this.node.getComponent(cc.Sprite);
+        ResourceManager.LoadRemoteSprite(this.icon, ResConfig.BrokeIcon());
         this.refresh();
     },
 
-    onClick(){
-        this.Select(true);
+    update(){
+        this.progressBar.progress = Math.min(databus.userInfo.meteor / this.cost, 1);
+    },
+
+    Init(index, cost){
+        this.index = index;
+        this.cost = cost;
     },
 
     Select(value){
@@ -23,14 +30,16 @@ cc.Class({
         this.refresh();
         if(value)
         {
-            EventUtil.GetInstance().DispatchEvent("SetFixRelatedBroke", this.index)
+            EventUtil.GetInstance().DispatchEvent("SetFixRelatedBroke", this)
         }
     },
 
+    SetFixed(value){
+        this.fixed = value;
+    },
+
     refresh(){
-        if(this.nodeSp)
-        {
-            ResourceManager.LoadRemoteSprite(this.nodeSp, this._select?ResConfig.BrokeSelectIcon():ResConfig.BrokeUnselectIcon())
-        }
+        this.progressBar = this.node.getChildByName("bar").getComponent(cc.ProgressBar);
+        this.progressBar.node.active = (this._select || false);
     }
 })

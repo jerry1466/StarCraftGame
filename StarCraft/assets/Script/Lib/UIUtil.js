@@ -1,9 +1,22 @@
 import ModuleManager from "ModuleManager"
 import TweenPosition from "TweenPosition"
 import TweenScale from "TweenScale"
+import TweenAlpha from "TweenAlpha"
+import ResConfig from "ResConfig";
+import SceneManager from "SceneManager";
 
 let noticeList = []
+let noticePrefab;
+let noticeInst;
 export default class UIUtil {
+    static SetNoticePrefab(prefab){
+        noticePrefab = prefab;
+    }
+
+    static GetNoticeInst(){
+        return cc.instantiate(noticePrefab);
+    }
+
     static FindNode(root, nodePath) {
         var nodeArr = nodePath.split('.')
         var curRoot = root
@@ -42,34 +55,56 @@ export default class UIUtil {
         return coord
     }
 
-    static Confirm(tip, confirmHandler){
-        ModuleManager.GetInstance().ShowModule("MessageBox",
-            {"mode":"confirm", content:tip, confirm:confirmHandler})
+    static ToLocalCoord(worldPos, root, nodePath){
+        var coord = cc.v2(worldPos.x, worldPos.y);
+        var curRoot = root
+        var nodeArr = nodePath.split('.');
+        for(var i = 0; i < nodeArr.length; i++)
+        {
+            var child = curRoot.getChildByName(nodeArr[i]);
+            if(child)
+            {
+                curRoot = child;
+                coord.x += child.x * child.scaleX;
+                coord.y += child.y * child.scaleY;
+            }
+        }
+        return coord;
     }
 
-    static ConfirmCancel(tip, confirmHandler, cancelHandler){
+    static Confirm(tip, confirmHandler, confirmText){
         ModuleManager.GetInstance().ShowModule("MessageBox",
-            {"mode":"confirmCancel", content:tip, confirm:confirmHandler, cancel:cancelHandler})
+            {"mode":"confirm", content:tip, confirm:confirmHandler, confirmText:confirmText});
+    }
+
+    static ConfirmCancel(tip, confirmHandler, cancelHandler, confirmText, cancelText){
+        ModuleManager.GetInstance().ShowModule("MessageBox",
+            {"mode":"confirmCancel", content:tip, confirm:confirmHandler, cancel:cancelHandler, confirmText:confirmText, cancelText:cancelText});
     }
 
     static ShowMoneyNotice(moneyType, moneyNum, parent, offset){
         if(parent == null) return;
-        var moneyIconName;
+        var moneyIconRes;
+        var color;
         if(moneyType == 1)
         {
-            moneyIconName = "Icon_Diamond"
+            moneyIconRes = ResConfig.DiamondIcon();
+            color = "<color=#ED6BF8>";
         }
         else
         {
-            moneyIconName = "Icon_Meteor"
+            moneyIconRes = ResConfig.MeteorIcon();
+            color = "<color=#FFD700>";
         }
-        var notice = "<img src=\'" + moneyIconName + "\'> + " + moneyNum;
-        var noticeLabel = new cc.Node();
-        var richTextCom = noticeLabel.addComponent(cc.RichText);
-        richTextCom.string = notice
-        noticeList.push(noticeLabel);
-        parent.addChild(noticeLabel);
-        noticeLabel.setPosition(offset.x, offset.y);
+        var noticeText = color + " + " + moneyNum + "</c>";
+        var notice = this.GetNoticeInst();
+        var noticeCom = notice.getComponent("Notice");
+        noticeCom.Init(moneyIconRes, noticeText);
+        noticeList.push(notice);
+        notice.x = offset.x;
+        notice.y = offset.y;
+        parent.addChild(notice);
+        notice.active = false;
         this.doShowNotice();
     }
 
@@ -84,14 +119,29 @@ export default class UIUtil {
     }
 
     static displayNotice(noticeLabel){
-        var tweenPos = TweenPosition.begin(noticeLabel, noticeLabel.position, cc.v2(noticeLabel.x, noticeLabel.y + 50), 1)
-        var tweenScale = TweenScale.begin(noticeLabel, cc.v2(0.2, 0.2), cc.v2(1, 1), 0.3, 1)
+        noticeLabel.active = true;
+        var tweenPos = TweenPosition.begin(noticeLabel, noticeLabel.position, cc.v2(noticeLabel.x, noticeLabel.y + 20), 1)
+        var that = this;
         tweenPos.onFinishCallBack = function(){
+            that.flyDiamond(noticeLabel.parent, cc.v2(noticeLabel.position.x - 25, noticeLabel.position.y - 15));
             noticeLabel.removeFromParent()
             noticeLabel.destroy()
         }
-        tweenScale.onFinishCallBack = function(){
-            TweenAlpha.begin(noticeLabel, 1, 0.3, 0.7, 1)
+        TweenAlpha.begin(noticeLabel, 255, 0, 1, 1);
+    }
+
+    static flyDiamond(parent, pos){
+        var diamondNode = new cc.Node();
+        parent.addChild(diamondNode);
+        diamondNode.setPosition(pos.x, pos.y);
+        var spriteCon = diamondNode.addComponent(cc.Sprite);
+        spriteCon.spriteFrame = new cc.SpriteFrame(cc.url.raw('resources/Image/diamond_icon.png'));
+        var targetPos = this.ToWorldCoord(parent, "Hud.DiamondCon");
+        var tweenPos = TweenPosition.begin(diamondNode, diamondNode.position, cc.v2(targetPos.x - 40, targetPos.y), 1)
+        tweenPos.onFinishCallBack = function(){
+            diamondNode.removeFromParent();
+            diamondNode.destroy();
+            diamondNode = null;
         }
     }
 }

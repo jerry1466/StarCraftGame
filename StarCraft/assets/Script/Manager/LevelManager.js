@@ -1,4 +1,5 @@
 import Databus from 'Databus'
+import ModuleManager from "ModuleManager";
 
 let databus = new Databus()
 
@@ -11,6 +12,7 @@ export default class LevelManager {
     }
 
     SwitchLevel(lvName, levelParam){
+        ModuleManager.GetInstance().PopAllModule();
         this.CurrentLevelName = lvName;
         this.CurrentLevelParam = levelParam
         console.log("SwitchLevel:" + lvName)

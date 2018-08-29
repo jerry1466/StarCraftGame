@@ -17,8 +17,13 @@ cc.Class({
     },
 
     onLoad(){
+
+    },
+
+    start(){
         this.DiamondCon.Init(ResConfig.DiamondConBg());
         this.ProductivityCon.Init(ResConfig.ProductivityConBg(), "/秒");
+        this.ProductivityCon.InitIcon(ResConfig.DiamondIcon());
     },
 
     update(dt) {

@@ -2,8 +2,6 @@
  * Maze
  * @author lijun
  **/
-import Scene from 'Scene'
-import HUD from 'HUD'
 import Databus from 'Databus'
 import LevelManager from "LevelManager";
 import SceneManager from "SceneManager";
@@ -13,27 +11,32 @@ import ModuleManager from "ModuleManager";
 import EffectUtil from "EffectUtil";
 import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig";
-import BuffBase from 'BuffBase'
+import BuffBase from 'BuffBase';
+import Coin from "Coin";
+import Player from "Player";
+import UIUtil from "UIUtil";
 
 let databus = new Databus()
 cc.Class({
     extends: cc.Component,
     properties: {
         bg:cc.Sprite,
-        hud: HUD,
+        diamondCon: Coin,
         btnExit:cc.Button,
         map:cc.Node,
-        player:cc.Node,
+        player:Player,
+        tip:cc.Label,
     },
 
     onLoad(){
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MazeBg())
         SceneManager.GetInstance().SetRoot(this.node);
+        this.diamondCon.Init(ResConfig.DiamondConBg());
         this.registerEventHandler();
     },
 
     update() {
-        super.update();
+        this.diamondCon.UpdateCoin(databus.userInfo.diamond, true);
     },
 
     onDestroy() {
@@ -41,7 +44,7 @@ cc.Class({
     },
 
     start(){
-        MazeManager.GetInstance().Start(new LevelManager().CurrentLevelParam);
+        MazeManager.GetInstance().Start(this.map, this.player);
     },
 
     Init() {
@@ -49,29 +52,48 @@ cc.Class({
     },
 
     registerEventHandler(){
-        EventUtil.GetInstance().addEventListener("TriggerReward", this.triggerRewardHandler);
-        EventUtil.GetInstance().addEventListener("TriggerFreeze", this.triggerFreezeHandler);
-        EventUtil.GetInstance().addEventListener("TriggerRob", this.triggerRobHandler);
-        EventUtil.GetInstance().addEventListener("TriggerGame", this.triggerGameHandler);
-        this.map.on(cc.Node.EventType.TOUCH_START, this.onMapClick);
+        this.onTriggerRewardHandler = this.triggerRewardHandler.bind(this);
+        EventUtil.GetInstance().AddEventListener("TriggerReward", this.onTriggerRewardHandler);
+        this.onTriggerFreezeHandler = this.triggerFreezeHandler.bind(this);
+        EventUtil.GetInstance().AddEventListener("TriggerFreeze", this.onTriggerFreezeHandler);
+        this.onTriggerRobHandler = this.triggerRobHandler.bind(this);
+        EventUtil.GetInstance().AddEventListener("TriggerRob", this.onTriggerRobHandler);
+        this.onTriggerGameHandler = this.triggerGameHandler.bind(this);
+        EventUtil.GetInstance().AddEventListener("TriggerGame", this.onTriggerGameHandler);
+        this.onSelectMapGridHandler = this.selectMapGridHandler.bind(this);
+        EventUtil.GetInstance().AddEventListener("SelectMapGrid", this.onSelectMapGridHandler);
+        this.onTouchStartHandler = this.onTouchStart.bind(this);
+        this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStartHandler);
     },
 
     unRegisterEventHandler(){
-        EventUtil.GetInstance().removeEventListener("TriggerReward", this.triggerRewardHandler);
-        EventUtil.GetInstance().removeEventListener("TriggerFreeze", this.triggerFreezeHandler);
-        EventUtil.GetInstance().removeEventListener("TriggerRob", this.triggerRobHandler);
-        EventUtil.GetInstance().removeEventListener("TriggerGame", this.triggerGameHandler);
-        this.map.off(cc.Node.EventType.TOUCH_START, this.onMapClick);
+        EventUtil.GetInstance().RemoveEventListener("TriggerReward", this.onTriggerRewardHandler);
+        EventUtil.GetInstance().RemoveEventListener("TriggerFreeze", this.onTriggerFreezeHandler);
+        EventUtil.GetInstance().RemoveEventListener("TriggerRob", this.onTriggerRobHandler);
+        EventUtil.GetInstance().RemoveEventListener("TriggerGame", this.onTriggerGameHandler);
+        EventUtil.GetInstance().RemoveEventListener("SelectMapGrid", this.onSelectMapGridHandler);
+        this.node.off(cc.Node.EventType.TOUCH_START, this.onTouchStartHandler);
     },
 
     onExit(){
         new LevelManager().SwitchLevel("Battle")
     },
 
-    onMapClick(event){
-        var location = event.getLocation()
-        var deltaX = location.x - this.player.x
-        var deltaY = location.y - this.player.y
+    onTouchStart(event){
+        this.touchStartLocation = event.getLocation();
+        MazeManager.GetInstance().ClickMap(UIUtil.ToLocalCoord(this.touchStartLocation, this.node, "MapFrame.Map"));
+        this.onTouchEndHandler = this.onTouchEnd.bind(this);
+        this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
+        this.onTouchCancelHandler = this.onTouchCancel.bind(this);
+        this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
+    },
+
+    onTouchEnd(event){
+        this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
+        this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
+        this.touchEndLocation = event.getLocation();
+        var deltaX = this.touchEndLocation.x - this.touchStartLocation.x
+        var deltaY = this.touchEndLocation.y - this.touchStartLocation.y
         if(Math.abs(deltaX) > Math.abs(deltaY)){
             if(deltaX > 0)
             {
@@ -92,6 +114,12 @@ cc.Class({
                 MazeManager.GetInstance().Move("down");
             }
         }
+    },
+
+    onTouchCancel(event){
+        this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
+        this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
+        this.touchStartLocation = cc.v2(0, 0);
     },
 
     triggerRewardHandler(affair){
@@ -117,4 +145,11 @@ cc.Class({
         new LevelManager().SwitchLevel("CutScene");
     },
 
+    selectMapGridHandler(){
+        this.showNotice("请选择一个格子作为探索起点");
+    },
+
+    showNotice(text){
+        this.tip.string = text;
+    }
 })    

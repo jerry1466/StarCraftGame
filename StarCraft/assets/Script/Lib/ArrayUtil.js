@@ -29,7 +29,6 @@ export default class ArrayUtil {
     }
 
     static GetRandomValue(arr) {
-        console.log("arr=======", arr)
         return arr[Math.floor(Math.random() * arr.length)]
     }
 

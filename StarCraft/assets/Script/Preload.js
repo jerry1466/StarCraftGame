@@ -90,7 +90,7 @@ cc.Class({
             this.btnShare.node.active = false;
         }
         //ResourceManager.LoadRemoteSprite(this.bg, "https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png")
-        //this.tweenStage1()
+        this.tweenStage1()
     },
 
     update(){

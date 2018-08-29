@@ -58,13 +58,13 @@ export default class ModuleManager {
             if(success)
             {
                 object.moduleMap[moduleName] = instance
-                object.mask.parent = SceneManager.GetInstance().rootCanvas
-                object.mask.width = SceneManager.GetInstance().rootCanvas.width
-                object.mask.height = SceneManager.GetInstance().rootCanvas.height
+                object.mask.parent = SceneManager.GetInstance().rootCanvas()
+                object.mask.width = SceneManager.GetInstance().rootCanvas().width
+                object.mask.height = SceneManager.GetInstance().rootCanvas().height
                 object.mask.x = object.mask.y = 0
                 var panelMask = object.mask.getComponent("PanelMask")
                 panelMask.Init(moduleName)
-                instance.parent = SceneManager.GetInstance().rootCanvas
+                instance.parent = SceneManager.GetInstance().rootCanvas()
                 instance.x = 0
                 instance.y = 0
                 var basePanel = instance.getComponent('BasePanel')
@@ -95,9 +95,15 @@ export default class ModuleManager {
             instance.removeFromParent()
             instance.destroy()
             instance = null
-            this.moduleMap[moduleName] = null
+            delete this.moduleMap[moduleName];
             this.mask.removeFromParent()
             EventUtil.GetInstance().DispatchEvent("HidePanel", moduleName)
+        }
+    }
+
+    PopAllModule(){
+        for(var moduleName in this.moduleMap){
+            this.HideModule(moduleName);
         }
     }
 

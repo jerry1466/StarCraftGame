@@ -38,7 +38,6 @@ var TweenAlpha = cc.Class({
     },
     // use this for initialization
     onLoad: function () {
-        this.node.setOpacity(this.from)
     },
 
     // called every frame, uncomment this function to activate update callback

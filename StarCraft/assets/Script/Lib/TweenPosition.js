@@ -32,8 +32,6 @@ var TweenPosition = cc.Class({
     },
     // use this for initialization
     onLoad: function () {
-
-        this.node.setPosition(this.from.x, this.from.y);
     },
 
     // called every frame, uncomment this function to activate update callback

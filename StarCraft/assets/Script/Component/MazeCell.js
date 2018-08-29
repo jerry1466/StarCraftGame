@@ -7,12 +7,12 @@ import AffairConstant from "AffairConstant";
 import EventUtil from "EventUtil";
 import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig";
+import TweenAlpha from "TweenAlpha";
 
 let databus = new Databus()
 cc.Class({
     extends: cc.Component,
     properties: {
-        bg:cc.Sprite,
         fog:cc.Sprite,
         icon:cc.Sprite,
         row:-1,
@@ -57,26 +57,42 @@ cc.Class({
     },
 
     Trigger(){
-        if(this.affair.type == AffairConstant.AffairEnum().REWARD)
+        if(this.fog.node.active == true)
         {
-            EventUtil.GetInstance().DispatchEvent("TriggerReward", this.affair)
-            EventUtil.GetInstance().DispatchEvent("FreeTouch")
-        }
-        else if(this.affair.type == AffairConstant.AffairEnum().FREEZE)
-        {
-            EventUtil.GetInstance().DispatchEvent("TriggerFreeze", this.affair)
-        }
-        else if(this.affair.type == AffairConstant.AffairEnum().ROB)
-        {
-            EventUtil.GetInstance().DispatchEvent("TriggerRob", this.affair)
-        }
-        else if(this.affair.type == AffairConstant.AffairEnum().GAME)
-        {
-            EventUtil.GetInstance().DispatchEvent("TriggerGame", this.affair)
+            var tweenAlpha = TweenAlpha.begin(this.fog.node, 255, 0, 1, 1);
+            tweenAlpha.onFinishCallBack = function(){
+                this.fog.node.active = false
+                this.fog.node.opacity = 255;
+                doTrigger();
+            }
         }
         else
         {
-            EventUtil.GetInstance().DispatchEvent("FreeTouch")
+            doTrigger();
+        }
+
+        function doTrigger(){
+            if(this.affair.type == AffairConstant.AffairEnum().REWARD)
+            {
+                EventUtil.GetInstance().DispatchEvent("TriggerReward", this.affair)
+                EventUtil.GetInstance().DispatchEvent("FreeTouch")
+            }
+            else if(this.affair.type == AffairConstant.AffairEnum().FREEZE)
+            {
+                EventUtil.GetInstance().DispatchEvent("TriggerFreeze", this.affair)
+            }
+            else if(this.affair.type == AffairConstant.AffairEnum().ROB)
+            {
+                EventUtil.GetInstance().DispatchEvent("TriggerRob", this.affair)
+            }
+            else if(this.affair.type == AffairConstant.AffairEnum().GAME)
+            {
+                EventUtil.GetInstance().DispatchEvent("TriggerGame", this.affair)
+            }
+            else
+            {
+                EventUtil.GetInstance().DispatchEvent("FreeTouch")
+            }
         }
     }
 })    

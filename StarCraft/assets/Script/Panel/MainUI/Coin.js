@@ -28,21 +28,24 @@ cc.Class({
         this.measureName = measureName || ""
     },
 
+    InitIcon(resIcon){
+        ResourceManager.LoadRemoteSprite(this.spIcon, resIcon);
+    },
+
     UpdateCoin(coinNum, doTween){
-        if(coinNum == this._coinNum) return;
         this.lbNum.string = coinNum + this.measureName;
         if(doTween && this._coinNum > 0 && coinNum > this._coinNum && !this.tweening)
         {
             this.tweening = true;
             var that = this;
-            var large = cc.v2(0.52, 0.52);
+            var large = cc.v2(0.6, 0.6);
             var normal = cc.v2(0.5, 0.5);
             var tweenScale1 = TweenScale.begin(this.lbNum.node, normal, large, 0.35, 1);
             tweenScale1.onFinishCallBack = function(){
-                // var tweenScale2 = TweenScale.begin(that.lbNum.node, large, normal, 0.35, 1);
-                // tweenScale2.onFinishCallBack = function(){
+                var tweenScale2 = TweenScale.begin(that.lbNum.node, large, normal, 0.35, 1);
+                tweenScale2.onFinishCallBack = function(){
                     that.tweening = false;
-                // }
+                }
             }
         }
         this._coinNum = coinNum;

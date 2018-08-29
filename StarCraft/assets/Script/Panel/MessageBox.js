@@ -1,17 +1,21 @@
 /**
- * XXX
+ * MessageBox
  * @author lijun
  **/
 import BasePanel from "BasePanel"
 import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig";
+import ModuleManager from "ModuleManager";
 cc.Class({
     extends: BasePanel,
     properties: {
         spBg:cc.Sprite,
         lbContent:cc.Label,
         btnConfirm:cc.Button,
-        btnCancel:cc.Button
+        btnCancel:cc.Button,
+        btnClose:cc.Button,
+        lbConfirm:cc.Label,
+        lbCancel:cc.Label,
     },
 
     onDestroy() {
@@ -22,27 +26,36 @@ cc.Class({
         ResourceManager.LoadRemoteSprite(this.spBg, ResConfig.MessageBoxBg())
     },
 
-    Init(mode, content, confirmHandler, cancelHandler) {
-        this.confirmHandler = confirmHandler;
-        this.cancelHandler = cancelHandler;
-        if(mode == "confirm"){
-            this.btnCancel.active = true
-            this.btnConfirm.x = this.spBg.node.width * 0.5;
+    Init(data) {
+        this.confirmHandler = data.confirm;
+        this.cancelHandler = data.cancel;
+        if(data.confirmText){
+            this.lbConfirm.string = data.confirmText;
+        }
+        if(data.cancelText){
+            this.lbCancel.string = data.cancelText;
+        }
+        if(data.mode == "confirm"){
+            this.btnCancel.node.active = false;
+            this.btnConfirm.node.x = 0;
         }
         else{
-            this.btnConfirm.x = this.spBg.node.width * 0.33;
-            this.btnCancel.x = this.spBg.node.width * 0.67;
+            this.btnCancel.node.active = true;
+            this.btnConfirm.node.x = this.spBg.node.width * 0.17;
+            this.btnCancel.node.x = -this.spBg.node.width * 0.17;
         }
-        this.lbContent.string = content;
+        this.lbContent.string = data.content;
     },
 
     OnConfirm(){
+        ModuleManager.GetInstance().HideModule("MessageBox");
         if(this.confirmHandler){
             this.confirmHandler()
         }
     },
 
     OnCancel(){
+        ModuleManager.GetInstance().HideModule("MessageBox");
         if(this.cancelHandler){
             this.cancelHandler()
         }

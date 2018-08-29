@@ -35,7 +35,7 @@ cc.Class({
         console.log(temp.loginButton)
         temp.loginButton.onTap((res)=> {
             if (res["encryptedData"] && res["iv"]) {
-                databus.userInfo = res.userInfo;
+                databus.wxUserInfo = res.userInfo;
                 res["userInfo"] = res.userInfo;
                 LoginManager.GetInstance().WxLogin(res,function(fail,host){
                     if(fail)

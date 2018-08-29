@@ -11,6 +11,7 @@ import SceneManager from 'SceneManager'
 import BuffBase from "BuffBase";
 import NetUtil from "NetUtil";
 import Productor from "Productor";
+import StarConfig from "StarConfig";
 
 let databus = new Databus()
 cc.Class({
@@ -30,7 +31,6 @@ cc.Class({
     onLoad() {
         SceneManager.GetInstance().SetRoot(this.node);
         ResourceManager.LoadRemoteSprite(this.spBg, "https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png")
-
         var that = this
         NetUtil.Request(databus.cfgUrl, {}, function(data){
     	    databus.cfgData = data;
@@ -38,6 +38,7 @@ cc.Class({
     	    that.startLoad();
         });
         this.lbCompany.string = "有來有趣网络科技"
+        databus.userInfo.curStarId = parseInt(StarConfig.GetStarIds()[0]);
         BuffBase.Init();
     },
 

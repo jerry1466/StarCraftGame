@@ -7,6 +7,8 @@ import ResourceManager from "ResourceManager";
 import UnitManager from "UnitManager";
 import TweenAlpha from 'TweenAlpha';
 import StarConfig from 'StarConfig';
+import EventUtil from "EventUtil";
+import ModuleManager from "ModuleManager";
 
 let databus = new Databus()
 let rotation = 0.05;
@@ -17,10 +19,15 @@ cc.Class({
     },
 
     onLoad(){
+        this.SetFixRelatedBrokeHandler = this.OnSetFixRelatedBroke.bind(this);
+        EventUtil.GetInstance().AddEventListener("SetFixRelatedBroke", this.SetFixRelatedBrokeHandler);
         this._curStarId = -1;
-        this._brokeFixIndex = databus.userInfo.brokeFixIndex;
-        this._brokeSpList = UnitManager.GetInstance().BrokeSpList;
+        this._brokeSpList = [];
         this.rotation = 2.5;
+    },
+
+    start(){
+
     },
 
     update(dt) {
@@ -28,53 +35,104 @@ cc.Class({
     },
 
     onDestroy() {
+        this._brokeSpList = [];
+        EventUtil.GetInstance().RemoveEventListener("SetFixRelatedBroke", this.SetFixRelatedBrokeHandler);
     },
 
-    Refresh(){
+    refresh(){
         var curStarId = databus.userInfo.curStarId;
         var brokeList = StarConfig.GetStarBrokeList(curStarId);
         ResourceManager.LoadRemoteSprite(this.star, StarConfig.GetStarAppearance(curStarId));
-        for(var i = databus.userInfo.brokeFixIndex + 1; i < brokeList.length; i++)
-        {
-            var brokeCfg = brokeList[i];
-            if(this._brokeSpList[i] != null)
+        if(this._brokeSpList.length == 0){
+            for(var i = 0; i < brokeList.length; i++)
             {
-                this.node.addChild(this._brokeSpList[i]);
-                this._brokeSpList[i].name = "Broke" + i;
-                this._brokeSpList[i].setPosition(cc.v2(brokeCfg[0], brokeCfg[1]));
-                this._brokeSpList[i].active = true;
-                var broke = this._brokeSpList[i].getComponent("Broke");
-                broke.index = i;
-                broke.cost = brokeCfg[2];
+                this._brokeSpList[i] = UnitManager.GetInstance().FetchBrokeInst();
             }
         }
-        for(var i = 0; i < databus.userInfo.brokeFixIndex; i++)
+        for(var i = 0; i < brokeList.length; i++)
         {
-            this._brokeSpList[i].removeFromParent();
-        }
-        if(databus.userInfo.brokeFixIndex >= 0)
-        {
-            if(this._brokeFixIndex == databus.userInfo.brokeFixIndex)
-            {
-                this._brokeSpList[i].removeFromParent();
+            var broke = this._brokeSpList[i].getComponent("Broke");
+            if(i <= databus.userInfo.brokeFixIndex){
+                broke.SetFixed(true);
             }
-            else
-            {
-                this._brokeFixIndex = databus.userInfo.brokeFixIndex;
-                TweenAlpha.begin(this._brokeSpList[databus.userInfo.brokeFixIndex], 1, 0, 0.5, 1);
+            else{
+                var brokeCfg = brokeList[i];
+                if(this._brokeSpList[i] != null)
+                {
+                    this._brokeSpList[i].parent = this.node;
+                    this._brokeSpList[i].name = "Broke" + i;
+                    this._brokeSpList[i].setPosition(cc.v2(brokeCfg[0], brokeCfg[1]));
+                    this._brokeSpList[i].active = true;
+                    this._brokeSpList[i].opacity = 255;
+                    this._brokeSpList[i].zIndex = 50 - i;
+                    broke.Init(i, brokeCfg[2]);
+                    broke.SetFixed(false);
+                }
             }
         }
+
         if(this._curStarId != curStarId)
         {
-            for(var i = 0; i < this._brokeSpList.length; i++)
-            {
-                this._brokeSpList[i].getComponent("Broke").Select(i == (databus.userInfo.brokeFixIndex + 1));
-            }
+            this.node.rotation = 0;
+            this.selectBroke(databus.userInfo.brokeFixIndex + 1);
         }
         this._curStarId = curStarId;
     },
 
     Switch(){
-        this.Refresh();
-    }
+        this.refresh();
+    },
+
+    StepNextBroke(){
+        var curFixIndex = databus.userInfo.brokeFixIndex + 1;
+        var broke = this._brokeSpList[curFixIndex].getComponent("Broke");
+        broke.Select(false);
+        broke.SetFixed(true);
+        var tweenAlpha = TweenAlpha.begin(this._brokeSpList[curFixIndex], 255, 0, 1, 1);
+        var that = this
+        tweenAlpha.onFinishCallBack = function(){
+            databus.AddMoney(2, 0 - broke.cost);
+            that._brokeSpList[curFixIndex].removeFromParent();
+            var curStarId = databus.userInfo.curStarId;
+            var brokeList = StarConfig.GetStarBrokeList(curStarId);
+            if(databus.userInfo.brokeFixIndex < brokeList.length - 2)
+            {
+                databus.userInfo.brokeFixIndex += 1;
+                that.selectBroke(databus.userInfo.brokeFixIndex + 1);
+            }
+            else
+            {
+                databus.userInfo.brokeFixIndex += 1;
+                EventUtil.GetInstance().DispatchEvent("SetFixRelatedBroke", null);
+                ModuleManager.GetInstance().ShowModule("FixCompleteBox", databus.userInfo.curStarId);
+            }
+        }
+
+    },
+
+    selectBroke(brokeIndex){
+        if(brokeIndex >= this._brokeSpList.length)
+        {
+            return;
+        }
+        for(var i = 0; i < this._brokeSpList.length; i++)
+        {
+            this._brokeSpList[i].getComponent("Broke").Select(i == brokeIndex);
+        }
+        this._brokeSpList[brokeIndex].zIndex = 10000;
+        this._brokeSpList[brokeIndex].parent.sortAllChildren();
+    },
+
+    OnSetFixRelatedBroke(broke){
+        if(broke)
+        {
+            for(var i = 0; i < this._brokeSpList.length; i++)
+            {
+                if(i != broke.index)
+                {
+                    this._brokeSpList[i].getComponent("Broke").Select(false);
+                }
+            }
+        }
+    },
 })

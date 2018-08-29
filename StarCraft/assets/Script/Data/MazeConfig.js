@@ -1,18 +1,18 @@
 let data =
 {
-     "1":
+     "1001":
      {
         "row":5,
         "column":5,
         "rate":[70, 30, 0]
      },
-    "2":
+    "1002":
     {
         "row":6,
         "column":6,
         "rate":[60, 40, 0]
     },
-    "3":
+    "1003":
     {
         "row":7,
         "column":7,
@@ -21,7 +21,7 @@ let data =
 }
 
 export default class MazeConfig{
-    static GetConfig(mazeId){
-        return data[mazeId.toString()]
+    static GetConfig(starId){
+        return data[starId.toString()]
     }
 }

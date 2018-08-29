@@ -38,7 +38,6 @@ var TweenScale = cc.Class({
     },
     // use this for initialization
     onLoad: function () {
-        this.node.setScale(this.from)
     },
 
     // called every frame, uncomment this function to activate update callback

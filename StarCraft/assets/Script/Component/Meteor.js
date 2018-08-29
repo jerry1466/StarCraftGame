@@ -26,10 +26,11 @@ cc.Class({
     },
 
     Init(top, buttom, left, right) {
+    	console.log("meteor init top:", top, "buttom:", buttom, "left:", left, "right:", right)
     	this.is_valid = false
     	var height = top - buttom
 		var width = Math.abs(right - left)
-		var planet = FindMeteor.GetPlanet()
+		var planet = FindMeteor.GetInstance().GetPlanet()
 
     	while (!this.is_valid) {
 			var c = Math.floor(Math.random() * 100)

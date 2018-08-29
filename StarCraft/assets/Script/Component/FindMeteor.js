@@ -7,6 +7,7 @@ import MathUtil from "MathUtil"
 import PrefabUtil from "PrefabUtil";
 import Meteor from "Meteor"
 import ModuleManager from "ModuleManager"
+import SceneManager from "SceneManager"
 
 let databus = new Databus()
 let instance
@@ -15,6 +16,7 @@ export default class FindMeteor {
         this.meteorList = new Array()
         this.blackholeList = new Array()
         this.gameOver = false
+        this.meteorList = new Array()
     }
 
     static GetInstance() {
@@ -24,12 +26,14 @@ export default class FindMeteor {
         return instance
     }
 
-	CreatePlanet() {
+	CreatePlanet(component) {
+		console.log("createplanet")
 		var _this = this
-		this.loadRes("planet", function(instance) {
+		this.loadRes("Planet", function(instance) {
 			var planet = instance.addComponent("Planet")
 			planet.Init()
 			_this.planet = planet
+			component.node.addChild(instance)
 		})
 	}
 
@@ -37,19 +41,22 @@ export default class FindMeteor {
 		return this.planet
 	}
 
-	CreateMeteor(num) {
+	CreateMeteor(component, num) {
+		console.log("createMeteor Height:", databus.screenHeight, "Width:", databus.screenWidth)
 		var blockList = MathUtil.spliteScreenToBlock(databus.screenHeight, databus.screenWidth, num)
 
 		//在每个分块里面随机出来一个流星
 		var meteor = null
 		var _this = this
-		for (var i = blockList.length - 1; i > 0; i--) {
-			this.loadRes("meteor", function(instance) {
-				meteor = instance.addComponent("meteor")
+		for (let i = blockList.length - 1; i >= 0; i--) {
+			this.loadRes("Meteor", function(instance) {
+				meteor = instance.addComponent("Meteor")
+				component.node.addChild(instance)
+				var blocktmp = blockList[i]
+				meteor.Init(blocktmp.top, blocktmp.buttom, blocktmp.left, blocktmp.right)
+				_this.meteorList.push(meteor)
 			})
-			var blocktmp = blockList[i]
-			meteor.Init(blocktmp.top, blocktmp.buttom, blocktmp.left, blocktmp.right)
-			_this.meteorList.push(meteor)
+			
 		}
 	}
 

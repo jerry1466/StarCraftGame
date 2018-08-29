@@ -18,8 +18,8 @@ export default class Databus{
         this.soundEnable = true;
         this.screenWidth = 375;
         this.screenHeight = 812;
-        this.screenTop = this.screenHeight;
-        this.screenButtom = 0;
+        this.screenTop = this.screenHeight / 2;
+        this.screenButtom = 0 - this.screeHeight;
         this.screeLeft = 0 - this.screenWidth / 2;
         this.screeRight = this.screenWidth / 2;
         this.screenRatio = 1;

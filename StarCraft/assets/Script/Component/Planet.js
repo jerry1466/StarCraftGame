@@ -26,7 +26,7 @@ cc.Class({
 
     Init() {
     	this.node.x = 0
-    	this.node.y = databus.screenHeight / 2
+    	this.node.y = 0
     	this.is_valid = true
 		this.life = 3
 		this.meteorNum = 0

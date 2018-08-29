@@ -80,8 +80,13 @@ cc.Class({
     },
 
     onTouchStart(event){
-        this.touchStartLocation = event.getLocation();
-        MazeManager.GetInstance().ClickMap(UIUtil.ToLocalCoord(this.touchStartLocation, this.node, "MapFrame.Map"));
+        var eventLocation = event.getLocation();
+        var mapLocation = UIUtil.ToWorldCoord(this.node, "MapFrame.Map");
+        console.log("onTouchStart", eventLocation, mapLocation);
+        eventLocation.x -= 0.5 * databus.screenWidth + mapLocation.x;
+        eventLocation.y -= 0.5 * databus.screenHeight + mapLocation.y;
+        this.touchStartLocation = eventLocation;
+        MazeManager.GetInstance().ClickMap(this.touchStartLocation);
         this.onTouchEndHandler = this.onTouchEnd.bind(this);
         this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
         this.onTouchCancelHandler = this.onTouchCancel.bind(this);

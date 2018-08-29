@@ -68,6 +68,7 @@ export default class MazeManager{
 
     ClickMap(position){
         if(this.Stage == STAGE_PLAYER_NOT_IN_MAP){
+            console.log("MazeManager ClickMap", position);
             var response = false;
             for(var i = 0; i < this.mazeRow && !response; i++)
             {
@@ -89,7 +90,7 @@ export default class MazeManager{
     }
 
     Move(dir) {
-        if(this.MapReady && this.TouchEnable)
+        if(this.Stage == STAGE_PLAYER_IN_MAP && this.MapReady && this.TouchEnable)
         {
             var row = this.player.row;
             var column = this.player.column;

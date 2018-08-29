@@ -17,7 +17,7 @@ export default class Databus{
         this.cfgUrl = "https://wxa.05babay.cn/index.php?g=Wap&m=WxaGame&a=get_config&token=fktd1531820173";
         this.soundEnable = true;
         this.screenWidth = 375;
-        this.screenHeight = 812;
+        this.screenHeight = 850;
         this.screenTop = this.screenHeight / 2;
         this.screenButtom = 0 - this.screeHeight;
         this.screeLeft = 0 - this.screenWidth / 2;

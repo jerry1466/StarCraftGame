@@ -60,34 +60,35 @@ cc.Class({
         if(this.fog.node.active == true)
         {
             var tweenAlpha = TweenAlpha.begin(this.fog.node, 255, 0, 1, 1);
+            var that = this;
             tweenAlpha.onFinishCallBack = function(){
-                this.fog.node.active = false
-                this.fog.node.opacity = 255;
-                doTrigger();
+                that.fog.node.active = false
+                that.fog.node.opacity = 255;
+                doTrigger(that.affair);
             }
         }
         else
         {
-            doTrigger();
+            doTrigger(this.affair);
         }
 
-        function doTrigger(){
-            if(this.affair.type == AffairConstant.AffairEnum().REWARD)
+        function doTrigger(affair){
+            if(affair.type == AffairConstant.AffairEnum().REWARD)
             {
-                EventUtil.GetInstance().DispatchEvent("TriggerReward", this.affair)
+                EventUtil.GetInstance().DispatchEvent("TriggerReward", affair)
                 EventUtil.GetInstance().DispatchEvent("FreeTouch")
             }
-            else if(this.affair.type == AffairConstant.AffairEnum().FREEZE)
+            else if(affair.type == AffairConstant.AffairEnum().FREEZE)
             {
-                EventUtil.GetInstance().DispatchEvent("TriggerFreeze", this.affair)
+                EventUtil.GetInstance().DispatchEvent("TriggerFreeze", affair)
             }
-            else if(this.affair.type == AffairConstant.AffairEnum().ROB)
+            else if(affair.type == AffairConstant.AffairEnum().ROB)
             {
-                EventUtil.GetInstance().DispatchEvent("TriggerRob", this.affair)
+                EventUtil.GetInstance().DispatchEvent("TriggerRob", affair)
             }
-            else if(this.affair.type == AffairConstant.AffairEnum().GAME)
+            else if(affair.type == AffairConstant.AffairEnum().GAME)
             {
-                EventUtil.GetInstance().DispatchEvent("TriggerGame", this.affair)
+                EventUtil.GetInstance().DispatchEvent("TriggerGame", affair)
             }
             else
             {

@@ -56,6 +56,7 @@ export default class UIUtil {
     }
 
     static ToLocalCoord(worldPos, root, nodePath){
+        console.log("world pos", worldPos.x, worldPos.y);
         var coord = cc.v2(worldPos.x, worldPos.y);
         var curRoot = root
         var nodeArr = nodePath.split('.');
@@ -65,10 +66,11 @@ export default class UIUtil {
             if(child)
             {
                 curRoot = child;
-                coord.x += child.x * child.scaleX;
-                coord.y += child.y * child.scaleY;
+                coord.x -= child.x * child.scaleX;
+                coord.y -= child.y * child.scaleY;
             }
         }
+        console.log("local pos", coord.x, coord.y);
         return coord;
     }
 

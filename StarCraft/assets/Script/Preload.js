@@ -48,8 +48,8 @@ cc.Class({
                     databus.screenHeight = res.windowHeight
                     databus.screenTop = databus.screenHeight / 2
                     databus.screenButtom = 0 - databus.screenHeight / 2
-                    databus.screeLeft = 0 - databus.screenWidth / 2
-                    databus.screeRight = databus.screenWidth / 2
+                    databus.screenLeft = 0 - databus.screenWidth / 2
+                    databus.screenRight = databus.screenWidth / 2
                     databus.isIphoneX = (databus.screenWidth == 375) && (databus.screenHeight == 812)
                     //temp.bg.node.width = res.windowWidth
                     //temp.bg.node.height = res.windowHeight
@@ -81,10 +81,10 @@ cc.Class({
         else{
             databus.screenWidth = 375;
             databus.screenHeight = 850;
-            databus.screenTop = databus.screenHeight;
-            databus.screenButtom = 0;
-            databus.screeLeft = 0 - databus.screenWidth / 2;
-            databus.screeRight = databus.screenWidth / 2;
+            databus.screenTop = databus.screenHeight / 2;
+            databus.screenButtom = 0 - databus.screenHeight / 2;
+            databus.screenLeft = 0 - databus.screenWidth / 2;
+            databus.screenRight = databus.screenWidth / 2;
             databus.isIphoneX = false;
             this.lbSubscribe.label = "";
             this.btnShare.node.active = false;

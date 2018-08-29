@@ -25,6 +25,7 @@ cc.Class({
     },
 
     Init() {
+    	console.log("planet init")
     	this.node.x = 0
     	this.node.y = 0
     	this.is_valid = true
@@ -64,7 +65,7 @@ cc.Class({
 		this.node.y = y
 
 		if (MathUtil.LeftBoundaryHitTest(this.node.x - this.node.width / 2, databus.screenLeft)) {
-			this.node.x = databus.screeLeft + this.node.width / 2
+			this.node.x = databus.screenLeft + this.node.width / 2
 		}
 
 		if (MathUtil.RightBoundaryHitTest(this.node.x + this.node.width / 2, databus.screenRight)) {

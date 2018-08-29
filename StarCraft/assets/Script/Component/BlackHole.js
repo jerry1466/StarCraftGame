@@ -20,42 +20,42 @@ cc.Class({
 
     	this.move()
 
-    	var planet = FindMeteor.getInstance().GetPlanet()
-    	if (MathUtil.HitTest(this, planet)) {
-			planet.ReduceLife()
-    	}
+    	var planet = FindMeteor.GetInstance().GetPlanet()
+    	//if (MathUtil.HitTest(this, planet)) {
+			//planet.ReduceLife()
+    	//}
     },
 
     Init(top, buttom, left, right) {
+    	console.log("black hole init left:", databus.screenLeft, "right:", databus.screenRight, "top:", databus.screenTop, "buttom:", databus.screenButtom)
     	this.is_valid = false
     	var height = top - buttom
 		var width = Math.abs(right - left)
-		var planet = FindMeteor.GetPlanet()
+		var planet = FindMeteor.GetInstance().GetPlanet()
 
     	while (!this.is_valid) {
 			var c = Math.floor(Math.random() * 100)
-			this.node.x = buttom + (height * c / 100)
+			this.node.x = left + (width * c / 100)
 			c = Math.floor(Math.random() * 100)
-			this.node.y = left + (width * c / 100)
+			this.node.y = buttom + (height * c / 100)
 
 			if (MathUtil.LeftBoundaryHitTest(this.node.x - this.node.width / 2, left)) {
-				this.node.x = left + this.node.width / 2 + 1	
+				this.node.x = left + this.node.width / 2 + 10	
 			}
 
 			if (MathUtil.RightBoundaryHitTest(this.node.x + this.node.width / 2, right)) {
-				this.node.x = right - this.node.width / 2 - 1	
+				this.node.x = right - this.node.width / 2 - 10
 			}
 
-			
 			if (MathUtil.TopBoundaryHitTest(this.node.y + this.node.height / 2, top)) {
-				this.node.y = top - this.node.height / 2 - 1	
+				this.node.y = top - this.node.height / 2 - 10	
 			}
 
 			if (MathUtil.ButtomBoundaryHitTest(this.node.y - this.node.height / 2, buttom)) {
-				this.node.y = buttom + this.node.height / 2 + 1	
+				this.node.y = buttom + this.node.height / 2 + 10	
 			}
 
-			if (MathUtil.HitTest(this, planet)) {
+			if (MathUtil.HitTest(this.node, planet.node)) {
 				continue;
 			}
 			this.is_valid = true;
@@ -63,17 +63,18 @@ cc.Class({
 
 		var positive = Math.floor(Math.random() * 10) % 2
 		if (0 == positive) {
-			this.speed_x = Math.floor(Math.random() * 10) + 10
+			this.speed_x = Math.floor(Math.random() * 10) % 1 + 1
 		} else {
-			this.speed_x = 0 - Math.floor(Math.random() * 10) + 10
+			this.speed_x = 0 - (Math.floor(Math.random() * 10) % 1 + 1)
 		}
 
 		positive = Math.floor(Math.random() * 10) % 2
     	if (0 == positive) {
-			this.speed_y = Math.floor(Math.random() * 10) + 10
+			this.speed_y = Math.floor(Math.random() * 10) % 1 + 1
 		} else {
-			this.speed_y = 0 - Math.floor(Math.random() * 10) + 10
+			this.speed_y = 0 - (Math.floor(Math.random() * 10) % 1 + 1)
 		}
+		this.node.zIndex = 1
     },
 
     move() {

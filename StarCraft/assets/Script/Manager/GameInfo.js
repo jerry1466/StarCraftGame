@@ -132,6 +132,7 @@ export default class GameInfo {
     }
 
     CheckHitBrick(wood){
+    	return false
         for(var i = 0; i < UnitManager.GetInstance().bricks.length; i++)
         {
             var brick = UnitManager.GetInstance().bricks[i];
@@ -147,6 +148,7 @@ export default class GameInfo {
     }
 
     CheckHitWall(wood){
+    	return false
         for(var i = 0; i < UnitManager.GetInstance().walls.length; i++)
         {
             var wall = UnitManager.GetInstance().walls[i];

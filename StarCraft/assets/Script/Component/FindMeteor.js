@@ -42,7 +42,7 @@ export default class FindMeteor {
 	}
 
 	CreateMeteor(component, num) {
-		console.log("createMeteor Height:", databus.screenHeight, "Width:", databus.screenWidth)
+		//console.log("createMeteor Height:", databus.screenHeight, "Width:", databus.screenWidth)
 		var blockList = MathUtil.spliteScreenToBlock(databus.screenHeight, databus.screenWidth, num)
 
 		//在每个分块里面随机出来一个流星
@@ -71,18 +71,21 @@ export default class FindMeteor {
         }
     }
 
-    CreateBlackHole(num) {
-		var blockList = MathUtil.spliteScreenToBlock(num)
+    CreateBlackHole(component, num) {
+    	console.log("create black hole")
+		var blockList = MathUtil.spliteScreenToBlock(databus.screenHeight, databus.screenWidth, num)
 
 		var blackhole = null
 		var _this = this
-		for (var i = blockList.length - 1; i > 0; i--) {
-			this.loadRes("blackhole", function(instance) {
-				blackhole = instance.addComponent("blackhole")
+		for (let i = blockList.length - 1; i >= 0; i--) {
+			this.loadRes("BlackHole", function(instance) {
+				blackhole = instance.addComponent("BlackHole")
+				component.node.addChild(instance)
+				var blocktmp = blockList[i]
+				blackhole.Init(blocktmp.top, blocktmp.buttom, blocktmp.left, blocktmp.right)
+				_this.blackholeList.push(blackhole)
 			})
-			var blocktmp = blockList[i]
-			blackhole.Init(blocktmp.top, blocktmp.buttom, blocktmp.left, blocktmp.right)
-			_this.blackholeList.push(blackhole)
+			
 		}
     }
 

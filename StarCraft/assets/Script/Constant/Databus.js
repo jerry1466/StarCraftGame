@@ -19,9 +19,9 @@ export default class Databus{
         this.screenWidth = 375;
         this.screenHeight = 850;
         this.screenTop = this.screenHeight / 2;
-        this.screenButtom = 0 - this.screeHeight;
-        this.screeLeft = 0 - this.screenWidth / 2;
-        this.screeRight = this.screenWidth / 2;
+        this.screenButtom = 0 - this.screenHeight / 2;
+        this.screenLeft = 0 - this.screenWidth / 2;
+        this.screenRight = this.screenWidth / 2;
         this.screenRatio = 1;
         this.adHeight = 110;
         this.gameRegion = cc.v2(370, 550);

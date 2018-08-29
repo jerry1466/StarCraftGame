@@ -34,8 +34,8 @@ cc.Class({
        	/*var blackholeNum = param["level"] * 2 + 3
         if (blackholeNum > 9) {
 			blackholeNum = 9
-        }
-        this.findMeteor.CreateBlackHole(5)*/
+        }*/
+        this.findMeteor.CreateBlackHole(this, 5)
     },
 
     update() {

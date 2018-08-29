@@ -25,6 +25,28 @@ export default class MathUtil {
         return result;
     }
 
+	static HitTestWithScale(node1, node2) {
+        var x01 = node1.x - node1.width * 0.5 * node1.scale.x
+        var x02 = node1.x + node1.width * 0.5 * node1.scale.x
+        var x11 = node2.x - node2.width * 0.5 * node2.scale.x
+        var x12 = node2.x + node2.width * 0.5 * node2.scale.x
+        var y01 = node1.y - node1.height * 0.5 * node1.scale.y
+        var y02 = node1.y + node1.height * 0.5 * node1.scale.y
+        var y11 = node2.y - node2.height * 0.5 * node2.scale.y
+        var y12 = node2.y + node2.height * 0.5 * node2.scale.y
+        //console.log("this.left:", x01, "this.right:", x02, "this.top:", y02, "this.buttom:", y01)
+        //console.log("planet.left:", x11, "planet.right:", x12, "planet.top:", y12, "planet.buttom:", y11)
+
+        var zx = Math.abs(x01 + x02 - x11 - x12)
+        var x = Math.abs(x01 - x02) + Math.abs(x11 - x12)
+        var zy = Math.abs(y01 + y02 - y11 - y12)
+        var y = Math.abs(y01 - y02) + Math.abs(y11 - y12)
+        if (zx <= x && zy <= y)
+            return true
+        else
+            return false
+	}
+
     static HitTest(node1, node2){
         var x01 = node1.x - node1.width * 0.5
         var x02 = node1.x + node1.width * 0.5
@@ -34,6 +56,8 @@ export default class MathUtil {
         var y02 = node1.y + node1.height * 0.5
         var y11 = node2.y - node2.height * 0.5
         var y12 = node2.y + node2.height * 0.5
+        //console.log("this.left:", x01, "this.right:", x02, "this.top:", y02, "this.buttom:", y01)
+        //console.log("planet.left:", x11, "planet.right:", x12, "planet.top:", y12, "planet.buttom:", y11)
 
         var zx = Math.abs(x01 + x02 - x11 - x12)
         var x = Math.abs(x01 - x02) + Math.abs(x11 - x12)
@@ -80,18 +104,18 @@ export default class MathUtil {
 		var blocktmp = null
 		blockList.push(block)
 
-		console.log("splite", block)
+		//console.log("splite", block)
 		while (blockList.length < num) {
 			var blockout = blockList.splice(0, 1)
 			blocktmp = blockout[0]
 			if (blocktmp.top - blocktmp.buttom > blocktmp.right - blocktmp.left) {
-				console.log("-:", blocktmp)
+				//console.log("-:", blocktmp)
 				//橫着分
 				if (blocktmp.top > 0) {
 					var index = (blocktmp.top - blocktmp.buttom) / 2
 					var new1 = {top:blocktmp.top, left:blocktmp.left, right:blocktmp.right, buttom:(blocktmp.buttom + index)}
 					var new2 = {top:(blocktmp.buttom + index), left:blocktmp.left, right:blocktmp.right, buttom:blocktmp.buttom}
-					console.log("- new1:", new1, "new2:", new2)
+					//console.log("- new1:", new1, "new2:", new2)
 					blockList.push(new1)
 					blockList.push(new2)
 				}
@@ -100,19 +124,18 @@ export default class MathUtil {
 					var index = Math.abs(blocktmp.buttom - blocktmp.top) / 2
 					var new1 = {top:blocktmp.top, left:blocktmp.left, right:blocktmp.right, buttom:(blocktmp.top - index)}
 					var new2 = {top:(blocktmp.top - index), left:blocktmp.left, right:blocktmp.right, buttom:blocktmp.buttom}
-					console.log("- new1:", new1, "new2:", new2)
+					//console.log("- new1:", new1, "new2:", new2)
 					blockList.push(new1)
 					blockList.push(new2)
 				}
-				//console.log("-:", blockList)
 			} else {
 				//竖着分
-				console.log("l:", blocktmp)
+				//console.log("l:", blocktmp)
 				if (blocktmp.right > 0) {
 					var index = (blocktmp.right - blocktmp.left) / 2
 					var new1 = {top:blocktmp.top, left:blocktmp.left, right:(blocktmp.left + index), buttom:blocktmp.buttom}
 					var new2 = {top:blocktmp.top, left:(blocktmp.left + index), right:blocktmp.right, buttom:blocktmp.buttom}
-					console.log("l new1:", new1, "new2:", new2)
+					//console.log("l new1:", new1, "new2:", new2)
 					blockList.push(new1)
 					blockList.push(new2)
 				}
@@ -121,11 +144,10 @@ export default class MathUtil {
 					var index = Math.abs(blocktmp.left - blocktmp.right) / 2
 					var new1 = {top:blocktmp.top, left:blocktmp.left, right:(blocktmp.right - index), buttom:blocktmp.buttom}
 					var new2 = {top:blocktmp.top, left:(blocktmp.right - index), right:blocktmp.right, buttom:blocktmp.buttom}
-					console.log("l new1:", new1, "new2:", new2)
+					//console.log("l new1:", new1, "new2:", new2)
 					blockList.push(new1)
 					blockList.push(new2)
 				}
-				//console.log("l:", blockList)
 			}
 		}
 

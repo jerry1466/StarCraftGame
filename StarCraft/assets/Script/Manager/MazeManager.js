@@ -75,12 +75,16 @@ export default class MazeManager{
                 for(var j = 0; j < this.mazeCol; j++)
                 {
                     var mazeCell = this.cells[i][j];
-                    if(mazeCell.node.x - mazeCell.node.width * 0.5 <= position.x && mazeCell.node.x + mazeCell.node.width * 0.5 >= position.x
-                        && mazeCell.node.y - mazeCell.node.height * 0.5 <= position.y && mazeCell.node.y + mazeCell.node.height * 0.5 >= position.y)
+                    var width = mazeCell.node.width * mazeCell.node.scaleX;
+                    var height = mazeCell.node.height * mazeCell.node.scaleY;
+                    if(mazeCell.node.x - width * 0.5 <= position.x && mazeCell.node.x + width * 0.5 >= position.x
+                        && mazeCell.node.y - height * 0.5 <= position.y && mazeCell.node.y + height * 0.5 >= position.y)
                     {
                         response = true;
                         this.TouchEnable = false;
-                        mazeCell.Trigger();
+                        this.player.JumpTo(mazeCell, function(){
+                            mazeCell.Trigger();
+                        });
                         this.Stage = STAGE_PLAYER_IN_MAP;
                         break;
                     }
@@ -146,7 +150,7 @@ export default class MazeManager{
         var column = Math.floor(index % temp.mazeCol);
         if(row < temp.mazeRow && column < temp.mazeCol)
         {
-            PrefabUtil.GetPrefabInstance("MazeCell", function(success, instance){
+            PrefabUtil.GetPrefabInstance("MazeMapCell", function(success, instance){
                 if(success)
                 {
                     instance.parent = container
@@ -156,7 +160,7 @@ export default class MazeManager{
                     instance.x = (column - temp.mazeCol * 0.5) * width + 0.5 * width;
                     instance.y = (0.5 * temp.mazeRow - row) * height - 0.5 * height;
                     instance.active = true;
-                    var mazeCell = instance.getComponent("MazeCell");
+                    var mazeCell = instance.getComponent("MazeMapCell");
                     mazeCell.Init(row, column);
                     mazeCell.InitAffair(temp.createAffair(temp.affairEventList[row * temp.mazeColumn + column]));
                     temp.cells[row][column] = mazeCell;

@@ -1,5 +1,5 @@
 /**
- * MazeCell
+ * MazeMapCell
  * @author lijun
  **/
 import Databus from 'Databus'
@@ -73,6 +73,7 @@ cc.Class({
         }
 
         function doTrigger(affair){
+            console.log("MazeMapCell doTrigger", affair)
             if(affair.type == AffairConstant.AffairEnum().REWARD)
             {
                 EventUtil.GetInstance().DispatchEvent("TriggerReward", affair)
@@ -96,4 +97,4 @@ cc.Class({
             }
         }
     }
-})    
+})

@@ -79,13 +79,15 @@ cc.Class({
         new LevelManager().SwitchLevel("Battle")
     },
 
-    onTouchStart(event){
-        var eventLocation = event.getLocation();
+    toMapPosition(worldPosition){
         var mapLocation = UIUtil.ToWorldCoord(this.node, "MapFrame.Map");
-        console.log("onTouchStart", eventLocation, mapLocation);
-        eventLocation.x -= 0.5 * databus.screenWidth + mapLocation.x;
-        eventLocation.y -= 0.5 * databus.screenHeight + mapLocation.y;
-        this.touchStartLocation = eventLocation;
+        worldPosition.x -= 0.5 * databus.screenWidth + mapLocation.x;
+        worldPosition.y -= 0.5 * databus.screenHeight + mapLocation.y;
+        return worldPosition;
+    },
+
+    onTouchStart(event){
+        this.touchStartLocation = this.toMapPosition(event.getLocation());
         MazeManager.GetInstance().ClickMap(this.touchStartLocation);
         this.onTouchEndHandler = this.onTouchEnd.bind(this);
         this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
@@ -96,7 +98,7 @@ cc.Class({
     onTouchEnd(event){
         this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
         this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
-        this.touchEndLocation = event.getLocation();
+        this.touchEndLocation = this.toMapPosition(event.getLocation());
         var deltaX = this.touchEndLocation.x - this.touchStartLocation.x
         var deltaY = this.touchEndLocation.y - this.touchStartLocation.y
         if(Math.abs(deltaX) > Math.abs(deltaY)){

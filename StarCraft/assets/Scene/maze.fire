@@ -65,9 +65,6 @@
         "__id__": 11
       },
       {
-        "__id__": 14
-      },
-      {
         "__id__": 17
       },
       {
@@ -420,7 +417,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 13
+        "__id__": 16
       }
     ],
     "_prefab": null,
@@ -467,7 +464,11 @@
     "_parent": {
       "__id__": 11
     },
-    "_children": [],
+    "_children": [
+      {
+        "__id__": 13
+      }
+    ],
     "_tag": -1,
     "_active": true,
     "_components": [],
@@ -509,47 +510,21 @@
     "groupIndex": 0
   },
   {
-    "__type__": "cc.Sprite",
-    "_name": "",
-    "_objFlags": 0,
-    "node": {
-      "__id__": 11
-    },
-    "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "8e4c59b3-d4b9-46ef-b95f-0183902d30d7"
-    },
-    "_type": 0,
-    "_sizeMode": 0,
-    "_fillType": 0,
-    "_fillCenter": {
-      "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 0
-    },
-    "_fillStart": 0,
-    "_fillRange": 0,
-    "_isTrimmedMode": true,
-    "_srcBlendFactor": 770,
-    "_dstBlendFactor": 771,
-    "_atlas": null
-  },
-  {
     "__type__": "cc.Node",
     "_name": "Player",
     "_objFlags": 0,
     "_parent": {
-      "__id__": 2
+      "__id__": 12
     },
     "_children": [],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 15
+        "__id__": 14
       },
       {
-        "__id__": 16
+        "__id__": 15
       }
     ],
     "_prefab": null,
@@ -580,7 +555,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 96,
-      "y": 396
+      "y": 321
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -594,7 +569,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 14
+      "__id__": 13
     },
     "_enabled": true,
     "_spriteFrame": {
@@ -620,14 +595,40 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 14
+      "__id__": 13
     },
     "_enabled": true,
     "head": {
-      "__id__": 15
+      "__id__": 14
     },
     "row": -1,
     "column": -1
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 11
+    },
+    "_enabled": true,
+    "_spriteFrame": {
+      "__uuid__": "8e4c59b3-d4b9-46ef-b95f-0183902d30d7"
+    },
+    "_type": 0,
+    "_sizeMode": 0,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_atlas": null
   },
   {
     "__type__": "cc.Node",
@@ -898,7 +899,7 @@
       "__id__": 12
     },
     "player": {
-      "__id__": 16
+      "__id__": 15
     },
     "tip": {
       "__id__": 22

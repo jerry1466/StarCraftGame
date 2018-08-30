@@ -50,5 +50,14 @@ cc.Class({
         this.column = tarCell.column;
         var tweenPos = TweenPosition.begin(this.node, this.node.position, tarCell.node.position, 0.2);
         tweenPos.onFinishCallBack = callback;
+    },
+
+    JumpTo(tarCell, callback){
+        this.row = tarCell.row;
+        this.column = tarCell.column;
+        this.node.setPosition(tarCell.node.position);
+        if(callback){
+            callback();
+        }
     }
 })    

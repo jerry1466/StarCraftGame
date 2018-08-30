@@ -32,20 +32,40 @@ cc.Class({
 		this.life = 3
 		this.meteorNum = 0
 
-		var _this = this
-        EventUtil.GetInstance().AddEventListener("CANVAS_TOUCH_START", function() {
-			EventUtil.GetInstance().AddEventListener("CANVAS_TOUCH_MOVE", onTouchMove)
-			EventUtil.GetInstance().AddEventListener("CANVAS_TOUCH_END", onTouchEnd)
-        })
+		this.onTouchStartHandler = this.onTouchStart.bind(this)
+        this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStartHandler)
     },
 
-	onTouchMove(x, y) {
-    	this.setPosition(x, y)
+    onTouchStart(event) {
+    	this.startX = event.getLocation().x
+    	this.startY = event.getLocation().y
+    	this.onTouchMoveHandler = this.onTouchMove.bind(this)
+    	this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMoveHandler)
+		this.onTouchEndHandler = this.onTouchEnd.bind(this);
+		this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler)
+		this.onTouchCancelHandler = this.onTouchCancel.bind(this)
+		this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler)
+
+    },
+
+	onTouchMove(event) {
+    	this.setPosition(event.getLocation())
 	},
 
-	onTouchEnd() {
-		EventUtil.GetInstance().RemoveEventListener("CANVAS_TOUCH_MOVE", onTouchMove)
-		EventUtil.GetInstance().RemoveEventListener("CANVAS_TOUCH_END", onTouchEnd)
+	onTouchEnd(event) {
+		this.node.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMoveHandler)
+		this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler)
+		this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler)
+		this.startX = 0
+		this.StartY = 0
+	},
+
+	onTouchCancel(event) {
+		this.node.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMoveHandler)
+		this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler)
+		this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler)
+		this.startX = 0
+		this.StartY = 0
 	},
 
     GetOneMeteor() {
@@ -60,24 +80,29 @@ cc.Class({
 		this.life -= 1
 	},
 
-	setPosition(x, y) {
-		this.node.x = x
-		this.node.y = y
+	setPosition(position) {
+		this.node.x += position.x - this.startX
+		this.node.y += position.y - this.startY
+		this.startX = position.x
+		this.startY = position.y
 
-		if (MathUtil.LeftBoundaryHitTest(this.node.x - this.node.width / 2, databus.screenLeft)) {
-			this.node.x = databus.screenLeft + this.node.width / 2
+		var width = this.node.width * this.node.scaleX
+		var height = this.node.height * this.node.scaleY
+
+		if (MathUtil.LeftBoundaryHitTest(this.node.x - width / 2, databus.screenLeft)) {
+			this.node.x = databus.screenLeft + width / 2
 		}
 
-		if (MathUtil.RightBoundaryHitTest(this.node.x + this.node.width / 2, databus.screenRight)) {
-			this.node.x = databus.screenRight - this.node.width / 2
+		if (MathUtil.RightBoundaryHitTest(this.node.x + width / 2, databus.screenRight)) {
+			this.node.x = databus.screenRight - width / 2
 		}
 
-		if (MathUtil.TopBoundaryHitTest(this.node.y + this.node.height / 2, databus.screenTop)) {
-			this.node.y = databus.screenTop - this.node.height / 2
+		if (MathUtil.TopBoundaryHitTest(this.node.y + height / 2, databus.screenTop)) {
+			this.node.y = databus.screenTop - height / 2
 		}
 
-		if (MathUtil.ButtomBoundaryHitTest(this.node.y - this.node.height / 2, databus.screenButtom)) {
-			this.node.y = databus.screenButtom + this.node.height / 2
+		if (MathUtil.ButtomBoundaryHitTest(this.node.y - height / 2, databus.screenButtom)) {
+			this.node.y = databus.screenButtom + height / 2
 		}
 	}
 })    

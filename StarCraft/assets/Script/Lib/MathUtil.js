@@ -26,14 +26,14 @@ export default class MathUtil {
     }
 
 	static HitTestWithScale(node1, node2) {
-        var x01 = node1.x - node1.width * 0.5 * node1.scale.x
-        var x02 = node1.x + node1.width * 0.5 * node1.scale.x
-        var x11 = node2.x - node2.width * 0.5 * node2.scale.x
-        var x12 = node2.x + node2.width * 0.5 * node2.scale.x
-        var y01 = node1.y - node1.height * 0.5 * node1.scale.y
-        var y02 = node1.y + node1.height * 0.5 * node1.scale.y
-        var y11 = node2.y - node2.height * 0.5 * node2.scale.y
-        var y12 = node2.y + node2.height * 0.5 * node2.scale.y
+        var x01 = node1.x - node1.width * 0.5 * node1.scaleX
+        var x02 = node1.x + node1.width * 0.5 * node1.scaleX
+        var x11 = node2.x - node2.width * 0.5 * node2.scaleX
+        var x12 = node2.x + node2.width * 0.5 * node2.scaleX
+        var y01 = node1.y - node1.height * 0.5 * node1.scaleY
+        var y02 = node1.y + node1.height * 0.5 * node1.scaleY
+        var y11 = node2.y - node2.height * 0.5 * node2.scaleY
+        var y12 = node2.y + node2.height * 0.5 * node2.scaleY
         //console.log("this.left:", x01, "this.right:", x02, "this.top:", y02, "this.buttom:", y01)
         //console.log("planet.left:", x11, "planet.right:", x12, "planet.top:", y12, "planet.buttom:", y11)
 

@@ -62,6 +62,8 @@ export default class FindMeteor {
 
     RemoveMeteor(meteor) {
         this.meteorList.splice(this.meteorList.indexOf(meteor), 1)
+        meteor.node.removeFromParent(true)
+        meteor.node.destroy()
     }
 
     ClearAllMeteor() {

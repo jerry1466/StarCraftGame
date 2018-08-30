@@ -17,9 +17,10 @@ cc.Class({
     	if (!this.is_valid) {
 			return
     	}
-    	return
+
 		var planet = FindMeteor.GetInstance().GetPlanet()
-		if (MathUtil.HitTest(this, planet)) {
+		if (MathUtil.HitTestWithScale(this.node, planet.node)) {
+			console.log("meteor hit")
 			this.is_valid = false
 			FindMeteor.GetInstance().RemoveMeteor(this)
 			planet.GetOneMeteor()
@@ -60,7 +61,6 @@ cc.Class({
 			}
 
 			if (MathUtil.HitTest(this.node, planet.node)) {
-				console.log("meteor init hit")
 				continue;
 			}
 			this.is_valid = true;

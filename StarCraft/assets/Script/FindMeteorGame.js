@@ -23,7 +23,6 @@ cc.Class({
     },
 
     onLoad() {
-    	console.log("FindMeteorGame onLoad")
         SceneManager.GetInstance().SetRoot(this.node);
     	//加载流星平原背景
         //ResourceManager.LoadRemoteSprite(this.bg, ResConfig.FindMeteorBg())
@@ -35,11 +34,16 @@ cc.Class({
         if (blackholeNum > 9) {
 			blackholeNum = 9
         }*/
-        //this.findMeteor.CreateBlackHole(this, 5)
+        this.findMeteor.CreateBlackHole(this, 3)
     },
 
     update() {
         BuffBase.Update();
+
+        if (this.findMeteor.GetReCreateBlackHoleCnt() > 0) {
+			this.findMeteor.CreateBlackHole(this, 1)
+			this.findMeteor.ReCreateBlackHoleCntDel()
+        }
     },
 
     onDestroy() {

@@ -5,6 +5,7 @@
 import Databus from 'Databus'
 import FindMeteor from 'FindMeteor'
 import MathUtil from 'MathUtil'
+import TweenAlpha from "TweenAlpha"
 
 let databus = new Databus()
 cc.Class({
@@ -20,10 +21,12 @@ cc.Class({
 
 		var planet = FindMeteor.GetInstance().GetPlanet()
 		if (MathUtil.HitTestWithScale(this.node, planet.node)) {
-			console.log("meteor hit")
 			this.is_valid = false
-			FindMeteor.GetInstance().RemoveMeteor(this)
-			planet.GetOneMeteor()
+			var tweenAlpha = TweenAlpha.begin(this.node, 255, 1, 0.2, 1)
+            tweenAlpha.onFinishCallBack = function() {
+            	FindMeteor.GetInstance().RemoveMeteor(this)
+				planet.GetOneMeteor()
+            }
 		}
     },
 

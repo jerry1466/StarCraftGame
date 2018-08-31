@@ -20,17 +20,18 @@ cc.Class({
 
 		if (this.life <= 0) {
 			this.is_valid = false
-			FindMeteor.GetInstance().GameOver()
+			console.log("Game over")
+			//FindMeteor.GetInstance().GameOver()
 		}
     },
 
     Init() {
-    	console.log("planet init")
     	this.node.x = 0
     	this.node.y = 0
     	this.is_valid = true
 		this.life = 3
 		this.meteorNum = 0
+		this.node.zIndex = 100
 
 		this.onTouchStartHandler = this.onTouchStart.bind(this)
         this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStartHandler)
@@ -70,6 +71,7 @@ cc.Class({
 
     GetOneMeteor() {
 		this.meteorNum += 1
+		console.log("get Meteor num:", this.meteorNum)
     },
 
     GetMeteorNum() {
@@ -77,6 +79,7 @@ cc.Class({
     },
 
 	ReduceLife() {
+		console.log("planet reduce life")
 		this.life -= 1
 	},
 

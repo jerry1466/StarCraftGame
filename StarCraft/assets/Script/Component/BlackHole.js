@@ -5,6 +5,7 @@
 import Databus from 'Databus'
 import FindMeteor from 'FindMeteor'
 import MathUtil from 'MathUtil'
+import TweenAlpha from "TweenAlpha"
 
 let databus = new Databus()
 cc.Class({
@@ -21,13 +22,18 @@ cc.Class({
     	this.move()
 
     	var planet = FindMeteor.GetInstance().GetPlanet()
-    	//if (MathUtil.HitTest(this, planet)) {
-			//planet.ReduceLife()
-    	//}
+    	if (MathUtil.HitTestWithScale(this.node, planet.node)) {
+			planet.ReduceLife()
+			this.is_valid = false
+			var tweenAlpha = TweenAlpha.begin(this.node, 255, 1, 0.2, 1)
+            tweenAlpha.onFinishCallBack = function() {
+            	FindMeteor.GetInstance().RemoveBlackHole(this)
+            	FindMeteor.GetInstance().ReCreateBlackHoleCntAdd()
+            }
+    	}
     },
 
     Init(top, buttom, left, right) {
-    	console.log("black hole init left:", databus.screenLeft, "right:", databus.screenRight, "top:", databus.screenTop, "buttom:", databus.screenButtom)
     	this.is_valid = false
     	var height = top - buttom
 		var width = Math.abs(right - left)

@@ -9,6 +9,7 @@ import Meteor from "Meteor"
 import ModuleManager from "ModuleManager"
 import SceneManager from "SceneManager"
 
+
 let databus = new Databus()
 let instance
 export default class FindMeteor {
@@ -17,6 +18,7 @@ export default class FindMeteor {
         this.blackholeList = new Array()
         this.gameOver = false
         this.meteorList = new Array()
+        this.ReBlackHoleCnt = 0
     }
 
     static GetInstance() {
@@ -27,7 +29,6 @@ export default class FindMeteor {
     }
 
 	CreatePlanet(component) {
-		console.log("createplanet")
 		var _this = this
 		this.loadRes("Planet", function(instance) {
 			var planet = instance.addComponent("Planet")
@@ -42,7 +43,6 @@ export default class FindMeteor {
 	}
 
 	CreateMeteor(component, num) {
-		//console.log("createMeteor Height:", databus.screenHeight, "Width:", databus.screenWidth)
 		var blockList = MathUtil.spliteScreenToBlock(databus.screenHeight, databus.screenWidth, num)
 
 		//在每个分块里面随机出来一个流星
@@ -74,7 +74,6 @@ export default class FindMeteor {
     }
 
     CreateBlackHole(component, num) {
-    	console.log("create black hole")
 		var blockList = MathUtil.spliteScreenToBlock(databus.screenHeight, databus.screenWidth, num)
 
 		var blackhole = null
@@ -91,9 +90,22 @@ export default class FindMeteor {
 		}
     }
 
+	ReCreateBlackHoleCntAdd() {
+		this.ReBlackHoleCnt += 1
+	}
+
+	ReCreateBlackHoleCntDel() {
+		this.ReBlackHoleCnt -= 1
+	}
+
+	GetReCreateBlackHoleCnt() {
+		return this.ReBlackHoleCnt
+	}
 	
 	RemoveBlackHole(blackhole) {
 		this.blackholeList.splice(this.blackholeList.indexOf(blackhole), 1)
+		blackhole.node.removeFromParent(true)
+		blackhole.node.destroy()
 	}
     
 	ClearAllBlackHole() {

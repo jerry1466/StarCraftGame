@@ -10,7 +10,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "planet",
+    "_name": "Planet",
     "_objFlags": 0,
     "_parent": null,
     "_children": [],
@@ -92,9 +92,9 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "e16349ad-4b0b-47b2-b0a1-394856c4aea2"
+      "__uuid__": "156175e9-19c9-4d92-ad05-d1c229e5dac5"
     },
-    "fileId": "5a1NRa/+tJ1Kz1CfhGd2IE",
+    "fileId": "2bTqZnKiJB3J0l0I0NjHkg",
     "sync": false
   }
 ]

@@ -37,5 +37,6 @@ cc.Class({
 
     Init(meteorNum) {
         this.meteorNum = meteorNum;
+        this.node.zIndex = 101
     }
 })

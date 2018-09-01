@@ -28,13 +28,15 @@ cc.Class({
         //ResourceManager.LoadRemoteSprite(this.bg, ResConfig.FindMeteorBg())
         var param = new LevelManager().CurrentLevelParam
         this.findMeteor = FindMeteor.GetInstance()
-        this.findMeteor.CreatePlanet(this)
-        this.findMeteor.CreateMeteor(this, 5)
-       	/*var blackholeNum = param["level"] * 2 + 3
-        if (blackholeNum > 9) {
-			blackholeNum = 9
-        }*/
-        this.findMeteor.CreateBlackHole(this, 3)
+        var that = this
+        this.findMeteor.CreatePlanet(this, function(){
+            that.findMeteor.CreateMeteor(that, 5);
+            /*var blackholeNum = param["level"] * 2 + 3
+            if (blackholeNum > 9) {
+                blackholeNum = 9
+            }*/
+            that.findMeteor.CreateBlackHole(that, 3);
+        });
     },
 
     update() {

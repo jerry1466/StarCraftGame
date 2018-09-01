@@ -8,6 +8,7 @@ import EventUtil from "EventUtil";
 import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig";
 import TweenAlpha from "TweenAlpha";
+import LevelManager from "../Manager/LevelManager";
 
 let databus = new Databus()
 cc.Class({
@@ -74,6 +75,8 @@ cc.Class({
 
         function doTrigger(affair){
             console.log("MazeMapCell doTrigger", affair)
+            new LevelManager().SwitchLevel("game");
+
             if(affair.type == AffairConstant.AffairEnum().REWARD)
             {
                 EventUtil.GetInstance().DispatchEvent("TriggerReward", affair)

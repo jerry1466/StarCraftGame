@@ -7,7 +7,6 @@ import MathUtil from "MathUtil"
 import PrefabUtil from "PrefabUtil";
 import Meteor from "Meteor"
 import ModuleManager from "ModuleManager"
-import SceneManager from "SceneManager"
 
 
 let databus = new Databus()
@@ -28,13 +27,14 @@ export default class FindMeteor {
         return instance
     }
 
-	CreatePlanet(component) {
+	CreatePlanet(component, callback) {
 		var _this = this
 		this.loadRes("Planet", function(instance) {
 			var planet = instance.addComponent("Planet")
 			planet.Init()
 			_this.planet = planet
-			component.node.addChild(instance)
+			component.node.addChild(instance);
+			callback();
 		})
 	}
 
@@ -61,9 +61,12 @@ export default class FindMeteor {
 	}
 
     RemoveMeteor(meteor) {
-        this.meteorList.splice(this.meteorList.indexOf(meteor), 1)
+        this.meteorList.splice(this.meteorList.indexOf(meteor), 1);
         meteor.node.removeFromParent(true)
         meteor.node.destroy()
+		if(this.meteorList.length == 0){
+        	this.GameOver(this.GetPlanet().GetMeteorNum());
+		}
     }
 
     ClearAllMeteor() {
@@ -127,8 +130,9 @@ export default class FindMeteor {
         })
     }
 
-    GameOver() {
-		this.gameOver = true
+    GameOver(collectMeteorNum) {
+        ModuleManager.GetInstance().ShowModule("GameResultPanel", collectMeteorNum);
+    	this.gameOver = true;
     }
 
     IsGameOver() {

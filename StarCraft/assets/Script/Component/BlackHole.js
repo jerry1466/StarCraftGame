@@ -19,6 +19,11 @@ cc.Class({
 			return
     	}
 
+    	if(FindMeteor.GetInstance().gameOver){
+            FindMeteor.GetInstance().RemoveBlackHole(this);
+            return;
+		}
+
     	this.move()
 
     	var planet = FindMeteor.GetInstance().GetPlanet()
@@ -37,7 +42,7 @@ cc.Class({
     	this.is_valid = false
     	var height = top - buttom
 		var width = Math.abs(right - left)
-		var planet = FindMeteor.GetInstance().GetPlanet()
+		var planet = FindMeteor.GetInstance().GetPlanet();
 
     	while (!this.is_valid) {
 			var c = Math.floor(Math.random() * 100)

@@ -18,10 +18,19 @@ cc.Class({
 		if (!this.is_valid)
 			return
 
+        if(FindMeteor.GetInstance().gameOver){
+            this.node.removeFromParent();
+            return;
+        }
+
 		if (this.life <= 0) {
 			this.is_valid = false
-			console.log("Game over")
-			//FindMeteor.GetInstance().GameOver()
+			console.log("Game over");
+            this.node.off(cc.Node.EventType.TOUCH_START, this.onTouchStartHandler);
+            this.node.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMoveHandler);
+            this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
+            this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
+			FindMeteor.GetInstance().GameOver(this.GetMeteorNum());
 		}
     },
 

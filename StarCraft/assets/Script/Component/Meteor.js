@@ -19,6 +19,11 @@ cc.Class({
 			return
     	}
 
+        if(FindMeteor.GetInstance().gameOver){
+            FindMeteor.GetInstance().RemoveMeteor(this);
+            return;
+        }
+
 		var planet = FindMeteor.GetInstance().GetPlanet()
 		if (MathUtil.HitTestWithScale(this.node, planet.node)) {
 			this.is_valid = false

@@ -2,11 +2,11 @@ let res=
 {
     "bg":
     {
-        "main":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "diamondCon":"https://cdn-game.2zhuji.cn/uploads/wdxq/diamondCon_bg.png",
-        "productivityCon":"https://cdn-game.2zhuji.cn/uploads/wdxq/productivityCon_bg.png",
-        "meteorCon":"https://cdn-game.2zhuji.cn/uploads/wdxq/meteorCon_bg.png",
-        "fixCon":"https://cdn-game.2zhuji.cn/uploads/wdxq/meteorCon_bg.png",
+        "main":"battle_bg.png",
+        "diamondCon":"diamondCon_bg.png",
+        "productivityCon":"productivityCon_bg.png",
+        "meteorCon":"gameMeteor_bg.png",
+        "fixCon":"costCon_bg.png",
 		"findmeteor":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "messagebox":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "starListItemBg":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
@@ -25,9 +25,30 @@ let res=
         "mazeCell":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "fox":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "broke":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "star_1001":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "star_1002":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "star_1003":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "star_1001":"star/star_1001.png",
+        "star_1002":"star/star_1002.png",
+        "star_1003":"star/star_1003.png",
+        "star_1004":"star/star_1004.png",
+        "star_1005":"star/star_1005.png",
+        "star_1006":"star/star_1006.png",
+        "star_1007":"star/star_1007.png",
+        "star_1008":"star/star_1008.png",
+        "star_1009":"star/star_1009.png",
+        "star_1010":"star/star_1010.png",
+        "star_1011":"star/star_1011.png",
+        "star_1012":"star/star_1012.png",
+        "broke_1001":"broke/broke_1001.png",
+        "broke_1002":"broke/broke_1002.png",
+        "broke_1003":"broke/broke_1003.png",
+        "broke_1004":"broke/broke_1004.png",
+        "broke_1005":"broke/broke_1005.png",
+        "broke_1006":"broke/broke_1006.png",
+        "broke_1007":"broke/broke_1007.png",
+        "broke_1008":"broke/broke_1008.png",
+        "broke_1009":"broke/broke_1009.png",
+        "broke_1010":"broke/broke_1010.png",
+        "broke_1011":"broke/broke_1011.png",
+        "broke_1012":"broke/broke_1012.png",
         "affair_1":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "affair_2":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
         "affair_3":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
@@ -42,6 +63,8 @@ let res=
     }
 }
 
+let baseUrl = "https://cdn-game.2zhuji.cn/uploads/yxhzbzk/";
+
 export default class ResConfig{
     static GetAllRes(){
         for(var mainKey in res){
@@ -53,106 +76,106 @@ export default class ResConfig{
     }
 
     static MainBg(){
-        return res["bg"]["main"]
+        return baseUrl + res["bg"]["main"]
     }
 
     static DiamondConBg(){
-        return res["bg"]["diamondCon"]
+        return baseUrl + res["bg"]["diamondCon"]
     }
 
     static ProductivityConBg(){
-        return res["bg"]["productivityCon"]
+        return baseUrl + res["bg"]["productivityCon"]
     }
 
     static MeteorConBg(){
-        return res["bg"]["meteorCon"]
+        return baseUrl + res["bg"]["meteorCon"]
     }
 
     static FixConBg(){
-        return res["bg"]["fixCon"]
+        return baseUrl + res["bg"]["fixCon"]
     }
     
     static DiamondIcon(){
-        return res["icon"]["diamond"]
+        return baseUrl + res["icon"]["diamond"]
     }
 
     static MeteorIcon(){
-        return res["icon"]["meteor"]
+        return baseUrl + res["icon"]["meteor"]
     }
 
     static FindMeteorBg() {
-		return res["bg"]["findmeteor"]
+		return baseUrl + res["bg"]["findmeteor"]
     }
 
     static MessageBoxBg() {
-        return res["bg"]["messagebox"]
+        return baseUrl + res["bg"]["messagebox"]
     }
 
     static StarListItemBg(){
-        return res["bg"]["starListItemBg"]
+        return baseUrl + res["bg"]["starListItemBg"]
     }
 
     static MazeBg(){
-        return res["bg"]["mazeBg"]
+        return baseUrl + res["bg"]["mazeBg"]
     }
 
     static CutSceneBg(){
-        return res["bg"]["cutscene"]
+        return baseUrl + res["bg"]["cutscene"]
     }
 
     static StarListPanelBg(){
-        return res["bg"]["starListPanel"]
+        return baseUrl + res["bg"]["starListPanel"]
     }
 
     static GuideDiamondBoxBg(){
-        return res["bg"]["guideDiamondBox"]
+        return baseUrl + res["bg"]["guideDiamondBox"]
     }
 
     static FixCompleteBoxBg(){
-        return res["bg"]["fixCompleteBox"]
+        return baseUrl + res["bg"]["fixCompleteBox"]
     }
 
     static GetStarIcon(id){
-        return res["icon"]["star_" + id]
+        return baseUrl + res["icon"]["star_" + id]
     }
 
     static BlackHoleIcon() {
-		return res["icon"]["blackhole"]
+		return baseUrl + res["icon"]["blackhole"]
     }
 
     static PlanetIcon() {
-		return res["icon"]["planet"]
+		return baseUrl + res["icon"]["planet"]
     }
 
     static MazeCellIcon(){
-        return res["icon"]["mazeCell"]
+        return baseUrl + res["icon"]["mazeCell"]
     }
 
     static FoxIcon(){
-        return res["icon"]["fox"]
+        return baseUrl + res["icon"]["fox"]
     }
 
     static BrokeIcon(){
-        return res["icon"]["broke"]
+        return baseUrl + res["icon"]["broke"]
     }
 
     static AffairIcon(index){
-        return res["icon"]["affair_" + index];
+        return baseUrl + res["icon"]["affair_" + index];
     }
 
     static SearchMeteorBtn(){
-        return res["btn"]["searchMeteor"]
+        return baseUrl + res["btn"]["searchMeteor"]
     }
 
     static VideoBtn(){
-        return res["btn"]["video"]
+        return baseUrl + res["btn"]["video"]
     }
 
     static NextStarBtn(){
-        return res["btn"]["nextStar"]
+        return baseUrl + res["btn"]["nextStar"]
     }
 
     static WellDoneBtn(){
-        return res["btn"]["wellDone"]
+        return baseUrl + res["btn"]["wellDone"]
     }
 }

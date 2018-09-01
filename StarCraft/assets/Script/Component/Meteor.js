@@ -19,18 +19,20 @@ cc.Class({
 			return
     	}
 
-        if(FindMeteor.GetInstance().gameOver){
-            FindMeteor.GetInstance().RemoveMeteor(this);
+		var findMeteor = FindMeteor.GetInstance()
+        if(findMeteor.gameOver){
+            findMeteor.RemoveMeteor(this)
             return;
         }
 
-		var planet = FindMeteor.GetInstance().GetPlanet()
+		var planet = findMeteor.GetPlanet()
 		if (MathUtil.HitTestWithScale(this.node, planet.node)) {
 			this.is_valid = false
 			var tweenAlpha = TweenAlpha.begin(this.node, 255, 1, 0.2, 1)
             tweenAlpha.onFinishCallBack = function() {
-            	FindMeteor.GetInstance().RemoveMeteor(this)
+            	findMeteor.RemoveMeteor(this)
 				planet.GetOneMeteor()
+				findMeteor.ChangeBlackHoleSpeed()
             }
 		}
     },

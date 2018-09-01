@@ -104,7 +104,23 @@ export default class FindMeteor {
 	GetReCreateBlackHoleCnt() {
 		return this.ReBlackHoleCnt
 	}
-	
+
+	ChangeBlackHoleSpeed() {
+		for (var i = this.blackholeList.length - 1; i >= 0; i--) {
+			if (this.blackholeList[i].speed_x >= 0) {
+				this.blackholeList[i].speed_x += 0.5
+			} else {
+				this.blackholeList[i].speed_x -= 0.5
+			}
+
+			if (this.blackholeList[i].speed_y >= 0) {
+				this.blackholeList[i].speed_y += 0.5
+			} else {
+				this.blackholeList[i].speed_y -= 0.5
+			}
+		}
+	}
+
 	RemoveBlackHole(blackhole) {
 		this.blackholeList.splice(this.blackholeList.indexOf(blackhole), 1)
 		blackhole.node.removeFromParent(true)

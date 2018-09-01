@@ -74,16 +74,16 @@ cc.Class({
 
 		var positive = Math.floor(Math.random() * 10) % 2
 		if (0 == positive) {
-			this.speed_x = Math.floor(Math.random() * 10) % 1 + 1
+			this.speed_x = 1
 		} else {
-			this.speed_x = 0 - (Math.floor(Math.random() * 10) % 1 + 1)
+			this.speed_x = 0 - 1
 		}
 
 		positive = Math.floor(Math.random() * 10) % 2
     	if (0 == positive) {
-			this.speed_y = Math.floor(Math.random() * 10) % 1 + 1
+			this.speed_y = 1
 		} else {
-			this.speed_y = 0 - (Math.floor(Math.random() * 10) % 1 + 1)
+			this.speed_y = 0 - 1
 		}
 		this.node.zIndex = 1
     },

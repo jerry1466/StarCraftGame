@@ -42,6 +42,8 @@ cc.Class({
 		this.meteorNum = 0
 		this.node.zIndex = 100
 
+		console.log("planet scalex:", this.node.scaleX, "scaley:", this.node.scaleY)
+
 		this.onTouchStartHandler = this.onTouchStart.bind(this)
         this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStartHandler)
     },
@@ -80,6 +82,8 @@ cc.Class({
 
     GetOneMeteor() {
 		this.meteorNum += 1
+		this.node.scaleX += 0.05
+		this.node.scaleY += 0.05
 		console.log("get Meteor num:", this.meteorNum)
     },
 

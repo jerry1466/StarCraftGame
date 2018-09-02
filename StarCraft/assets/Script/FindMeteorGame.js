@@ -4,12 +4,13 @@
  **/
 import Scene from 'Scene'
 import Databus from 'Databus'
-import ResourceManager from "ResourceManager";
-import FindMeteor from "FindMeteor";
-import ResConfig from 'ResConfig';
+import ResourceManager from "ResourceManager"
+import FindMeteor from "FindMeteor"
+import ResConfig from 'ResConfig'
 import BuffBase from 'BuffBase'
 import LevelManager from 'LevelManager'
 import SceneManager from 'SceneManager'
+import GameMeteorCnt from "GameMeteorCnt"
 
 let databus = new Databus()
 cc.Class({
@@ -20,10 +21,14 @@ cc.Class({
             type: cc.AudioSource
         },
         bg:cc.Sprite,
+        gameMeteor_bg:GameMeteorCnt,
+        gameHpCon_bg:cc.Sprite,
     },
 
     onLoad() {
         SceneManager.GetInstance().SetRoot(this.node);
+        this.gameMeteor_bg.Init(ResConfig.MeteorConBg())
+        //this.gameHpCon_bg.Init(ResConfig.GameHpConBg())
     	//加载流星平原背景
         //ResourceManager.LoadRemoteSprite(this.bg, ResConfig.FindMeteorBg())
         var param = new LevelManager().CurrentLevelParam
@@ -37,6 +42,7 @@ cc.Class({
             }*/
             that.findMeteor.CreateBlackHole(that, 3);
         });
+        
     },
 
     update() {

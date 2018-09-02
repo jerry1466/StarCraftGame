@@ -60,6 +60,10 @@ export default class FindMeteor {
 		}
 	}
 
+	CreateMeteorForCnts(component) {
+		
+	}
+
     RemoveMeteor(meteor) {
         this.meteorList.splice(this.meteorList.indexOf(meteor), 1);
         meteor.node.removeFromParent(true)

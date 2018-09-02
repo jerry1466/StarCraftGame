@@ -42,7 +42,9 @@ cc.Class({
     Init(config){
         this.config = config;
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.StarListItemBg());
-        ResourceManager.LoadRemoteSprite(this.spIcon, config["resUrl"]);
+        ResourceManager.LoadRemoteSprite(this.spIcon, ResConfig.GetStarIcon(this.config["id"]));
+        ResourceManager.LoadRemoteSprite(this.btnUnlock, ResConfig.UnlockBtn());
+        ResourceManager.LoadRemoteSprite(this.btnView, ResConfig.ViewStarBtn());
         this.lbName.string = config["name"];
         this.lbIntro.string = config["intro"];
         this.rtProductivity.font = "黑体";

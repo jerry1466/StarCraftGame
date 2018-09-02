@@ -22,7 +22,7 @@ cc.Class({
 
     onLoad(){
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MazeCellIcon());
-        ResourceManager.LoadRemoteSprite(this.fog, ResConfig.FoxIcon());
+        ResourceManager.LoadRemoteSprite(this.fog, ResConfig.FogIcon());
     },
 
     update() {
@@ -46,7 +46,7 @@ cc.Class({
         else{
             this.fog.node.active = true;
         }
-        ResourceManager.LoadRemoteSprite(this.icon, ResConfig.FoxIcon());
+        ResourceManager.LoadRemoteSprite(this.icon, ResConfig.AffairIcon(this.affair.type));
     },
 
     GetAffair(){
@@ -55,6 +55,7 @@ cc.Class({
 
     RemoveFog(){
         this.fog.node.active = false;
+        this.fog.node.opacity = 255;
     },
 
     Trigger(){
@@ -63,8 +64,7 @@ cc.Class({
             var tweenAlpha = TweenAlpha.begin(this.fog.node, 255, 0, 1, 1);
             var that = this;
             tweenAlpha.onFinishCallBack = function(){
-                that.fog.node.active = false
-                that.fog.node.opacity = 255;
+                that.RemoveFog();
                 doTrigger(that.affair);
             }
         }

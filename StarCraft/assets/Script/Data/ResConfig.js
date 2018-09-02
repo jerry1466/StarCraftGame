@@ -7,24 +7,29 @@ let res=
         "productivityCon":"productivityCon_bg.png",
         "meteorCon":"gameMeteor_bg.png",
         "fixCon":"costCon_bg.png",
-		"findmeteor":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "messagebox":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "starListItemBg":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "mazeBg":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "cutscene":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "starListPanel":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "guideDiamondBox":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "fixCompleteBox":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+		"findmeteor":"battle_bg.png",
+        "messagebox":"window_bg1.png",
+        "starListItemBg":"starListItem_bg.png",
+        "mazeBg":"battle_bg.png",
+        "preloadBg":"battle_bg.png",
+        "cutscene":"battle_bg.png",
+        "starListPanel":"myStar_bg.png",
+        "guideDiamondBox":"window_bg3.png",
+        "fixCompleteBox":"window_bg2.png",
+        "gameResultPanel":"window_bg4.png",
+        "mazePanel":"mazePanel_bg2.png",
     },
     "icon":
     {
-        "diamond":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png",
-        "meteor":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png",
-        "blackhole":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png",
-        "planet":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png",
-        "mazeCell":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "fox":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "broke":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "diamond":"diamond_icon.png",
+        "meteor":"meteor_icon.png",
+        "blackhole":"Broke.png",
+        "planet":"Star.png",
+        "mazeCell":"mazeCell_bg.png",
+        "fog":"fog.png",
+        "broke":"Broke.png",
+        "newStar_1":"newStar_icon1.png",
+        "newStar_2":"newStar_icon2.png",
         "star_1001":"star/star_1001.png",
         "star_1002":"star/star_1002.png",
         "star_1003":"star/star_1003.png",
@@ -49,17 +54,28 @@ let res=
         "broke_1010":"broke/broke_1010.png",
         "broke_1011":"broke/broke_1011.png",
         "broke_1012":"broke/broke_1012.png",
-        "affair_1":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "affair_2":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "affair_3":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "affair_4":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "affair_1":"et_icon.png",
+        "affair_2":"affair_2.png",
+        "affair_3":"affair_3.png",
+        "affair_4":"affair_4.png",
     },
     "btn":
     {
-        "searchMeteor":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "video":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "nextStar":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
-        "wellDone":"https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png",
+        "viewStar":"view_btn",
+        "gameSearchMeteor":"game_search_btn.png",
+        "searchMeteor":"search_btn.png",
+        "video":"video_btn.png",
+        "nextStar":"nextStar_btn.png",
+        "wellDone":"wellDone_btn.png",
+        "unlock":"bigBtn_bg.png",
+        "normal":"btn_bg.png",
+        "myStarList":"myStarList_btn.png",
+        "exit":"exit_btn.png",
+        "fix":"fix_btn.png",
+    },
+    "item":
+    {
+        "unFreeze":"unfreeze_icon.png",
     }
 }
 
@@ -119,6 +135,10 @@ export default class ResConfig{
         return baseUrl + res["bg"]["mazeBg"]
     }
 
+    static PreloadBg(){
+        return baseUrl + res["bg"]["preloadBg"]
+    }
+
     static CutSceneBg(){
         return baseUrl + res["bg"]["cutscene"]
     }
@@ -133,6 +153,18 @@ export default class ResConfig{
 
     static FixCompleteBoxBg(){
         return baseUrl + res["bg"]["fixCompleteBox"]
+    }
+
+    static GameResultPanelBg(){
+        return baseUrl + res["bg"]["GameResultPanel"]
+    }
+
+    static MazePanelBg(){
+        return baseUrl + res["bg"]["MazePanel"]
+    }
+
+    static NewStarIcon(index){
+        return baseUrl + res["icon"]["newStar_" + index]
     }
 
     static GetStarIcon(id){
@@ -151,8 +183,8 @@ export default class ResConfig{
         return baseUrl + res["icon"]["mazeCell"]
     }
 
-    static FoxIcon(){
-        return baseUrl + res["icon"]["fox"]
+    static FogIcon(){
+        return baseUrl + res["icon"]["fog"]
     }
 
     static BrokeIcon(){
@@ -161,6 +193,14 @@ export default class ResConfig{
 
     static AffairIcon(index){
         return baseUrl + res["icon"]["affair_" + index];
+    }
+
+    static ViewStarBtn(){
+        return baseUrl + res["icon"]["viewStar"]
+    }
+
+    static GameSearchMeteorBtn(){
+        return baseUrl + res["icon"]["gameSearchMeteor"]
     }
 
     static SearchMeteorBtn(){
@@ -177,5 +217,26 @@ export default class ResConfig{
 
     static WellDoneBtn(){
         return baseUrl + res["btn"]["wellDone"]
+    }
+
+    static UnlockBtn(){
+        return baseUrl + res["btn"]["unlock"]
+    }
+
+    static NormalBtn(){
+        return baseUrl + res["btn"]["normal"]
+    }
+
+    static MyStarListBtn()
+    {
+        return baseUrl + res["btn"]["myStarList"]
+    }
+
+    static ExitBtn() {
+        return baseUrl + res["btn"]["exit"]
+    }
+
+    static FixBtn(){
+        return baseUrl + res["btn"]["fix"]
     }
 }

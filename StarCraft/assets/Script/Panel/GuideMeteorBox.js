@@ -18,7 +18,7 @@ cc.Class({
 
     onLoad(){
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MessageBoxBg());
-        ResourceManager.LoadRemoteSprite(this.spSearchMeteor, ResConfig.SearchMeteorBtn());
+        ResourceManager.LoadRemoteSprite(this.spSearchMeteor, ResConfig.GameSearchMeteorBtn());
     },
 
     update() {

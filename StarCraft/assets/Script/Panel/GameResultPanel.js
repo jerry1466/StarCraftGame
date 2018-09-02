@@ -5,6 +5,8 @@
 import Databus from 'Databus'
 import BasePanel from 'BasePanel'
 import LevelManager from "LevelManager";
+import ResourceManager from "ResourceManager";
+import ResConfig from "ResConfig";
 
 let databus = new Databus()
 cc.Class({
@@ -20,6 +22,7 @@ cc.Class({
     },
 
     start(){
+        ResourceManager.LoadRemoteSprite(this.spBg, ResConfig.GameResultPanelBg());
         this.lbNum.string = this.meteorNum.toString();
     },
 

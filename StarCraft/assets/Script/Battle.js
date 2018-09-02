@@ -33,8 +33,10 @@ cc.Class({
         meteorCon:Coin,
         fixCon:cc.Node,
         fixCostCon: Coin,
+        btnFix:cc.Button,
         btnMyStars: cc.Button,
         btnSearch: cc.Button,
+        btnExit: cc.Button,
         hud: HUD,
         leftBar: LeftBar,
         bottomBar: BottomBar,
@@ -47,6 +49,9 @@ cc.Class({
         SceneManager.GetInstance().SetRoot(this.node);
         this.tex = new cc.Texture2D();
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MainBg())
+        ResourceManager.LoadRemoteSprite(this.btnSearch, ResConfig.GameSearchMeteorBtn());
+        ResourceManager.LoadRemoteSprite(this.btnExit, ResConfig.ExitBtn());
+        ResourceManager.LoadRemoteSprite(this.btnFix, ResConfig.FixBtn());
         this.meteorCon.Init(ResConfig.MeteorConBg());
         this.meteorCon.SetCoinType(2);
         this.fixCostCon.Init(ResConfig.FixConBg());

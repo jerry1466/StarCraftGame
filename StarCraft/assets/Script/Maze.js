@@ -21,6 +21,7 @@ cc.Class({
     extends: cc.Component,
     properties: {
         bg:cc.Sprite,
+        mazeBg:cc.Sprite,
         diamondCon: Coin,
         btnExit:cc.Button,
         map:cc.Node,
@@ -29,7 +30,8 @@ cc.Class({
     },
 
     onLoad(){
-        ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MazeBg())
+        ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MazeBg());
+        ResourceManager.LoadRemoteSprite(this.mazeBg, ResConfig.MazePanelBg())
         SceneManager.GetInstance().SetRoot(this.node);
         this.diamondCon.Init(ResConfig.DiamondConBg());
         this.registerEventHandler();

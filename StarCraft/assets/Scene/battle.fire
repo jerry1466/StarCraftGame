@@ -2562,11 +2562,17 @@
     "fixCostCon": {
       "__id__": 55
     },
+    "btnFix": {
+      "__id__": 47
+    },
     "btnMyStars": {
       "__id__": 36
     },
     "btnSearch": {
       "__id__": 31
+    },
+    "btnExit": {
+      "__id__": 41
     },
     "hud": {
       "__id__": 22

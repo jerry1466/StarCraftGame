@@ -9,6 +9,7 @@ import EventUtil from "EventUtil";
 import StatisticManager from "StatisticManager";
 import TweenPosition from "TweenPosition"
 import BuffBase from "BuffBase";
+import ResConfig from "ResConfig";
 
 let databus = new Databus()
 
@@ -89,7 +90,7 @@ cc.Class({
             this.lbSubscribe.label = "";
             this.btnShare.node.active = false;
         }
-        //ResourceManager.LoadRemoteSprite(this.bg, "https://cdn-game.2zhuji.cn/uploads/yxhzbzk/cover_bg.png")
+        ResourceManager.LoadRemoteSprite(this.bg, ResConfig.PreloadBg());
         this.tweenStage1()
     },
 

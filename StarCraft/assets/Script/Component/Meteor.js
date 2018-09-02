@@ -5,7 +5,7 @@
 import Databus from 'Databus'
 import FindMeteor from 'FindMeteor'
 import MathUtil from 'MathUtil'
-import TweenAlpha from "TweenAlpha"
+import EventUtil from "EventUtil";
 
 let databus = new Databus()
 cc.Class({
@@ -28,12 +28,8 @@ cc.Class({
 		var planet = findMeteor.GetPlanet()
 		if (MathUtil.HitTestWithScale(this.node, planet.node)) {
 			this.is_valid = false
-			var tweenAlpha = TweenAlpha.begin(this.node, 255, 1, 0.2, 1)
-            tweenAlpha.onFinishCallBack = function() {
-            	findMeteor.RemoveMeteor(this)
-				planet.GetOneMeteor()
-				findMeteor.ChangeBlackHoleSpeed()
-            }
+			EventUtil.GetInstance().DispatchEvent("CatchMeteor", this);
+            planet.GetOneMeteor();
 		}
     },
 

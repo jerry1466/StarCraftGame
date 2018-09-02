@@ -27,9 +27,11 @@ export default class Databus{
         this.gameRegion = cc.v2(370, 550);
         this.mazeRow = 15;
         this.mazeColumn = 10;
+        this.gameMaxHp = 3;
         /**************用户数据*************/
         this.userInfo = {
             curStarId:1001,
+            maxStarId:1001,
             diamond:0,
             meteor:0,
             brokeFixIndex:-1

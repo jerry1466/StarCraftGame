@@ -14,6 +14,10 @@ cc.Class({
         id:0
     },
 
+	onLoad(){
+    	EventUtil.GetInstance().DispatchEvent("HpChange", this.life);
+	},
+
     update() {
 		if (!this.is_valid)
 			return
@@ -38,7 +42,7 @@ cc.Class({
     	this.node.x = 0
     	this.node.y = 0
     	this.is_valid = true
-		this.life = 3
+		this.life = databus.gameMaxHp;
 		this.meteorNum = 0
 		this.node.zIndex = 100
 
@@ -94,6 +98,7 @@ cc.Class({
 	ReduceLife() {
 		console.log("planet reduce life")
 		this.life -= 1
+        EventUtil.GetInstance().DispatchEvent("HpChange", this.life);
 	},
 
 	setPosition(position) {

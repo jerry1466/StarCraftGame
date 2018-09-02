@@ -17,6 +17,7 @@ let data =
         "unlock":0,
         "mazeCellCost":20,
         "num_scale_duration":[1, 1.1],
+        "game_meteor_income":10,
     },
     "1002":
     {
@@ -35,6 +36,7 @@ let data =
         "unlock":3000,
         "mazeCellCost":20,
         "num_scale_duration":[1.15, 1.3],
+        "game_meteor_income":15,
     },
     "1003":
     {
@@ -53,6 +55,7 @@ let data =
         "unlock":10000,
         "mazeCellCost":20,
         "num_scale_duration":[1.3, 1.6],
+        "game_meteor_income":25,
     }
 }
 
@@ -109,5 +112,9 @@ export default class StarConfig{
 
     static GetBaseAffairRob(){
         return this.star_base_data["affair_rob"]
+    }
+
+    static GetGameMeteorIncome(id){
+        return data[id.toString()]["game_meteor_income"]
     }
 }

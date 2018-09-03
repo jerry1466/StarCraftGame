@@ -9,7 +9,7 @@ let res=
         "meteorCon":"gameMeteor_bg.png",
         "fixCon":"costCon_bg.png",
         "gameHpCon":"gameHpCon_bg.png",
-		"findmeteor":"battle_bg.png",
+		"findmeteor":"gamePanel_bg.png",
         "messagebox":"window_bg1.png",
         "starListItemBg":"starListItem_bg.png",
         "mazeBg":"battle_bg.png",

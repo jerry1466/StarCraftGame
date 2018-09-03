@@ -18,6 +18,7 @@ export default class FindMeteor {
         this.gameOver = false
         this.meteorList = new Array()
         this.ReBlackHoleCnt = 0
+        this.gameTop = 0
     }
 
     static GetInstance() {
@@ -43,7 +44,7 @@ export default class FindMeteor {
 	}
 
 	CreateMeteor(component, num) {
-		var blockList = MathUtil.spliteScreenToBlock(databus.screenHeight, databus.screenWidth, num)
+		var blockList = MathUtil.spliteScreenToBlock(this.gameTop - this.gameButtom, this.gameRight - this.gameLeft, num)
 
 		//在每个分块里面随机出来一个流星
 		var meteor = null
@@ -81,7 +82,7 @@ export default class FindMeteor {
     }
 
     CreateBlackHole(component, num) {
-		var blockList = MathUtil.spliteScreenToBlock(databus.screenHeight, databus.screenWidth, num)
+		var blockList = MathUtil.spliteScreenToBlock(this.gameTop - this.gameButtom, this.gameRight - this.gameLeft, num)
 
 		var blackhole = null
 		var _this = this

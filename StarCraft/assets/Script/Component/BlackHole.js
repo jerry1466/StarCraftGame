@@ -92,6 +92,8 @@ cc.Class({
 		this.node.x += this.speed_x
 		this.node.y += this.speed_y
 
+		var findMeteor = FindMeteor.GetInstance()
+
 		if (MathUtil.LeftBoundaryHitTest(this.node.x - this.node.width / 2, databus.screenLeft)) {
 			this.node.x = databus.screenLeft + this.node.width / 2
 			this.speed_x = 0 - this.speed_x
@@ -102,8 +104,8 @@ cc.Class({
 			this.speed_x = 0 - this.speed_x
 		}
 
-		if (MathUtil.TopBoundaryHitTest(this.node.y + this.node.height / 2, databus.screenTop)) {
-			this.node.y = databus.screenTop - this.node.height / 2
+		if (MathUtil.TopBoundaryHitTest(this.node.y + this.node.height / 2, findMeteor.gameTop)) {
+			this.node.y = findMeteor.gameTop - this.node.height / 2
 			this.speed_y = 0 - this.speed_y
 		}
 

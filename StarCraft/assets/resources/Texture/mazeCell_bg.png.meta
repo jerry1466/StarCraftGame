@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "0e0d07bb-47b4-4a1d-bbf5-9d76cccf7517",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "mazeCell_bg": {
+      "ver": "1.0.3",
+      "uuid": "339c1ed8-d1d5-46bd-9bbd-84152d3e3ac3",
+      "rawTextureUuid": "0e0d07bb-47b4-4a1d-bbf5-9d76cccf7517",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 89,
+      "height": 90,
+      "rawWidth": 89,
+      "rawHeight": 90,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

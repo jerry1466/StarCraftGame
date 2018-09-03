@@ -85,7 +85,8 @@ cc.Class({
             if(success){
                 databus.AddMoney(1, 0 - that.config["unlock"]);
                 UIUtil.Confirm("恭喜！星球已解锁~\n立即前往巡视吧！", function(){
-                    databus.userInfo.curStarId = that.config.id;
+                    databus.userInfo.maxStarId = that.config.id;
+                    databus.userInfo.curStarId = databus.userInfo.maxStarId;
                     databus.userInfo.brokeFixIndex = -1;
                     EventUtil.GetInstance().DispatchEvent("RefreshStar");
                     ModuleManager.GetInstance().HideModule("StarListPanel");

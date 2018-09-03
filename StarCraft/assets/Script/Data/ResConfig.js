@@ -2,12 +2,13 @@ let res=
 {
     "bg":
     {
-        "main":"battle_bg.png",
+        "main":"battle_bg.jpg",
+        "con":"coin_bg.png",
         "diamondCon":"diamondCon_bg.png",
         "productivityCon":"productivityCon_bg.png",
         "meteorCon":"gameMeteor_bg.png",
         "fixCon":"costCon_bg.png",
-        "gameHpCon":"gameHpCon_bg",
+        "gameHpCon":"gameHpCon_bg.png",
 		"findmeteor":"battle_bg.png",
         "messagebox":"window_bg1.png",
         "starListItemBg":"starListItem_bg.png",
@@ -63,7 +64,7 @@ let res=
     },
     "btn":
     {
-        "viewStar":"view_btn",
+        "viewStar":"view_btn.png",
         "gameSearchMeteor":"game_search_btn.png",
         "searchMeteor":"search_btn.png",
         "video":"video_btn.png",
@@ -81,20 +82,27 @@ let res=
     }
 }
 
-let baseUrl = "https://cdn-game.2zhuji.cn/uploads/yxhzbzk/";
+//let baseUrl = "https://cdn-game.2zhuji.cn/uploads/wdxq/";//微信环境下用这个
+let baseUrl = "Texture/";
 
 export default class ResConfig{
     static GetAllRes(){
+        var resList = [];
         for(var mainKey in res){
             for(var subKey in res[mainKey]){
-                resList.push(res[mainKey][subKey])
+                resList.push(baseUrl + res[mainKey][subKey])
             }
         }
+        console.log("resList:",resList);
         return resList;
     }
 
     static MainBg(){
         return baseUrl + res["bg"]["main"]
+    }
+
+    static ConBg(){
+        return baseUrl + res["bg"]["con"]
     }
 
     static DiamondConBg(){
@@ -197,8 +205,8 @@ export default class ResConfig{
         return baseUrl + res["icon"]["fog"]
     }
 
-    static BrokeIcon(){
-        return baseUrl + res["icon"]["broke"]
+    static BrokeIcon(id){
+        return baseUrl + res["icon"]["broke_" + id]
     }
 
     static AffairIcon(index){

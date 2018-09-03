@@ -12,12 +12,11 @@ cc.Class({
 
     onLoad(){
         this.icon = this.node.getComponent(cc.Sprite);
-        ResourceManager.LoadRemoteSprite(this.icon, ResConfig.BrokeIcon());
-        this.refresh();
+        ResourceManager.LoadRemoteSprite(this.icon, ResConfig.BrokeIcon(databus.userInfo.curStarId));
     },
 
     update(){
-        this.progressBar.progress = Math.min(databus.userInfo.meteor / this.cost, 1);
+        //this.progressBar.progress = Math.min(databus.userInfo.meteor / this.cost, 1);
     },
 
     Init(index, cost){
@@ -27,7 +26,6 @@ cc.Class({
 
     Select(value){
         this._select = value;
-        this.refresh();
         if(value)
         {
             EventUtil.GetInstance().DispatchEvent("SetFixRelatedBroke", this)
@@ -37,9 +35,4 @@ cc.Class({
     SetFixed(value){
         this.fixed = value;
     },
-
-    refresh(){
-        this.progressBar = this.node.getChildByName("bar").getComponent(cc.ProgressBar);
-        this.progressBar.node.active = (this._select || false);
-    }
 })

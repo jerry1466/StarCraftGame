@@ -6,6 +6,7 @@ import Databus from 'Databus'
 import ResourceManager from "ResourceManager";
 import UnitManager from "UnitManager";
 import TweenAlpha from 'TweenAlpha';
+import ResConfig from "ResConfig";
 import StarConfig from 'StarConfig';
 import EventUtil from "EventUtil";
 import ModuleManager from "ModuleManager";
@@ -42,7 +43,7 @@ cc.Class({
     refresh(){
         var curStarId = databus.userInfo.curStarId;
         var brokeList = StarConfig.GetStarBrokeList(curStarId);
-        ResourceManager.LoadRemoteSprite(this.star, StarConfig.GetStarAppearance(curStarId));
+        ResourceManager.LoadRemoteSprite(this.star, ResConfig.GetStarIcon(curStarId));
         if(this._brokeSpList.length == 0){
             for(var i = 0; i < brokeList.length; i++)
             {

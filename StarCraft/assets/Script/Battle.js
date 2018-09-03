@@ -49,10 +49,10 @@ cc.Class({
         SceneManager.GetInstance().SetRoot(this.node);
         this.tex = new cc.Texture2D();
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MainBg())
-        ResourceManager.LoadRemoteSprite(this.btnSearch, ResConfig.GameSearchMeteorBtn());
+        ResourceManager.LoadRemoteSprite(this.btnSearch, ResConfig.SearchMeteorBtn());
         ResourceManager.LoadRemoteSprite(this.btnExit, ResConfig.ExitBtn());
         ResourceManager.LoadRemoteSprite(this.btnFix, ResConfig.FixBtn());
-        this.meteorCon.Init(ResConfig.MeteorConBg());
+        this.meteorCon.Init(ResConfig.ConBg());
         this.meteorCon.SetCoinType(2);
         this.fixCostCon.Init(ResConfig.FixConBg());
         this.registerEventHandler();
@@ -70,15 +70,25 @@ cc.Class({
     update() {
         this.meteorCon.UpdateCoin(databus.userInfo.meteor, true);
         if(this._broke){
-            this.fixCon.active = true;
             if(databus.userInfo.meteor >= this._broke.cost)
             {
                 this.fixCostCon.UpdateCoin(this._broke.cost);
             }
+            if(databus.userInfo.meteor < this._broke.cost)
+            {
+                this.btnSearch.node.active = true;
+                this.btnFix.node.active = false;
+            }
+            else
+            {
+                this.btnSearch.node.active = false;
+                this.btnFix.node.active = true;
+            }
         }
         else
         {
-            this.fixCon.active = false;
+            this.btnSearch.node.active = true;
+            this.btnFix.node.active = false;
         }
         if(databus.showNextGoal)
         {
@@ -118,7 +128,7 @@ cc.Class({
     },
 
     onSearchClick(){
-        new LevelManager().SwitchLevel("maze")
+        new LevelManager().SwitchLevel("game");
     },
 
     onExitClick(){

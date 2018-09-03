@@ -1,4 +1,4 @@
-import Scene from 'Scene'
+import ResourceManager from 'ResourceManager'
 import LevelManager from 'LevelManager'
 import SceneManager from "SceneManager";
 import InterfaceManager from "InterfaceManager";

@@ -47,8 +47,7 @@ cc.Class({
     },
 
     startLoad(){
-        //this.loadList = [new ImageLoading(), new PrefabLoading()]
-        this.loadList = [new PrefabLoading()]
+        this.loadList = [new ImageLoading(), new PrefabLoading()]
         this.loadIndex = 0;
         this.doLoad();
     },

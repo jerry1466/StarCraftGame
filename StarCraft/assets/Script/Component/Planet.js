@@ -86,7 +86,6 @@ cc.Class({
 		this.meteorNum += 1
 		this.node.scaleX += 0.05
 		this.node.scaleY += 0.05
-		console.log("get Meteor num:", this.meteorNum)
     },
 
     GetMeteorNum() {
@@ -94,7 +93,6 @@ cc.Class({
     },
 
 	ReduceLife() {
-		console.log("planet reduce life")
 		this.life -= 1
         EventUtil.GetInstance().DispatchEvent("HpChange", this.life);
 	},
@@ -107,21 +105,22 @@ cc.Class({
 
 		var width = this.node.width * this.node.scaleX
 		var height = this.node.height * this.node.scaleY
+		var findMeteor = FindMeteor.GetInstance()
 
-		if (MathUtil.LeftBoundaryHitTest(this.node.x - width / 2, databus.screenLeft)) {
-			this.node.x = databus.screenLeft + width / 2
+		if (MathUtil.LeftBoundaryHitTest(this.node.x - width / 2, findMeteor.gameLeft)) {
+			this.node.x = findMeteor.gameLeft + width / 2
 		}
 
-		if (MathUtil.RightBoundaryHitTest(this.node.x + width / 2, databus.screenRight)) {
-			this.node.x = databus.screenRight - width / 2
+		if (MathUtil.RightBoundaryHitTest(this.node.x + width / 2, findMeteor.gameRight)) {
+			this.node.x = findMeteor.gameRight - width / 2
 		}
 
-		if (MathUtil.TopBoundaryHitTest(this.node.y + height / 2, databus.screenTop)) {
-			this.node.y = databus.screenTop - height / 2
+		if (MathUtil.TopBoundaryHitTest(this.node.y + height / 2, findMeteor.gameTop)) {
+			this.node.y = findMeteor.gameTop - height / 2
 		}
 
-		if (MathUtil.ButtomBoundaryHitTest(this.node.y - height / 2, databus.screenButtom)) {
-			this.node.y = databus.screenButtom + height / 2
+		if (MathUtil.ButtomBoundaryHitTest(this.node.y - height / 2, findMeteor.gameButtom)) {
+			this.node.y = findMeteor.gameButtom + height / 2
 		}
 	}
 })    

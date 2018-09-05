@@ -28,8 +28,7 @@ cc.Class({
     },
 
     onLoad() {
-    	console.log(
-"find meteor game onload")
+    	console.log("find meteor game onload")
         SceneManager.GetInstance().SetRoot(this.node);
         this.gameMeteorCon.Init(ResConfig.MeteorConBg());
         this.gameHpCon.Init(ResConfig.GameHpConBg());
@@ -102,5 +101,4 @@ cc.Class({
     hpChangeHandler(hp){
 	     this.gameHpCon.UpdateHp(hp);
     }
-})    
-
+})

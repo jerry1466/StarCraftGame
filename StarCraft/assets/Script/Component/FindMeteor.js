@@ -47,25 +47,19 @@ export default class FindMeteor {
 	}
 
 	CreateMeteor(component, num) {
-		console.log("create meteor start")
 		var blockList = MathUtil.spliteScreenToBlock(this.gameTop - this.gameButtom, this.gameRight - this.gameLeft, num)
-		console.log("create meteor going:", blockList.length)
 		//在每个分块里面随机出来一个流星
 		var meteor = null
 		var _this = this
 		for (let i = blockList.length - 1; i >= 0; i--) {
-			console.log("create meteor end000")
 			this.loadRes("Meteor", function(instance) {
-				console.log("create meteor end1111")
 				meteor = instance.addComponent("Meteor")
 				component.node.addChild(instance)
 				var blocktmp = blockList[i]
 				meteor.Init(blocktmp.top, blocktmp.buttom, blocktmp.left, blocktmp.right)
 				_this.meteorList.push(meteor)
-				console.log("create meteor end2222")
 			})
 		}
-		console.log("create meteor end")
 	}
 
     RemoveMeteor(meteor) {
@@ -97,7 +91,6 @@ export default class FindMeteor {
 				blackhole.Init(blocktmp.top, blocktmp.buttom, blocktmp.left, blocktmp.right)
 				_this.blackholeList.push(blackhole)
 			})
-			
 		}
     }
 

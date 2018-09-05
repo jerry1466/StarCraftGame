@@ -5,13 +5,23 @@
 import BasePanel from "BasePanel";
 import Databus from 'Databus';
 import ModuleManager from "ModuleManager";
+import ResourceManager from "ResourceManager";
+import ResConfig from "ResConfig";
 
 let databus = new Databus();
 cc.Class({
     extends: BasePanel,
     properties: {
+        bg:cc.Sprite,
+        inputBg:cc.Sprite,
         ebGm:cc.EditBox,
-        btnConfirm:cc.Button,
+        btnClose:cc.Button,
+    },
+
+    onLoad(){
+        ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MessageBoxBg());
+        ResourceManager.LoadRemoteSprite(this.btnClose, ResConfig.CloseBtn());
+        ResourceManager.LoadRemoteSprite(this.inputBg, ResConfig.FrameBg());
     },
 
     update() {

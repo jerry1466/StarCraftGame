@@ -126,7 +126,8 @@ cc.Class({
     },
 
     onEnterClick(){
-        new LevelManager().SwitchLevel("battle", databus.startMission)
+        //new LevelManager().SwitchLevel("battle", databus.startMission)
+        new LevelManager().SwitchLevel("game")
     },
 
     onShareClick(){

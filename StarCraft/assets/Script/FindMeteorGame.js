@@ -28,7 +28,8 @@ cc.Class({
     },
 
     onLoad() {
-    	console.log("find meteor game onload")
+    	console.log(
+"find meteor game onload")
         SceneManager.GetInstance().SetRoot(this.node);
         this.gameMeteorCon.Init(ResConfig.MeteorConBg());
         this.gameHpCon.Init(ResConfig.GameHpConBg());
@@ -39,7 +40,7 @@ cc.Class({
         //根据生命值的框计算出游戏场景最上沿的坐标
         this.findMeteor.gameTop = this.gameHpCon.node.y - this.gameHpCon.node.height / 2 - 5
         this.findMeteor.gameButtom = 0 - this.findMeteor.gameTop
-        this.findMeteor.gameRight = databus.screenRight - 15
+        this.findMeteor.gameRight = databus.screenRight - 17
         this.findMeteor.gameLeft = 0 - this.findMeteor.gameRight
 
         console.log("xxxxxxxxxxxxx", this.findMeteor.gameTop, this.findMeteor.gameButtom, this.findMeteor.gameRight, this.findMeteor.gameLeft)

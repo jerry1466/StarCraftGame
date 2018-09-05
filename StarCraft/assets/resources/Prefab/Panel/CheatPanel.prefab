@@ -2474,11 +2474,17 @@
     "_enabled": true,
     "openAnim": 1,
     "blankClose": true,
+    "bg": {
+      "__id__": 3
+    },
+    "inputBg": {
+      "__id__": 60
+    },
     "ebGm": {
       "__id__": 58
     },
-    "btnConfirm": {
-      "__id__": 67
+    "btnClose": {
+      "__id__": 71
     }
   },
   {

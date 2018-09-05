@@ -20,6 +20,7 @@ let res=
         "fixCompleteBox":"window_bg2.png",
         "gameResultPanel":"window_bg4.png",
         "mazePanel":"mazePanel_bg2.png",
+        "frame":"frame.png",
     },
     "icon":
     {
@@ -75,6 +76,7 @@ let res=
         "myStarList":"myStarList_btn.png",
         "exit":"exit_btn.png",
         "fix":"fix_btn.png",
+        "close":"close_btn.png",
     },
     "item":
     {
@@ -123,6 +125,10 @@ export default class ResConfig{
 
     static GameHpConBg(){
         return baseUrl + res["bg"]["gameHpCon"]
+    }
+
+    static FrameBg(){
+        return baseUrl + res["bg"]["frame"]
     }
     
     static DiamondIcon(){
@@ -256,5 +262,9 @@ export default class ResConfig{
 
     static FixBtn(){
         return baseUrl + res["btn"]["fix"]
+    }
+
+    static CloseBtn(){
+        return baseUrl + res["btn"]["close"]
     }
 }

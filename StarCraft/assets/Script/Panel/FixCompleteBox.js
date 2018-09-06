@@ -7,6 +7,7 @@ import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig"
 import BasePanel from "BasePanel"
 import Databus from "Databus"
+import TweenAlpha from "TweenAlpha"
 
 let databus = new Databus();
 cc.Class({
@@ -16,6 +17,7 @@ cc.Class({
         star:cc.Sprite,
         btnNext:cc.Button,
         spNext:cc.Sprite,
+        newStarFlag:cc.Sprite,
     },
 
     onLoad(){
@@ -24,7 +26,20 @@ cc.Class({
     },
 
     start(){
-        ResourceManager.LoadRemoteSprite(this.star, ResConfig.GetStarAppearance(this.curStarId));
+        ResourceManager.LoadRemoteSprite(this.star, ResConfig.GetStarIcon(this.curStarId));
+        if(this.curStarId <= 1015)
+        {
+            ResourceManager.LoadRemoteSprite(this.newStarFlag, ResConfig.NewStarIcon(1));
+        }
+        else
+        {
+            ResourceManager.LoadRemoteSprite(this.newStarFlag, ResConfig.NewStarIcon(2));
+        }
+        this.newStarFlag.node.opacity = 255;
+        var that = this;
+        setTimeout(function(){
+            TweenAlpha.begin(that.newStarFlag.node, 255, 0, 0.5, 1);
+        }, 1000)
     },
 
     update() {

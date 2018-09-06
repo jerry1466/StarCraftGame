@@ -85,191 +85,201 @@ let res=
     }
 }
 
-//let baseUrl = "https://cdn-game.2zhuji.cn/uploads/wdxq/";//微信环境下用这个
+let wxBaseUrl = "https://cdn-game.2zhuji.cn/uploads/wdxq/";//微信环境下用这个
 let baseUrl = "Texture/";
 
 export default class ResConfig{
+    static GetBaseUrl(){
+        if(CC_WECHATGAME)
+        {
+            return wxBaseUrl;
+        }
+        else
+        {
+            return baseUrl;
+        }
+    }
+
     static GetAllRes(){
         var resList = [];
         for(var mainKey in res){
             for(var subKey in res[mainKey]){
-                resList.push(baseUrl + res[mainKey][subKey])
+                resList.push(this.GetBaseUrl() + res[mainKey][subKey])
             }
         }
-        console.log("resList:",resList);
         return resList;
     }
 
     static MainBg(){
-        return baseUrl + res["bg"]["main"]
+        return this.GetBaseUrl() + res["bg"]["main"]
     }
 
     static ConBg(){
-        return baseUrl + res["bg"]["con"]
+        return this.GetBaseUrl() + res["bg"]["con"]
     }
 
     static DiamondConBg(){
-        return baseUrl + res["bg"]["diamondCon"]
+        return this.GetBaseUrl() + res["bg"]["diamondCon"]
     }
 
     static ProductivityConBg(){
-        return baseUrl + res["bg"]["productivityCon"]
+        return this.GetBaseUrl() + res["bg"]["productivityCon"]
     }
 
     static MeteorConBg(){
-        return baseUrl + res["bg"]["meteorCon"]
+        return this.GetBaseUrl() + res["bg"]["meteorCon"]
     }
 
     static FixConBg(){
-        return baseUrl + res["bg"]["fixCon"]
+        return this.GetBaseUrl() + res["bg"]["fixCon"]
     }
 
     static GameHpConBg(){
-        return baseUrl + res["bg"]["gameHpCon"]
+        return this.GetBaseUrl() + res["bg"]["gameHpCon"]
     }
 
     static FrameBg(){
-        return baseUrl + res["bg"]["frame"]
+        return this.GetBaseUrl() + res["bg"]["frame"]
     }
     
     static DiamondIcon(){
-        return baseUrl + res["icon"]["diamond"]
+        return this.GetBaseUrl() + res["icon"]["diamond"]
     }
 
     static MeteorIcon(){
-        return baseUrl + res["icon"]["meteor"]
+        return this.GetBaseUrl() + res["icon"]["meteor"]
     }
 
     static HpIcon(){
-        return baseUrl + res["icon"]["hp"]
+        return this.GetBaseUrl() + res["icon"]["hp"]
     }
 
     static FindMeteorBg() {
-		return baseUrl + res["bg"]["findmeteor"]
+		return this.GetBaseUrl() + res["bg"]["findmeteor"]
     }
 
     static MessageBoxBg() {
-        return baseUrl + res["bg"]["messagebox"]
+        return this.GetBaseUrl() + res["bg"]["messagebox"]
     }
 
     static StarListItemBg(){
-        return baseUrl + res["bg"]["starListItemBg"]
+        return this.GetBaseUrl() + res["bg"]["starListItemBg"]
     }
 
     static MazeBg(){
-        return baseUrl + res["bg"]["mazeBg"]
+        return this.GetBaseUrl() + res["bg"]["mazeBg"]
     }
 
     static PreloadBg(){
-        return baseUrl + res["bg"]["preloadBg"]
+        return this.GetBaseUrl() + res["bg"]["preloadBg"]
     }
 
     static CutSceneBg(){
-        return baseUrl + res["bg"]["cutscene"]
+        return this.GetBaseUrl() + res["bg"]["cutscene"]
     }
 
     static StarListPanelBg(){
-        return baseUrl + res["bg"]["starListPanel"]
+        return this.GetBaseUrl() + res["bg"]["starListPanel"]
     }
 
     static GuideDiamondBoxBg(){
-        return baseUrl + res["bg"]["guideDiamondBox"]
+        return this.GetBaseUrl() + res["bg"]["guideDiamondBox"]
     }
 
     static FixCompleteBoxBg(){
-        return baseUrl + res["bg"]["fixCompleteBox"]
+        return this.GetBaseUrl() + res["bg"]["fixCompleteBox"]
     }
 
     static GameResultPanelBg(){
-        return baseUrl + res["bg"]["GameResultPanel"]
+        return this.GetBaseUrl() + res["bg"]["GameResultPanel"]
     }
 
     static MazeCellLine(){
-        return baseUrl + res["bg"]["line"]
+        return this.GetBaseUrl() + res["bg"]["line"]
     }
 
     static MazePanelBg(){
-        return baseUrl + res["bg"]["mazePanel"]
+        return this.GetBaseUrl() + res["bg"]["mazePanel"]
     }
 
     static NewStarIcon(index){
-        return baseUrl + res["icon"]["newStar_" + index]
+        return this.GetBaseUrl() + res["icon"]["newStar_" + index]
     }
 
     static GetStarIcon(id){
-        return baseUrl + res["icon"]["star_" + id]
+        return this.GetBaseUrl() + res["icon"]["star_" + id]
     }
 
     static BlackHoleIcon() {
-		return baseUrl + res["icon"]["blackhole"]
+		return this.GetBaseUrl() + res["icon"]["blackhole"]
     }
 
     static PlanetIcon() {
-		return baseUrl + res["icon"]["planet"]
+		return this.GetBaseUrl() + res["icon"]["planet"]
     }
 
     static MazeCellIcon(){
-        return baseUrl + res["icon"]["mazeCell"]
+        return this.GetBaseUrl() + res["icon"]["mazeCell"]
     }
 
     static FogIcon(){
-        return baseUrl + res["icon"]["fog"]
+        return this.GetBaseUrl() + res["icon"]["fog"]
     }
 
     static BrokeIcon(id){
-        return baseUrl + res["icon"]["broke_" + id]
+        return this.GetBaseUrl() + res["icon"]["broke_" + id]
     }
 
     static AffairIcon(index){
-        return baseUrl + res["icon"]["affair_" + index];
+        return this.GetBaseUrl() + res["icon"]["affair_" + index];
     }
 
     static ViewStarBtn(){
-        return baseUrl + res["icon"]["viewStar"]
+        return this.GetBaseUrl() + res["icon"]["viewStar"]
     }
 
     static GameSearchMeteorBtn(){
-        return baseUrl + res["icon"]["gameSearchMeteor"]
+        return this.GetBaseUrl() + res["icon"]["gameSearchMeteor"]
     }
 
     static SearchMeteorBtn(){
-        return baseUrl + res["btn"]["searchMeteor"]
+        return this.GetBaseUrl() + res["btn"]["searchMeteor"]
     }
 
     static VideoBtn(){
-        return baseUrl + res["btn"]["video"]
+        return this.GetBaseUrl() + res["btn"]["video"]
     }
 
     static NextStarBtn(){
-        return baseUrl + res["btn"]["nextStar"]
+        return this.GetBaseUrl() + res["btn"]["nextStar"]
     }
 
     static WellDoneBtn(){
-        return baseUrl + res["btn"]["wellDone"]
+        return this.GetBaseUrl() + res["btn"]["wellDone"]
     }
 
     static UnlockBtn(){
-        return baseUrl + res["btn"]["unlock"]
+        return this.GetBaseUrl() + res["btn"]["unlock"]
     }
 
     static NormalBtn(){
-        return baseUrl + res["btn"]["normal"]
+        return this.GetBaseUrl() + res["btn"]["normal"]
     }
 
     static MyStarListBtn()
     {
-        return baseUrl + res["btn"]["myStarList"]
+        return this.GetBaseUrl() + res["btn"]["myStarList"]
     }
 
     static ExitBtn() {
-        return baseUrl + res["btn"]["exit"]
+        return this.GetBaseUrl() + res["btn"]["exit"]
     }
 
     static FixBtn(){
-        return baseUrl + res["btn"]["fix"]
+        return this.GetBaseUrl() + res["btn"]["fix"]
     }
 
     static CloseBtn(){
-        return baseUrl + res["btn"]["close"]
+        return this.GetBaseUrl() + res["btn"]["close"]
     }
 }

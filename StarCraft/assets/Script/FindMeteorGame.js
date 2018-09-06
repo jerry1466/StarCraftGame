@@ -28,7 +28,6 @@ cc.Class({
     },
 
     onLoad() {
-    	console.log("find meteor game onload")
         SceneManager.GetInstance().SetRoot(this.node);
         this.gameMeteorCon.Init(ResConfig.MeteorConBg());
         this.gameHpCon.Init(ResConfig.GameHpConBg());
@@ -42,7 +41,6 @@ cc.Class({
         this.findMeteor.gameRight = databus.screenRight - 17
         this.findMeteor.gameLeft = 0 - this.findMeteor.gameRight
 
-        console.log("xxxxxxxxxxxxx", this.findMeteor.gameTop, this.findMeteor.gameButtom, this.findMeteor.gameRight, this.findMeteor.gameLeft)
         var that = this
         this.findMeteor.CreatePlanet(this, function(){
             that.findMeteor.CreateMeteor(that, 5);

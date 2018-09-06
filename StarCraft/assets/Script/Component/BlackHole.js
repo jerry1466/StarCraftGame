@@ -19,6 +19,12 @@ cc.Class({
 			return
     	}
 
+		//黑洞在游戏开始的时候稍微停顿一下
+    	if (this.timer < 20) {
+			this.timer += 1
+			return
+    	}
+
     	if(FindMeteor.GetInstance().gameOver){
             FindMeteor.GetInstance().RemoveBlackHole(this);
             return;
@@ -28,6 +34,13 @@ cc.Class({
 
     	var planet = FindMeteor.GetInstance().GetPlanet()
     	if (MathUtil.HitTestWithScale(this.node, planet.node)) {
+    		if (CC_WECHATGAME) {
+				this.soundChnl.play()
+    		} else {
+				cc.loader.loadRes("Audio/hitBlackHole.mp3", function (err, audio) {
+			        cc.audioEngine.play(audio, false, 1)
+			    })
+    		}
 			planet.ReduceLife()
 			this.is_valid = false
 			var tweenAlpha = TweenAlpha.begin(this.node, 255, 1, 0.2, 1)
@@ -40,6 +53,12 @@ cc.Class({
 
     Init(top, buttom, left, right) {
     	this.is_valid = false
+    	this.timer = 0
+    	if (CC_WECHATGAME) {
+			this.soundChnl = wx.createInnerAudioContext()
+    		this.soundChnl.src = "https://cdn-game.2zhuji.cn/uploads/wdxq/hitBlackHole.mp3"
+    		this.soundChnl.autoplay = true
+    	}
     	var height = top - buttom
 		var width = Math.abs(right - left)
 		var planet = FindMeteor.GetInstance().GetPlanet();

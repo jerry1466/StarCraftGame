@@ -38,7 +38,7 @@ export default class MazeManager{
         this.mapScale = cc.v2(MAXCOL / this.mazeCol, MAXROW / this.mazeRow);
         this.affairEventList = [];
         this.InitAffairEventList(this.mazeConfig);
-        MathUtil.Shuffle(this.affairEventList);
+        this.affairEventList = MathUtil.Shuffle(this.affairEventList);
         this.cells = new Array(this.mazeRow);
         for(var i = 0; i < this.mazeRow; i++)
         {
@@ -71,7 +71,6 @@ export default class MazeManager{
 
     ClickMap(position){
         if(this.Stage == STAGE_PLAYER_NOT_IN_MAP){
-            console.log("MazeManager ClickMap", position);
             var response = false;
             for(var i = 0; i < this.mazeRow && !response; i++)
             {
@@ -165,7 +164,8 @@ export default class MazeManager{
                     instance.active = true;
                     var mazeCell = instance.getComponent("MazeMapCell");
                     mazeCell.Init(row, column);
-                    mazeCell.InitAffair(temp.createAffair(temp.affairEventList[row * temp.mazeColumn + column]));
+                    console.log("loadCell====", row * temp.mazeCol + column, temp.affairEventList[row * temp.mazeCol + column]);
+                    mazeCell.InitAffair(temp.createAffair(temp.affairEventList[row * temp.mazeCol + column]));
                     temp.cells[row][column] = mazeCell;
                     temp.loadCell(index + 1, temp, container);
                 }
@@ -185,16 +185,16 @@ export default class MazeManager{
         affair.type = type;
         switch(type)
         {
-            case AffairConstant.AffairEnum.NONE:
+            case AffairConstant.AffairEnum().NONE:
                 break;
-            case AffairConstant.AffairEnum.REWARD:
+            case AffairConstant.AffairEnum().REWARD:
                 affair.meteor = StarConfig.GetBaseAffairReward();
                 break;
-            case AffairConstant.AffairEnum.CARD:
+            case AffairConstant.AffairEnum().CARD:
                 break;
-            case AffairConstant.AffairEnum.FREEZE:
+            case AffairConstant.AffairEnum().FREEZE:
                 break;
-            case AffairConstant.AffairEnum.GAME:
+            case AffairConstant.AffairEnum().GAME:
                 break;
         }
         affair.cost = StarConfig.GetMazeCellCost(this.starId, databus.userInfo.brokeFixIndex + 1)

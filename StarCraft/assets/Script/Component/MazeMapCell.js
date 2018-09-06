@@ -82,7 +82,7 @@ cc.Class({
 
         function doTrigger(affair){
             console.log("MazeMapCell doTrigger", affair)
-            new LevelManager().SwitchLevel("game");
+            // new LevelManager().SwitchLevel("game");
 
             if(affair.type == AffairConstant.AffairEnum().REWARD)
             {

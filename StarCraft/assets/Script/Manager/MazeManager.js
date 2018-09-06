@@ -33,27 +33,11 @@ export default class MazeManager{
         this.MapReady = false;
         this.starId = databus.userInfo.curStarId;
         this.mazeConfig = MazeConfig.GetConfig(this.starId);
-        this.mazeRow = this.mazeConfig["row"]
-        this.mazeCol = this.mazeConfig["column"]
+        this.mazeRow = this.mazeConfig["row"];
+        this.mazeCol = this.mazeConfig["column"];
         this.mapScale = cc.v2(MAXCOL / this.mazeCol, MAXROW / this.mazeRow);
-        this.mazeRate = this.mazeConfig["rate"]
-        this.affairEventList = []
-        var totalCellCount = this.mazeRow * this.mazeCol;
-        var hard = Math.floor(totalCellCount * this.mazeRate[2]);
-        var common = Math.floor(totalCellCount * this.mazeRate[1]);
-        var easy = totalCellCount - hard - common
-        for(var i = hard - 1; i >= 0 ; i--)
-        {
-            this.affairEventList.push(AffairConstant.CreateAffairTypeByLevel(3));
-        }
-        for(var i = common - 1; i >= 0 ; i--)
-        {
-            this.affairEventList.push(AffairConstant.CreateAffairTypeByLevel(2));
-        }
-        for(var i = easy - 1; i >= 0 ; i--)
-        {
-            this.affairEventList.push(AffairConstant.CreateAffairTypeByLevel(1));
-        }
+        this.affairEventList = [];
+        this.InitAffairEventList(this.mazeConfig);
         MathUtil.Shuffle(this.affairEventList);
         this.cells = new Array(this.mazeRow);
         for(var i = 0; i < this.mazeRow; i++)
@@ -64,6 +48,25 @@ export default class MazeManager{
         this.player = player;
         this.loadCell(0, this, this.container);
         this.frozen = false
+    }
+
+    InitAffairEventList(mazeConfig){
+        var eventNames = AffairConstant.GetEventNames();
+        for(var i = 0; i < eventNames.length; i++)
+        {
+            var eventName = eventNames[i];
+            var eventCnt = mazeConfig[eventName];
+            for(var j = 0; j < eventCnt; j++)
+            {
+                this.affairEventList.push(AffairConstant.CreateAffairTypeByName(eventName));
+            }
+        }
+        var length = this.affairEventList.length;
+        var totalLength = this.mazeRow * this.mazeCol;
+        for(var k = length; k < totalLength; k++)
+        {
+            this.affairEventList.push(AffairConstant.AffairEnum().NONE);
+        }
     }
 
     ClickMap(position){
@@ -185,17 +188,16 @@ export default class MazeManager{
             case AffairConstant.AffairEnum.NONE:
                 break;
             case AffairConstant.AffairEnum.REWARD:
-                affair.meteor = StarConfig.GetStarNumScaleDuration(this.starId) * StarConfig.GetBaseAffairReward();
+                affair.meteor = StarConfig.GetBaseAffairReward();
                 break;
-            case AffairConstant.AffairEnum.ROB:
-                affair.meteor = StarConfig.GetStarNumScaleDuration(this.starId) * StarConfig.GetBaseAffairRob();
+            case AffairConstant.AffairEnum.CARD:
                 break;
             case AffairConstant.AffairEnum.FREEZE:
                 break;
             case AffairConstant.AffairEnum.GAME:
                 break;
         }
-        affair.cost = StarConfig.GetMazeCellCost(this.starId)
+        affair.cost = StarConfig.GetMazeCellCost(this.starId, databus.userInfo.brokeFixIndex + 1)
         return affair;
     }
 

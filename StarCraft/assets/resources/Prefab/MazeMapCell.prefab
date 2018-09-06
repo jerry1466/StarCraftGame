@@ -696,6 +696,18 @@
       "__id__": 1
     },
     "_enabled": true,
+    "borderTop": {
+      "__id__": 4
+    },
+    "borderRight": {
+      "__id__": 13
+    },
+    "borderLeft": {
+      "__id__": 10
+    },
+    "borderBottom": {
+      "__id__": 7
+    },
     "fog": {
       "__id__": 20
     },

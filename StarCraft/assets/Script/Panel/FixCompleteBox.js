@@ -5,7 +5,6 @@
 import ModuleManager from "ModuleManager";
 import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig"
-import StarConfig from "StarConfig"
 import BasePanel from "BasePanel"
 import Databus from "Databus"
 
@@ -25,7 +24,7 @@ cc.Class({
     },
 
     start(){
-        ResourceManager.LoadRemoteSprite(this.star, StarConfig.GetStarAppearance(this.curStarId));
+        ResourceManager.LoadRemoteSprite(this.star, ResConfig.GetStarAppearance(this.curStarId));
     },
 
     update() {

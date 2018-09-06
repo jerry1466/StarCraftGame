@@ -21,6 +21,7 @@ let res=
         "gameResultPanel":"window_bg4.png",
         "mazePanel":"mazePanel_bg2.png",
         "frame":"frame.png",
+        "line":"mazeLine.png",
     },
     "icon":
     {
@@ -183,8 +184,12 @@ export default class ResConfig{
         return baseUrl + res["bg"]["GameResultPanel"]
     }
 
+    static MazeCellLine(){
+        return baseUrl + res["bg"]["line"]
+    }
+
     static MazePanelBg(){
-        return baseUrl + res["bg"]["MazePanel"]
+        return baseUrl + res["bg"]["mazePanel"]
     }
 
     static NewStarIcon(index){

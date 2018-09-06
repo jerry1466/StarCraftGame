@@ -10,7 +10,8 @@ let affairEnum = {
     REWARD:1,
     ROB:2,
     GAME:11,
-    FREEZE:111
+    CARD:12,
+    FREEZE:13,
 }
 
 let affairHardLevel = {
@@ -19,9 +20,15 @@ let affairHardLevel = {
     Hard:1000,
 }
 
+let AFFAIR_EVENT_NAMES = ["get star", "star game", "ice game", "card"];
+
 export default class AffairConstant {
     static AffairEnum(){
         return affairEnum
+    }
+
+    static GetEventNames(){
+        return AFFAIR_EVENT_NAMES;
     }
 
     static GenerateAffairMap(){
@@ -52,10 +59,24 @@ export default class AffairConstant {
         return 0;
     }
 
-    static CreateAffairTypeByLevel(level){
-        if(this.affairMap == null){
-            this.GenerateAffairMap();
+    static CreateAffairTypeByName(eventName){
+        switch(eventName)
+        {
+            case "get star":
+                return affairEnum.REWARD;
+                break;
+            case "star game":
+                return affairEnum.GAME;
+                break;
+            case "ice game":
+                return affairEnum.FREEZE;
+                break;
+            case "card":
+                return affairEnum.CARD;
+                break;
+            default:
+                return affairEnum.NONE;
+                break;
         }
-        return ArrayUtil.GetRandomValue(this.affairMap[level - 1])
     }
 }

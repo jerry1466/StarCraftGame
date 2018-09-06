@@ -8,7 +8,6 @@ import ArrayUtil from "ArrayUtil"
 import EventUtil from "EventUtil";
 import StatisticManager from "StatisticManager";
 import TweenPosition from "TweenPosition"
-import BuffBase from "BuffBase";
 import ResConfig from "ResConfig";
 
 let databus = new Databus()
@@ -126,8 +125,7 @@ cc.Class({
     },
 
     onEnterClick(){
-        //new LevelManager().SwitchLevel("battle", databus.startMission)
-        new LevelManager().SwitchLevel("game")
+        new LevelManager().SwitchLevel("battle")
     },
 
     onShareClick(){

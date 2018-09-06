@@ -14,6 +14,10 @@ let databus = new Databus()
 cc.Class({
     extends: cc.Component,
     properties: {
+        borderTop:cc.Sprite,
+        borderRight:cc.Sprite,
+        borderLeft:cc.Sprite,
+        borderBottom:cc.Sprite,
         fog:cc.Sprite,
         icon:cc.Sprite,
         row:-1,
@@ -21,7 +25,10 @@ cc.Class({
     },
 
     onLoad(){
-        ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MazeCellIcon());
+        ResourceManager.LoadRemoteSprite(this.borderTop, ResConfig.MazeCellLine());
+        ResourceManager.LoadRemoteSprite(this.borderRight, ResConfig.MazeCellLine());
+        ResourceManager.LoadRemoteSprite(this.borderLeft, ResConfig.MazeCellLine());
+        ResourceManager.LoadRemoteSprite(this.borderBottom, ResConfig.MazeCellLine());
         ResourceManager.LoadRemoteSprite(this.fog, ResConfig.FogIcon());
     },
 

@@ -23,8 +23,8 @@ cc.Class({
         rtProductivity:cc.RichText,
         lbStatus:cc.Label,
         btnView:cc.Button,
-        btnUnlock:cc.Button,
-        costNum:cc.Label,
+        // btnUnlock:cc.Button,
+        // costNum:cc.Label,
     },
 
     update() {
@@ -43,7 +43,7 @@ cc.Class({
         this.config = config;
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.StarListItemBg());
         ResourceManager.LoadRemoteSprite(this.spIcon, ResConfig.GetStarIcon(this.config["id"]));
-        ResourceManager.LoadRemoteSprite(this.btnUnlock, ResConfig.UnlockBtn());
+        // ResourceManager.LoadRemoteSprite(this.btnUnlock, ResConfig.UnlockBtn());
         ResourceManager.LoadRemoteSprite(this.btnView, ResConfig.ViewStarBtn());
         this.lbName.string = config["name"];
         this.lbIntro.string = config["intro"];
@@ -51,23 +51,25 @@ cc.Class({
         if(config.id <= databus.userInfo.curStarId)
         {
             this.lbStatus.node.active = false;
-            this.btnUnlock.node.active = false;
+            // this.btnUnlock.node.active = false;
             this.btnView.node.active = true;
             this.rtProductivity.node.active = true;
             this.rtProductivity.string = "<color=#ED6BF8>产量：" + "</c><color=#9AFF9A>" + Productor.GetInstance().GetStarProductivity(config, databus.userInfo.brokeFixIndex) + "</c><color=#FFFFFF>/秒</c>";
         }
+        /*
         else if(databus.IsCurStarFixed() && config.id == databus.userInfo.curStarId + 1)
         {
             this.lbStatus.node.active = false;
-            this.btnUnlock.node.active = true;
-            this.costNum.string = this.config["unlock"];
+            // this.btnUnlock.node.active = true;
+            // this.costNum.string = this.config["unlock"];
             this.btnView.node.active = false;
             this.rtProductivity.node.active = false;
         }
+        */
         else
         {
             this.lbStatus.node.active = true;
-            this.btnUnlock.node.active = false;
+            // this.btnUnlock.node.active = false;
             this.btnView.node.active = false;
             this.rtProductivity.node.active = false;
             this.lbStatus.string = "未解锁";

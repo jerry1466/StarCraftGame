@@ -56,7 +56,7 @@ export default class Productor{
             var id = parseInt(ids[i]);
             var config = StarConfig.GetStarConfig(id);
             if(id < databus.userInfo.maxStarId){
-                total += config["singleProduct"] * config["broke"].length;
+                total += this.GetStarProductivity(config, 2);
             }
             else if(id == databus.userInfo.maxStarId)
             {
@@ -67,6 +67,7 @@ export default class Productor{
     }
 
     GetStarProductivity(config, brokeFixIndex){
-        return config["singleProduct"] * (brokeFixIndex + 1);
+        var id = parseInt(config["id"]);
+        return (id - 1001) * config["broke"].length + brokeFixIndex + 1;
     }
 }

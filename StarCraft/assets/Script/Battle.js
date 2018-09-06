@@ -70,10 +70,7 @@ cc.Class({
     update() {
         this.meteorCon.UpdateCoin(databus.userInfo.meteor, true);
         if(this._broke){
-            if(databus.userInfo.meteor >= this._broke.cost)
-            {
-                this.fixCostCon.UpdateCoin(this._broke.cost);
-            }
+            this.fixCostCon.UpdateCoin(this._broke.cost);
             if(databus.userInfo.meteor < this._broke.cost)
             {
                 this.btnSearch.node.active = true;

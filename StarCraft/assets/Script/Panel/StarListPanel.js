@@ -29,10 +29,13 @@ cc.Class({
     },
 
     start(){
-        this.scrollView.scrollToTop();
         this.productivityCon.Init(ResConfig.ProductivityConBg(), "/秒");
         this.productivityCon.InitIcon(ResConfig.DiamondIcon());
         this.refreshList();
+        var that = this;
+        setTimeout(function(){
+            that.scrollView.scrollToTop();
+        }, 100)
     },
 
     onDestroy() {

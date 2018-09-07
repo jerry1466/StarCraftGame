@@ -26,7 +26,12 @@ export default class MazeManager{
     }
 
     Init(){
-        EventUtil.GetInstance().AddEventListener("FreeTouch", this.onFreeTouch)
+        this.onFreeTouchHandler = this.onFreeTouch.bind(this);
+        EventUtil.GetInstance().AddEventListener("FreeTouch", this.onFreeTouchHandler);
+    }
+
+    Destroy(){
+        EventUtil.GetInstance().RemoveEventListener("FreeTouch", this.onFreeTouchHandler);
     }
 
     Start(container, player){
@@ -84,6 +89,7 @@ export default class MazeManager{
                     {
                         response = true;
                         this.TouchEnable = false;
+                        EventUtil.GetInstance().DispatchEvent("MazeShowNotice", "");
                         this.player.JumpTo(mazeCell, function(){
                             mazeCell.Trigger();
                         });
@@ -96,6 +102,7 @@ export default class MazeManager{
     }
 
     Move(dir) {
+        console.log("MazeManager Move======", dir, this.Stage, this.MapReady, this.TouchEnable, this.frozen);
         if(this.Stage == STAGE_PLAYER_IN_MAP && this.MapReady && this.TouchEnable)
         {
             var row = this.player.row;
@@ -140,6 +147,7 @@ export default class MazeManager{
                 {
                     databus.AddMoney(affair.cost);
                 }
+                EventUtil.GetInstance().DispatchEvent("MazeShowNotice", "");
                 this.player.Move(tarCell, function(){
                     tarCell.Trigger();
                 })
@@ -203,5 +211,9 @@ export default class MazeManager{
 
     onFreeTouch(){
         this.TouchEnable = true;
+        if(this.Stage == STAGE_PLAYER_IN_MAP)
+        {
+            EventUtil.GetInstance().DispatchEvent("MazeShowNotice", "请在屏幕上滑动手指，决策下一步的移动方向");
+        }
     }
 }

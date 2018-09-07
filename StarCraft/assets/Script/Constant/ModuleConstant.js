@@ -33,6 +33,7 @@ export default class ModuleConstant {
         this.moduleNames["GuideDiamondBox"] = "Panel/GuideDiamondBox";
         this.moduleNames["FixCompleteBox"] = "Panel/FixCompleteBox";
         this.moduleNames["GameResultPanel"] = "Panel/GameResultPanel";
+        this.moduleNames["CardGamePanel"] = "Panel/CardGamePanel";
     }
 
     GetModuleUrl(moduleName){

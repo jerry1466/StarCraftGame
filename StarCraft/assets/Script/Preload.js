@@ -23,18 +23,21 @@ cc.Class({
             default: null,
             type:cc.Button,
         },
-
         btnShare: {
             default: null,
             type:cc.Button
         },
-
         lbSubscribe:{
             default: null,
             type:cc.Label
         },
-
         infer:cc.Node,
+        star:cc.Sprite,
+        btnRank:cc.Button,
+        btnAiWan:cc.Button,
+        btnMoreGame:cc.Button,
+        btnSound:cc.Button,
+        btnAd:cc.Button,
     },
 
     onLoad:function(){
@@ -90,6 +93,15 @@ cc.Class({
             this.btnShare.node.active = false;
         }
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.PreloadBg());
+        ResourceManager.LoadRemoteSprite(this.btnEnter, ResConfig.BigBtn());
+        ResourceManager.LoadRemoteSprite(this.btnShare, ResConfig.BigBtn());
+        ResourceManager.LoadRemoteSprite(this.infer, ResConfig.BubbleBtn());
+        ResourceManager.LoadRemoteSprite(this.star, ResConfig.FatalStarIcon());
+        ResourceManager.LoadRemoteSprite(this.btnRank, ResConfig.RankBtn());
+        ResourceManager.LoadRemoteSprite(this.btnMoreGame, ResConfig.MoreGameBtn());
+        ResourceManager.LoadRemoteSprite(this.btnAiWan, ResConfig.AiwanBtn());
+        ResourceManager.LoadRemoteSprite(this.btnSound, ResConfig.AudioBtn());
+        ResourceManager.LoadRemoteSprite(this.btnAd, ResConfig.AdBtn());
         this.tweenStage1()
     },
 

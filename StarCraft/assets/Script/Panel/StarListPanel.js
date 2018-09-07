@@ -18,10 +18,12 @@ cc.Class({
         scrollView:cc.ScrollView,
         scrollViewContent:cc.Node,
         listItemPrefab:cc.Prefab,
+        btnClose:cc.Button
     },
 
     onLoad(){
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.StarListPanelBg());
+        ResourceManager.LoadRemoteSprite(this.btnClose, ResConfig.CloseBtn());
     },
 
     update() {

@@ -138,9 +138,7 @@
       "__id__": 2
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "6c17473a-fbfe-4ce4-9194-0fd02c28a078"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -380,9 +378,7 @@
       "__id__": 9
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "b9a7de41-c3cf-4767-8fae-0f16ead9ddae"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -417,9 +413,7 @@
       "__id__": 5
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "0a6f8431-a05e-4c25-8c76-53e6d7118d2d"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -798,9 +792,7 @@
       "__id__": 24
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "bb5edc4d-dd16-49a3-8fff-25f8045e94f9"
-    },
+    "_spriteFrame": null,
     "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -862,9 +854,7 @@
       "b": 255,
       "a": 255
     },
-    "_N$normalSprite": {
-      "__uuid__": "bb5edc4d-dd16-49a3-8fff-25f8045e94f9"
-    },
+    "_N$normalSprite": null,
     "_N$pressedSprite": {
       "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
     },
@@ -952,6 +942,9 @@
     },
     "listItemPrefab": {
       "__uuid__": "784b69ba-9d0b-4682-bb1f-d0f5929aaab3"
+    },
+    "btnClose": {
+      "__id__": 26
     }
   },
   {

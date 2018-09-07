@@ -18,11 +18,13 @@ cc.Class({
         btnNext:cc.Button,
         spNext:cc.Sprite,
         newStarFlag:cc.Sprite,
+        btnClose:cc.Button,
     },
 
     onLoad(){
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.FixCompleteBoxBg());
         ResourceManager.LoadRemoteSprite(this.spNext, ResConfig.NextStarBtn());
+        ResourceManager.LoadRemoteSprite(this.btnClose, ResConfig.CloseBtn());
     },
 
     start(){

@@ -50,6 +50,7 @@ cc.Class({
         this.tex = new cc.Texture2D();
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MainBg())
         ResourceManager.LoadRemoteSprite(this.btnSearch, ResConfig.SearchMeteorBtn());
+        ResourceManager.LoadRemoteSprite(this.btnMyStars, ResConfig.MyStarListBtn());
         ResourceManager.LoadRemoteSprite(this.btnExit, ResConfig.ExitBtn());
         ResourceManager.LoadRemoteSprite(this.btnFix, ResConfig.FixBtn());
         this.meteorCon.Init(ResConfig.ConBg());

@@ -22,6 +22,7 @@ let res=
         "mazePanel":"mazePanel_bg2.png",
         "frame":"frame.png",
         "line":"mazeLine.png",
+        "loginPanel":"圆角矩形.png",
     },
     "icon":
     {
@@ -35,6 +36,7 @@ let res=
         "broke":"Broke.png",
         "newStar_1":"newStar_icon1.png",
         "newStar_2":"newStar_icon2.png",
+        "star":"Star.png",
         "star_1001":"star/star_1001.png",
         "star_1002":"star/star_1002.png",
         "star_1003":"star/star_1003.png",
@@ -59,10 +61,11 @@ let res=
         "broke_1010":"broke/broke_1010.png",
         "broke_1011":"broke/broke_1011.png",
         "broke_1012":"broke/broke_1012.png",
-        "affair_1":"et_icon.png",
-        "affair_2":"affair_2.png",
-        "affair_3":"affair_3.png",
-        "affair_4":"affair_4.png",
+        "affair_1":"affair/affair_1.png",
+        "affair_2":"affair/affair_2.png",
+        "affair_11":"affair/affair_11.png",
+        "affair_12":"affair/affair_12.png",
+        "affair_13":"affair/affair_13.png",
     },
     "btn":
     {
@@ -74,10 +77,17 @@ let res=
         "wellDone":"wellDone_btn.png",
         "unlock":"bigBtn_bg.png",
         "normal":"btn_bg.png",
+        "bigBtn":"bigBtn_bg.png",
         "myStarList":"myStarList_btn.png",
         "exit":"exit_btn.png",
         "fix":"fix_btn.png",
         "close":"close_btn.png",
+        "bubble":"bubble.png",
+        "bar_rank":"1.png",
+        "bar_aiwan":"2.png",
+        "bar_more":"3.png",
+        "bar_audio":"4.png",
+        "ad":"盒子.png",
     },
     "item":
     {
@@ -202,8 +212,16 @@ export default class ResConfig{
         return this.GetBaseUrl() + res["bg"]["mazePanel"]
     }
 
+    static LoginPanelBg(){
+        return this.GetBaseUrl() + res["bg"]["loginPanel"]
+    }
+
     static NewStarIcon(index){
         return this.GetBaseUrl() + res["icon"]["newStar_" + index]
+    }
+
+    static FatalStarIcon(){
+        return this.GetBaseUrl() + res["icon"]["star"]
     }
 
     static GetStarIcon(id){
@@ -230,8 +248,8 @@ export default class ResConfig{
         return this.GetBaseUrl() + res["icon"]["broke_" + id]
     }
 
-    static AffairIcon(index){
-        return this.GetBaseUrl() + res["icon"]["affair_" + index];
+    static AffairIcon(type){
+        return this.GetBaseUrl() + res["icon"]["affair_" + type];
     }
 
     static ViewStarBtn(){
@@ -266,6 +284,10 @@ export default class ResConfig{
         return this.GetBaseUrl() + res["btn"]["normal"]
     }
 
+    static BigBtn(){
+        return this.GetBaseUrl() + res["btn"]["bigBtn"]
+    }
+
     static MyStarListBtn()
     {
         return this.GetBaseUrl() + res["btn"]["myStarList"]
@@ -281,5 +303,29 @@ export default class ResConfig{
 
     static CloseBtn(){
         return this.GetBaseUrl() + res["btn"]["close"]
+    }
+
+    static BubbleBtn(){
+        return this.GetBaseUrl() + res["btn"]["bubble"]
+    }
+
+    static RankBtn(){
+        return this.GetBaseUrl() + res["btn"]["bar_rank"]
+    }
+
+    static AiwanBtn(){
+        return this.GetBaseUrl() + res["btn"]["bar_aiwan"]
+    }
+
+    static MoreGameBtn(){
+        return this.GetBaseUrl() + res["btn"]["bar_more"]
+    }
+
+    static AudioBtn(){
+        return this.GetBaseUrl() + res["btn"]["bar_audio"]
+    }
+
+    static AdBtn(){
+        return this.GetBaseUrl() + res["btn"]["ad"]
     }
 }

@@ -240,9 +240,7 @@
       "__id__": 4
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "212a1d91-84f2-4ebf-9f0d-3953c4d607dc"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_sizeMode": 1,
     "_fillType": 0,
@@ -266,9 +264,7 @@
       "__id__": 3
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "9d3ec3b8-593c-4b94-85b4-3025d3cbe43c"
-    },
+    "_spriteFrame": null,
     "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -428,9 +424,7 @@
       "__id__": 7
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "8f2c28df-e084-40ca-98a8-d16abf54b290"
-    },
+    "_spriteFrame": null,
     "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -1072,9 +1066,7 @@
       "__id__": 24
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "d767548e-3c6d-499c-9eff-48c0edcdc926"
-    },
+    "_spriteFrame": null,
     "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -1118,9 +1110,7 @@
       "__id__": 21
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "8f2c28df-e084-40ca-98a8-d16abf54b290"
-    },
+    "_spriteFrame": null,
     "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -1657,9 +1647,7 @@
       "__id__": 42
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "53268734-80c3-4564-a6ad-ce3331da6ae2"
-    },
+    "_spriteFrame": null,
     "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -1721,9 +1709,7 @@
       "b": 255,
       "a": 255
     },
-    "_N$normalSprite": {
-      "__uuid__": "53268734-80c3-4564-a6ad-ce3331da6ae2"
-    },
+    "_N$normalSprite": null,
     "_N$pressedSprite": {
       "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
     },
@@ -1815,9 +1801,7 @@
       "__id__": 46
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "dbf68360-c73b-4076-a3e3-0a360bc3184c"
-    },
+    "_spriteFrame": null,
     "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -1879,9 +1863,7 @@
       "b": 255,
       "a": 255
     },
-    "_N$normalSprite": {
-      "__uuid__": "dbf68360-c73b-4076-a3e3-0a360bc3184c"
-    },
+    "_N$normalSprite": null,
     "_N$pressedSprite": {
       "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
     },
@@ -1973,9 +1955,7 @@
       "__id__": 50
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "c8b7998e-5294-42ce-af31-13e826a22f51"
-    },
+    "_spriteFrame": null,
     "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -2037,9 +2017,7 @@
       "b": 255,
       "a": 255
     },
-    "_N$normalSprite": {
-      "__uuid__": "c8b7998e-5294-42ce-af31-13e826a22f51"
-    },
+    "_N$normalSprite": null,
     "_N$pressedSprite": {
       "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
     },
@@ -2131,9 +2109,7 @@
       "__id__": 54
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "75278bd4-d4d0-4b6f-8ec0-b9afdda6c09f"
-    },
+    "_spriteFrame": null,
     "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -2195,9 +2171,7 @@
       "b": 255,
       "a": 255
     },
-    "_N$normalSprite": {
-      "__uuid__": "75278bd4-d4d0-4b6f-8ec0-b9afdda6c09f"
-    },
+    "_N$normalSprite": null,
     "_N$pressedSprite": {
       "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
     },
@@ -2320,9 +2294,7 @@
       "__id__": 59
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "8cd2ec56-3a19-4837-a129-8373a9b4692b"
-    },
+    "_spriteFrame": null,
     "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -2384,9 +2356,7 @@
       "b": 255,
       "a": 255
     },
-    "_N$normalSprite": {
-      "__uuid__": "8cd2ec56-3a19-4837-a129-8373a9b4692b"
-    },
+    "_N$normalSprite": null,
     "_N$pressedSprite": {
       "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
     },
@@ -2471,7 +2441,7 @@
       "__id__": 6
     },
     "btnEnter": {
-      "__id__": 18
+      "__id__": 11
     },
     "btnShare": {
       "__id__": 30
@@ -2481,6 +2451,24 @@
     },
     "infer": {
       "__id__": 24
+    },
+    "star": {
+      "__id__": 5
+    },
+    "btnRank": {
+      "__id__": 44
+    },
+    "btnAiWan": {
+      "__id__": 48
+    },
+    "btnMoreGame": {
+      "__id__": 52
+    },
+    "btnSound": {
+      "__id__": 56
+    },
+    "btnAd": {
+      "__id__": 61
     }
   }
 ]

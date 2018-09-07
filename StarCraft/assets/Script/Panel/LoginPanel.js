@@ -3,13 +3,21 @@ import BasePanel from 'BasePanel'
 import Databus from 'Databus'
 import EventUtil from "EventUtil"
 import StatisticManager from "StatisticManager";
+import ResourceManager from "ResourceManager";
+import ResConfig from "ResConfig";
 
 let databus = new Databus()
 cc.Class({
     extends:BasePanel,
+    properties: {
+        bg:cc.Sprite,
+        bannerBg:cc.Sprite
+    },
 
     onLoad(){
         console.log('尝试用户登录！');
+        ResourceManager.LoadRemoteSprite(this.bg, ResConfig.LoginPanelBg())
+        ResourceManager.LoadRemoteSprite(this.bannerBg, ResConfig.MazeCellLine())
         var temp = this
         var local_info = wx.getStorageSync("game_userinfo")
         console.log("local_info",local_info);

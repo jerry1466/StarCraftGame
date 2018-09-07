@@ -42,6 +42,7 @@ cc.Class({
     },
 
     onDestroy() {
+        MazeManager.GetInstance().Destroy();
         this.unRegisterEventHandler();
     },
 
@@ -62,8 +63,12 @@ cc.Class({
         EventUtil.GetInstance().AddEventListener("TriggerRob", this.onTriggerRobHandler);
         this.onTriggerGameHandler = this.triggerGameHandler.bind(this);
         EventUtil.GetInstance().AddEventListener("TriggerGame", this.onTriggerGameHandler);
+        this.onTriggerCardHandler = this.triggerCardHandler.bind(this);
+        EventUtil.GetInstance().AddEventListener("TriggerCard", this.onTriggerCardHandler);
         this.onSelectMapGridHandler = this.selectMapGridHandler.bind(this);
         EventUtil.GetInstance().AddEventListener("SelectMapGrid", this.onSelectMapGridHandler);
+        this.onShowNoticeHandler = this.showNotice.bind(this);
+        EventUtil.GetInstance().AddEventListener("MazeShowNotice", this.onShowNoticeHandler);
         this.onTouchStartHandler = this.onTouchStart.bind(this);
         this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStartHandler);
     },
@@ -73,7 +78,9 @@ cc.Class({
         EventUtil.GetInstance().RemoveEventListener("TriggerFreeze", this.onTriggerFreezeHandler);
         EventUtil.GetInstance().RemoveEventListener("TriggerRob", this.onTriggerRobHandler);
         EventUtil.GetInstance().RemoveEventListener("TriggerGame", this.onTriggerGameHandler);
+        EventUtil.GetInstance().RemoveEventListener("TriggerCard", this.onTriggerCardHandler);
         EventUtil.GetInstance().RemoveEventListener("SelectMapGrid", this.onSelectMapGridHandler);
+        EventUtil.GetInstance().RemoveEventListener("MazeShowNotice", this.onShowNoticeHandler);
         this.node.off(cc.Node.EventType.TOUCH_START, this.onTouchStartHandler);
     },
 
@@ -152,6 +159,10 @@ cc.Class({
     triggerGameHandler(affair){
         new LevelManager().PushNextLevel("Game", affair);
         new LevelManager().SwitchLevel("CutScene");
+    },
+
+    triggerCardHandler(affair){
+        ModuleManager.GetInstance().ShowModule("CardGamePanel");
     },
 
     selectMapGridHandler(){

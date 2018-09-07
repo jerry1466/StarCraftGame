@@ -14,11 +14,13 @@ cc.Class({
         bg: cc.Sprite,
         btnSearchMeteor:cc.Button,
         spSearchMeteor:cc.Sprite,
+        btnClose:cc.Button,
     },
 
     onLoad(){
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MessageBoxBg());
         ResourceManager.LoadRemoteSprite(this.spSearchMeteor, ResConfig.GameSearchMeteorBtn());
+        ResourceManager.LoadRemoteSprite(this.btnClose, ResConfig.CloseBtn());
     },
 
     update() {

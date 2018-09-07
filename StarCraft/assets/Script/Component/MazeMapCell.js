@@ -30,6 +30,7 @@ cc.Class({
         ResourceManager.LoadRemoteSprite(this.borderLeft, ResConfig.MazeCellLine());
         ResourceManager.LoadRemoteSprite(this.borderBottom, ResConfig.MazeCellLine());
         ResourceManager.LoadRemoteSprite(this.fog, ResConfig.FogIcon());
+        // this.fog.node.opacity = 0;
     },
 
     update() {
@@ -73,17 +74,18 @@ cc.Class({
             tweenAlpha.onFinishCallBack = function(){
                 that.RemoveFog();
                 doTrigger(that.affair);
+                removeIcon(that.icon);
             }
         }
         else
         {
             doTrigger(this.affair);
+            removeIcon(this.icon);
         }
 
         function doTrigger(affair){
             console.log("MazeMapCell doTrigger", affair)
             // new LevelManager().SwitchLevel("game");
-
             if(affair.type == AffairConstant.AffairEnum().REWARD)
             {
                 EventUtil.GetInstance().DispatchEvent("TriggerReward", affair)
@@ -91,7 +93,8 @@ cc.Class({
             }
             else if(affair.type == AffairConstant.AffairEnum().FREEZE)
             {
-                EventUtil.GetInstance().DispatchEvent("TriggerFreeze", affair)
+                //EventUtil.GetInstance().DispatchEvent("TriggerFreeze", affair);
+                EventUtil.GetInstance().DispatchEvent("FreeTouch");
             }
             else if(affair.type == AffairConstant.AffairEnum().ROB)
             {
@@ -101,10 +104,19 @@ cc.Class({
             {
                 EventUtil.GetInstance().DispatchEvent("TriggerGame", affair)
             }
+            else if(affair.type == AffairConstant.AffairEnum().CARD)
+            {
+                //EventUtil.GetInstance().DispatchEvent("TriggerCard", affair);
+                EventUtil.GetInstance().DispatchEvent("FreeTouch");
+            }
             else
             {
                 EventUtil.GetInstance().DispatchEvent("FreeTouch")
             }
+        }
+
+        function removeIcon(icon){
+            TweenAlpha.begin(icon, 255, 0, 1, 1);
         }
     }
 })

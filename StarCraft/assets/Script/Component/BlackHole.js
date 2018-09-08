@@ -6,6 +6,7 @@ import Databus from 'Databus'
 import FindMeteor from 'FindMeteor'
 import MathUtil from 'MathUtil'
 import TweenAlpha from "TweenAlpha"
+import BGMConfig from "BGMConfig"
 
 let databus = new Databus()
 cc.Class({
@@ -34,13 +35,7 @@ cc.Class({
 
     	var planet = FindMeteor.GetInstance().GetPlanet()
     	if (MathUtil.HitTestWithScale(this.node, planet.node)) {
-    		if (CC_WECHATGAME) {
-				this.soundChnl.play()
-    		} else {
-				cc.loader.loadRes("Audio/hitBlackHole.mp3", function (err, audio) {
-			        cc.audioEngine.play(audio, false, 1)
-			    })
-    		}
+    		BGMConfig.BgmPlay(this.soundChnl)
 			planet.ReduceLife()
 			this.is_valid = false
 			var tweenAlpha = TweenAlpha.begin(this.node, 255, 1, 0.2, 1)
@@ -54,11 +49,7 @@ cc.Class({
     Init(top, buttom, left, right) {
     	this.is_valid = false
     	this.timer = 0
-    	if (CC_WECHATGAME) {
-			this.soundChnl = wx.createInnerAudioContext()
-    		this.soundChnl.src = "https://cdn-game.2zhuji.cn/uploads/wdxq/hitBlackHole.mp3"
-    		this.soundChnl.autoplay = true
-    	}
+    	this.soundChnl = BGMConfig.BgmInit(BGMConfig.GetBgm("hitBlackHole"))
     	var height = top - buttom
 		var width = Math.abs(right - left)
 		var planet = FindMeteor.GetInstance().GetPlanet();

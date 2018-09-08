@@ -5,7 +5,8 @@
 import Databus from 'Databus'
 import FindMeteor from 'FindMeteor'
 import MathUtil from 'MathUtil'
-import EventUtil from "EventUtil";
+import EventUtil from "EventUtil"
+import BGMConfig from "BGMConfig"
 
 let databus = new Databus()
 cc.Class({
@@ -28,25 +29,15 @@ cc.Class({
 		var planet = findMeteor.GetPlanet()
 		if (MathUtil.HitTestWithScale(this.node, planet.node)) {
 			this.is_valid = false
-			if (CC_WECHATGAME) {
-				this.soundChnl.play()
-    		} else {
-				cc.loader.loadRes("Audio/collectMeteor.mp3", function (err, audio) {
-			        cc.audioEngine.play(audio, false, 1)
-			    })
-    		}
-			EventUtil.GetInstance().DispatchEvent("CatchMeteor", this);
-            planet.GetOneMeteor();
+			BGMConfig.BgmPlay(this.soundChnl)
+			EventUtil.GetInstance().DispatchEvent("CatchMeteor", this)
+            planet.GetOneMeteor()
 		}
     },
 
     Init(top, buttom, left, right) {
     	this.is_valid = false
-    	if (CC_WECHATGAME) {
-			this.soundChnl = wx.createInnerAudioContext()
-    		this.soundChnl.src = "https://cdn-game.2zhuji.cn/uploads/wdxq/collectMeteor.mp3"
-    		this.soundChnl.autoplay = true
-    	}
+    	this.soundChnl = BGMConfig.BgmInit(BGMConfig.GetBgm("collectMeteor"))
     	var height = top - buttom
 		var width = Math.abs(right - left)
 		var planet = FindMeteor.GetInstance().GetPlanet()

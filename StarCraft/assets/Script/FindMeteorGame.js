@@ -28,12 +28,13 @@ cc.Class({
     },
 
     onLoad() {
+    	console.log("game start")
         SceneManager.GetInstance().SetRoot(this.node);
         this.gameMeteorCon.Init(ResConfig.MeteorConBg());
         this.gameHpCon.Init(ResConfig.GameHpConBg());
     	//加载流星平原背景
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.FindMeteorBg())
-        var param = new LevelManager().CurrentLevelParam
+        //var param = new LevelManager().CurrentLevelParam
         this.findMeteor = FindMeteor.GetInstance()
         //根据生命值的框计算出游戏场景最上沿的坐标
         this.findMeteor.gameTop = this.gameHpCon.node.y - this.gameHpCon.node.height / 2 - 5

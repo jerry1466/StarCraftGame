@@ -28,7 +28,7 @@ cc.Class({
     	}
 
 		//黑洞在游戏开始的时候稍微停顿一下
-    	if (this.timer < 20) {
+    	if (this.timer < 50) {
 			this.timer += 1
 			return
     	}

@@ -436,7 +436,8 @@ export default class StarConfig{
     }
 
     static GetMazeCellCost(id, broke){
-        return this.GetStarBrokeList(id)[broke][3];
+    	console.log("GetMazeCellCost ", broke)
+        return this.GetStarBrokeList(id)[broke]
     }
 
     static GetBaseAffairReward(){

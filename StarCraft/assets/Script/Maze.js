@@ -139,6 +139,7 @@ cc.Class({
     },
 
     triggerRewardHandler(affair){
+    	console.log("500 reward trigger")
         databus.AddMoney(2, affair.meteor);
         ModuleManager.GetInstance().ShowModule("MeteorRewardBox", affair.meteor);
     },

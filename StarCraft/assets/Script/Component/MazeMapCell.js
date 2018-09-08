@@ -44,6 +44,7 @@ cc.Class({
     Init(row, column) {
         this.row = row;
         this.column = column;
+        this.affair_active = true;
     },
 
     InitAffair(affair){
@@ -74,45 +75,48 @@ cc.Class({
             tweenAlpha.onFinishCallBack = function(){
                 that.RemoveFog();
                 removeIcon(that.icon);
-                doTrigger(that.affair);
+                doTrigger(that);
             }
-        }
-        else
-        {
+        } else {
             removeIcon(this.icon);
-            doTrigger(this.affair);
+            doTrigger(this);
         }
 
-        function doTrigger(affair){
-            console.log("MazeMapCell doTrigger", affair)
+        function doTrigger(_this){
+            console.log("MazeMapCell doTrigger", _this.affair)
             // new LevelManager().SwitchLevel("game");
-            if(affair.type == AffairConstant.AffairEnum().REWARD)
+
+            if (!_this.affair_active) {
+				EventUtil.GetInstance().DispatchEvent("FreeTouch")
+				return
+            }
+            _this.affair_active = false
+            if(_this.affair.type == AffairConstant.AffairEnum().REWARD)
             {
-                EventUtil.GetInstance().DispatchEvent("TriggerReward", affair)
+				EventUtil.GetInstance().DispatchEvent("TriggerReward", _this.affair)
                 EventUtil.GetInstance().DispatchEvent("FreeTouch")
             }
-            else if(affair.type == AffairConstant.AffairEnum().FREEZE)
+            else if(_this.affair.type == AffairConstant.AffairEnum().FREEZE)
             {
                 //EventUtil.GetInstance().DispatchEvent("TriggerFreeze", affair);
                 EventUtil.GetInstance().DispatchEvent("FreeTouch");
             }
-            else if(affair.type == AffairConstant.AffairEnum().ROB)
+            else if(_this.affair.type == AffairConstant.AffairEnum().ROB)
             {
-                EventUtil.GetInstance().DispatchEvent("TriggerRob", affair)
+                EventUtil.GetInstance().DispatchEvent("TriggerRob", _this.affair)
             }
-            else if(affair.type == AffairConstant.AffairEnum().GAME)
+            else if(_this.affair.type == AffairConstant.AffairEnum().GAME)
             {
-                EventUtil.GetInstance().DispatchEvent("TriggerGame", affair)
+                EventUtil.GetInstance().DispatchEvent("TriggerGame", _this.affair)
+                return
             }
-            else if(affair.type == AffairConstant.AffairEnum().CARD)
+            else if(_this.affair.type == AffairConstant.AffairEnum().CARD)
             {
                 //EventUtil.GetInstance().DispatchEvent("TriggerCard", affair);
                 EventUtil.GetInstance().DispatchEvent("FreeTouch");
             }
-            else
-            {
-                EventUtil.GetInstance().DispatchEvent("FreeTouch")
-            }
+
+            EventUtil.GetInstance().DispatchEvent("FreeTouch")
         }
 
         function removeIcon(icon){

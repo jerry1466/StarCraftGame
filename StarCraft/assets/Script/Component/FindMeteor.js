@@ -67,7 +67,7 @@ export default class FindMeteor {
         this.meteorList.splice(this.meteorList.indexOf(meteor), 1);
         meteor.node.removeFromParent(true)
         meteor.node.destroy()
-		if(this.meteorList.length == 0){
+		if(this.meteorList.length == 0) {
         	this.GameOver(this.GetPlanet().GetMeteorNum());
 		}
     }
@@ -149,12 +149,9 @@ export default class FindMeteor {
     }
 
     GameOver(collectMeteorNum) {
-        ModuleManager.GetInstance().ShowModule("GameResultPanel", collectMeteorNum);
-    	this.gameOver = true;
-    }
-
-    IsGameOver() {
-		return this.gameOver
+    	console.log("show game result")
+        ModuleManager.GetInstance().ShowModule("GameResultPanel", collectMeteorNum)
+    	this.gameOver = true
     }
 
     ShowResult(win) {

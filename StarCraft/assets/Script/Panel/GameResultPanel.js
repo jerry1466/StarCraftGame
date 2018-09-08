@@ -22,6 +22,7 @@ cc.Class({
     },
 
     start(){
+    	console.log("game result panel start")
         ResourceManager.LoadRemoteSprite(this.spBg, ResConfig.GameResultPanelBg());
         ResourceManager.LoadRemoteSprite(this.btnConfirm, ResConfig.WellDoneBtn());
         this.lbNum.string = this.meteorNum.toString();

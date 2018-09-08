@@ -12,9 +12,9 @@ let res=
 		"findmeteor":"gamePanel_bg.png",
         "messagebox":"window_bg1.png",
         "starListItemBg":"starListItem_bg.png",
-        "mazeBg":"battle_bg.png",
-        "preloadBg":"battle_bg.png",
-        "cutscene":"battle_bg.png",
+        "mazeBg":"battle_bg.jpg",
+        "preloadBg":"battle_bg.jpg",
+        "cutscene":"battle_bg.jpg",
         "starListPanel":"myStar_bg.png",
         "guideDiamondBox":"window_bg3.png",
         "fixCompleteBox":"window_bg2.png",
@@ -22,7 +22,7 @@ let res=
         "mazePanel":"mazePanel_bg2.png",
         "frame":"frame.png",
         "line":"mazeLine.png",
-        "loginPanel":"圆角矩形.png",
+        // "loginPanel":"圆角矩形.png",
     },
     "icon":
     {
@@ -61,11 +61,7 @@ let res=
         "broke_1010":"broke/broke_1010.png",
         "broke_1011":"broke/broke_1011.png",
         "broke_1012":"broke/broke_1012.png",
-        "affair_1":"affair/affair_1.png",
-        "affair_2":"affair/affair_2.png",
-        "affair_11":"affair/affair_11.png",
-        "affair_12":"affair/affair_12.png",
-        "affair_13":"affair/affair_13.png",
+
     },
     "btn":
     {
@@ -77,6 +73,11 @@ let res=
         "wellDone":"wellDone_btn.png",
         "unlock":"bigBtn_bg.png",
         "normal":"btn_bg.png",
+        "affair_1":"affair/affair_1.png",
+        "affair_2":"affair/affair_2.png",
+        "affair_11":"affair/affair_11.png",
+        "affair_12":"affair/affair_12.png",
+        "affair_13":"affair/affair_13.png",
         "bigBtn":"bigBtn_bg.png",
         "myStarList":"myStarList_btn.png",
         "exit":"exit_btn.png",
@@ -87,11 +88,11 @@ let res=
         "bar_aiwan":"2.png",
         "bar_more":"3.png",
         "bar_audio":"4.png",
-        "ad":"盒子.png",
+        // "ad":"盒子.png",
     },
     "item":
     {
-        "unFreeze":"unfreeze_icon.png",
+        // "unFreeze":"unfreeze_icon.png",
     }
 }
 
@@ -201,7 +202,7 @@ export default class ResConfig{
     }
 
     static GameResultPanelBg(){
-        return this.GetBaseUrl() + res["bg"]["GameResultPanel"]
+        return this.GetBaseUrl() + res["bg"]["gameResultPanel"]
     }
 
     static MazeCellLine(){

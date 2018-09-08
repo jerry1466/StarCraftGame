@@ -157,8 +157,9 @@ cc.Class({
     },
 
     triggerGameHandler(affair){
-        new LevelManager().PushNextLevel("Game", affair);
-        new LevelManager().SwitchLevel("CutScene");
+        // new LevelManager().PushNextLevel("game", affair);
+        // new LevelManager().SwitchLevel("CutScene");
+        new LevelManager().SwitchLevel("game", affair);
     },
 
     triggerCardHandler(affair){

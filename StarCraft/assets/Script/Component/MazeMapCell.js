@@ -73,14 +73,14 @@ cc.Class({
             var that = this;
             tweenAlpha.onFinishCallBack = function(){
                 that.RemoveFog();
-                doTrigger(that.affair);
                 removeIcon(that.icon);
+                doTrigger(that.affair);
             }
         }
         else
         {
-            doTrigger(this.affair);
             removeIcon(this.icon);
+            doTrigger(this.affair);
         }
 
         function doTrigger(affair){

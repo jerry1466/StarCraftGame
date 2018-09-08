@@ -7,13 +7,20 @@ import FindMeteor from 'FindMeteor'
 import MathUtil from 'MathUtil'
 import TweenAlpha from "TweenAlpha"
 import BGMConfig from "BGMConfig"
+import ResourceManager from "ResourceManager";
+import ResConfig from "ResConfig";
 
 let databus = new Databus()
 cc.Class({
     extends: cc.Component,
     properties: {
+    	icon:cc.Sprite,
         id:0
     },
+
+	onLoad(){
+        // ResourceManager.LoadRemoteSprite(this.icon, ResConfig.BlackHoleIcon());
+	},
 
     update() {
     	if (!this.is_valid) {

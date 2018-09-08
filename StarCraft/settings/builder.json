@@ -31,10 +31,10 @@
   "webOrientation": "portrait",
   "wechatgame": {
     "REMOTE_SERVER_ROOT": "",
-    "appid": "wx1d519b37123de06b",
+    "appid": "wx3395fc5afe9b46dc",
     "isSubdomain": false,
     "orientation": "portrait",
-    "subContext": "BrickRank"
+    "subContext": ""
   },
   "xxteaKey": "39f68ff9-a8d0-4e",
   "zipCompressJs": true

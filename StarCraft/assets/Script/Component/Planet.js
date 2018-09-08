@@ -6,16 +6,20 @@ import Databus from 'Databus'
 import EventUtil from 'EventUtil'
 import MathUtil from 'MathUtil'
 import FindMeteor from 'FindMeteor'
+import ResourceManager from "ResourceManager";
+import ResConfig from "ResConfig";
 
 let databus = new Databus()
 cc.Class({
     extends: cc.Component,
     properties: {
-        id:0
+    	icon:cc.Sprite
     },
 
 	onLoad(){
-    	EventUtil.GetInstance().DispatchEvent("HpChange", this.life);
+    	console.log("======", this.icon);
+    	// ResourceManager.LoadRemoteSprite(this.icon, ResConfig.GetStarIcon(databus.userInfo.curStarId));
+        EventUtil.GetInstance().DispatchEvent("HpChange", this.life);
 	},
 
     update() {

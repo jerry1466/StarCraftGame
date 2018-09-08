@@ -5,15 +5,22 @@
 import Databus from 'Databus'
 import FindMeteor from 'FindMeteor'
 import MathUtil from 'MathUtil'
-import EventUtil from "EventUtil"
 import BGMConfig from "BGMConfig"
+import EventUtil from "EventUtil";
+import ResourceManager from "ResourceManager";
+import ResConfig from "ResConfig";
 
 let databus = new Databus()
 cc.Class({
     extends: cc.Component,
     properties: {
+    	icon:cc.Sprite,
         id:0
     },
+
+	onLoad(){
+        // ResourceManager.LoadRemoteSprite(this.icon, ResConfig.MeteorIcon());
+	},
 
     update() {
     	if (!this.is_valid) {

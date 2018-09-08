@@ -98,8 +98,10 @@ cc.Class({
             }
             else if(_this.affair.type == AffairConstant.AffairEnum().FREEZE)
             {
-                //EventUtil.GetInstance().DispatchEvent("TriggerFreeze", affair);
-                EventUtil.GetInstance().DispatchEvent("FreeTouch");
+            	console.log("xut trigger fronze")
+            	// FreeTouch事件在冰冻buff结束之后再抛出
+                EventUtil.GetInstance().DispatchEvent("TriggerFreeze", _this.affair);
+                //EventUtil.GetInstance().DispatchEvent("FreeTouch");
             }
             else if(_this.affair.type == AffairConstant.AffairEnum().ROB)
             {
@@ -112,7 +114,7 @@ cc.Class({
             }
             else if(_this.affair.type == AffairConstant.AffairEnum().CARD)
             {
-                //EventUtil.GetInstance().DispatchEvent("TriggerCard", affair);
+                //EventUtil.GetInstance().DispatchEvent("TriggerCard", _this.affair);
                 EventUtil.GetInstance().DispatchEvent("FreeTouch");
             }
 

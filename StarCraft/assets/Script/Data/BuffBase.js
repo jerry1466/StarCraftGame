@@ -12,32 +12,38 @@ export default class BuffBase{
 	static Init(){
 	    if(buffDic == null)
         {
-            buffDic = new Dictionary();
+            buffDic = new Dictionary()
         }
-	    buffDic.add(1, new HarvestBuff(1));
-	    buffDic.add(2, new FrozenBuff(2));
+        var newBuff = new HarvestBuff()
+	    buffDic.add(newBuff.name, newBuff)
+	    newBuff = new FrozenBuff()
+	    buffDic.add(newBuff.name, newBuff)
 	}
 
 	static Update(){
 		var nowTime = Date.now();
 		for(var i = buffList.length - 1; i >= 0; i--)
 		{
-			buffList[i].Update();
+			console.log("xut buff update ", buffList[i].name)
 			if(buffList[i].Timeout(nowTime))
 			{
+				console.log("xut buff update timeout", buffList[i].name, buffList[i].endTime, nowTime)
+				buffList[i].timeOutHandler()
 				this.DelBuff(buffList[i]);
 			}
 		}
 	}
 
-    static AddBuff(buffId) {
-    	var buffInstance = buffDic.find(buffId);
+    static AddBuff(buffName, timeOutHandler) {
+    	var buffInstance = buffDic.find(buffName)
+    	buffInstance.timeOutHandler = timeOutHandler
     	if(buffInstance)
 		{
             var nowTime = Date.now();
             buffList.push(buffInstance);
             buffInstance.Active(nowTime);
 		}
+		console.log("xut addbuff ", buffInstance.name)
     }
 
     static DelBuff(buffInstance) {

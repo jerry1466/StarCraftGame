@@ -139,17 +139,19 @@ cc.Class({
     },
 
     triggerRewardHandler(affair){
-    	console.log("500 reward trigger")
         databus.AddMoney(2, affair.meteor);
         ModuleManager.GetInstance().ShowModule("MeteorRewardBox", affair.meteor);
     },
 
     triggerFreezeHandler(affair){
-        EffectUtil.PlayFullScreenEffect("AffairFullScreenEffect", "freeze", this.node, cc.v2(0, 0), function(){
-            EventUtil.GetInstance().DispatchEvent("FreeTouch");
+    	BuffBase.AddBuff("frozen", function(){
+    		EventUtil.GetInstance().DispatchEvent("FreeTouch")
+    	})
+        //EffectUtil.PlayFullScreenEffect("AffairFullScreenEffect", "freeze", this.node, cc.v2(0, 0), function(){
+            //EventUtil.GetInstance().DispatchEvent("FreeTouch");
             //给玩家增加冰冻buff
-			BuffBase.AddBuff(2)
-        })
+			//BuffBase.AddBuff("frozen")
+        //})
     },
 
     triggerRobHandler(affair){

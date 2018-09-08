@@ -2,12 +2,12 @@ import BasicBuff from "BasicBuff"
 import MazeManager from "MazeManager";
 
 export default class FrozenBuff extends BasicBuff {
-    constructor(buffId) {
-		super(buffId);
+    constructor() {
+		super("frozen");
     }
 
     Active(startTime){
-		super.Active();
+		super.Active(startTime);
         MazeManager.GetInstance().frozen = true
 	}
 
@@ -15,6 +15,5 @@ export default class FrozenBuff extends BasicBuff {
         MazeManager.GetInstance().frozen = false
         super.UnActive();
     }
-
 }
 

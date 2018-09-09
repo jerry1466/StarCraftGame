@@ -8,11 +8,9 @@ export default class FrozenBuff extends BasicBuff {
 
     Active(startTime){
 		super.Active(startTime);
-        MazeManager.GetInstance().frozen = true
 	}
 
     UnActive() {
-        MazeManager.GetInstance().frozen = false
         super.UnActive();
     }
 }

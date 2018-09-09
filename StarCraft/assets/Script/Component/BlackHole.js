@@ -28,17 +28,15 @@ cc.Class({
     	}
 
 		//黑洞在游戏开始的时候稍微停顿一下
-    	if (this.timer < 50) {
-			this.timer += 1
-			return
+    	if (this.timer > 50) {
+			this.move()
     	}
+		this.timer += 1
 
     	if(FindMeteor.GetInstance().gameOver){
             FindMeteor.GetInstance().RemoveBlackHole(this);
             return;
 		}
-
-    	this.move()
 
     	var planet = FindMeteor.GetInstance().GetPlanet()
     	if (MathUtil.HitTestWithScale(this.node, planet.node)) {

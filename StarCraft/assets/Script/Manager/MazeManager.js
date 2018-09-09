@@ -20,14 +20,11 @@ export default class MazeManager{
         if(instance == null)
         {
             instance = new MazeManager();
-            instance.Init();
         }
         return instance;
     }
 
     Init(){
-        this.onFreeTouchHandler = this.onFreeTouch.bind(this);
-        EventUtil.GetInstance().AddEventListener("FreeTouch", this.onFreeTouchHandler);
     }
 
     Destroy(){
@@ -35,6 +32,11 @@ export default class MazeManager{
     }
 
     Start(container, player){
+    	//FreeTouch事件的监听之前放在Init函数里面，而Init函数在GetInstance的if语句里调用，会导致再次进入迷宫的时候没有添加事件的监听
+    	//因此把FreeTouch事件的监听放在start函数里
+	    this.onFreeTouchHandler = this.onFreeTouch.bind(this);
+        EventUtil.GetInstance().AddEventListener("FreeTouch", this.onFreeTouchHandler);
+
         this.MapReady = false;
         this.starId = databus.userInfo.curStarId;
         this.mazeConfig = MazeConfig.GetConfig(this.starId);
@@ -52,7 +54,6 @@ export default class MazeManager{
         this.container = container;
         this.player = player;
         this.loadCell(0, this, this.container);
-        this.frozen = false
     }
 
     InitAffairEventList(mazeConfig){
@@ -102,7 +103,7 @@ export default class MazeManager{
     }
 
     Move(dir) {
-        console.log("MazeManager Move======", dir, this.Stage, this.MapReady, this.TouchEnable, this.frozen);
+        console.log("MazeManager Move======", dir, this.Stage, this.MapReady, this.TouchEnable);
         if(this.Stage == STAGE_PLAYER_IN_MAP && this.MapReady && this.TouchEnable)
         {
             var row = this.player.row;
@@ -138,7 +139,7 @@ export default class MazeManager{
                     }
                     break;
             }
-            if(moveEnable && !this.frozen)
+            if(moveEnable)
             {
                 this.TouchEnable = false;
                 var tarCell = this.cells[row][column];

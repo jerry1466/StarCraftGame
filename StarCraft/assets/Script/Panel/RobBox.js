@@ -10,7 +10,7 @@ cc.Class({
         btnConfirm:cc.Button,
         lbMeteor:cc.Label,
         btnClose:cc.Button,
-        icon:cc.Sprite
+        icon:cc.Sprite,
     },
 
     onLoad(){

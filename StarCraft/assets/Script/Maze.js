@@ -147,11 +147,13 @@ cc.Class({
     	BuffBase.AddBuff("frozen", function(){
     		EventUtil.GetInstance().DispatchEvent("FreeTouch")
     	})
-        //EffectUtil.PlayFullScreenEffect("AffairFullScreenEffect", "freeze", this.node, cc.v2(0, 0), function(){
-            //EventUtil.GetInstance().DispatchEvent("FreeTouch");
+    	/*
+        EffectUtil.PlayFullScreenEffect("AffairFullScreenEffect", "freeze", this.node, cc.v2(0, 0), function(){
             //给玩家增加冰冻buff
-			//BuffBase.AddBuff("frozen")
-        //})
+			BuffBase.AddBuff("frozen", function(){
+    			EventUtil.GetInstance().DispatchEvent("FreeTouch")
+    		})
+        })*/
     },
 
     triggerRobHandler(affair){

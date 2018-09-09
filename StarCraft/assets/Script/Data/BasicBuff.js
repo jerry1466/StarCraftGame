@@ -10,7 +10,6 @@ let buffconfig = {
 
 export default class BasicBuff{
     constructor(buffName){
-    	console.log("xut buff constructor:", buffName)
         this.name = buffName;
         this.config = buffconfig[buffName]; // TODO 通过读表赋值对应的buffConfig
         this.active = false;
@@ -19,7 +18,6 @@ export default class BasicBuff{
     Active(startTime){
         this.active = true
         this.endTime = startTime + this.config["lastTime"]
-        console.log("xut ", this.name, this.endTime)
     }
 
     Update() {

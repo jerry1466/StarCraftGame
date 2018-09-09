@@ -36,6 +36,7 @@ cc.Class({
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.FindMeteorBg())
         //var param = new LevelManager().CurrentLevelParam
         this.findMeteor = FindMeteor.GetInstance()
+        this.findMeteor.gameOver = false
         //根据生命值的框计算出游戏场景最上沿的坐标
         this.findMeteor.gameTop = this.gameHpCon.node.y - this.gameHpCon.node.height / 2 - 5
         this.findMeteor.gameButtom = 0 - this.findMeteor.gameTop

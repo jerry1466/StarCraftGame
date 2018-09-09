@@ -20,8 +20,9 @@ export default class MazeManager{
         if(instance == null)
         {
             instance = new MazeManager();
-            instance.Init();
         }
+		//Init函数不能按在if里，否则再次开始迷宫的时候没有监听FreeTouch事件
+        instance.Init();
         return instance;
     }
 
@@ -52,7 +53,6 @@ export default class MazeManager{
         this.container = container;
         this.player = player;
         this.loadCell(0, this, this.container);
-        this.frozen = false
     }
 
     InitAffairEventList(mazeConfig){
@@ -102,7 +102,7 @@ export default class MazeManager{
     }
 
     Move(dir) {
-        console.log("MazeManager Move======", dir, this.Stage, this.MapReady, this.TouchEnable, this.frozen);
+        console.log("MazeManager Move======", dir, this.Stage, this.MapReady, this.TouchEnable);
         if(this.Stage == STAGE_PLAYER_IN_MAP && this.MapReady && this.TouchEnable)
         {
             var row = this.player.row;
@@ -138,7 +138,7 @@ export default class MazeManager{
                     }
                     break;
             }
-            if(moveEnable && !this.frozen)
+            if(moveEnable)
             {
                 this.TouchEnable = false;
                 var tarCell = this.cells[row][column];

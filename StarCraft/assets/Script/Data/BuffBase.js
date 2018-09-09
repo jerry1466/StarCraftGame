@@ -24,10 +24,8 @@ export default class BuffBase{
 		var nowTime = Date.now();
 		for(var i = buffList.length - 1; i >= 0; i--)
 		{
-			console.log("xut buff update ", buffList[i].name)
 			if(buffList[i].Timeout(nowTime))
 			{
-				console.log("xut buff update timeout", buffList[i].name, buffList[i].endTime, nowTime)
 				buffList[i].timeOutHandler()
 				this.DelBuff(buffList[i]);
 			}
@@ -43,7 +41,6 @@ export default class BuffBase{
             buffList.push(buffInstance);
             buffInstance.Active(nowTime);
 		}
-		console.log("xut addbuff ", buffInstance.name)
     }
 
     static DelBuff(buffInstance) {

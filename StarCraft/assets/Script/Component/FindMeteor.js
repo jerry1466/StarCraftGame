@@ -150,8 +150,8 @@ export default class FindMeteor {
 
     GameOver(collectMeteorNum) {
     	console.log("show game result")
-        ModuleManager.GetInstance().ShowModule("GameResultPanel", collectMeteorNum)
     	this.gameOver = true
+        ModuleManager.GetInstance().ShowModule("GameResultPanel", collectMeteorNum)
     }
 
     ShowResult(win) {

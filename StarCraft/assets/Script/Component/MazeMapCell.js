@@ -85,23 +85,21 @@ cc.Class({
         function doTrigger(_this){
             console.log("MazeMapCell doTrigger", _this.affair)
             // new LevelManager().SwitchLevel("game");
-
             if (!_this.affair_active) {
 				EventUtil.GetInstance().DispatchEvent("FreeTouch")
 				return
             }
+
             _this.affair_active = false
             if(_this.affair.type == AffairConstant.AffairEnum().REWARD)
             {
 				EventUtil.GetInstance().DispatchEvent("TriggerReward", _this.affair)
-                EventUtil.GetInstance().DispatchEvent("FreeTouch")
             }
             else if(_this.affair.type == AffairConstant.AffairEnum().FREEZE)
             {
-            	console.log("xut trigger fronze")
             	// FreeTouch事件在冰冻buff结束之后再抛出
-                EventUtil.GetInstance().DispatchEvent("TriggerFreeze", _this.affair);
-                //EventUtil.GetInstance().DispatchEvent("FreeTouch");
+                EventUtil.GetInstance().DispatchEvent("TriggerFreeze", _this.affair)
+                return
             }
             else if(_this.affair.type == AffairConstant.AffairEnum().ROB)
             {
@@ -115,7 +113,6 @@ cc.Class({
             else if(_this.affair.type == AffairConstant.AffairEnum().CARD)
             {
                 //EventUtil.GetInstance().DispatchEvent("TriggerCard", _this.affair);
-                EventUtil.GetInstance().DispatchEvent("FreeTouch");
             }
 
             EventUtil.GetInstance().DispatchEvent("FreeTouch")

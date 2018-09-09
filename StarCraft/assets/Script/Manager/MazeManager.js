@@ -21,14 +21,10 @@ export default class MazeManager{
         {
             instance = new MazeManager();
         }
-		//Init函数不能按在if里，否则再次开始迷宫的时候没有监听FreeTouch事件
-        instance.Init();
         return instance;
     }
 
     Init(){
-        this.onFreeTouchHandler = this.onFreeTouch.bind(this);
-        EventUtil.GetInstance().AddEventListener("FreeTouch", this.onFreeTouchHandler);
     }
 
     Destroy(){
@@ -36,6 +32,11 @@ export default class MazeManager{
     }
 
     Start(container, player){
+    	//FreeTouch事件的监听之前放在Init函数里面，而Init函数在GetInstance的if语句里调用，会导致再次进入迷宫的时候没有添加事件的监听
+    	//因此把FreeTouch事件的监听放在start函数里
+	    this.onFreeTouchHandler = this.onFreeTouch.bind(this);
+        EventUtil.GetInstance().AddEventListener("FreeTouch", this.onFreeTouchHandler);
+
         this.MapReady = false;
         this.starId = databus.userInfo.curStarId;
         this.mazeConfig = MazeConfig.GetConfig(this.starId);

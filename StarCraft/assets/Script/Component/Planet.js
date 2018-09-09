@@ -38,7 +38,7 @@ cc.Class({
             this.node.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMoveHandler);
             this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
             this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
-			FindMeteor.GetInstance().GameOver(this.GetMeteorNum());
+			FindMeteor.GetInstance().GameOver();
 		}
     },
 
@@ -47,7 +47,6 @@ cc.Class({
     	this.node.y = 0
     	this.is_valid = true
 		this.life = databus.gameMaxHp;
-		this.meteorNum = 0
 		this.node.zIndex = 100
 
 		this.onTouchStartHandler = this.onTouchStart.bind(this)
@@ -87,13 +86,8 @@ cc.Class({
 	},
 
     GetOneMeteor() {
-		this.meteorNum += 1
 		this.node.scaleX += 0.05
 		this.node.scaleY += 0.05
-    },
-
-    GetMeteorNum() {
-		return this.meteorNum
     },
 
 	ReduceLife() {

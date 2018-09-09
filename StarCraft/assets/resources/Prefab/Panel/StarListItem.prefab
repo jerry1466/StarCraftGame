@@ -150,9 +150,7 @@
       "__id__": 2
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "84d17c2e-2be7-4c5e-aa40-71a8d334b3f0"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -472,8 +470,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 144,
-      "height": 36
+      "width": 96,
+      "height": 24
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -500,9 +498,9 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 36,
-    "_fontSize": 36,
-    "_lineHeight": 36,
+    "_actualFontSize": 24,
+    "_fontSize": 24,
+    "_lineHeight": 24,
     "_enableWrapText": true,
     "_N$file": null,
     "_isSystemFontUsed": true,
@@ -676,9 +674,7 @@
       "__id__": 20
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "95a01207-8a87-40ce-a647-87238981f8d6"
-    },
+    "_spriteFrame": null,
     "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -740,9 +736,7 @@
       "b": 255,
       "a": 255
     },
-    "_N$normalSprite": {
-      "__uuid__": "95a01207-8a87-40ce-a647-87238981f8d6"
-    },
+    "_N$normalSprite": null,
     "_N$pressedSprite": {
       "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
     },
@@ -1052,9 +1046,7 @@
       "__id__": 30
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "b9a7de41-c3cf-4767-8fae-0f16ead9ddae"
-    },
+    "_spriteFrame": null,
     "_type": 0,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -1187,9 +1179,7 @@
       "__id__": 25
     },
     "_enabled": true,
-    "_spriteFrame": {
-      "__uuid__": "fe5d2c2f-5727-4f79-919b-4941663d3656"
-    },
+    "_spriteFrame": null,
     "_type": 1,
     "_sizeMode": 0,
     "_fillType": 0,
@@ -1251,9 +1241,7 @@
       "b": 255,
       "a": 255
     },
-    "_N$normalSprite": {
-      "__uuid__": "810b192d-b135-4d91-9685-a2c7f5b311c4"
-    },
+    "_N$normalSprite": null,
     "_N$pressedSprite": {
       "__uuid__": "e9ec654c-97a2-4787-9325-e6a10375219a"
     },
@@ -1345,9 +1333,6 @@
     },
     "btnView": {
       "__id__": 22
-    },
-    "btnUnlock": {
-      "__id__": 38
     }
   },
   {

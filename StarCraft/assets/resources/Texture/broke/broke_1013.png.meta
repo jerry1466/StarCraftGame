@@ -1,14 +1,14 @@
 {
   "ver": "1.0.0",
-  "uuid": "df3401a8-055e-47bd-b3cd-b0ea5f056828",
+  "uuid": "f6c801fe-dea1-469b-843e-393d3dbd130c",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "再玩一次": {
+    "broke_1013": {
       "ver": "1.0.3",
-      "uuid": "d21a59f6-08e1-4b85-a9d3-6d588584a303",
-      "rawTextureUuid": "df3401a8-055e-47bd-b3cd-b0ea5f056828",
+      "uuid": "281f3bb3-8241-4b52-88e7-d94dd506404a",
+      "rawTextureUuid": "f6c801fe-dea1-469b-843e-393d3dbd130c",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
@@ -16,10 +16,10 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 471,
-      "height": 112,
-      "rawWidth": 471,
-      "rawHeight": 112,
+      "width": 103,
+      "height": 96,
+      "rawWidth": 103,
+      "rawHeight": 96,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,

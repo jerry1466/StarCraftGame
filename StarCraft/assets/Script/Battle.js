@@ -2,7 +2,6 @@
  * 主星球场景
  * @author lijun
  **/
-import GameInfo from 'GameInfo'
 import EventUtil from 'EventUtil'
 import MoneyUtil from 'MoneyUtil'
 import Databus from 'Databus'
@@ -56,6 +55,7 @@ cc.Class({
         this.meteorCon.Init(ResConfig.ConBg());
         this.meteorCon.SetCoinType(2);
         this.fixCostCon.Init(ResConfig.FixConBg());
+        this.fixCostCon.SetCoinType(2);
         this.registerEventHandler();
     },
 

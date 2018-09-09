@@ -30,7 +30,6 @@ cc.Class({
         ResourceManager.LoadRemoteSprite(this.borderLeft, ResConfig.MazeCellLine());
         ResourceManager.LoadRemoteSprite(this.borderBottom, ResConfig.MazeCellLine());
         ResourceManager.LoadRemoteSprite(this.fog, ResConfig.FogIcon());
-        // this.fog.node.opacity = 0;
     },
 
     update() {
@@ -60,6 +59,10 @@ cc.Class({
 
     GetAffair(){
         return this.affair;
+    },
+
+    ClearAffair(){
+        this.affair.type = AffairConstant.AffairEnum().NONE;
     },
 
     RemoveFog(){
@@ -118,10 +121,12 @@ cc.Class({
                 EventUtil.GetInstance().DispatchEvent("FreeTouch");
             }
 
-            EventUtil.GetInstance().DispatchEvent("FreeTouch")
+            EventUtil.GetInstance().DispatchEvent("FreeTouch");
+            _this.ClearAffair();
         }
 
         function removeIcon(icon){
+            console.log("removeIcon");
             TweenAlpha.begin(icon, 255, 0, 1, 1);
         }
     }

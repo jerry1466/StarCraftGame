@@ -31,6 +31,11 @@ export default class FindMeteor {
         return instance
     }
 
+    Destroy(){
+    	this.gameOver = false;
+        this.totalCollectMeteor = 0;
+	}
+
 	CreatePlanet(component, callback) {
 		var _this = this
 		
@@ -68,7 +73,7 @@ export default class FindMeteor {
         meteor.node.removeFromParent(true)
         meteor.node.destroy()
 		if(this.meteorList.length == 0) {
-        	this.GameOver(this.GetPlanet().GetMeteorNum());
+        	this.GameOver();
 		}
     }
 
@@ -136,6 +141,14 @@ export default class FindMeteor {
 		}
 	}
 
+    AddCollectMeteor(meteorNum){
+    	if(this.totalCollectMeteor == null)
+		{
+            this.totalCollectMeteor = 0;
+		}
+        this.totalCollectMeteor += meteorNum;
+	}
+
     loadRes(resName, callback) {
         PrefabUtil.GetPrefabInstance(resName, function(success, instance){
             if(success)
@@ -148,14 +161,13 @@ export default class FindMeteor {
         })
     }
 
-    GameOver(collectMeteorNum) {
-    	console.log("show game result")
-        ModuleManager.GetInstance().ShowModule("GameResultPanel", collectMeteorNum)
-    	this.gameOver = true
-    }
-
-    ShowResult(win) {
-		ModuleManager.GetInstance().ShowModule("GameResultPanel", true)
+    GameOver() {
+    	if(this.gameOver)
+		{
+			return;
+		}
+        this.gameOver = true
+        ModuleManager.GetInstance().ShowModule("GameResultPanel", this.totalCollectMeteor)
     }
 }
 

@@ -5,7 +5,6 @@
 import UnitManager from "UnitManager";
 import Databus from 'Databus'
 import MissionConfig from "MissionConfig"
-import GameInfo from "GameInfo"
 import Cd from "Cd"
 import EventUtil from "EventUtil"
 

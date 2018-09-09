@@ -62,6 +62,7 @@ cc.Class({
     },
 
     onDestroy() {
+	    this.findMeteor.Destroy();
         this.unRegisterEventHandler();
     },
 
@@ -78,7 +79,6 @@ cc.Class({
     },
 
     start() {
-	    this.totalCollectMeteor = 0;
 	    this.gameMeteorCon.UpdateCoin(0);
     },
 
@@ -90,10 +90,10 @@ cc.Class({
         var tweenPosition = TweenPosition.begin(meteor.node, meteor.node.position, this.gameMeteorCon.node.position, 0.3);
         tweenPosition.onFinishCallBack = function() {
             var findMeteor = FindMeteor.GetInstance();
+            that.findMeteor.AddCollectMeteor(meteorNum);
             findMeteor.RemoveMeteor(meteor);
             findMeteor.ChangeBlackHoleSpeed();
-            that.totalCollectMeteor += meteorNum;
-            that.gameMeteorCon.UpdateCoin(that.totalCollectMeteor, true);
+            that.gameMeteorCon.UpdateCoin(that.findMeteor.totalCollectMeteor, true);
         }
     },
 

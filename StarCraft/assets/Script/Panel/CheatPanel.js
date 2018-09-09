@@ -7,6 +7,8 @@ import Databus from 'Databus';
 import ModuleManager from "ModuleManager";
 import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig";
+import LevelManager from "LevelManager";
+import Affair from "Affair";
 
 let databus = new Databus();
 cc.Class({
@@ -45,7 +47,8 @@ cc.Class({
     },
 
     onConfirm(){
-        var content = this.ebGm.string
+        var content = this.ebGm.string;
+        console.log("onConfirm", content);
         this.execute(content);
     },
 
@@ -65,6 +68,12 @@ cc.Class({
             case "Meteor":
                 var num = parseInt(splits[1], 10);
                 databus.AddMoney(2, num);
+                break;
+            case "game":
+                var affair = new Affair();
+                affair.type = 11;
+                affair.meteor = 100;
+                new LevelManager().SwitchLevel("game", affair);
                 break;
         }
     }

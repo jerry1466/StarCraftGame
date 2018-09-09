@@ -7,7 +7,7 @@
   "subMetas": {
     "broke_1009": {
       "ver": "1.0.3",
-      "uuid": "3b369259-18aa-4399-8ba2-bc8f9313ebd5",
+      "uuid": "827f6128-eb7d-48e1-9ea1-3b507af14540",
       "rawTextureUuid": "34afdafe-c6dd-4bad-8b61-c6d3b8f1ec95",
       "trimType": "auto",
       "trimThreshold": 1,
@@ -16,10 +16,10 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 117,
-      "height": 99,
-      "rawWidth": 117,
-      "rawHeight": 99,
+      "width": 111,
+      "height": 115,
+      "rawWidth": 111,
+      "rawHeight": 115,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,

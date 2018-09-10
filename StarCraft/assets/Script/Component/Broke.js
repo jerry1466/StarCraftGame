@@ -52,6 +52,7 @@ cc.Class({
                 {
                     highLightShader.destroy();
                 }
+                ShaderUtil.RollBackNormal(this.icon);
             }
         }
     },

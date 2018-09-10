@@ -6,7 +6,7 @@ import ShaderUtil from "ShaderUtil";
 
 let highLightShader = {
     vShader: "attribute vec4 a_position; \nattribute vec2 a_texCoord; \nattribute vec4 a_color; \nvarying vec4 v_fragmentColor;\nvarying vec2 v_texCoord;\nvoid main() \n{ \ngl_Position = CC_PMatrix * a_position;\nv_fragmentColor = a_color;\nv_texCoord = a_texCoord;\n}",
-    fShader: "uniform float time;\nvarying vec4 v_fragmentColor; \nvarying vec2 v_texCoord; \n//uniform sampler2D CC_Texture0; \nvoid main() \n{ \nvec4 v_orColor = v_fragmentColor * texture2D(CC_Texture0, v_texCoord);\nfloat gray = dot(v_orColor.rgb, vec3(0.8, 0.9, 0.85));\ngl_FragColor = vec4(v_orColor.r+time, v_orColor.g+time, v_orColor.b+time, v_orColor.a+0.015);\n}"
+    fShader: "varying vec4 v_fragmentColor; \nvarying vec2 v_texCoord; \n//uniform sampler2D CC_Texture0; \nvoid main() \n{ \nvec4 v_orColor = v_fragmentColor * texture2D(CC_Texture0, v_texCoord);\nfloat gray = dot(v_orColor.rgb, vec3(0.8, 0.9, 0.85));\ngl_FragColor = vec4(v_orColor.r+0.38, v_orColor.g+0.38, v_orColor.b+0.38, v_orColor.a+0.015);\n}"
 };
 
 cc.Class({
@@ -37,7 +37,7 @@ cc.Class({
     },
 
     onDestroy() {
-        ShaderUtil.RollBackNormal(this.sprite);
+
     },
 
     onLoad() {

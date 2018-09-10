@@ -77,11 +77,15 @@ cc.Class({
             var that = this;
             tweenAlpha.onFinishCallBack = function(){
                 that.RemoveFog();
-                removeIcon(that.icon);
+                if(that.affair.type != AffairConstant.AffairEnum().NONE){
+                    removeIcon(that.icon);
+                }
                 doTrigger(that);
             }
         } else {
-            removeIcon(this.icon);
+            if(this.affair.type != AffairConstant.AffairEnum().NONE) {
+                removeIcon(this.icon);
+            }
             doTrigger(this);
         }
 
@@ -123,8 +127,12 @@ cc.Class({
         }
 
         function removeIcon(icon){
-            console.log("removeIcon");
-            TweenAlpha.begin(icon, 255, 0, 1, 1);
+            var tweenAlpha = TweenAlpha.begin(icon, 255, 0, 1, 1);
+            tweenAlpha.onFinishCallBack = function()
+            {
+                icon.node.removeFromParent();
+                icon.node.destroy();
+            }
         }
     }
 })

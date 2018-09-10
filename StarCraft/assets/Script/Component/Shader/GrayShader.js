@@ -17,7 +17,7 @@ cc.Class({
     },
 
     onDestroy() {
-        ShaderUtil.RollBackNormal(this.sprite);
+
     },
 
     onLoad() {

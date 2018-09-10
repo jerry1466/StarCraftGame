@@ -498,8 +498,8 @@
     "target": {
       "__id__": 1
     },
-    "component": "MessageBox",
-    "handler": "OnConfirm",
+    "component": "RobBox",
+    "handler": "onConfirm",
     "customEventData": ""
   },
   {

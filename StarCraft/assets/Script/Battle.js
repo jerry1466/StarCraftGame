@@ -19,15 +19,14 @@ import StarModel from 'StarModel';
 import UnitManager from "UnitManager";
 import ResourceManager from "ResourceManager";
 import ResConfig from 'ResConfig';
-import StarConfig from "StarConfig";
 import Coin from 'Coin'
 import UIUtil from "UIUtil";
+import BGMConfig from "BGMConfig";
 
 let databus = new Databus()
 cc.Class({
     extends: cc.Component,
     properties: {
-        bgm: cc.AudioSource,
         bg:cc.Sprite,
         meteorCon:Coin,
         fixCon:cc.Node,
@@ -104,8 +103,6 @@ cc.Class({
     },
 
     start() {
-        // if(databus.soundEnable) this.bgm.play();
-        this.bgm.stop();
         this.refreshStar();
     },
 
@@ -164,7 +161,8 @@ cc.Class({
     },
 
     refreshStar(){
-        this.star.Switch()
+        this.star.Switch();
+        EventUtil.GetInstance().DispatchEvent("SwitchBgMusic", BGMConfig.GetStarBgm(databus.userInfo.curStarId));
     },
 
     setFixRelatedBroke(broke){

@@ -2,6 +2,7 @@ import Databus from "Databus"
 import EventUtil from "EventUtil";
 import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig";
+import ShaderUtil from "ShaderUtil";
 
 let databus = new Databus();
 cc.Class({
@@ -13,6 +14,7 @@ cc.Class({
     onLoad(){
         this.icon = this.node.getComponent(cc.Sprite);
         ResourceManager.LoadRemoteSprite(this.icon, ResConfig.BrokeIcon(databus.userInfo.curStarId));
+        this.refresh();
     },
 
     update(){
@@ -28,7 +30,29 @@ cc.Class({
         this._select = value;
         if(value)
         {
-            EventUtil.GetInstance().DispatchEvent("SetFixRelatedBroke", this)
+            EventUtil.GetInstance().DispatchEvent("SetFixRelatedBroke", this);
+        }
+        this.refresh();
+    },
+
+    refresh(){
+        if(this.icon)
+        {
+            var highLightShader = this.icon.node.getComponent("HighLightShader");
+            if(this._select)
+            {
+                if(highLightShader == null)
+                {
+                    this.icon.node.addComponent("HighLightShader");
+                }
+            }
+            else
+            {
+                if(highLightShader != null)
+                {
+                    highLightShader.destroy();
+                }
+            }
         }
     },
 

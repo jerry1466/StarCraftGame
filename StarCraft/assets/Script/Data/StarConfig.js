@@ -431,6 +431,10 @@ export default class StarConfig{
         return data[id.toString()];
     }
 
+    static IsMaxStarId(id){
+        return 1030 == parseInt(id);
+    }
+
     static GetStarBrokeList(id){
         return data[id.toString()]["broke"]
     }

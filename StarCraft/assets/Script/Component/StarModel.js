@@ -105,7 +105,11 @@ cc.Class({
             {
                 databus.userInfo.brokeFixIndex += 1;
                 EventUtil.GetInstance().DispatchEvent("SetFixRelatedBroke", null);
-                ModuleManager.GetInstance().ShowModule("FixCompleteBox", databus.userInfo.curStarId);
+                if(!StarConfig.IsMaxStarId(curStarId))
+                {
+                    databus.userInfo.maxStarId = curStarId + 1;
+                }
+                ModuleManager.GetInstance().ShowModule("FixCompleteBox", curStarId);
             }
         }
 

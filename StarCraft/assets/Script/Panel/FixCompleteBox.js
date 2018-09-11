@@ -7,7 +7,7 @@ import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig"
 import BasePanel from "BasePanel"
 import Databus from "Databus"
-import TweenAlpha from "TweenAlpha"
+import StarConfig from "StarConfig";
 
 let databus = new Databus();
 cc.Class({
@@ -16,32 +16,27 @@ cc.Class({
         bg: cc.Sprite,
         star:cc.Sprite,
         btnNext:cc.Button,
-        spNext:cc.Sprite,
-        newStarFlag:cc.Sprite,
         btnClose:cc.Button,
     },
 
     onLoad(){
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.FixCompleteBoxBg());
-        ResourceManager.LoadRemoteSprite(this.spNext, ResConfig.NextStarBtn());
+        ResourceManager.LoadRemoteSprite(this.btnNext, ResConfig.NextStarBtn());
         ResourceManager.LoadRemoteSprite(this.btnClose, ResConfig.CloseBtn());
     },
 
     start(){
         ResourceManager.LoadRemoteSprite(this.star, ResConfig.GetStarIcon(this.curStarId));
-        if(this.curStarId <= 1015)
+        if(this.isFinalStar)
         {
-            ResourceManager.LoadRemoteSprite(this.newStarFlag, ResConfig.NewStarIcon(1));
+            this.btnNext.node.active = false;
+            this.btnClose.node.active = true;
         }
         else
         {
-            ResourceManager.LoadRemoteSprite(this.newStarFlag, ResConfig.NewStarIcon(2));
+            this.btnNext.node.active = true;
+            this.btnClose.node.active = false;
         }
-        this.newStarFlag.node.opacity = 255;
-        var that = this;
-        setTimeout(function(){
-            TweenAlpha.begin(that.newStarFlag.node, 255, 0, 0.5, 1);
-        }, 1000)
     },
 
     update() {
@@ -55,14 +50,15 @@ cc.Class({
 
     Init(curStarId) {
         this.curStarId = curStarId
+        this.isFinalStar = StarConfig.IsMaxStarId(curStarId);
     },
 
     onNext(){
         ModuleManager.GetInstance().HideModule("FixCompleteBox");
-        ModuleManager.GetInstance().ShowModule("StarListPanel");
+        ModuleManager.GetInstance().ShowModule("NewStarPanel", this.curStarId + 1);
     },
 
     onClose(){
         ModuleManager.GetInstance().HideModule("FixCompleteBox");
-    },
+    }
 })    

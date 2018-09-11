@@ -103,7 +103,6 @@ export default class MazeManager{
     }
 
     Move(dir) {
-        console.log("MazeManager Move======", dir, this.Stage, this.MapReady, this.TouchEnable);
         if(this.Stage == STAGE_PLAYER_IN_MAP && this.MapReady && this.TouchEnable)
         {
             var row = this.player.row;
@@ -173,7 +172,6 @@ export default class MazeManager{
                     instance.active = true;
                     var mazeCell = instance.getComponent("MazeMapCell");
                     mazeCell.Init(row, column);
-                    console.log("loadCell====", row * temp.mazeCol + column, temp.affairEventList[row * temp.mazeCol + column]);
                     mazeCell.InitAffair(temp.createAffair(temp.affairEventList[row * temp.mazeCol + column]));
                     temp.cells[row][column] = mazeCell;
                     temp.loadCell(index + 1, temp, container);

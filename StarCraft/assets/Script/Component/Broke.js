@@ -13,7 +13,6 @@ cc.Class({
 
     onLoad(){
         this.icon = this.node.getComponent(cc.Sprite);
-        ResourceManager.LoadRemoteSprite(this.icon, ResConfig.BrokeIcon(databus.userInfo.curStarId));
         this.refresh();
     },
 
@@ -38,6 +37,7 @@ cc.Class({
     refresh(){
         if(this.icon)
         {
+            ResourceManager.LoadRemoteSprite(this.icon, ResConfig.BrokeIcon(databus.userInfo.curStarId));
             var highLightShader = this.icon.node.getComponent("HighLightShader");
             if(this._select)
             {

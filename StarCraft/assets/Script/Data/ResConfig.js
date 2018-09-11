@@ -23,6 +23,7 @@ let res=
         "frame":"frame.png",
         "line":"mazeLine.png",
         "loginPanel":"loginPanel_bg.png",
+        "guideCircle":"Star.png",
     },
     "icon":
     {
@@ -250,6 +251,10 @@ export default class ResConfig{
 
     static LoginPanelBg(){
         return this.GetBaseUrl() + res["bg"]["loginPanel"]
+    }
+
+    static GuideCircle(){
+        return this.GetBaseUrl() + res["bg"]["guideCircle"]
     }
 
     static NewStarIcon(index){

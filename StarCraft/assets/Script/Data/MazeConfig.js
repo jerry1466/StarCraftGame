@@ -45,6 +45,231 @@ let data =
             "ice game":3,
             "cards":3,
         },
+    "1006":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1007":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1008":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1009":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1010":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1011":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1012":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1013":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1014":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1015":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1016":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1017":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1018":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1019":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1020":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1021":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1022":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1023":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1024":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1025":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1026":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1027":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1028":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1029":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
+    "1030":
+        {
+            "row":14,
+            "column":9,
+            "get star":16,
+            "star game":3,
+            "ice game":3,
+            "cards":3,
+        },
 }
 
 export default class MazeConfig{

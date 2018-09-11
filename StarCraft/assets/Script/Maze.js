@@ -145,7 +145,7 @@ cc.Class({
 
     triggerFreezeHandler(affair){
     	BuffBase.AddBuff("frozen", function(){
-    		EventUtil.GetInstance().DispatchEvent("FreeTouch")
+    		EventUtil.GetInstance().DispatchEvent("FreeTouch");
     	})
     	/*
         EffectUtil.PlayFullScreenEffect("AffairFullScreenEffect", "freeze", this.node, cc.v2(0, 0), function(){

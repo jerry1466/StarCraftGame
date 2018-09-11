@@ -17,8 +17,7 @@ cc.Class({
     },
 
 	onLoad(){
-    	console.log("======", this.icon);
-    	// ResourceManager.LoadRemoteSprite(this.icon, ResConfig.GetStarIcon(databus.userInfo.curStarId));
+    	ResourceManager.LoadRemoteSprite(this.icon, ResConfig.GetStarIcon(databus.userInfo.curStarId));
         EventUtil.GetInstance().DispatchEvent("HpChange", this.life);
 	},
 

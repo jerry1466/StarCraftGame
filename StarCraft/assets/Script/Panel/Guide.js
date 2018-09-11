@@ -4,18 +4,34 @@
  **/
 import BasePanel from 'BasePanel'
 import Databus from 'Databus'
-import TweenAlpha from 'TweenAlpha'
-import PrefabUtil from "../Lib/PrefabUtil";
+import TweenScale from 'TweenScale'
+import ResourceManager from "ResourceManager";
+import ResConfig from "ResConfig";
 
 let databus = new Databus()
 
 cc.Class({
     extends: BasePanel,
     properties: {
-        lbContent: {
-            default: null,
-            type: cc.Label
-        }
+        bgContent:cc.Sprite,
+        lbContent: cc.Label,
+        circleNode:cc.Node,
+    },
+
+    onLoad(){
+        ResourceManager.LoadRemoteSprite(this.bgContent, ResConfig.BigBtn());
+        ResourceManager.LoadRemoteSprite(this.circleNode, ResConfig.GuideCircle());
+        this.node.width = this.node.height = 10000;
+        this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchBg, this);
+    },
+
+    start(){
+        this.lbContent.string = this.guideConfig["text"];
+        this.notice();
+    },
+
+    notice(){
+        TweenScale.begin(this.circleNode, cc.v2(3, 3), cc.v2(1, 1), 0.2, 1);
     },
 
     update() {
@@ -26,82 +42,23 @@ cc.Class({
         databus.gamePause = false
     },
 
-
-    Init(index) {
-        if(index == 1)
-        {
-            var _this = this
-            PrefabUtil.GetPrefabInstance("GuideFrame", function(success, instance){
-                if(success)
-                {
-                    instance.parent = _this.node
-                    instance.width = (databus.gameRegion.x - databus.wallWidth) * 0.5// - ((databus.screenWidth - databus.gameRegion.x) * 0.5)
-                    instance.height = databus.gameRegion.y + 30
-                    instance.x = instance.width * 0.5 + 0.5 * databus.wallWidth
-                    instance.y = 0.5 * databus.adHeight
-                    var tweenAlpha = TweenAlpha.begin(instance, 255, 20, 20, 30)
-                    tweenAlpha.onFinishCallBack = function()
-                    {
-                        instance.active = false
-                    }
-                }
-            })
-
-            var hand = new cc.Node();
-            hand.name = 'HandAnim';
-
-            hand.addComponent(cc.Sprite);
-            hand.parent = this.node;
-            hand.x = databus.gameRegion.x * 0.25
-
-            var animation = hand.addComponent(cc.Animation);
-
-            /* 添加SpriteFrame到frames数组 */
-            var frames = [];
-            frames[0] = new cc.SpriteFrame(cc.url.raw('resources/AnimClip/hand_1.png'));
-            frames[1] = new cc.SpriteFrame(cc.url.raw('resources/AnimClip/hand_2.png'));
-            frames[2] = new cc.SpriteFrame(cc.url.raw('resources/AnimClip/hand_3.png'));
-
-            var clip = cc.AnimationClip.createWithSpriteFrames(frames, 3);
-            clip.name = 'click';
-            clip.wrapMode = cc.WrapMode.Loop;
-
-            animation.addClip(clip);
-            clip.y = -150;
-            animation.play('click');
-
-            this.lbContent.string = "点击屏幕，控制木条撞向花盆"
+    onTouchBg(event){
+        let point = event.getLocation();
+        let retWord = this.circleNode.getBoundingBoxToWorld();
+        let space = 40;
+        retWord.width -= space;
+        retWord.width = retWord.width <= 0 ? 0 : retWord.width;
+        retWord.height -= space;
+        retWord.height = retWord.height <= 0 ? 0 : retWord.height;
+        if (retWord.contains(point)) {
+            this.node._touchListener.setSwallowTouches(false);
+        } else {
+            this.node._touchListener.setSwallowTouches(true);
+            this.notice();
         }
-        else if(index == 2)
-        {
-            this.lbContent.string = "把花盆撞到对方区域内\n获得胜利"
-        }
-        else if(index == 3)
-        {
-            var hand = new cc.Node();
-            hand.name = 'HandAnim';
+    },
 
-            hand.addComponent(cc.Sprite);
-            hand.parent = this.node;
-            hand.y = databus.gameRegion.y * 0.5 - 30;
-            hand.x = databus.gameRegion.x * 0.4 + 30;
-
-            var animation = hand.addComponent(cc.Animation);
-
-            /* 添加SpriteFrame到frames数组 */
-            var frames = [];
-            frames[0] = new cc.SpriteFrame(cc.url.raw('resources/AnimClip/hand_1.png'));
-            frames[1] = new cc.SpriteFrame(cc.url.raw('resources/AnimClip/hand_2.png'));
-            frames[2] = new cc.SpriteFrame(cc.url.raw('resources/AnimClip/hand_3.png'));
-
-            var clip = cc.AnimationClip.createWithSpriteFrames(frames, 3);
-            clip.name = 'click';
-            clip.wrapMode = cc.WrapMode.Loop;
-
-            animation.addClip(clip);
-            animation.play('click');
-
-            this.lbContent.string = "使用道具可以获得使美女\n" + (databus.freezeDuration / 1000) + "秒内处于麻痹状态\n道具还可通过分享到不同群来获得"
-        }
+    Init(guideConfig) {
+        this.guideConfig = guideConfig;
     }
 })    

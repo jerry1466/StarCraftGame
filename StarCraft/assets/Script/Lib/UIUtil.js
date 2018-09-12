@@ -1,6 +1,5 @@
 import ModuleManager from "ModuleManager"
 import TweenPosition from "TweenPosition"
-import TweenScale from "TweenScale"
 import TweenAlpha from "TweenAlpha"
 import ResConfig from "ResConfig";
 import SceneManager from "SceneManager";
@@ -25,7 +24,7 @@ export default class UIUtil {
         var rootChildNum = root.childrenCount;
         for(var i = 0; i < rootChildNum; i++)
         {
-            var node = this.FindNodeRecursion(root.children[i]);
+            var node = this.FindNodeRecursion(root.children[i], nodeName);
             if(node != null)
             {
                 return node;
@@ -72,8 +71,19 @@ export default class UIUtil {
         return coord
     }
 
+    static ToCanvasCoord(node){
+        var coord = node.position;
+        var parent = node.parent;
+        while(parent != SceneManager.GetInstance().rootCanvas())
+        {
+            coord.x += parent.x * parent.scaleX;
+            coord.y += parent.y * parent.scaleY;
+            parent = node.parent;
+        }
+        return coord;
+    }
+
     static ToLocalCoord(worldPos, root, nodePath){
-        console.log("world pos", worldPos.x, worldPos.y);
         var coord = cc.v2(worldPos.x, worldPos.y);
         var curRoot = root
         var nodeArr = nodePath.split('.');
@@ -87,7 +97,6 @@ export default class UIUtil {
                 coord.y -= child.y * child.scaleY;
             }
         }
-        console.log("local pos", coord.x, coord.y);
         return coord;
     }
 

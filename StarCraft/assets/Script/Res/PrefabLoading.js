@@ -17,7 +17,7 @@ cc.Class({
             that._loadedIndex++;
             UIUtil.SetNoticePrefab(loadRes);
         })
-        this.loadRes("Guide", function(errMsg, loadRes){
+        this.loadRes("Panel/Guide", function(errMsg, loadRes){
             that._loadedIndex++;
             GuideManager.SetGuidePrefab(loadRes);
         })

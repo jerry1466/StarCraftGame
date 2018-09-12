@@ -48,23 +48,39 @@ var TweenScale = cc.Class({
             return;
         }
         this.timer += dt;
-        if(this.timer > (this.repeater + 1) * this.interval)
+        if(this.count <= 0)
         {
-            this.repeater = this.repeater + 1
+            this.repeater = Math.floor(this.timer / this.time);
+            var reminder = this.timer - this.repeater * this.time;
+            if(this.repeater % 2 == 0)
+            {
+                this.node.setScale(this.from.lerp(this.to, reminder / this.time));
+            }
+            else
+            {
+                this.node.setScale(this.to.lerp(this.from, reminder / this.time));
+            }
         }
-        if (this.repeater <= this.count - 1)
+        else
         {
-            this.repeaterTimer = this.timer - this.repeater * this.interval
-            var x = this.from.x + (this.to.x - this.from.x) * this.repeaterTimer / this.interval
-            var y = this.from.y + (this.to.y - this.from.y) * this.repeaterTimer / this.interval
-            this.node.setScale(cc.v2(x, y));
-        }
+            if(this.timer > (this.repeater + 1) * this.interval)
+            {
+                this.repeater = this.repeater + 1
+            }
+            if (this.repeater <= this.count - 1)
+            {
+                this.repeaterTimer = this.timer - this.repeater * this.interval
+                var x = this.from.x + (this.to.x - this.from.x) * this.repeaterTimer / this.interval
+                var y = this.from.y + (this.to.y - this.from.y) * this.repeaterTimer / this.interval
+                this.node.setScale(cc.v2(x, y));
+            }
 
-        if (this.timer >= this.time) {
-            this.isDone = true;
+            if (this.timer >= this.time) {
+                this.isDone = true;
 
-            if (this.onFinishCallBack) {
-                this.onFinishCallBack(this.node);
+                if (this.onFinishCallBack) {
+                    this.onFinishCallBack(this.node);
+                }
             }
         }
     },

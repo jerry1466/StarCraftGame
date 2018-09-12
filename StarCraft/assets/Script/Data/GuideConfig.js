@@ -3,7 +3,8 @@ let data =
     "test":
         {
             "text":"请快快点击此处进入游戏",
-            "uiName":"btnEnter",
+            "uiName":"BtnEnter",
+            "offset":[0, -77],
         }
 }
 

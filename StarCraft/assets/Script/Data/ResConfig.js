@@ -23,7 +23,7 @@ let res=
         "frame":"frame.png",
         "line":"mazeLine.png",
         "loginPanel":"loginPanel_bg.png",
-        "guideCircle":"Star.png",
+        "guideCircle":"select.png",
     },
     "icon":
     {

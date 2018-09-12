@@ -1,26 +1,29 @@
 import UIUtil from "UIUtil";
 import GuideConfig from "GuideConfig";
+import SceneManager from "SceneManager";
 
 let guideInst;
 export default class GuideManager{
     static SetGuidePrefab(res){
-        guideInst = res;
+        guideInst = cc.instantiate(res);
     }
 
-    static AddGuide(key, root, nodeName){
+    static AddGuide(key, root){
+        var guideCfg = GuideConfig.GetGuideConfig(key);
+        if(guideCfg == null)
+        {
+            console.error("没有找到对应的引导配置", key);
+            return;
+        }
+        var nodeName = guideCfg["uiName"];
         var targetNode = UIUtil.FindNodeRecursion(root, nodeName);
         if(targetNode)
         {
-            guideInst.parent = targetNode.parent;
-            guideInst.setPosition(targetNode.position);
-            var guideCfg = GuideConfig.GetGuideConfig(key);
+            guideInst.parent = SceneManager.GetInstance().rootCanvas();
+            var worldPos = UIUtil.ToCanvasCoord(targetNode);
+            guideInst.setPosition(worldPos);
             var guideCom = guideInst.getComponent("Guide");
-            if(guideCfg == null)
-            {
-                console.error("没有找到对应的引导配置", key);
-                return;
-            }
-            guideCom.Init(guideCfg);
+            guideCom.Init(guideCfg, targetNode);
         }
         else
         {

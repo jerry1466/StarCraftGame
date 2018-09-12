@@ -17,12 +17,13 @@ cc.Class({
     },
 
 	onLoad(){
+		this.icon = this.node.getComponent(cc.Sprite);
     	ResourceManager.LoadRemoteSprite(this.icon, ResConfig.GetStarIcon(databus.userInfo.curStarId));
         EventUtil.GetInstance().DispatchEvent("HpChange", this.life);
 	},
 
     update() {
-		if (!this.is_valid && !FindMeteor.GetInstance().cdFinish)
+		if (!this.is_valid || !FindMeteor.GetInstance().cdFinish)
 			return
 
         if(FindMeteor.GetInstance().gameOver){

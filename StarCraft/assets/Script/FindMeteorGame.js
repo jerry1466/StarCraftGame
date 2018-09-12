@@ -43,7 +43,7 @@ cc.Class({
         this.findMeteor.gameButtom = 0 - this.findMeteor.gameTop
         this.findMeteor.gameRight = databus.screenRight - 17
         this.findMeteor.gameLeft = 0 - this.findMeteor.gameRight
-		
+		this.countDownTimer();
         var that = this
         this.findMeteor.CreatePlanet(this, function(){
             that.findMeteor.CreateMeteor(that, 5);
@@ -52,7 +52,7 @@ cc.Class({
                 blackholeNum = 9
             }*/
             that.findMeteor.CreateBlackHole(that, 3);
-            this.countDownTimer();
+            
         });
         this.registerEventHandler();
     },
@@ -111,11 +111,10 @@ cc.Class({
 		this.cdanim.play('countDown');
     },
 
-    countDownFinish(that) {
-    	console.log("find meteor cd finish")
-    	//that.cdanim.off('finished', that.countDownFinish, that);
-		that.countDown.node.removeFromParent(true);
-		that.countDown.node.destroy();
-		that.findMeteor.cdFinish = true;
+    countDownFinish() {
+    	this.cdanim.off('finished', this.countDownFinish, this);
+		this.countDown.node.removeFromParent(true);
+		this.countDown.node.destroy();
+		this.findMeteor.cdFinish = true;
     }
 })

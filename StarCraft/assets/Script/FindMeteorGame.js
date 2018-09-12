@@ -113,7 +113,7 @@ cc.Class({
 
     countDownFinish(that) {
     	console.log("find meteor cd finish")
-    	that.cdanim.off('finished', that.countDownFinish, that);
+    	//that.cdanim.off('finished', that.countDownFinish, that);
 		that.countDown.node.removeFromParent(true);
 		that.countDown.node.destroy();
 		that.findMeteor.cdFinish = true;

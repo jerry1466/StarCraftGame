@@ -17,6 +17,23 @@ export default class UIUtil {
         return cc.instantiate(noticePrefab);
     }
 
+    static FindNodeRecursion(root, nodeName){
+        if(root.name == nodeName)
+        {
+            return root;
+        }
+        var rootChildNum = root.childrenCount;
+        for(var i = 0; i < rootChildNum; i++)
+        {
+            var node = this.FindNodeRecursion(root.children[i]);
+            if(node != null)
+            {
+                return node;
+            }
+        }
+        return null;
+    }
+
     static FindNode(root, nodePath) {
         var nodeArr = nodePath.split('.')
         var curRoot = root

@@ -25,6 +25,7 @@ cc.Class({
         bg:cc.Sprite,
         gameMeteorCon:Coin,
         gameHpCon:GameHpCon,
+        countDown:cc.Sprite,
     },
 
     onLoad() {
@@ -42,7 +43,7 @@ cc.Class({
         this.findMeteor.gameButtom = 0 - this.findMeteor.gameTop
         this.findMeteor.gameRight = databus.screenRight - 17
         this.findMeteor.gameLeft = 0 - this.findMeteor.gameRight
-
+		this.countDownTimer();
         var that = this
         this.findMeteor.CreatePlanet(this, function(){
             that.findMeteor.CreateMeteor(that, 5);
@@ -51,6 +52,7 @@ cc.Class({
                 blackholeNum = 9
             }*/
             that.findMeteor.CreateBlackHole(that, 3);
+            
         });
         this.registerEventHandler();
     },
@@ -100,5 +102,20 @@ cc.Class({
 
     hpChangeHandler(hp){
 	     this.gameHpCon.UpdateHp(hp);
+    },
+
+    countDownTimer() {
+    	this.countDown.node.zIndex = 101;
+    	this.cdanim = this.countDown.node.getComponent(cc.Animation);
+    	this.cdanim.on('finished', this.countDownFinish, this);
+		this.cdanim.play('countDown');
+    },
+
+    countDownFinish(that) {
+    	console.log("find meteor cd finish")
+    	that.cdanim.off('finished', that.countDownFinish, that);
+		that.countDown.node.removeFromParent(true);
+		that.countDown.node.destroy();
+		that.findMeteor.cdFinish = true;
     }
 })

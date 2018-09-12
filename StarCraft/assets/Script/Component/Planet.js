@@ -22,7 +22,7 @@ cc.Class({
 	},
 
     update() {
-		if (!this.is_valid)
+		if (!this.is_valid && !FindMeteor.GetInstance().cdFinish)
 			return
 
         if(FindMeteor.GetInstance().gameOver){

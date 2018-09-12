@@ -22,6 +22,7 @@ export default class FindMeteor {
         this.gameButtom = 0
         this.gameLeft = 0
         this.gameRight = 0
+        this.cdFinish = false
     }
 
     static GetInstance() {

@@ -43,7 +43,7 @@ cc.Class({
         this.findMeteor.gameButtom = 0 - this.findMeteor.gameTop
         this.findMeteor.gameRight = databus.screenRight - 17
         this.findMeteor.gameLeft = 0 - this.findMeteor.gameRight
-		this.countDownTimer();
+		
         var that = this
         this.findMeteor.CreatePlanet(this, function(){
             that.findMeteor.CreateMeteor(that, 5);
@@ -52,7 +52,7 @@ cc.Class({
                 blackholeNum = 9
             }*/
             that.findMeteor.CreateBlackHole(that, 3);
-            
+            this.countDownTimer();
         });
         this.registerEventHandler();
     },

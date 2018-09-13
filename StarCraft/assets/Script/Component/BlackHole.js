@@ -27,11 +27,7 @@ cc.Class({
 			return
     	}
 
-		//黑洞在游戏开始的时候稍微停顿一下
-    	if (this.timer > 50) {
-			this.move()
-    	}
-		this.timer += 1
+		this.move()
 
     	if(FindMeteor.GetInstance().gameOver){
             FindMeteor.GetInstance().RemoveBlackHole(this);

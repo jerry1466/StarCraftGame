@@ -7,6 +7,7 @@ import Databus from 'Databus'
 import TweenScale from 'TweenScale'
 import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig";
+import GuideManager from "GuideManager";
 
 let databus = new Databus()
 
@@ -24,12 +25,16 @@ cc.Class({
         ResourceManager.LoadRemoteSprite(this.bgContent, ResConfig.BigBtn());
         ResourceManager.LoadRemoteSprite(this.circleNode, ResConfig.GuideCircle());
         ResourceManager.LoadRemoteSprite(this.cover, ResConfig.FogIcon());
-        this.cover.node.width = this.cover.node.height = 1000;
+        this.cover.node.width = this.cover.node.height = 3000;
         // this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchBg, this);
         this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchBg, this);
     },
 
     start(){
+        this.refresh();
+    },
+
+    refresh(){
         this.lbContent.string = this.guideConfig["text"];
         this.bgContent.node.setPosition(cc.v2(this.guideConfig["offset"][0], this.guideConfig["offset"][1]));
         this.mask.width = this.tarNode.width * this.tarNode.scaleX;
@@ -61,6 +66,7 @@ cc.Class({
         retWord.height = retWord.height <= 0 ? 0 : retWord.height;
         if (retWord.contains(point)) {
             this.node._touchListener.setSwallowTouches(false);
+            GuideManager.RemoveGuide();
         } else {
             this.node._touchListener.setSwallowTouches(true);
         }
@@ -69,5 +75,6 @@ cc.Class({
     Init(guideConfig, node) {
         this.guideConfig = guideConfig;
         this.tarNode = node;
+        this.refresh();
     }
 })    

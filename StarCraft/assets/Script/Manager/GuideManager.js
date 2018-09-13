@@ -1,14 +1,21 @@
 import UIUtil from "UIUtil";
 import GuideConfig from "GuideConfig";
 import SceneManager from "SceneManager";
+import Databus from "Databus"
 
 let guideInst;
+let curGuideKey;
+let databus = new Databus();
 export default class GuideManager{
     static SetGuidePrefab(res){
         guideInst = cc.instantiate(res);
     }
 
     static AddGuide(key, root){
+        if(this.HasGuide(key))
+        {
+            return;
+        }
         var guideCfg = GuideConfig.GetGuideConfig(key);
         if(guideCfg == null)
         {
@@ -19,6 +26,7 @@ export default class GuideManager{
         var targetNode = UIUtil.FindNodeRecursion(root, nodeName);
         if(targetNode)
         {
+            curGuideKey = key;
             guideInst.parent = SceneManager.GetInstance().rootCanvas();
             var worldPos = UIUtil.ToCanvasCoord(targetNode);
             guideInst.setPosition(worldPos);
@@ -32,6 +40,14 @@ export default class GuideManager{
     }
 
     static RemoveGuide(){
+        if(!this.HasGuide(curGuideKey))
+        {
+            databus.userInfo.guidedList.push(curGuideKey);
+        }
         guideInst.removeFromParent();
+    }
+
+    static HasGuide(key){
+        return databus.userInfo.guidedList.indexOf(key) >= 0
     }
 }

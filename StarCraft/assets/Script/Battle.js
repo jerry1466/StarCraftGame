@@ -22,6 +22,7 @@ import ResConfig from 'ResConfig';
 import Coin from 'Coin'
 import UIUtil from "UIUtil";
 import BGMConfig from "BGMConfig";
+import GuideManager from "GuideManager";
 
 let databus = new Databus()
 cc.Class({
@@ -104,6 +105,7 @@ cc.Class({
 
     start() {
         this.refreshStar();
+        // GuideManager.AddGuide("myStarList", this.node);
     },
 
     registerEventHandler(){

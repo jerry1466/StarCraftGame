@@ -35,7 +35,8 @@ export default class Databus{
             maxStarId:1001,
             diamond:0,
             meteor:0,
-            brokeFixIndex:-1
+            brokeFixIndex:-1,
+            guidedList:[]
         }
         /**************微信账号信息*************/
         this.wxUserInfo = {}

@@ -78,7 +78,7 @@ export default class UIUtil {
         {
             coord.x += parent.x * parent.scaleX;
             coord.y += parent.y * parent.scaleY;
-            parent = node.parent;
+            parent = parent.parent;
         }
         return coord;
     }

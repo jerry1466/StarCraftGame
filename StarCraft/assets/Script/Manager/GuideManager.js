@@ -44,7 +44,14 @@ export default class GuideManager{
         {
             databus.userInfo.guidedList.push(curGuideKey);
         }
+        var guideCom = guideInst.getComponent("Guide");
         guideInst.removeFromParent();
+        guideCom.Dispose();
+        var guideConfig = GuideConfig.GetGuideConfig(curGuideKey)
+        if(guideConfig && guideConfig["next"])
+        {
+            GuideManager.AddGuide(guideConfig["next"], SceneManager.GetInstance().rootCanvas());
+        }
     }
 
     static HasGuide(key){

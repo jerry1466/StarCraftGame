@@ -1,5 +1,6 @@
 import Databus from 'Databus'
 import ModuleManager from "ModuleManager";
+import GuideManager from "GuideManager";
 
 let databus = new Databus()
 
@@ -12,6 +13,7 @@ export default class LevelManager {
     }
 
     SwitchLevel(lvName, levelParam){
+        GuideManager.RemoveGuide()
         ModuleManager.GetInstance().PopAllModule();
         this.CurrentLevelName = lvName;
         this.CurrentLevelParam = levelParam

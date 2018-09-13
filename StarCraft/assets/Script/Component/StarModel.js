@@ -10,6 +10,8 @@ import ResConfig from "ResConfig";
 import StarConfig from 'StarConfig';
 import EventUtil from "EventUtil";
 import ModuleManager from "ModuleManager";
+import GuideManager from "GuideManager";
+import SceneManager from "SceneManager";
 
 let databus = new Databus()
 let rotation = 0.05;
@@ -78,6 +80,7 @@ cc.Class({
             this.selectBroke(databus.userInfo.brokeFixIndex + 1);
         }
         this._curStarId = curStarId;
+        GuideManager.AddGuide("broke", SceneManager.GetInstance().rootCanvas());
     },
 
     Switch(){

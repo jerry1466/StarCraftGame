@@ -8,6 +8,7 @@ import TweenScale from 'TweenScale'
 import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig";
 import GuideManager from "GuideManager";
+import SceneManager from "SceneManager";
 
 let databus = new Databus()
 
@@ -26,12 +27,19 @@ cc.Class({
         ResourceManager.LoadRemoteSprite(this.circleNode, ResConfig.GuideCircle());
         ResourceManager.LoadRemoteSprite(this.cover, ResConfig.FogIcon());
         this.cover.node.width = this.cover.node.height = 3000;
-        // this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchBg, this);
-        this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchBg, this);
+        this.node.width = this.node.height = 3000;
     },
 
     start(){
         this.refresh();
+        if(this.guideConfig["timeout"])
+        {
+            var that = this;
+            this.delay = setTimeout(function()
+            {
+                GuideManager.RemoveGuide(true);
+            }, this.guideConfig["timeout"] * 1000)
+        }
     },
 
     refresh(){
@@ -52,8 +60,14 @@ cc.Class({
 
     },
 
-    onDestroy() {
-        databus.gamePause = false
+    Dispose() {
+        this.node.off(cc.Node.EventType.TOUCH_START, this.onTouchBg, this);
+        databus.gamePause = false;
+        if(this.delay)
+        {
+            clearTimeout(this.delay);
+            this.delay = null;
+        }
     },
 
     onTouchBg(event){
@@ -66,7 +80,7 @@ cc.Class({
         retWord.height = retWord.height <= 0 ? 0 : retWord.height;
         if (retWord.contains(point)) {
             this.node._touchListener.setSwallowTouches(false);
-            GuideManager.RemoveGuide();
+            GuideManager.RemoveGuide(true);
         } else {
             this.node._touchListener.setSwallowTouches(true);
         }
@@ -76,5 +90,6 @@ cc.Class({
         this.guideConfig = guideConfig;
         this.tarNode = node;
         this.refresh();
+        this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchBg, this);
     }
 })    

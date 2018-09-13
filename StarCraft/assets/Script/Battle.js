@@ -105,7 +105,6 @@ cc.Class({
 
     start() {
         this.refreshStar();
-        // GuideManager.AddGuide("myStarList", this.node);
     },
 
     registerEventHandler(){
@@ -169,5 +168,9 @@ cc.Class({
 
     setFixRelatedBroke(broke){
         this._broke = broke;
+        if(broke.index > 0)
+        {
+            GuideManager.AddGuide("fixCostMeteor", this.node);
+        }
     }
 })    

@@ -9,7 +9,6 @@ import EventUtil from "EventUtil";
 import StatisticManager from "StatisticManager";
 import TweenPosition from "TweenPosition"
 import ResConfig from "ResConfig";
-import GuideManager from "GuideManager";
 
 let databus = new Databus()
 
@@ -135,7 +134,6 @@ cc.Class({
                 InterfaceManager.GetInstance().RegisterShareAppMessageHandler()
             }, 300)
         }
-        GuideManager.AddGuide("test", this.node);
     },
 
     onEnterClick(){

@@ -8,7 +8,7 @@ import SceneManager from "SceneManager";
 import EventUtil from "EventUtil";
 import MazeManager from "MazeManager";
 import ModuleManager from "ModuleManager";
-import EffectUtil from "EffectUtil";
+import BGMConfig from "BGMConfig";
 import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig";
 import BuffBase from 'BuffBase';
@@ -26,6 +26,8 @@ cc.Class({
         btnExit:cc.Button,
         map:cc.Node,
         player:Player,
+        fogMask:cc.Mask,
+        fog:cc.Sprite,
         tip:cc.Label,
     },
 
@@ -33,12 +35,15 @@ cc.Class({
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MazeBg());
         ResourceManager.LoadRemoteSprite(this.mazeBg, ResConfig.MazePanelBg());
         ResourceManager.LoadRemoteSprite(this.btnExit, ResConfig.ExitBtn());
+        ResourceManager.LoadRemoteSprite(this.fog, ResConfig.FogIcon());
         SceneManager.GetInstance().SetRoot(this.node);
         this.diamondCon.Init(ResConfig.DiamondConBg());
         this.registerEventHandler();
     },
 
     update() {
+        MazeManager.GetInstance().Update();
+        MazeManager.GetInstance().UpdateFogShader();
         this.diamondCon.UpdateCoin(databus.userInfo.diamond, true);
     },
 
@@ -48,7 +53,7 @@ cc.Class({
     },
 
     start(){
-        MazeManager.GetInstance().Start(this.map, this.player);
+        MazeManager.GetInstance().Start(this.map, this.player, this.fogMask);
     },
 
     Init() {
@@ -66,8 +71,6 @@ cc.Class({
         EventUtil.GetInstance().AddEventListener("TriggerGame", this.onTriggerGameHandler);
         this.onTriggerCardHandler = this.triggerCardHandler.bind(this);
         EventUtil.GetInstance().AddEventListener("TriggerCard", this.onTriggerCardHandler);
-        this.onSelectMapGridHandler = this.selectMapGridHandler.bind(this);
-        EventUtil.GetInstance().AddEventListener("SelectMapGrid", this.onSelectMapGridHandler);
         this.onShowNoticeHandler = this.showNotice.bind(this);
         EventUtil.GetInstance().AddEventListener("MazeShowNotice", this.onShowNoticeHandler);
         this.onTouchStartHandler = this.onTouchStart.bind(this);
@@ -80,7 +83,6 @@ cc.Class({
         EventUtil.GetInstance().RemoveEventListener("TriggerRob", this.onTriggerRobHandler);
         EventUtil.GetInstance().RemoveEventListener("TriggerGame", this.onTriggerGameHandler);
         EventUtil.GetInstance().RemoveEventListener("TriggerCard", this.onTriggerCardHandler);
-        EventUtil.GetInstance().RemoveEventListener("SelectMapGrid", this.onSelectMapGridHandler);
         EventUtil.GetInstance().RemoveEventListener("MazeShowNotice", this.onShowNoticeHandler);
         this.node.off(cc.Node.EventType.TOUCH_START, this.onTouchStartHandler);
     },
@@ -172,11 +174,7 @@ cc.Class({
         ModuleManager.GetInstance().ShowModule("CardGamePanel");
     },
 
-    selectMapGridHandler(){
-        this.showNotice("请选择一个格子作为探索起点");
-    },
-
     showNotice(text){
         this.tip.string = text;
-    }
+    },
 })    

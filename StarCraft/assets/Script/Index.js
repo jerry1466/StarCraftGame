@@ -30,7 +30,7 @@ cc.Class({
 
     onLoad() {
         SceneManager.GetInstance().SetRoot(this.node);
-        ResourceManager.LoadRemoteSprite(this.spBg, "https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png")
+        //ResourceManager.LoadRemoteSprite(this.spBg, "https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png")
         var that = this
         NetUtil.Request(databus.cfgUrl, {}, function(data){
     	    databus.cfgData = data;

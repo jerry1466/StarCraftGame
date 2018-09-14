@@ -8,7 +8,6 @@ import EventUtil from "EventUtil";
 import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig";
 import TweenAlpha from "TweenAlpha";
-import LevelManager from "../Manager/LevelManager";
 
 let databus = new Databus()
 cc.Class({
@@ -18,18 +17,16 @@ cc.Class({
         borderRight:cc.Sprite,
         borderLeft:cc.Sprite,
         borderBottom:cc.Sprite,
-        fog:cc.Sprite,
         icon:cc.Sprite,
         row:-1,
         column:-1,
     },
 
     onLoad(){
-        ResourceManager.LoadRemoteSprite(this.borderTop, ResConfig.MazeCellLine());
-        ResourceManager.LoadRemoteSprite(this.borderRight, ResConfig.MazeCellLine());
-        ResourceManager.LoadRemoteSprite(this.borderLeft, ResConfig.MazeCellLine());
-        ResourceManager.LoadRemoteSprite(this.borderBottom, ResConfig.MazeCellLine());
-        ResourceManager.LoadRemoteSprite(this.fog, ResConfig.FogIcon());
+        // ResourceManager.LoadRemoteSprite(this.borderTop, ResConfig.MazeCellLine());
+        // ResourceManager.LoadRemoteSprite(this.borderRight, ResConfig.MazeCellLine());
+        // ResourceManager.LoadRemoteSprite(this.borderLeft, ResConfig.MazeCellLine());
+        // ResourceManager.LoadRemoteSprite(this.borderBottom, ResConfig.MazeCellLine());
     },
 
     update() {
@@ -49,10 +46,10 @@ cc.Class({
     InitAffair(affair){
         this.affair = affair;
         if(this.affair.triggered){
-            this.fog.node.active = false;
+            this.icon.node.active = false;
         }
         else{
-            this.fog.node.active = true;
+            this.icon.node.active = true;
         }
         ResourceManager.LoadRemoteSprite(this.icon, ResConfig.AffairIcon(this.affair.type));
     },
@@ -63,36 +60,21 @@ cc.Class({
 
     ClearAffair(){
         this.affair.type = AffairConstant.AffairEnum().NONE;
-    },
-
-    RemoveFog(){
-        this.fog.node.active = false;
-        this.fog.node.opacity = 255;
+        this.affair.triggered = true;
     },
 
     Trigger(){
-        if(this.fog.node.active == true)
-        {
-            var tweenAlpha = TweenAlpha.begin(this.fog.node, 255, 0, 1, 1);
-            var that = this;
-            tweenAlpha.onFinishCallBack = function(){
-                that.RemoveFog();
-                if(that.affair.type != AffairConstant.AffairEnum().NONE){
-                    removeIcon(that.icon);
-                }
-                doTrigger(that);
-            }
-        } else {
-            if(this.affair.type != AffairConstant.AffairEnum().NONE) {
-                removeIcon(this.icon);
-            }
-            doTrigger(this);
+        if(this.affair.type != AffairConstant.AffairEnum().NONE) {
+            removeIcon(this.icon);
         }
+        var that = this;
+        setTimeout(function(){
+            doTrigger(that);
+        }, 100);
 
         function doTrigger(_this){
-            console.log("MazeMapCell doTrigger", _this.affair)
-            // new LevelManager().SwitchLevel("game");
             if (!_this.affair_active) {
+                _this.ClearAffair();
 				EventUtil.GetInstance().DispatchEvent("FreeTouch")
 				return
             }
@@ -106,7 +88,6 @@ cc.Class({
             {
             	// FreeTouch事件在冰冻buff结束之后再抛出
                 EventUtil.GetInstance().DispatchEvent("TriggerFreeze", _this.affair)
-                return
             }
             else if(_this.affair.type == AffairConstant.AffairEnum().ROB)
             {
@@ -114,16 +95,17 @@ cc.Class({
             }
             else if(_this.affair.type == AffairConstant.AffairEnum().GAME)
             {
-                EventUtil.GetInstance().DispatchEvent("TriggerGame", _this.affair)
-                return
+                setTimeout(function(){
+                    EventUtil.GetInstance().DispatchEvent("TriggerGame", _this.affair)
+                }, 20)
             }
             else if(_this.affair.type == AffairConstant.AffairEnum().CARD)
             {
                 //EventUtil.GetInstance().DispatchEvent("TriggerCard", _this.affair);
             }
 
-            EventUtil.GetInstance().DispatchEvent("FreeTouch");
             _this.ClearAffair();
+            EventUtil.GetInstance().DispatchEvent("FreeTouch");
         }
 
         function removeIcon(icon){

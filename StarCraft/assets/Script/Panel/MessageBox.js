@@ -24,8 +24,8 @@ cc.Class({
 
     onLoad(){
         ResourceManager.LoadRemoteSprite(this.spBg, ResConfig.MessageBoxBg())
-        ResourceManager.LoadRemoteSprite(this.btnConfirm, ResConfig.NormalBtn())
-        ResourceManager.LoadRemoteSprite(this.btnCancel, ResConfig.NormalBtn())
+        ResourceManager.LoadRemoteSprite(this.btnConfirm, ResConfig.BigBtn())
+        ResourceManager.LoadRemoteSprite(this.btnCancel, ResConfig.BigBtn())
         ResourceManager.LoadRemoteSprite(this.btnClose, ResConfig.CloseBtn())
     },
 

@@ -38,22 +38,22 @@ cc.Class({
         if(this.icon)
         {
             ResourceManager.LoadRemoteSprite(this.icon, ResConfig.BrokeIcon(databus.userInfo.curStarId));
-            var highLightShader = this.icon.node.getComponent("HighLightShader");
-            if(this._select)
-            {
-                if(highLightShader == null)
-                {
-                    this.icon.node.addComponent("HighLightShader");
-                }
-            }
-            else
-            {
-                if(highLightShader != null)
-                {
-                    highLightShader.destroy();
-                }
-                ShaderUtil.RollBackNormal(this.icon);
-            }
+            // var highLightShader = this.icon.node.getComponent("HighLightShader");
+            // if(this._select)
+            // {
+            //     if(highLightShader == null)
+            //     {
+            //         this.icon.node.addComponent("HighLightShader");
+            //     }
+            // }
+            // else
+            // {
+            //     if(highLightShader != null)
+            //     {
+            //         highLightShader.destroy();
+            //     }
+            //     ShaderUtil.RollBackNormal(this.icon);
+            // }
         }
     },
 

@@ -5,6 +5,9 @@
 import CD from 'Cd'
 import Databus from 'Databus'
 import TweenPosition from 'TweenPosition'
+import ResourceManager from "ResourceManager";
+import ResConfig from "ResConfig";
+import MazeManager from "MazeManager";
 
 let databus = new Databus()
 cc.Class({
@@ -16,6 +19,7 @@ cc.Class({
     },
 
     onLoad(){
+        ResourceManager.LoadRemoteSprite(this.head, ResConfig.GetStarIcon(databus.userInfo.curStarId));
         if(CC_WECHATGAME)
         {
             let avatarUrl = databus.wxUserInfo.avatarUrl;
@@ -35,6 +39,11 @@ cc.Class({
     },
 
     update() {
+        if(MazeManager.GetInstance().mapScale)
+        {
+            this.head.node.scaleX = MazeManager.GetInstance().mapScale.x;
+            this.head.node.scaleY = MazeManager.GetInstance().mapScale.y;
+        }
     },
 
     onDestroy() {

@@ -26,6 +26,17 @@ export default class GuideManager{
             console.error("没有找到对应的引导配置", key);
             return;
         }
+        var prev = guideCfg["prev"]
+        if(prev)
+        {
+            for(var i = 0; i < prev.length; i++)
+            {
+                if(!this.HasGuide(prev[i]))
+                {
+                    return;
+                }
+            }
+        }
         var nodeName = guideCfg["uiName"];
         var targetNode = UIUtil.FindNodeRecursion(root, nodeName);
         if(targetNode)

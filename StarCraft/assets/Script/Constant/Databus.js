@@ -29,7 +29,7 @@ export default class Databus{
         this.mazeColumn = 10;
         this.gameMaxHp = 3;
         this.bgMusic = "";
-        this.guideEnable = false;
+        this.guideEnable = true;
         /**************用户数据*************/
         this.userInfo = {
             curStarId:1001,
@@ -37,6 +37,10 @@ export default class Databus{
             diamond:0,
             meteor:0,
             brokeFixIndex:-1,
+            mazeComplete:1,
+            mazeAffairList:[],
+            mazeCurLoc:-1,
+            mazeStarId:0,
             guidedList:[]
         }
         /**************微信账号信息*************/
@@ -44,10 +48,6 @@ export default class Databus{
     }
 
     Reset(){
-        this.passGuide = false;
-        this.guide1 = false;
-        this.guide2 = false;
-        this.guide3 = false;
     }
 
     GetMoneyNum(moneyType){

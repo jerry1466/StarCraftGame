@@ -1,3 +1,11 @@
+/*
+  text:引导时显示的文字
+  uiName:指向的控件名称
+  offset:引导文字框距离中心点的偏移
+  timeout:指定时间后引导自动移除
+  prev:前置引导（依赖其完成）
+  next:引导结束后自动触发的下一个引导
+ */
 let data =
 {
     "diamond":
@@ -57,6 +65,7 @@ let data =
             "text":"这里可以查看所有的星球哦~",
             "uiName":"BtnMyStars",
             "offset":[-150, 0],
+            "prev":["searchMeteor"],
         }
 }
 

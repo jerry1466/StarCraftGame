@@ -19,12 +19,14 @@ cc.Class({
         spVideo:cc.Sprite,
         lbNum:cc.Label,
         btnClose:cc.Button,
+        icon:cc.Sprite,
     },
 
     onLoad(){
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.GuideDiamondBoxBg());
         ResourceManager.LoadRemoteSprite(this.spVideo, ResConfig.VideoBtn());
         ResourceManager.LoadRemoteSprite(this.btnClose, ResConfig.CloseBtn());
+        ResourceManager.LoadRemoteSprite(this.icon, ResConfig.DiamondIcon());
         if(databus.cfgData != null && databus.cfgData.set.wx_video != null && databus.cfgData.set.wx_video.length > 0)
         {
             this.btnVideo.node.active = true

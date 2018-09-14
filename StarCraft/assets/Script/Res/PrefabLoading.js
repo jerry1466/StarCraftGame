@@ -12,14 +12,17 @@ cc.Class({
         this.loadRes("Broke", function(errMsg, loadRes){
             that._loadedIndex++;
             UnitManager.GetInstance().BrokePrefab = loadRes;
+            console.log("Broke Loaded");
         })
         this.loadRes("Notice", function(errMsg, loadRes){
             that._loadedIndex++;
             UIUtil.SetNoticePrefab(loadRes);
+            console.log("Notice Loaded");
         })
         this.loadRes("Panel/Guide", function(errMsg, loadRes){
             that._loadedIndex++;
             GuideManager.SetGuidePrefab(loadRes);
+            console.log("Guide Loaded");
         })
     },
     GetProgress(){return this._loadedIndex / PrefabInitNum},

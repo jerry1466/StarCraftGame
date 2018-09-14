@@ -7,6 +7,8 @@ import BasePanel from 'BasePanel'
 import LevelManager from "LevelManager";
 import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig";
+import EventUtil from "EventUtil"
+import BGMConfig from "BGMConfig"
 
 let databus = new Databus()
 cc.Class({
@@ -38,6 +40,7 @@ cc.Class({
 
     onClose(){
         new LevelManager().SwitchLevel("maze");
+        //EventUtil.GetInstance().DispatchEvent("SwitchBgMusic", BGMConfig.GetStarBgm(databus.userInfo.curStarId));
     },
 
     Init(meteorNum) {

@@ -23,17 +23,17 @@ cc.Class({
     onLoad() {
         this.sprite = this.node.getComponent(cc.Sprite);
         this._program = new cc.GLProgram();
-        if(cc.sys.isNative)
-        {
+        // if(cc.sys.isNative)
+        // {
             this._program.initWithString(grayShader.vShader, grayShader.fShader);
-        }
-        else
-        {
-            this._program.initWithVertexShaderByteArray(grayShader.vShader, grayShader.fShader);
+        // }
+        // else
+        // {
+        //     this._program.initWithVertexShaderByteArray(grayShader.vShader, grayShader.fShader);
             this._program.addAttribute(cc.macro.ATTRIBUTE_NAME_POSITION, cc.macro.VERTEX_ATTRIB_POSITION);
             this._program.addAttribute(cc.macro.ATTRIBUTE_NAME_COLOR, cc.macro.VERTEX_ATTRIB_COLOR);
             this._program.addAttribute(cc.macro.ATTRIBUTE_NAME_TEX_COORD, cc.macro.VERTEX_ATTRIB_TEX_COORDS);
-        }
+        // }
         this._program.link();
         this._program.updateUniforms();
         this.sprite._sgNode.shaderProgram = this._program;

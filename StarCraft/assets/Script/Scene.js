@@ -34,7 +34,7 @@ cc.Class({
             return;
         }
         databus.bgMusic = musicName;
-        this.soundChnl = BGMConfig.BgmInit(musicName);
+        this.soundChnl = BGMConfig.BgmInit(musicName, true);
         BGMConfig.BgmPlay(this.soundChnl);
     }
 })    

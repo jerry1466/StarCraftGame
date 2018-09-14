@@ -105,7 +105,10 @@ cc.Class({
 
     start() {
         this.refreshStar();
-        GuideManager.AddGuide("diamond", SceneManager.GetInstance().rootCanvas());
+        setTimeout(function(){
+            GuideManager.AddGuide("diamond", SceneManager.GetInstance().rootCanvas());
+            GuideManager.AddGuide("myStarList", SceneManager.GetInstance().rootCanvas());
+        }, 100)
     },
 
     registerEventHandler(){
@@ -169,7 +172,7 @@ cc.Class({
 
     setFixRelatedBroke(broke){
         this._broke = broke;
-        if(broke.index > 0)
+        if(broke && broke.index > 0)
         {
             GuideManager.AddGuide("fixCostMeteor", this.node);
         }

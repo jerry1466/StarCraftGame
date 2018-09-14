@@ -34,7 +34,7 @@ let res =
     "star_1030":"bgMusic_1.mp3"
 }
 
-let wxBaseUrl = "https://cdn-game.2zhuji.cn/uploads/wdxq/audio";//微信环境下用这个
+let wxBaseUrl = "https://cdn-game.2zhuji.cn/uploads/wdxq/audio/";//微信环境下用这个
 let baseUrl = "Audio/";
 
 export default class BGMConfig{
@@ -46,11 +46,13 @@ export default class BGMConfig{
         return res["star_" + id.toString()];
     }
 
-	static BgmInit(bgm) {
+	static BgmInit(bgm, loop) {
+        if(loop == null) loop = false;
 		var sound
 		if (CC_WECHATGAME) {
 			sound = wx.createInnerAudioContext()
-    		sound.src = wxBaseUrl + bgm
+    		sound.src = wxBaseUrl + bgm;
+            sound.loop = loop;
     		sound.autoplay = true
 		} else {
 			sound = baseUrl + bgm

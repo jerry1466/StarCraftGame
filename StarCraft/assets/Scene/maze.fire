@@ -68,17 +68,17 @@
         "__id__": 17
       },
       {
-        "__id__": 21
+        "__id__": 22
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 23
+        "__id__": 24
       },
       {
-        "__id__": 24
+        "__id__": 25
       }
     ],
     "_prefab": null,
@@ -246,7 +246,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -97.5,
+      "x": 101,
       "y": 393
     },
     "_skewX": 0,
@@ -380,10 +380,12 @@
     },
     "_enabled": true,
     "isAlignOnce": true,
-    "_target": null,
-    "_alignFlags": 9,
-    "_left": 20,
-    "_right": 0,
+    "_target": {
+      "__id__": 2
+    },
+    "_alignFlags": 33,
+    "_left": 218.5,
+    "_right": 16.5,
     "_top": 10,
     "_bottom": 0,
     "_verticalCenter": 0,
@@ -550,8 +552,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 96,
-      "y": 321
+      "x": -47,
+      "y": 302
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -640,6 +642,9 @@
       },
       {
         "__id__": 19
+      },
+      {
+        "__id__": 21
       }
     ],
     "_prefab": null,
@@ -660,8 +665,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 64,
-      "height": 32
+      "width": 68,
+      "height": 69
     },
     "_rotationX": 0,
     "_rotationY": 0,
@@ -669,8 +674,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 135,
-      "y": 333
+      "x": -146,
+      "y": 380.5
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -779,6 +784,34 @@
     "customEventData": ""
   },
   {
+    "__type__": "cc.Widget",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 17
+    },
+    "_enabled": true,
+    "isAlignOnce": true,
+    "_target": {
+      "__id__": 2
+    },
+    "_alignFlags": 9,
+    "_left": 7.5,
+    "_right": 0,
+    "_top": 10,
+    "_bottom": 0,
+    "_verticalCenter": 0,
+    "_horizontalCenter": 0,
+    "_isAbsLeft": true,
+    "_isAbsRight": true,
+    "_isAbsTop": true,
+    "_isAbsBottom": true,
+    "_isAbsHorizontalCenter": true,
+    "_isAbsVerticalCenter": true,
+    "_originalWidth": 0,
+    "_originalHeight": 0
+  },
+  {
     "__type__": "cc.Node",
     "_name": "Tip",
     "_objFlags": 0,
@@ -790,7 +823,7 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 22
+        "__id__": 23
       }
     ],
     "_prefab": null,
@@ -835,7 +868,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 21
+      "__id__": 22
     },
     "_enabled": true,
     "_useOriginalSize": false,
@@ -895,7 +928,7 @@
       "__id__": 15
     },
     "tip": {
-      "__id__": 22
+      "__id__": 23
     }
   }
 ]

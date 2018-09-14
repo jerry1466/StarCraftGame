@@ -1,8 +1,32 @@
 let data =
 {
+    "diamond":
+        {
+            "text":"欢迎来到我的星球\n这是你所拥有的钻石数",
+            "uiName":"DiamondCon",
+            "offset":[40, -77],
+            "timeout":3.5,
+            "next":"meteor",
+        },
+    "meteor":
+        {
+            "text":"流星也是一种资源\n这是你所拥有的流星数",
+            "uiName":"MeteorCon",
+            "offset":[0, -77],
+            "timeout":2.5,
+            "next":"productivity",
+        },
+    "productivity":
+        {
+            "text":"当前钻石的产量，拥有完好星球越多，产量越高",
+            "uiName":"ProductivityCon",
+            "offset":[40, -77],
+            "timeout":2.5,
+            "next":"broke",
+        },
     "broke":
         {
-            "text":"由于生态破坏吗，美丽的星球家园上出现了破损",
+            "text":"由于生态破坏，美丽的星球家园上出现了破损",
             "uiName":"Broke0",
             "offset":[0, -77],
             "timeout":4.5,
@@ -16,17 +40,17 @@ let data =
         },
     "fixCostMeteor":
         {
-            "text":"现在开始，修复需要使用到流星",
+            "text":"修补后续的破损，需要使用到流星",
             "uiName":"FixCost",
             "offset":[0, -77],
-            "timeout":1.5,
+            "timeout":2.5,
             "next":"searchMeteor",
         },
     "searchMeteor":
         {
             "text":"两手空空的你，试着去寻找流星吧",
             "uiName":"BtnSearch",
-            "offset":[0, -77],
+            "offset":[0, -87],
         },
     "myStarList":
         {

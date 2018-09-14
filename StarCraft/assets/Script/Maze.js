@@ -31,7 +31,8 @@ cc.Class({
 
     onLoad(){
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MazeBg());
-        ResourceManager.LoadRemoteSprite(this.mazeBg, ResConfig.MazePanelBg())
+        ResourceManager.LoadRemoteSprite(this.mazeBg, ResConfig.MazePanelBg());
+        ResourceManager.LoadRemoteSprite(this.btnExit, ResConfig.ExitBtn());
         SceneManager.GetInstance().SetRoot(this.node);
         this.diamondCon.Init(ResConfig.DiamondConBg());
         this.registerEventHandler();
@@ -85,7 +86,7 @@ cc.Class({
     },
 
     onExit(){
-        new LevelManager().SwitchLevel("Battle")
+        new LevelManager().SwitchLevel("battle")
     },
 
     toMapPosition(worldPosition){

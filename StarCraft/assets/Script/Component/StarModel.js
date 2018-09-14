@@ -34,7 +34,10 @@ cc.Class({
     },
 
     update(dt) {
-        this.node.rotation += this.rotation * dt;
+        if(databus.gamePause != true)
+        {
+            this.node.rotation += this.rotation * dt;
+        }
     },
 
     onDestroy() {
@@ -80,7 +83,6 @@ cc.Class({
             this.selectBroke(databus.userInfo.brokeFixIndex + 1);
         }
         this._curStarId = curStarId;
-        GuideManager.AddGuide("broke", SceneManager.GetInstance().rootCanvas());
     },
 
     Switch(){

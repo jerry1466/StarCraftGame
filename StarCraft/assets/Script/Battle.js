@@ -105,6 +105,7 @@ cc.Class({
 
     start() {
         this.refreshStar();
+        GuideManager.AddGuide("diamond", SceneManager.GetInstance().rootCanvas());
     },
 
     registerEventHandler(){

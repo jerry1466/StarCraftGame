@@ -29,6 +29,7 @@ export default class Databus{
         this.mazeColumn = 10;
         this.gameMaxHp = 3;
         this.bgMusic = "";
+        this.guideEnable = false;
         /**************用户数据*************/
         this.userInfo = {
             curStarId:1001,

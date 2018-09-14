@@ -5,10 +5,10 @@
 import BasePanel from 'BasePanel'
 import Databus from 'Databus'
 import TweenScale from 'TweenScale'
+import TweenAlpha from 'TweenAlpha'
 import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig";
 import GuideManager from "GuideManager";
-import SceneManager from "SceneManager";
 
 let databus = new Databus()
 
@@ -30,18 +30,6 @@ cc.Class({
         this.node.width = this.node.height = 3000;
     },
 
-    start(){
-        this.refresh();
-        if(this.guideConfig["timeout"])
-        {
-            var that = this;
-            this.delay = setTimeout(function()
-            {
-                GuideManager.RemoveGuide(true);
-            }, this.guideConfig["timeout"] * 1000)
-        }
-    },
-
     refresh(){
         this.lbContent.string = this.guideConfig["text"];
         this.bgContent.node.setPosition(cc.v2(this.guideConfig["offset"][0], this.guideConfig["offset"][1]));
@@ -54,6 +42,7 @@ cc.Class({
 
     notice(){
         TweenScale.begin(this.circleNode, cc.v2(1,1), cc.v2(1.1, 1.1), 0.6, -1);
+        TweenAlpha.begin(this.bgContent.node, 100, 255, 0.75, 1);
     },
 
     update() {
@@ -91,5 +80,14 @@ cc.Class({
         this.tarNode = node;
         this.refresh();
         this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchBg, this);
+        databus.gamePause = true;
+        if(this.guideConfig["timeout"])
+        {
+            var that = this;
+            this.delay = setTimeout(function()
+            {
+                GuideManager.RemoveGuide(true);
+            }, this.guideConfig["timeout"] * 1000)
+        }
     }
 })    

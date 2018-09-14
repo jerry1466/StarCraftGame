@@ -12,6 +12,10 @@ export default class GuideManager{
     }
 
     static AddGuide(key, root){
+        if(!databus.guideEnable)
+        {
+            return;
+        }
         if(this.HasGuide(key))
         {
             return;

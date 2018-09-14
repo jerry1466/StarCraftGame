@@ -6,6 +6,7 @@ import Affair from 'Affair'
 import AffairConstant from "AffairConstant";
 import MathUtil from "MathUtil";
 import StarConfig from "StarConfig";
+import ModuleManager from "ModuleManager";
 
 let instance;
 let databus = new Databus();
@@ -143,14 +144,19 @@ export default class MazeManager{
                 this.TouchEnable = false;
                 var tarCell = this.cells[row][column];
                 var affair = tarCell.GetAffair();
-                if(affair.type != AffairConstant.AffairEnum().NONE)
+                if(databus.userInfo.diamond < affair.cost)
                 {
-                    databus.AddMoney(affair.cost);
+                    EventUtil.GetInstance().DispatchEvent("FreeTouch");
+                    ModuleManager.GetInstance().ShowModule("GuideDiamondBox", affair.cost);
                 }
-                EventUtil.GetInstance().DispatchEvent("MazeShowNotice", "");
-                this.player.Move(tarCell, function(){
-                    tarCell.Trigger();
-                })
+                else
+                {
+                    databus.AddMoney(0 - affair.cost);
+                    EventUtil.GetInstance().DispatchEvent("MazeShowNotice", "");
+                    this.player.Move(tarCell, function(){
+                        tarCell.Trigger();
+                    })
+                }
             }
         }
     }

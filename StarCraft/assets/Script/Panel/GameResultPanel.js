@@ -37,7 +37,7 @@ cc.Class({
     },
 
     onClose(){
-        new LevelManager().SwitchLevel("battle");
+        new LevelManager().SwitchLevel("maze");
     },
 
     Init(meteorNum) {

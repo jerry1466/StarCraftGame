@@ -43,4 +43,8 @@ export default class LevelManager {
     IsBattleLevel(){
         return this.CurrentLevelName == "battle"
     }
+
+    IsMazeLevel(){
+        return this.CurrentLevelName == "maze"
+    }
 }

@@ -8,13 +8,14 @@ import SceneManager from "SceneManager";
 import EventUtil from "EventUtil";
 import MazeManager from "MazeManager";
 import ModuleManager from "ModuleManager";
-import BGMConfig from "BGMConfig";
+import StarConfig from "StarConfig";
 import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig";
 import BuffBase from 'BuffBase';
 import Coin from "Coin";
 import Player from "Player";
 import UIUtil from "UIUtil";
+import GuideManager from "GuideManager";
 
 let databus = new Databus()
 cc.Class({
@@ -22,7 +23,8 @@ cc.Class({
     properties: {
         bg:cc.Sprite,
         mazeBg:cc.Sprite,
-        diamondCon: Coin,
+        stepCostCon:Coin,
+        diamondCon:Coin,
         btnExit:cc.Button,
         map:cc.Node,
         player:Player,
@@ -37,6 +39,8 @@ cc.Class({
         ResourceManager.LoadRemoteSprite(this.btnExit, ResConfig.ExitBtn());
         ResourceManager.LoadRemoteSprite(this.fog, ResConfig.FogIcon());
         SceneManager.GetInstance().SetRoot(this.node);
+        this.stepCostCon.Init(ResConfig.ConBg());
+        this.stepCostCon.InitIcon(ResConfig.DiamondIcon());
         this.diamondCon.Init(ResConfig.DiamondConBg());
         this.registerEventHandler();
     },
@@ -44,6 +48,7 @@ cc.Class({
     update() {
         MazeManager.GetInstance().Update();
         MazeManager.GetInstance().UpdateFogShader();
+        this.stepCostCon.UpdateCoin(StarConfig.GetMazeCellCost(databus.userInfo.maxStarId, databus.userInfo.brokeFixIndex + 1));
         this.diamondCon.UpdateCoin(databus.userInfo.diamond, true);
     },
 
@@ -100,7 +105,6 @@ cc.Class({
 
     onTouchStart(event){
         this.touchStartLocation = this.toMapPosition(event.getLocation());
-        MazeManager.GetInstance().ClickMap(this.touchStartLocation);
         this.onTouchEndHandler = this.onTouchEnd.bind(this);
         this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
         this.onTouchCancelHandler = this.onTouchCancel.bind(this);

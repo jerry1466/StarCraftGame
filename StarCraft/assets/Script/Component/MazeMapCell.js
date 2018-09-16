@@ -113,7 +113,6 @@ cc.Class({
             tweenAlpha.onFinishCallBack = function()
             {
                 icon.node.removeFromParent();
-                icon.node.destroy();
             }
         }
     }

@@ -4,19 +4,20 @@
  **/
 import ModuleManager from "ModuleManager";
 import ResourceManager from "ResourceManager";
-import BasePanel from "BasePanel"
-import ResConfig from "ResConfig"
+import BasePanel from "BasePanel";
+import ResConfig from "ResConfig";
 import InterfaceManager from "InterfaceManager";
-import ArrayUtil from "ArrayUtil"
-import Databus from "Databus"
+import Databus from "Databus";
+import EventUtil from "EventUtil";
+import SceneManager from "SceneManager";
+import UIUtil from "UIUtil";
 
 let databus = new Databus();
 cc.Class({
     extends: BasePanel,
     properties: {
         bg: cc.Sprite,
-        btnVideo:cc.Button,
-        spVideo:cc.Sprite,
+        btnShare:cc.Button,
         lbNum:cc.Label,
         btnClose:cc.Button,
         icon:cc.Sprite,
@@ -24,16 +25,16 @@ cc.Class({
 
     onLoad(){
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.GuideDiamondBoxBg());
-        ResourceManager.LoadRemoteSprite(this.spVideo, ResConfig.VideoBtn());
+        ResourceManager.LoadRemoteSprite(this.btnShare, ResConfig.BigBtn());
         ResourceManager.LoadRemoteSprite(this.btnClose, ResConfig.CloseBtn());
         ResourceManager.LoadRemoteSprite(this.icon, ResConfig.DiamondIcon());
-        if(databus.cfgData != null && databus.cfgData.set.wx_video != null && databus.cfgData.set.wx_video.length > 0)
+        if(databus.cfgData != null && databus.cfgData.audit == 1)
         {
-            this.btnVideo.node.active = true
+            this.btnShare.node.active = true
         }
         else
         {
-            this.btnVideo.node.active = false
+            this.btnShare.node.active = false
         }
     },
 
@@ -46,7 +47,8 @@ cc.Class({
     },
 
     onDestroy() {
-
+        EventUtil.GetInstance().RemoveEventListener("ShareSuccess", this.ShareSuccessHandler);
+        EventUtil.GetInstance().DispatchEvent("FreeTouch");
     },
 
 
@@ -54,14 +56,21 @@ cc.Class({
         this.diamondNum = diamondNum;
     },
 
-    onVideo(){
-        ModuleManager.GetInstance().HideModule("GuideDiamondBox");
-        InterfaceManager.GetInstance().CreateAdViedo(ArrayUtil.GetRandomValue(databus.cfgData.set.wx_video), function(){
-            databus.AddMoney(1, 1000);
-        });
+    onShare(){
+        this.ShareSuccessHandler = this.onShareSucess.bind(this);
+        EventUtil.GetInstance().AddEventListener("ShareSuccess", this.ShareSuccessHandler);
+        InterfaceManager.GetInstance().ShareWithImg();
     },
 
     onClose(){
         ModuleManager.GetInstance().HideModule("GuideDiamondBox");
     },
+
+    onShareSucess(){
+        ModuleManager.GetInstance().HideModule("GuideDiamondBox");
+        var moneyType = 1;
+        var moneyNum = 2000;
+        databus.AddMoney(moneyType, moneyNum);
+        UIUtil.ShowMoneyNotice(moneyType, moneyNum, SceneManager.GetInstance().rootCanvas(), cc.v2(0, 250))
+    }
 })    

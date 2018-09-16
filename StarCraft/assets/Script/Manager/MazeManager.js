@@ -7,16 +7,16 @@ import AffairConstant from "AffairConstant";
 import MathUtil from "MathUtil";
 import StarConfig from "StarConfig";
 import ModuleManager from "ModuleManager";
-import UIUtil from "UIUtil";
 import LevelManager from "LevelManager";
+import GuideManager from "GuideManager";
+import SceneManager from "SceneManager";
+import UnitManager from "./UnitManager";
 
 let instance;
 let databus = new Databus();
 let MAXROW = 18;
 let MAXCOL = 12;
 
-let STAGE_PLAYER_NOT_IN_MAP = 0;
-let STAGE_PLAYER_IN_MAP = 1;
 let STENCIL_COLOR = cc.color(255, 255, 255, 0);
 export default class MazeManager{
     static GetInstance(){
@@ -55,7 +55,8 @@ export default class MazeManager{
             {
                 for(var j = 0; j < this.cells[i].length; j++)
                 {
-                    if(this.cells[i][j].affair.triggered != true)
+                    var affair = this.cells[i][j].affair;
+                    if(affair.triggered != true && affair.fogCover == true)
                     {
                         var node = this.cells[i][j].node;
                         var xMin = node.x - 0.5*node.width*node.scaleX;
@@ -94,16 +95,45 @@ export default class MazeManager{
         this.mazeConfig = MazeConfig.GetConfig(this.starId);
         this.mazeRow = this.mazeConfig["row"];
         this.mazeCol = this.mazeConfig["column"];
-        this.mapScale = cc.v2(MAXCOL / this.mazeCol, MAXROW / this.mazeRow);
+        this.centerRow = Math.floor((this.mazeRow - 1) * 0.5);
+        this.centerCol = Math.floor((this.mazeCol - 1) * 0.5);
+        // this.mapScale = cc.v2(MAXCOL / this.mazeCol, MAXROW / this.mazeRow);
+        this.mapScale = cc.v2(1, 1);
         this.affairEventList = [];
         if(databus.userInfo.mazeComplete > 0)
         {
             this.InitAffairEventList(this.mazeConfig);
             this.affairEventList = MathUtil.Shuffle(this.affairEventList);
+            //把起始格的事件换成空的
+            var centerGridAffair = this.affairEventList[this.centerRow * this.mazeCol + this.centerCol]
+            if(centerGridAffair.type != AffairConstant.AffairEnum().NONE)
+            {
+                var randomValue = Math.floor(Math.random() * this.affairEventList.length);
+                while(this.affairEventList[randomValue].type != AffairConstant.AffairEnum().NONE)
+                {
+                    randomValue = Math.floor(Math.random() * this.affairEventList.length);
+                }
+                var temp = this.affairEventList[randomValue];
+                this.affairEventList[randomValue] = centerGridAffair;
+                this.affairEventList[this.centerRow * this.mazeCol + this.centerCol] = temp;
+            }
         }
         else
         {
             this.InitAffairByDataSource();
+        }
+        //把初始化无雾区域的事件fogCover置为false
+        var rowOffset = MazeConfig.GetNofogAreaRowOffset();
+        var colOffset = MazeConfig.GetNofogAreaColOffset();
+        for(var i = 0; i < this.affairEventList.length; i++)
+        {
+            var row = Math.floor(i / this.mazeCol);
+            var col = i % this.mazeCol;
+            if(row >= this.centerRow - rowOffset && row <= this.centerRow + rowOffset
+            && col >= this.centerCol - colOffset && col <= this.centerCol + colOffset)
+            {
+                this.affairEventList[i].fogCover = false;
+            }
         }
         this.cells = new Array(this.mazeRow);
         for(var i = 0; i < this.mazeRow; i++)
@@ -111,7 +141,6 @@ export default class MazeManager{
             this.cells[i] = new Array(this.mazeCol);
         }
         this.loadCell(0, this, this.container);
-        this.container.active = false;
     }
 
     InitAffairEventList(mazeConfig){
@@ -142,36 +171,8 @@ export default class MazeManager{
         }
     }
 
-    ClickMap(position){
-        if(this.Stage == STAGE_PLAYER_NOT_IN_MAP){
-            var response = false;
-            for(var i = 0; i < this.mazeRow && !response; i++)
-            {
-                for(var j = 0; j < this.mazeCol; j++)
-                {
-                    var mazeCell = this.cells[i][j];
-                    var width = mazeCell.node.width * mazeCell.node.scaleX;
-                    var height = mazeCell.node.height * mazeCell.node.scaleY;
-                    if(mazeCell.node.x - width * 0.5 <= position.x && mazeCell.node.x + width * 0.5 >= position.x
-                        && mazeCell.node.y - height * 0.5 <= position.y && mazeCell.node.y + height * 0.5 >= position.y)
-                    {
-                        response = true;
-                        this.TouchEnable = false;
-                        EventUtil.GetInstance().DispatchEvent("MazeShowNotice", "");
-                        databus.userInfo.mazeCurLoc = mazeCell.row * this.mazeCol + mazeCell.column;
-                        this.player.JumpTo(mazeCell, function(){
-                            mazeCell.Trigger();
-                        });
-                        this.Stage = STAGE_PLAYER_IN_MAP;
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
     Move(dir) {
-        if(this.Stage == STAGE_PLAYER_IN_MAP && this.MapReady && this.TouchEnable)
+        if(this.MapReady && this.TouchEnable && GuideManager.HasGuide("mazeFirstStep"))
         {
             var row = this.player.row;
             var column = this.player.column;
@@ -213,7 +214,6 @@ export default class MazeManager{
                 var affair = tarCell.GetAffair();
                 if(databus.userInfo.diamond < affair.cost)
                 {
-                    EventUtil.GetInstance().DispatchEvent("FreeTouch");
                     ModuleManager.GetInstance().ShowModule("GuideDiamondBox", affair.cost);
                 }
                 else
@@ -234,39 +234,38 @@ export default class MazeManager{
         var column = Math.floor(index % temp.mazeCol);
         if(row < temp.mazeRow && column < temp.mazeCol)
         {
-            PrefabUtil.GetPrefabInstance("MazeMapCell", function(success, instance){
-                if(success)
-                {
-                    instance.parent = container;
-                    instance.setScale(temp.mapScale);
-                    var width = instance.width * temp.mapScale.x;
-                    var height = instance.height * temp.mapScale.y;
-                    instance.x = (column - temp.mazeCol * 0.5) * width + 0.5 * width;
-                    instance.y = (0.5 * temp.mazeRow - row) * height - 0.5 * height;
-                    instance.active = true;
-                    var mazeCell = instance.getComponent("MazeMapCell");
-                    mazeCell.Init(row, column);
-                    mazeCell.InitAffair(temp.affairEventList[row * temp.mazeCol + column]);
-                    temp.cells[row][column] = mazeCell;
-                    temp.loadCell(index + 1, temp, container);
-                }
-            })
+            var instance = UnitManager.GetInstance().GetMazeMapCellInst();
+            instance.parent = container;
+            instance.setScale(temp.mapScale);
+            var width = instance.width * temp.mapScale.x;
+            var height = instance.height * temp.mapScale.y;
+            instance.x = (column - temp.mazeCol * 0.5) * width + 0.5 * width;
+            instance.y = (0.5 * temp.mazeRow - row) * height - 0.5 * height;
+            instance.active = true;
+            var mazeCell = instance.getComponent("MazeMapCell");
+            mazeCell.Init(row, column);
+            mazeCell.InitAffair(temp.affairEventList[row * temp.mazeCol + column]);
+            temp.cells[row][column] = mazeCell;
+            temp.loadCell(index + 1, temp, container);
         }
         else
         {
             this.MapReady = true;
-            this.container.active = true;
             this.UpdateFogShader();
+            GuideManager.AddGuide("mazeWelcome", SceneManager.GetInstance().rootCanvas());
             if(databus.userInfo.mazeComplete > 0)
             {
-                this.Stage = STAGE_PLAYER_NOT_IN_MAP;
-                EventUtil.GetInstance().DispatchEvent("MazeShowNotice", "请在迷雾中选择一个点作为探索起点");
+                EventUtil.GetInstance().DispatchEvent("MazeShowNotice", "");
                 this.TouchEnable = true;
-                databus.userInfo.mazeComplete = 0;
+                this.TouchEnable = false;
+                let mazeCell = temp.cells[this.centerRow][this.centerCol];
+                this.player.JumpTo(mazeCell, function(){
+                    mazeCell.Trigger();
+                });
+                EventUtil.GetInstance().DispatchEvent("FreeTouch");
             }
             else
             {
-                this.Stage == STAGE_PLAYER_IN_MAP;
                 if(databus.userInfo.mazeCurLoc != -1)
                 {
                     var row = Math.floor(databus.userInfo.mazeCurLoc / temp.mazeCol);
@@ -305,10 +304,7 @@ export default class MazeManager{
 
     onFreeTouch(){
         this.TouchEnable = true;
-        if(this.Stage == STAGE_PLAYER_IN_MAP)
-        {
-            EventUtil.GetInstance().DispatchEvent("MazeShowNotice", "请在屏幕上滑动手指，来决策下一步的移动方向");
-        }
+        EventUtil.GetInstance().DispatchEvent("MazeShowNotice", "请在屏幕上滑动手指，来决策下一步的移动方向");
         var allCompelte = true;
         for(var i = 0; i < this.cells.length; i++)
         {

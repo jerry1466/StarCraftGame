@@ -1,5 +1,6 @@
 import SceneManager from "SceneManager";
 import Databus from 'Databus'
+import EventUtil from "EventUtil";
 
 let databus = new Databus()
 /**
@@ -70,9 +71,8 @@ export default class InterfaceManager {
                                 if(addItemNum)
                                 {
                                     shareOpenIds.push(res.encryptedData);
-                                    wx.showToast({title:'分享成功！\n道具数量 + 1'});
-                                    databus.itemNumMax[0]++;
-                                    databus.itemNum[0]++;
+                                    wx.showToast({title:'分享成功！\n'});
+                                    EventUtil.GetInstance().DispatchEvent("ShareSuccess");
                                 }
                                 else
                                 {

@@ -3,6 +3,7 @@ import TweenPosition from "TweenPosition"
 import TweenAlpha from "TweenAlpha"
 import ResConfig from "ResConfig";
 import SceneManager from "SceneManager";
+import LevelManager from "LevelManager";
 
 let noticeList = []
 let noticePrefab;
@@ -164,9 +165,27 @@ export default class UIUtil {
         diamondNode.setPosition(pos.x, pos.y);
         var spriteCon = diamondNode.addComponent(cc.Sprite);
         spriteCon.spriteFrame = new cc.SpriteFrame(cc.url.raw('resources/Image/diamond_icon.png'));
-        var targetPos = this.ToWorldCoord(parent, "Hud.DiamondCon");
-        var tweenPos = TweenPosition.begin(diamondNode, diamondNode.position, cc.v2(targetPos.x - 40, targetPos.y), 1)
-        tweenPos.onFinishCallBack = function(){
+        var uiPath = null;
+        if(new LevelManager().IsBattleLevel())
+        {
+            uiPath = "Hud.DiamondCon";
+        }
+        else if(new LevelManager().IsMazeLevel())
+        {
+            uiPath = "DiamondCon";
+        }
+        if(uiPath)
+        {
+            var targetPos = this.ToWorldCoord(parent, uiPath);
+            var tweenPos = TweenPosition.begin(diamondNode, diamondNode.position, cc.v2(targetPos.x - 40, targetPos.y), 1)
+            tweenPos.onFinishCallBack = function(){
+                diamondNode.removeFromParent();
+                diamondNode.destroy();
+                diamondNode = null;
+            }
+        }
+        else
+        {
             diamondNode.removeFromParent();
             diamondNode.destroy();
             diamondNode = null;

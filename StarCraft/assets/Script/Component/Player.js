@@ -19,7 +19,7 @@ cc.Class({
     },
 
     onLoad(){
-        ResourceManager.LoadRemoteSprite(this.head, ResConfig.GetStarIcon(databus.userInfo.curStarId));
+        // ResourceManager.LoadRemoteSprite(this.head, ResConfig.GetStarIcon(databus.userInfo.curStarId));
         if(CC_WECHATGAME)
         {
             let avatarUrl = databus.wxUserInfo.avatarUrl;
@@ -58,13 +58,18 @@ cc.Class({
         this.row = tarCell.row;
         this.column = tarCell.column;
         var tweenPos = TweenPosition.begin(this.node, this.node.position, tarCell.node.position, 0.2);
-        tweenPos.onFinishCallBack = callback;
+        var that = this;
+        tweenPos.onFinishCallBack = function(){
+            that.node.y -= 4;
+            callback();
+        };
     },
 
     JumpTo(tarCell, callback){
         this.row = tarCell.row;
         this.column = tarCell.column;
         this.node.setPosition(tarCell.node.position);
+        this.node.y -= 4;
         if(callback){
             callback();
         }

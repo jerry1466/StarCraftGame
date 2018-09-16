@@ -19,7 +19,7 @@ let res=
         "guideDiamondBox":"window_bg3.png",
         "fixCompleteBox":"window_bg2.png",
         "gameResultPanel":"window_bg4.png",
-        "mazePanel":"mazePanel_bg2.png",
+        "mazePanel":"mazePanel_bg.png",
         "frame":"frame.png",
         "line":"mazeLine.png",
         "loginPanel":"loginPanel_bg.png",

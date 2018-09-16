@@ -2478,7 +2478,7 @@
     },
     "_enabled": true,
     "openAnim": 1,
-    "blankClose": true,
+    "blankClose": false,
     "bg": {
       "__id__": 3
     },

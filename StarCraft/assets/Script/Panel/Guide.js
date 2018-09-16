@@ -24,7 +24,6 @@ cc.Class({
 
     onLoad(){
         ResourceManager.LoadRemoteSprite(this.bgContent, ResConfig.BigBtn());
-        ResourceManager.LoadRemoteSprite(this.circleNode, ResConfig.GuideCircle());
         ResourceManager.LoadRemoteSprite(this.cover, ResConfig.FogIcon());
         this.cover.node.width = this.cover.node.height = 3000;
         this.node.width = this.node.height = 3000;
@@ -35,13 +34,13 @@ cc.Class({
         this.bgContent.node.setPosition(cc.v2(this.guideConfig["offset"][0], this.guideConfig["offset"][1]));
         this.mask.width = this.tarNode.width * this.tarNode.scaleX;
         this.mask.height = this.tarNode.height * this.tarNode.scaleY;
-        this.circleNode.width = this.mask.width + 50;
+        this.circleNode.width = this.mask.width + 20;
         this.circleNode.height = this.mask.height + 20;
         this.notice();
     },
 
     notice(){
-        TweenScale.begin(this.circleNode, cc.v2(1,1), cc.v2(1.1, 1.1), 0.6, -1);
+        TweenScale.begin(this.circleNode, cc.v2(1,1), cc.v2(1.04, 1.04), 0.6, -1);
         TweenAlpha.begin(this.bgContent.node, 100, 255, 0.75, 1);
     },
 

@@ -43,6 +43,7 @@ cc.Class({
     },
 
     start(){
+        this.barloading.progress = 0;
         Productor.GetInstance().Start();
     },
 

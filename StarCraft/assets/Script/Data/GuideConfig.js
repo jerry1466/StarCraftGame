@@ -50,7 +50,7 @@ let data =
         {
             "text":"修补后续的破损，需要使用到流星",
             "uiName":"FixCost",
-            "offset":[0, -77],
+            "offset":[0, 57],
             "timeout":2.5,
             "next":"searchMeteor",
         },
@@ -66,7 +66,29 @@ let data =
             "uiName":"BtnMyStars",
             "offset":[-150, 0],
             "prev":["searchMeteor"],
-        }
+        },
+    "mazeWelcome":
+        {
+            "text":"欢迎来到流星平原!!\n这里可以尽情探索财富~",
+            "uiName":"Map",
+            "offset":[0, -337],
+            "timeout":2.5,
+            "next":"mazeCost",
+        },
+    "mazeCost":
+        {
+            "text":"在流星平原上的行走需要消耗钻石哦~",
+            "uiName":"StepCostCon",
+            "offset":[0, -77],
+            "timeout":2.5,
+            "next":"mazeFirstStep",
+        },
+    "mazeFirstStep":
+        {
+            "text":"现在，请滑动手指，选择要行走的方向",
+            "uiName":"FogTopMask",
+            "offset":[0, -267],
+        },
 }
 
 export default class GuideConfig

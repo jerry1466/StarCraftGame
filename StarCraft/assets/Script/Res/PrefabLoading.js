@@ -1,9 +1,9 @@
 import BasicResLoading from 'BasicResLoading'
-import UnitManager from 'UnitManager';
 import UIUtil from "UIUtil";
 import GuideManager from "GuideManager";
+import UnitManager from "UnitManager";
 
-let PrefabInitNum = 3
+let PrefabInitNum = 4
 cc.Class({
     extends:BasicResLoading,
     Load(){
@@ -13,17 +13,22 @@ cc.Class({
             that._loadedIndex++;
             UnitManager.GetInstance().BrokePrefab = loadRes;
             console.log("Broke Loaded");
-        })
+        });
         this.loadRes("Notice", function(errMsg, loadRes){
             that._loadedIndex++;
             UIUtil.SetNoticePrefab(loadRes);
             console.log("Notice Loaded");
-        })
+        });
         this.loadRes("Panel/Guide", function(errMsg, loadRes){
             that._loadedIndex++;
             GuideManager.SetGuidePrefab(loadRes);
             console.log("Guide Loaded");
-        })
+        });
+        this.loadRes("MazeMapCell", function(errMsg, loadRes){
+            that._loadedIndex++;
+            UnitManager.GetInstance().SetMazeMapCellPrefab(loadRes);
+            console.log("MazeMapCell Loaded");
+        });
     },
     GetProgress(){return this._loadedIndex / PrefabInitNum},
     IsComplete(){return this._loadedIndex >= PrefabInitNum},

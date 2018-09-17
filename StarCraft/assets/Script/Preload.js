@@ -96,7 +96,7 @@ cc.Class({
         ResourceManager.LoadRemoteSprite(this.btnEnter, ResConfig.BigBtn());
         ResourceManager.LoadRemoteSprite(this.btnShare, ResConfig.BigBtn());
         ResourceManager.LoadRemoteSprite(this.infer, ResConfig.BubbleBtn());
-        ResourceManager.LoadRemoteSprite(this.star, ResConfig.FatalStarIcon());
+        // ResourceManager.LoadRemoteSprite(this.star, ResConfig.FatalStarIcon());
         ResourceManager.LoadRemoteSprite(this.btnRank, ResConfig.RankBtn());
         ResourceManager.LoadRemoteSprite(this.btnMoreGame, ResConfig.MoreGameBtn());
         ResourceManager.LoadRemoteSprite(this.btnAiWan, ResConfig.AiwanBtn());

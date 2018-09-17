@@ -87,7 +87,7 @@ let data =
         {
             "text":"现在，请滑动手指，选择要行走的方向",
             "uiName":"FogTopMask",
-            "offset":[0, -267],
+            "offset":[0, -287],
         },
 }
 

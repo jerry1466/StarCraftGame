@@ -647,8 +647,8 @@
     "_color": {
       "__type__": "cc.Color",
       "r": 237,
-      "g": 107,
-      "b": 248,
+      "g": 247,
+      "b": 0,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,

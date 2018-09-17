@@ -12,6 +12,7 @@ import EventUtil from "EventUtil";
 import ModuleManager from "ModuleManager";
 import GuideManager from "GuideManager";
 import SceneManager from "SceneManager";
+import UIUtil from "../Lib/UIUtil";
 
 let databus = new Databus()
 let rotation = 0.05;
@@ -94,7 +95,7 @@ cc.Class({
         var broke = this._brokeSpList[curFixIndex].getComponent("Broke");
         broke.Select(false);
         broke.SetFixed(true);
-        var tweenAlpha = TweenAlpha.begin(this._brokeSpList[curFixIndex], 255, 0, 1, 1);
+        var tweenAlpha = TweenAlpha.begin(this._brokeSpList[curFixIndex], 255, 0, 1.5, 1);
         var that = this
         tweenAlpha.onFinishCallBack = function(){
             databus.AddMoney(2, 0 - broke.cost);
@@ -105,6 +106,9 @@ cc.Class({
             {
                 databus.userInfo.brokeFixIndex += 1;
                 that.selectBroke(databus.userInfo.brokeFixIndex + 1);
+                UIUtil.Confirm("黑洞已修复！\n星球钻石产量 + 1/秒", function(){
+                    GuideManager.AddGuide("fixCostMeteor", SceneManager.GetInstance().rootCanvas());
+                }, "太棒了");
             }
             else
             {
@@ -114,7 +118,9 @@ cc.Class({
                 {
                     databus.userInfo.maxStarId = curStarId + 1;
                 }
-                ModuleManager.GetInstance().ShowModule("FixCompleteBox", curStarId);
+                UIUtil.Confirm("黑洞已修复！\n星球钻石产量 + 1/秒", function(){
+                    ModuleManager.GetInstance().ShowModule("FixCompleteBox", curStarId);
+                }, "太棒了");
             }
         }
 

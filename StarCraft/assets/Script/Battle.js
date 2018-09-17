@@ -172,9 +172,5 @@ cc.Class({
 
     setFixRelatedBroke(broke){
         this._broke = broke;
-        if(broke && broke.index > 0)
-        {
-            GuideManager.AddGuide("fixCostMeteor", this.node);
-        }
     }
 })    

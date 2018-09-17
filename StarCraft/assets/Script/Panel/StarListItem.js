@@ -54,7 +54,7 @@ cc.Class({
             // this.btnUnlock.node.active = false;
             this.btnView.node.active = true;
             this.rtProductivity.node.active = true;
-            this.rtProductivity.string = "<color=#ED6BF8>产量：" + "</c><color=#9AFF9A>" + Productor.GetInstance().GetStarProductivity(config, databus.userInfo.brokeFixIndex) + "</c><color=#FFFFFF>/秒</c>";
+            this.rtProductivity.string = "<color=#EDF700>产量：" + Productor.GetInstance().GetStarProductivity(config, databus.userInfo.brokeFixIndex) + "</c><color=#FFFFFF>/秒</c>";
         }
         /*
         else if(databus.IsCurStarFixed() && config.id == databus.userInfo.curStarId + 1)

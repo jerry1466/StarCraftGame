@@ -63,6 +63,11 @@ cc.Class({
         this.affair.triggered = true;
     },
 
+    RemoveFog(callback){
+        this.affair.fogCover = false;
+        setTimeout(callback, 300);
+    },
+
     Trigger(){
         if(this.affair.type != AffairConstant.AffairEnum().NONE) {
             removeIcon(this.icon);

@@ -220,10 +220,13 @@ export default class MazeManager{
                 {
                     databus.AddMoney(1, 0 - affair.cost);
                     databus.userInfo.mazeCurLoc = tarCell.row * this.mazeCol + tarCell.column;
-                    EventUtil.GetInstance().DispatchEvent("MazeShowNotice", "");
-                    this.player.Move(tarCell, function(){
-                        tarCell.Trigger();
-                    })
+                    var that = this;
+                    tarCell.RemoveFog(function(){
+                        EventUtil.GetInstance().DispatchEvent("MazeShowNotice", "");
+                        that.player.Move(tarCell, function(){
+                            tarCell.Trigger();
+                        })
+                    });
                 }
             }
         }
@@ -304,7 +307,10 @@ export default class MazeManager{
 
     onFreeTouch(){
         this.TouchEnable = true;
-        EventUtil.GetInstance().DispatchEvent("MazeShowNotice", "请在屏幕上滑动手指，来决策下一步的移动方向");
+        if(GuideManager.HasGuide("mazeFirstStep"))
+        {
+            EventUtil.GetInstance().DispatchEvent("MazeShowNotice", "请在屏幕上滑动手指，来决策下一步的移动方向");
+        }
         var allCompelte = true;
         for(var i = 0; i < this.cells.length; i++)
         {

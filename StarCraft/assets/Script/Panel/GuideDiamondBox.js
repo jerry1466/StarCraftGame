@@ -18,28 +18,32 @@ cc.Class({
     properties: {
         bg: cc.Sprite,
         btnShare:cc.Button,
-        lbNum:cc.Label,
+        lbCostNum:cc.Label,
         btnClose:cc.Button,
-        icon:cc.Sprite,
+        costIcon:cc.Sprite,
+        lbRewardNum:cc.Label,
+        rewardIcon:cc.Sprite,
     },
 
     onLoad(){
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.GuideDiamondBoxBg());
         ResourceManager.LoadRemoteSprite(this.btnShare, ResConfig.BigBtn());
         ResourceManager.LoadRemoteSprite(this.btnClose, ResConfig.CloseBtn());
-        ResourceManager.LoadRemoteSprite(this.icon, ResConfig.DiamondIcon());
-        if(databus.cfgData != null && databus.cfgData.audit == 1)
-        {
+        ResourceManager.LoadRemoteSprite(this.costIcon, ResConfig.DiamondIcon());
+        ResourceManager.LoadRemoteSprite(this.rewardIcon, ResConfig.DiamondIcon());
+        //if(databus.cfgData != null && databus.cfgData.audit == 1)
+        //{
             this.btnShare.node.active = true
-        }
-        else
-        {
-            this.btnShare.node.active = false
-        }
+        //}
+        //else
+        //{
+        //    this.btnShare.node.active = false
+        //}
     },
 
     start(){
-        this.lbNum.string = this.diamondNum.toString();
+        this.lbCostNum.string = this.diamondNum.toString();
+        this.lbRewardNum.string = "+" + databus.shareRewardDiamond.toString();
     },
 
     update() {
@@ -69,7 +73,7 @@ cc.Class({
     onShareSucess(){
         ModuleManager.GetInstance().HideModule("GuideDiamondBox");
         var moneyType = 1;
-        var moneyNum = 2000;
+        var moneyNum = databus.shareRewardDiamond;
         databus.AddMoney(moneyType, moneyNum);
         UIUtil.ShowMoneyNotice(moneyType, moneyNum, SceneManager.GetInstance().rootCanvas(), cc.v2(0, 250))
     }

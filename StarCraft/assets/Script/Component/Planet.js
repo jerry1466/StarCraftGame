@@ -47,7 +47,7 @@ cc.Class({
     	this.node.y = 0
     	this.is_valid = true
 		this.life = databus.gameMaxHp;
-		this.node.zIndex = 100
+		this.node.zIndex = 50
 
 		this.onTouchStartHandler = this.onTouchStart.bind(this)
         this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStartHandler)

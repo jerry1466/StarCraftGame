@@ -75,6 +75,9 @@ cc.Class({
     },
 
     Init(guideConfig, node) {
+    	if (guideConfig["zIndex"]) {
+			this.node.zIndex = guideConfig["zIndex"]
+    	}
         this.guideConfig = guideConfig;
         this.tarNode = node;
         this.refresh();

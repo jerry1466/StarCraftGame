@@ -12,7 +12,8 @@ import SceneManager from 'SceneManager'
 import GameHpCon from "GameHpCon"
 import Coin from "Coin"
 import StarConfig from "StarConfig";
-import TweenPosition from "TweenPosition";
+import TweenPosition from "TweenPosition"
+import GuideManager from "GuideManager"
 
 let databus = new Databus()
 cc.Class({
@@ -33,6 +34,8 @@ cc.Class({
         SceneManager.GetInstance().SetRoot(this.node);
         this.gameMeteorCon.Init(ResConfig.MeteorConBg());
         this.gameHpCon.Init(ResConfig.GameHpConBg());
+        this.countDownStart = false
+        this.countDown.node.active = false
     	//加载流星平原背景
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.FindMeteorBg())
         //var param = new LevelManager().CurrentLevelParam
@@ -44,7 +47,7 @@ cc.Class({
         this.findMeteor.gameButtom = 0 - this.findMeteor.gameTop
         this.findMeteor.gameRight = databus.screenRight - 17
         this.findMeteor.gameLeft = 0 - this.findMeteor.gameRight
-		this.countDownTimer();
+
         var that = this
         this.findMeteor.CreatePlanet(this, function(){
             that.findMeteor.CreateMeteor(that, 5);
@@ -53,12 +56,17 @@ cc.Class({
                 blackholeNum = 9
             }*/
             that.findMeteor.CreateBlackHole(that, 3);
-            
+            that.guide();
         });
         this.registerEventHandler();
     },
 
     update() {
+		if (GuideManager.HasGuide("gameBlackHole") && !this.countDownStart) {
+			this.countDownStart = true
+			this.countDownTimer()
+		}
+    
         if (this.findMeteor.GetReCreateBlackHoleCnt() > 0) {
 			this.findMeteor.CreateBlackHole(this, 1)
 			this.findMeteor.ReCreateBlackHoleCntDel()
@@ -105,8 +113,13 @@ cc.Class({
 	     this.gameHpCon.UpdateHp(hp);
     },
 
+    guide() {
+		GuideManager.AddGuide("gamePlanet", SceneManager.GetInstance().rootCanvas());
+    },
+
     countDownTimer() {
-    	this.countDown.node.zIndex = 101;
+    	this.countDown.node.active = true;
+    	this.countDown.node.zIndex = 100;
     	this.cdanim = this.countDown.node.getComponent(cc.Animation);
     	this.cdanim.on('finished', this.countDownFinish, this);
 		this.cdanim.play('countDown');

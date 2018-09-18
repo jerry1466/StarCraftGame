@@ -121,6 +121,32 @@ let data =
             "uiName":"FogTopMask",
             "offset":[0, -287],
         },
+   	"gamePlanet":
+   		{
+			"text":"手指滑动，移动星球",
+			"uiName":"Planet",
+			"offset":[0, -70],
+			"timeout":2.5,
+			"next":"gameMeteor",
+			"zIndex":200,
+   		},
+   	"gameMeteor":
+   		{
+			"text":"抓取流星",
+			"uiName":"Meteor",
+			"offset":[0, -50],
+			"timeout":2.5,
+			"next":"gameBlackHole",
+			"zIndex":200,
+   		},
+   	"gameBlackHole":
+   		{
+			"text":"注意！避开黑洞",
+			"uiName":"BlackHole",
+			"offset":[0, -80],
+			"timeout":2.5,
+			"zIndex":200,
+   		}
 }
 
 export default class GuideConfig

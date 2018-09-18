@@ -111,6 +111,18 @@ export default class UIUtil {
             {"mode":"confirmCancel", content:tip, confirm:confirmHandler, cancel:cancelHandler, confirmText:confirmText, cancelText:cancelText});
     }
 
+    static ShowTextNotice(content, offset){
+        var notice = this.GetNoticeInst();
+        var noticeCom = notice.getComponent("Notice");
+        noticeCom.Init(null, content);
+        noticeList.push(notice);
+        notice.x = offset.x;
+        notice.y = offset.y;
+        SceneManager.GetInstance().rootCanvas().addChild(notice);
+        notice.active = false;
+        this.doShowNotice();
+    }
+
     static ShowMoneyNotice(moneyType, moneyNum, parent, offset){
         if(parent == null) return;
         var moneyIconRes;
@@ -118,7 +130,7 @@ export default class UIUtil {
         if(moneyType == 1)
         {
             moneyIconRes = ResConfig.DiamondIcon();
-            color = "<color=#ED6BF8>";
+            color = "<color=#EDF700>";
         }
         else
         {
@@ -152,7 +164,11 @@ export default class UIUtil {
         var tweenPos = TweenPosition.begin(noticeLabel, noticeLabel.position, cc.v2(noticeLabel.x, noticeLabel.y + 20), 1)
         var that = this;
         tweenPos.onFinishCallBack = function(){
-            that.flyDiamond(noticeLabel.parent, cc.v2(noticeLabel.position.x - 25, noticeLabel.position.y - 15));
+            var noticeCom = noticeLabel.getComponent("Notice");
+            if(noticeCom.res)
+            {
+                that.flyDiamond(noticeLabel.parent, cc.v2(noticeLabel.position.x - 25, noticeLabel.position.y - 15));
+            }
             noticeLabel.removeFromParent()
             noticeLabel.destroy()
         }

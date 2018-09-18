@@ -8,7 +8,16 @@ let curGuideKey;
 let databus = new Databus();
 export default class GuideManager{
     static SetGuidePrefab(res){
-        guideInst = cc.instantiate(res);
+        this.guidePrefab = res;
+        guideInst = cc.instantiate(this.guidePrefab);
+    }
+
+    static GetGuideInst(){
+        if(guideInst == null)
+        {
+            guideInst = cc.instantiate(this.guidePrefab);
+        }
+        return guideInst;
     }
 
     static AddGuide(key, root){
@@ -42,10 +51,10 @@ export default class GuideManager{
         if(targetNode)
         {
             curGuideKey = key;
-            guideInst.parent = SceneManager.GetInstance().rootCanvas();
+            this.GetGuideInst().parent = SceneManager.GetInstance().rootCanvas();
             var worldPos = UIUtil.ToCanvasCoord(targetNode);
-            guideInst.setPosition(worldPos);
-            var guideCom = guideInst.getComponent("Guide");
+            this.GetGuideInst().setPosition(worldPos);
+            var guideCom = this.GetGuideInst().getComponent("Guide");
             guideCom.Init(guideCfg, targetNode);
         }
         else
@@ -59,8 +68,8 @@ export default class GuideManager{
         {
             databus.userInfo.guidedList.push(curGuideKey);
         }
-        var guideCom = guideInst.getComponent("Guide");
-        guideInst.removeFromParent();
+        var guideCom = this.GetGuideInst().getComponent("Guide");
+        this.GetGuideInst().removeFromParent();
         guideCom.Dispose();
         var guideConfig = GuideConfig.GetGuideConfig(curGuideKey)
         if(guideConfig && guideConfig["next"])

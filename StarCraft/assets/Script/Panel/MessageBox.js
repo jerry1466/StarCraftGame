@@ -13,7 +13,6 @@ cc.Class({
         lbContent:cc.Label,
         btnConfirm:cc.Button,
         btnCancel:cc.Button,
-        btnClose:cc.Button,
         lbConfirm:cc.Label,
         lbCancel:cc.Label
     },
@@ -26,7 +25,6 @@ cc.Class({
         ResourceManager.LoadRemoteSprite(this.spBg, ResConfig.MessageBoxBg())
         ResourceManager.LoadRemoteSprite(this.btnConfirm, ResConfig.BigBtn())
         ResourceManager.LoadRemoteSprite(this.btnCancel, ResConfig.BigBtn())
-        ResourceManager.LoadRemoteSprite(this.btnClose, ResConfig.CloseBtn())
     },
 
     Init(data) {

@@ -238,6 +238,7 @@ export default class MazeManager{
         if(row < temp.mazeRow && column < temp.mazeCol)
         {
             var instance = UnitManager.GetInstance().GetMazeMapCellInst();
+            instance.name = "MazeMapCell" + row.toString() + column.toString();
             instance.parent = container;
             instance.setScale(temp.mapScale);
             var width = instance.width * temp.mapScale.x;
@@ -309,7 +310,7 @@ export default class MazeManager{
         this.TouchEnable = true;
         if(GuideManager.HasGuide("mazeFirstStep"))
         {
-            EventUtil.GetInstance().DispatchEvent("MazeShowNotice", "请在屏幕上滑动手指，来决策下一步的移动方向");
+            EventUtil.GetInstance().DispatchEvent("MazeShowNotice", "请点击，来决策下一步的移动方向");
         }
         var allCompelte = true;
         for(var i = 0; i < this.cells.length; i++)

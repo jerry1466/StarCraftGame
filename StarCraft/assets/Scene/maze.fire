@@ -1433,7 +1433,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 442,
+      "width": 0,
       "height": 34
     },
     "_rotationX": 0,
@@ -1468,7 +1468,7 @@
     "_N$file": null,
     "_isSystemFontUsed": true,
     "_spacingX": 0,
-    "_N$string": "请选择一个格子作为探索起点",
+    "_N$string": "",
     "_N$horizontalAlign": 1,
     "_N$verticalAlign": 1,
     "_N$fontFamily": "黑体",

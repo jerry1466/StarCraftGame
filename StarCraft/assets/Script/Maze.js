@@ -58,7 +58,15 @@ cc.Class({
     },
 
     start(){
-        MazeManager.GetInstance().Start(this.map, this.player, this.fogMask);
+        UIUtil.ShowTextNotice("<color=#ED6BF8>流星平原开启中...\n大量流星来袭</c>", cc.v2(0, 100));
+        this.btnExit.node.active = false;
+        this.mazeBg.node.active = false;
+        var that = this;
+        setTimeout(function() {
+            that.btnExit.node.active = true;
+            that.mazeBg.node.active = true;
+            MazeManager.GetInstance().Start(that.map, that.player, that.fogMask);
+        }, 1000);
     },
 
     Init() {
@@ -66,29 +74,29 @@ cc.Class({
     },
 
     registerEventHandler(){
-        this.onTriggerRewardHandler = this.triggerRewardHandler.bind(this);
-        EventUtil.GetInstance().AddEventListener("TriggerReward", this.onTriggerRewardHandler);
-        this.onTriggerFreezeHandler = this.triggerFreezeHandler.bind(this);
-        EventUtil.GetInstance().AddEventListener("TriggerFreeze", this.onTriggerFreezeHandler);
-        this.onTriggerRobHandler = this.triggerRobHandler.bind(this);
-        EventUtil.GetInstance().AddEventListener("TriggerRob", this.onTriggerRobHandler);
-        this.onTriggerGameHandler = this.triggerGameHandler.bind(this);
-        EventUtil.GetInstance().AddEventListener("TriggerGame", this.onTriggerGameHandler);
-        this.onTriggerCardHandler = this.triggerCardHandler.bind(this);
-        EventUtil.GetInstance().AddEventListener("TriggerCard", this.onTriggerCardHandler);
-        this.onShowNoticeHandler = this.showNotice.bind(this);
-        EventUtil.GetInstance().AddEventListener("MazeShowNotice", this.onShowNoticeHandler);
+        // this.onTriggerRewardHandler = this.triggerRewardHandler.bind(this);
+        // EventUtil.GetInstance().AddEventListener("TriggerReward", this.onTriggerRewardHandler);
+        // this.onTriggerFreezeHandler = this.triggerFreezeHandler.bind(this);
+        // EventUtil.GetInstance().AddEventListener("TriggerFreeze", this.onTriggerFreezeHandler);
+        // this.onTriggerRobHandler = this.triggerRobHandler.bind(this);
+        // EventUtil.GetInstance().AddEventListener("TriggerRob", this.onTriggerRobHandler);
+        // this.onTriggerGameHandler = this.triggerGameHandler.bind(this);
+        // EventUtil.GetInstance().AddEventListener("TriggerGame", this.onTriggerGameHandler);
+        // this.onTriggerCardHandler = this.triggerCardHandler.bind(this);
+        // EventUtil.GetInstance().AddEventListener("TriggerCard", this.onTriggerCardHandler);
+        // this.onShowNoticeHandler = this.showNotice.bind(this);
+        // EventUtil.GetInstance().AddEventListener("MazeShowNotice", this.onShowNoticeHandler);
         this.onTouchStartHandler = this.onTouchStart.bind(this);
         this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStartHandler);
     },
 
     unRegisterEventHandler(){
-        EventUtil.GetInstance().RemoveEventListener("TriggerReward", this.onTriggerRewardHandler);
-        EventUtil.GetInstance().RemoveEventListener("TriggerFreeze", this.onTriggerFreezeHandler);
-        EventUtil.GetInstance().RemoveEventListener("TriggerRob", this.onTriggerRobHandler);
-        EventUtil.GetInstance().RemoveEventListener("TriggerGame", this.onTriggerGameHandler);
-        EventUtil.GetInstance().RemoveEventListener("TriggerCard", this.onTriggerCardHandler);
-        EventUtil.GetInstance().RemoveEventListener("MazeShowNotice", this.onShowNoticeHandler);
+        // EventUtil.GetInstance().RemoveEventListener("TriggerReward", this.onTriggerRewardHandler);
+        // EventUtil.GetInstance().RemoveEventListener("TriggerFreeze", this.onTriggerFreezeHandler);
+        // EventUtil.GetInstance().RemoveEventListener("TriggerRob", this.onTriggerRobHandler);
+        // EventUtil.GetInstance().RemoveEventListener("TriggerGame", this.onTriggerGameHandler);
+        // EventUtil.GetInstance().RemoveEventListener("TriggerCard", this.onTriggerCardHandler);
+        // EventUtil.GetInstance().RemoveEventListener("MazeShowNotice", this.onShowNoticeHandler);
         this.node.off(cc.Node.EventType.TOUCH_START, this.onTouchStartHandler);
     },
 
@@ -105,18 +113,12 @@ cc.Class({
 
     onTouchStart(event){
         this.touchStartLocation = this.toMapPosition(event.getLocation());
-        this.onTouchEndHandler = this.onTouchEnd.bind(this);
-        this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
-        this.onTouchCancelHandler = this.onTouchCancel.bind(this);
-        this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
-    },
-
-    onTouchEnd(event){
-        this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
-        this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
-        this.touchEndLocation = this.toMapPosition(event.getLocation());
-        var deltaX = this.touchEndLocation.x - this.touchStartLocation.x
-        var deltaY = this.touchEndLocation.y - this.touchStartLocation.y
+        // this.onTouchEndHandler = this.onTouchEnd.bind(this);
+        // this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
+        // this.onTouchCancelHandler = this.onTouchCancel.bind(this);
+        // this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
+        var deltaX = this.touchStartLocation.x - this.player.node.x
+        var deltaY = this.touchStartLocation.y - this.player.node.y
         if(Math.abs(deltaX) > Math.abs(deltaY)){
             if(deltaX > 0)
             {
@@ -139,11 +141,39 @@ cc.Class({
         }
     },
 
-    onTouchCancel(event){
-        this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
-        this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
-        this.touchStartLocation = cc.v2(0, 0);
-    },
+    // onTouchEnd(event){
+    //     this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
+    //     this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
+    //     this.touchEndLocation = this.toMapPosition(event.getLocation());
+    //     var deltaX = this.touchEndLocation.x - this.touchStartLocation.x
+    //     var deltaY = this.touchEndLocation.y - this.touchStartLocation.y
+    //     if(Math.abs(deltaX) > Math.abs(deltaY)){
+    //         if(deltaX > 0)
+    //         {
+    //             MazeManager.GetInstance().Move("right");
+    //         }
+    //         else
+    //         {
+    //             MazeManager.GetInstance().Move("left");
+    //         }
+    //     }
+    //     else{
+    //         if(deltaY > 0)
+    //         {
+    //             MazeManager.GetInstance().Move("up");
+    //         }
+    //         else
+    //         {
+    //             MazeManager.GetInstance().Move("down");
+    //         }
+    //     }
+    // },
+    //
+    // onTouchCancel(event){
+    //     this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
+    //     this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
+    //     this.touchStartLocation = cc.v2(0, 0);
+    // },
 
     triggerRewardHandler(affair){
         databus.AddMoney(2, affair.meteor);

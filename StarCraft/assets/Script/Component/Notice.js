@@ -12,11 +12,11 @@ cc.Class({
     },
 
     update() {
-
+        this.refresh();
     },
 
     onLoad(){
-        ResourceManager.LoadRemoteSprite(this.icon, this.res);
+
         this.num.string = this.numText;
     },
 
@@ -27,5 +27,18 @@ cc.Class({
     Init(res, numText) {
         this.res = res
         this.numText = numText;
+        this.refresh();
+    },
+
+    refresh(){
+        if(this.res)
+        {
+            this.icon.node.active = true;
+            ResourceManager.LoadRemoteSprite(this.icon, this.res);
+        }
+        else
+        {
+            this.icon.node.active = false;
+        }
     }
 })    

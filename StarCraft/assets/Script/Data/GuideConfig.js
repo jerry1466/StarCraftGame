@@ -81,11 +81,43 @@ let data =
             "uiName":"StepCostCon",
             "offset":[0, -77],
             "timeout":2.5,
+            "next":"mazeStepLeft",
+        },
+    "mazeStepLeft":
+        {
+            "text":"在星球的左侧点击，星球将向左边移动",
+            "uiName":"MazeMapCell82",
+            "offset":[0, -77],
+            "timeout":"2",
+            "next":"mazeStepRight",
+        },
+    "mazeStepRight":
+        {
+            "text":"同理，在这一侧点击，星球将向右边移动",
+            "uiName":"MazeMapCell88",
+            "offset":[0, -77],
+            "timeout":"2",
+            "next":"mazeStepTop",
+        },
+    "mazeStepTop":
+        {
+            "text":"在星球的上方点击，星球将向上方移动",
+            "uiName":"MazeMapCell25",
+            "offset":[0, 57],
+            "timeout":"2",
+            "next":"mazeStepBottom",
+        },
+    "mazeStepBottom":
+        {
+            "text":"同理，在这一侧点击，星球将向下方移动",
+            "uiName":"MazeMapCell145",
+            "offset":[0, -57],
+            "timeout":"2",
             "next":"mazeFirstStep",
         },
     "mazeFirstStep":
         {
-            "text":"现在，请滑动手指，选择要行走的方向",
+            "text":"现在，请选择一侧点击，选择要行走的方向",
             "uiName":"FogTopMask",
             "offset":[0, -287],
         },

@@ -74,29 +74,29 @@ cc.Class({
     },
 
     registerEventHandler(){
-        // this.onTriggerRewardHandler = this.triggerRewardHandler.bind(this);
-        // EventUtil.GetInstance().AddEventListener("TriggerReward", this.onTriggerRewardHandler);
-        // this.onTriggerFreezeHandler = this.triggerFreezeHandler.bind(this);
-        // EventUtil.GetInstance().AddEventListener("TriggerFreeze", this.onTriggerFreezeHandler);
-        // this.onTriggerRobHandler = this.triggerRobHandler.bind(this);
-        // EventUtil.GetInstance().AddEventListener("TriggerRob", this.onTriggerRobHandler);
-        // this.onTriggerGameHandler = this.triggerGameHandler.bind(this);
-        // EventUtil.GetInstance().AddEventListener("TriggerGame", this.onTriggerGameHandler);
-        // this.onTriggerCardHandler = this.triggerCardHandler.bind(this);
-        // EventUtil.GetInstance().AddEventListener("TriggerCard", this.onTriggerCardHandler);
-        // this.onShowNoticeHandler = this.showNotice.bind(this);
-        // EventUtil.GetInstance().AddEventListener("MazeShowNotice", this.onShowNoticeHandler);
+        this.onTriggerRewardHandler = this.triggerRewardHandler.bind(this);
+        EventUtil.GetInstance().AddEventListener("TriggerReward", this.onTriggerRewardHandler);
+        this.onTriggerFreezeHandler = this.triggerFreezeHandler.bind(this);
+        EventUtil.GetInstance().AddEventListener("TriggerFreeze", this.onTriggerFreezeHandler);
+        this.onTriggerRobHandler = this.triggerRobHandler.bind(this);
+        EventUtil.GetInstance().AddEventListener("TriggerRob", this.onTriggerRobHandler);
+        this.onTriggerGameHandler = this.triggerGameHandler.bind(this);
+        EventUtil.GetInstance().AddEventListener("TriggerGame", this.onTriggerGameHandler);
+        this.onTriggerCardHandler = this.triggerCardHandler.bind(this);
+        EventUtil.GetInstance().AddEventListener("TriggerCard", this.onTriggerCardHandler);
+        this.onShowNoticeHandler = this.showNotice.bind(this);
+        EventUtil.GetInstance().AddEventListener("MazeShowNotice", this.onShowNoticeHandler);
         this.onTouchStartHandler = this.onTouchStart.bind(this);
         this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStartHandler);
     },
 
     unRegisterEventHandler(){
-        // EventUtil.GetInstance().RemoveEventListener("TriggerReward", this.onTriggerRewardHandler);
-        // EventUtil.GetInstance().RemoveEventListener("TriggerFreeze", this.onTriggerFreezeHandler);
-        // EventUtil.GetInstance().RemoveEventListener("TriggerRob", this.onTriggerRobHandler);
-        // EventUtil.GetInstance().RemoveEventListener("TriggerGame", this.onTriggerGameHandler);
-        // EventUtil.GetInstance().RemoveEventListener("TriggerCard", this.onTriggerCardHandler);
-        // EventUtil.GetInstance().RemoveEventListener("MazeShowNotice", this.onShowNoticeHandler);
+        EventUtil.GetInstance().RemoveEventListener("TriggerReward", this.onTriggerRewardHandler);
+        EventUtil.GetInstance().RemoveEventListener("TriggerFreeze", this.onTriggerFreezeHandler);
+        EventUtil.GetInstance().RemoveEventListener("TriggerRob", this.onTriggerRobHandler);
+        EventUtil.GetInstance().RemoveEventListener("TriggerGame", this.onTriggerGameHandler);
+        EventUtil.GetInstance().RemoveEventListener("TriggerCard", this.onTriggerCardHandler);
+        EventUtil.GetInstance().RemoveEventListener("MazeShowNotice", this.onShowNoticeHandler);
         this.node.off(cc.Node.EventType.TOUCH_START, this.onTouchStartHandler);
     },
 

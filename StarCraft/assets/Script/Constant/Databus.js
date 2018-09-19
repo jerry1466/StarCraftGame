@@ -35,7 +35,7 @@ export default class Databus{
         this.userInfo = {
             curStarId:1001,
             maxStarId:1001,
-            diamond:1000,
+            diamond:100000,
             meteor:0,
             brokeFixIndex:-1,
             mazeComplete:1,

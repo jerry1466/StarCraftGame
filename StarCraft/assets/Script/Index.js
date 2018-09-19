@@ -12,6 +12,7 @@ import BuffBase from "BuffBase";
 import NetUtil from "NetUtil";
 import Productor from "Productor";
 import StarConfig from "StarConfig";
+import AysncImageLoading from "AysncImageLoading";
 
 let databus = new Databus()
 cc.Class({
@@ -32,6 +33,7 @@ cc.Class({
         SceneManager.GetInstance().SetRoot(this.node);
         //ResourceManager.LoadRemoteSprite(this.spBg, "https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png")
         var that = this
+        this.barloading.progress = 0;
         NetUtil.Request(databus.cfgUrl, {}, function(data){
     	    databus.cfgData = data;
     	    databus.Reset();
@@ -43,7 +45,6 @@ cc.Class({
     },
 
     start(){
-        this.barloading.progress = 0;
         Productor.GetInstance().Start();
     },
 
@@ -55,7 +56,8 @@ cc.Class({
 
     doLoad(){
         if(this.loadIndex >= this.loadList.length){
-            new LevelManager().SwitchLevel("preload", 0)
+            new LevelManager().SwitchLevel("preload", 0);
+            AysncImageLoading.Load();
         }
         else{
             this.loadList[this.loadIndex].Load()
@@ -78,7 +80,7 @@ cc.Class({
             if(this.loadIndex < this.loadList.length){
                 var currentResLoading = this.loadList[this.loadIndex];
                 var totalPerent = (this.loadIndex - 1) * blockPercent + currentResLoading.GetProgress();
-                this.barloading.progress = totalPerent;
+                this.barloading.progress = totalPerent < 0? 0 : totalPerent;
 
                 if(currentResLoading.IsComplete())
                 {
@@ -87,7 +89,14 @@ cc.Class({
                 }
             }
             else{
-                this.barloading.progress = 1
+                if(this.loadIndex != 0)
+                {
+                    this.barloading.progress = 1
+                }
+                else
+                {
+                    this.barloading.progress = 0
+                }
             }
         }
     },

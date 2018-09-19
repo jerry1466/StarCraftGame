@@ -6,11 +6,11 @@ cc.Class({
     Load(){
         if(CC_WECHATGAME)
         {
-            cc.loader.load(ResConfig.GetAllRes(), this.progressCallback.bind(this), this.completeCallback.bind(this))
+            cc.loader.load(ResConfig.GetSyncRes(), this.progressCallback.bind(this), this.completeCallback.bind(this))
         }
         else
         {
-            var resList = ResConfig.GetAllRes();
+            var resList = ResConfig.GetSyncRes();
             this.loadedCount = 0;
             this.totalCount = resList.length;
             this._progress = 0;

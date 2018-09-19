@@ -219,6 +219,7 @@ export default class MazeManager{
                 else
                 {
                     databus.AddMoney(1, 0 - affair.cost);
+                    var relatedCells = this.getRelatedCells(databus.userInfo.mazeCurLoc, dir);
                     databus.userInfo.mazeCurLoc = tarCell.row * this.mazeCol + tarCell.column;
                     var that = this;
                     tarCell.RemoveFog(function(){
@@ -227,9 +228,120 @@ export default class MazeManager{
                             tarCell.Trigger();
                         })
                     });
+                    for(var i = 0; i < relatedCells.length; i++)
+                    {
+                        var loc = relatedCells[i];
+                        if(this.checkCellExist(loc.x, loc.y))
+                        {
+                            var cell = this.cells[loc.x][loc.y];
+                            cell.RemoveFog();
+                        }
+                    }
                 }
             }
         }
+    }
+
+    getRelatedCells(curLoc, dir){
+        var row = Math.floor(curLoc / this.mazeCol);
+        var col = Math.floor(curLoc % this.mazeCol);
+        console.log("getRelatedCells", curLoc, row, col);
+        var foreCells = [];
+        var forwardCells = [];
+        var oneSideCells = [];
+        var otherSideCells = [];
+        switch(dir)
+        {
+            case "left":
+                foreCells.push(cc.v2(row - 1, col - 1));
+                forwardCells.push(cc.v2(row, col - 1));
+                forwardCells.push(cc.v2(row, col - 2));
+                oneSideCells.push(cc.v2(row - 1, col - 2));
+                otherSideCells.push(cc.v2(row - 1, col));
+                foreCells.push(cc.v2(row, col - 1));
+                oneSideCells.push(cc.v2(row, col - 2));
+                foreCells.push(cc.v2(row + 1, col - 1));
+                oneSideCells.push(cc.v2(row + 1, col - 2));
+                otherSideCells.push(cc.v2(row + 1, col));
+                break;
+            case "right":
+                foreCells.push(cc.v2(row - 1, col + 1));
+                forwardCells.push(cc.v2(row, col + 1));
+                forwardCells.push(cc.v2(row, col + 2));
+                oneSideCells.push(cc.v2(row - 1, col + 2));
+                otherSideCells.push(cc.v2(row - 1, col));
+                foreCells.push(cc.v2(row, col + 1));
+                oneSideCells.push(cc.v2(row, col + 2));
+                foreCells.push(cc.v2(row + 1, col + 1));
+                oneSideCells.push(cc.v2(row + 1, col + 2));
+                otherSideCells.push(cc.v2(row + 1, col));
+                break;
+            case "up":
+                foreCells.push(cc.v2(row - 1, col - 1));
+                forwardCells.push(cc.v2(row - 1, col));
+                forwardCells.push(cc.v2(row - 1, col));
+                oneSideCells.push(cc.v2(row - 2, col - 1));
+                otherSideCells.push(cc.v2(row, col - 1));
+                foreCells.push(cc.v2(row - 1, col));
+                oneSideCells.push(cc.v2(row - 2, col));
+                foreCells.push(cc.v2(row - 1, col + 1));
+                oneSideCells.push(cc.v2(row - 2, col + 1));
+                otherSideCells.push(cc.v2(row, col + 1));
+                break;
+            case "down":
+                foreCells.push(cc.v2(row + 1, col - 1));
+                forwardCells.push(cc.v2(row + 1, col));
+                forwardCells.push(cc.v2(row + 1, col));
+                oneSideCells.push(cc.v2(row + 2, col - 1));
+                otherSideCells.push(cc.v2(row, col - 1));
+                foreCells.push(cc.v2(row + 1, col));
+                oneSideCells.push(cc.v2(row + 2, col));
+                foreCells.push(cc.v2(row + 1, col + 1));
+                oneSideCells.push(cc.v2(row + 2, col + 1));
+                otherSideCells.push(cc.v2(row, col + 1));
+                break;
+        }
+        var oneSideNoFogCover = true;
+        for(var i = 0; i < oneSideCells.length; i++)
+        {
+            var loc = oneSideCells[i];
+            if(this.checkCellExist(loc.x, loc.y))
+            {
+                var cell = this.cells[loc.x][loc.y];
+                if(cell.fogCover == true)
+                {
+                    oneSideNoFogCover = false;
+                    break;
+                }
+            }
+        }
+        var otherSideNoFogCover = true;
+        for(var i = 0; i < otherSideCells.length; i++)
+        {
+            var loc = otherSideCells[i];
+            if(this.checkCellExist(loc.x, loc.y))
+            {
+                var cell = this.cells[loc.x][loc.y];
+                if(cell.fogCover == true)
+                {
+                    otherSideNoFogCover = false;
+                    break;
+                }
+            }
+        }
+        if(oneSideNoFogCover && otherSideNoFogCover)
+        {
+            return foreCells;
+        }
+        else if(oneSideNoFogCover || otherSideNoFogCover)
+        {
+            return forwardCells;
+        }
+        return [];
+    }
+
+    checkCellExist(row, col){
+        return row >= 0 && row < this.mazeRow && col >= 0 && col < this.mazeCol;
     }
 
     loadCell(index, temp, container){
@@ -263,10 +375,12 @@ export default class MazeManager{
                 this.TouchEnable = true;
                 this.TouchEnable = false;
                 let mazeCell = temp.cells[this.centerRow][this.centerCol];
+                databus.userInfo.mazeCurLoc = this.centerRow * this.mazeCol + this.centerCol;
                 this.player.JumpTo(mazeCell, function(){
                     mazeCell.Trigger();
                 });
                 EventUtil.GetInstance().DispatchEvent("FreeTouch");
+                databus.userInfo.mazeComplete = 0;
             }
             else
             {

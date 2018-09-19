@@ -132,6 +132,95 @@ let res=
     }
 }
 
+let asyncList =
+    [
+        "star_1001",
+        "star_1002",
+        "star_1003",
+        "star_1004",
+        "star_1005",
+        "star_1006",
+        "star_1007",
+        "star_1008",
+        "star_1009",
+        "star_1010",
+        "star_1011",
+        "star_1012",
+        "star_1013",
+        "star_1014",
+        "star_1015",
+        "star_1016",
+        "star_1017",
+        "star_1018",
+        "star_1019",
+        "star_1020",
+        "star_1021",
+        "star_1022",
+        "star_1023",
+        "star_1024",
+        "star_1025",
+        "star_1026",
+        "star_1027",
+        "star_1028",
+        "star_1029",
+        "star_1030",
+        "broke_1001",
+        "broke_1002",
+        "broke_1003",
+        "broke_1004",
+        "broke_1005",
+        "broke_1006",
+        "broke_1007",
+        "broke_1008",
+        "broke_1009",
+        "broke_1010",
+        "broke_1011",
+        "broke_1012",
+        "broke_1013",
+        "broke_1014",
+        "broke_1015",
+        "broke_1016",
+        "broke_1017",
+        "broke_1018",
+        "broke_1019",
+        "broke_1020",
+        "broke_1021",
+        "broke_1022",
+        "broke_1023",
+        "broke_1024",
+        "broke_1025",
+        "broke_1026",
+        "broke_1027",
+        "broke_1028",
+        "broke_1029",
+        "broke_1030",
+        "messagebox",
+        "starListItemBg",
+        "mazeBg",
+        "starListPanel",
+        "guideDiamondBox",
+        "fixCompleteBox",
+        "gameResultPanel",
+        "mazePanel",
+        "frame",
+        "line",
+        "hp",
+        "blackhole",
+        "planet",
+        "fog",
+        "broke",
+        "newStar_1",
+        "newStar_2",
+        "viewStar",
+        "gameSearchMeteor",
+        "video",
+        "nextStar",
+        "wellDone",
+        "unlock",
+        "normal",
+        "unFreeze",
+    ]
+
 let wxBaseUrl = "https://cdn-game.2zhuji.cn/uploads/wdxq/";//微信环境下用这个
 let baseUrl = "Texture/";
 
@@ -147,11 +236,29 @@ export default class ResConfig{
         }
     }
 
-    static GetAllRes(){
+    static GetSyncRes(){
         var resList = [];
         for(var mainKey in res){
             for(var subKey in res[mainKey]){
-                resList.push(this.GetBaseUrl() + res[mainKey][subKey])
+                if(asyncList.indexOf(subKey) < 0) {
+                    var url = this.GetBaseUrl() + res[mainKey][subKey];
+                    if (resList.indexOf(url) < 0)
+                        resList.push(url)
+                }
+            }
+        }
+        return resList;
+    }
+
+    static GetAsyncRes(){
+        var resList = []
+        for(var mainKey in res){
+            for(var subKey in res[mainKey]){
+                if(asyncList.indexOf(subKey) >= 0) {
+                    var url = this.GetBaseUrl() + res[mainKey][subKey];
+                    if(resList.indexOf(url) < 0)
+                        resList.push(url)
+                }
             }
         }
         return resList;

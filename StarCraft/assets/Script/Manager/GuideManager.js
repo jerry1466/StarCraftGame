@@ -2,6 +2,7 @@ import UIUtil from "UIUtil";
 import GuideConfig from "GuideConfig";
 import SceneManager from "SceneManager";
 import Databus from "Databus"
+import EventUtil from "EventUtil";
 
 let guideInst;
 let curGuideKey;
@@ -76,6 +77,7 @@ export default class GuideManager{
         {
             GuideManager.AddGuide(guideConfig["next"], SceneManager.GetInstance().rootCanvas());
         }
+        EventUtil.GetInstance().DispatchEvent("GuideEnd", curGuideKey);
     }
 
     static HasGuide(key){

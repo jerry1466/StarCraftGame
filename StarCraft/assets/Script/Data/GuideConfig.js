@@ -81,14 +81,13 @@ let data =
             "uiName":"StepCostCon",
             "offset":[0, -77],
             "timeout":2.5,
-            "next":"mazeStepLeft",
         },
     "mazeStepLeft":
         {
             "text":"在星球的左侧点击，星球将向左边移动",
             "uiName":"MazeMapCell82",
             "offset":[0, -77],
-            "timeout":"2",
+            "timeout":2,
             "next":"mazeStepRight",
         },
     "mazeStepRight":
@@ -96,7 +95,7 @@ let data =
             "text":"同理，在这一侧点击，星球将向右边移动",
             "uiName":"MazeMapCell88",
             "offset":[0, -77],
-            "timeout":"2",
+            "timeout":2,
             "next":"mazeStepTop",
         },
     "mazeStepTop":
@@ -104,7 +103,7 @@ let data =
             "text":"在星球的上方点击，星球将向上方移动",
             "uiName":"MazeMapCell25",
             "offset":[0, 57],
-            "timeout":"2",
+            "timeout":2,
             "next":"mazeStepBottom",
         },
     "mazeStepBottom":
@@ -112,12 +111,58 @@ let data =
             "text":"同理，在这一侧点击，星球将向下方移动",
             "uiName":"MazeMapCell145",
             "offset":[0, -57],
-            "timeout":"2",
+            "timeout":2,
             "next":"mazeFirstStep",
         },
     "mazeFirstStep":
         {
             "text":"现在，请选择一侧点击，选择要行走的方向",
+            "uiName":"FogTopMask",
+            "offset":[0, -287],
+        },
+    "mazeStepSlideLeft":
+        {
+            "slide":true,
+            "text":"手指向左滑动，星球将向左边移动",
+            "uiName":"MazeMapCell82",
+            "offset":[0, -77],
+            "sliderOffset":[-40, 0],
+            "timeout":2,
+            "next":"mazeStepSlideRight",
+        },
+    "mazeStepSlideRight":
+        {
+            "slide":true,
+            "text":"手指向右滑动，星球将向右边移动",
+            "uiName":"MazeMapCell88",
+            "offset":[0, -77],
+            "sliderOffset":[40, 0],
+            "timeout":2,
+            "next":"mazeStepSlideTop",
+        },
+    "mazeStepSlideTop":
+        {
+            "slide":true,
+            "text":"手指向上滑动，星球将向上方移动",
+            "uiName":"MazeMapCell25",
+            "offset":[0, 87],
+            "sliderOffset":[0, 40],
+            "timeout":2,
+            "next":"mazeStepSlideBottom",
+        },
+    "mazeStepSlideBottom":
+        {
+            "slide":true,
+            "text":"手指向下滑动，星球将向下方移动",
+            "uiName":"MazeMapCell145",
+            "offset":[0, -87],
+            "sliderOffset":[0, -40],
+            "timeout":2,
+            "next":"mazeFirstSlideStep",
+        },
+    "mazeFirstSlideStep":
+        {
+            "text":"现在，请滑动手指，选择要行走的方向",
             "uiName":"FogTopMask",
             "offset":[0, -287],
         },

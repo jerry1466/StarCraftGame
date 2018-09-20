@@ -64,9 +64,17 @@ cc.Class({
             this.mazeBg.node.active = false;
             var that = this;
             setTimeout(function() {
-                that.btnExit.node.active = true;
-                that.mazeBg.node.active = true;
-                MazeManager.GetInstance().Start(that.map, that.player, that.fogMask);
+                UIUtil.ConfirmCancel("请选择你想使用的操作方式", function(){
+                    MazeManager.GetInstance().operationMode = MazeManager.OperationMode().CLICK;
+                    that.btnExit.node.active = true;
+                    that.mazeBg.node.active = true;
+                    MazeManager.GetInstance().Start(that.map, that.player, that.fogMask);
+                }, function(){
+                    MazeManager.GetInstance().operationMode = MazeManager.OperationMode().SLIDE;
+                    that.btnExit.node.active = true;
+                    that.mazeBg.node.active = true;
+                    MazeManager.GetInstance().Start(that.map, that.player, that.fogMask);
+                }, "用点击", "用滑动")
             }, 1000);
         }
         else
@@ -119,67 +127,76 @@ cc.Class({
 
     onTouchStart(event){
         this.touchStartLocation = this.toMapPosition(event.getLocation());
-        // this.onTouchEndHandler = this.onTouchEnd.bind(this);
-        // this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
-        // this.onTouchCancelHandler = this.onTouchCancel.bind(this);
-        // this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
-        var deltaX = this.touchStartLocation.x - this.player.node.x
-        var deltaY = this.touchStartLocation.y - this.player.node.y
-        if(Math.abs(deltaX) > Math.abs(deltaY)){
-            if(deltaX > 0)
-            {
-                MazeManager.GetInstance().Move("right");
+        if(MazeManager.GetInstance().operationMode == MazeManager.OperationMode().CLICK)
+        {
+            var deltaX = this.touchStartLocation.x - this.player.node.x
+            var deltaY = this.touchStartLocation.y - this.player.node.y
+            if(Math.abs(deltaX) > Math.abs(deltaY)){
+                if(deltaX > 0)
+                {
+                    MazeManager.GetInstance().Move("right");
+                }
+                else
+                {
+                    MazeManager.GetInstance().Move("left");
+                }
             }
-            else
-            {
-                MazeManager.GetInstance().Move("left");
+            else{
+                if(deltaY > 0)
+                {
+                    MazeManager.GetInstance().Move("up");
+                }
+                else
+                {
+                    MazeManager.GetInstance().Move("down");
+                }
             }
         }
-        else{
-            if(deltaY > 0)
-            {
-                MazeManager.GetInstance().Move("up");
+        else
+        {
+            this.onTouchEndHandler = this.onTouchEnd.bind(this);
+            this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
+            this.onTouchCancelHandler = this.onTouchCancel.bind(this);
+            this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
+        }
+    },
+
+    onTouchEnd(event){
+        this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
+        this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
+        this.touchEndLocation = this.toMapPosition(event.getLocation());
+        var deltaX = this.touchEndLocation.x - this.touchStartLocation.x
+        var deltaY = this.touchEndLocation.y - this.touchStartLocation.y
+        if(Math.abs(deltaX) > 5 || Math.abs(deltaY) > 5)
+        {
+            if(Math.abs(deltaX) > Math.abs(deltaY)){
+                if(deltaX > 0)
+                {
+                    MazeManager.GetInstance().Move("right");
+                }
+                else
+                {
+                    MazeManager.GetInstance().Move("left");
+                }
             }
-            else
-            {
-                MazeManager.GetInstance().Move("down");
+            else{
+                if(deltaY > 0)
+                {
+                    MazeManager.GetInstance().Move("up");
+                }
+                else
+                {
+                    MazeManager.GetInstance().Move("down");
+                }
             }
         }
     },
 
-    // onTouchEnd(event){
-    //     this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
-    //     this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
-    //     this.touchEndLocation = this.toMapPosition(event.getLocation());
-    //     var deltaX = this.touchEndLocation.x - this.touchStartLocation.x
-    //     var deltaY = this.touchEndLocation.y - this.touchStartLocation.y
-    //     if(Math.abs(deltaX) > Math.abs(deltaY)){
-    //         if(deltaX > 0)
-    //         {
-    //             MazeManager.GetInstance().Move("right");
-    //         }
-    //         else
-    //         {
-    //             MazeManager.GetInstance().Move("left");
-    //         }
-    //     }
-    //     else{
-    //         if(deltaY > 0)
-    //         {
-    //             MazeManager.GetInstance().Move("up");
-    //         }
-    //         else
-    //         {
-    //             MazeManager.GetInstance().Move("down");
-    //         }
-    //     }
-    // },
-    //
-    // onTouchCancel(event){
-    //     this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
-    //     this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
-    //     this.touchStartLocation = cc.v2(0, 0);
-    // },
+    onTouchCancel(event){
+        this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
+        this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
+        this.touchStartLocation = cc.v2(0, 0);
+    },
 
     triggerRewardHandler(affair){
         databus.AddMoney(2, affair.meteor);

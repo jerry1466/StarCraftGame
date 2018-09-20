@@ -1,6 +1,5 @@
 import Databus from 'Databus'
 import MazeConfig from 'MazeConfig'
-import PrefabUtil from 'PrefabUtil'
 import EventUtil from 'EventUtil'
 import Affair from 'Affair'
 import AffairConstant from "AffairConstant";
@@ -10,13 +9,18 @@ import ModuleManager from "ModuleManager";
 import LevelManager from "LevelManager";
 import GuideManager from "GuideManager";
 import SceneManager from "SceneManager";
-import UnitManager from "./UnitManager";
+import UnitManager from "UnitManager";
 
 let instance;
 let databus = new Databus();
 let MAXROW = 18;
 let MAXCOL = 12;
 
+let operationMode =
+{
+    CLICK:0,
+    SLIDE:1
+}
 let STENCIL_COLOR = cc.color(255, 255, 255, 0);
 export default class MazeManager{
     static GetInstance(){
@@ -27,7 +31,8 @@ export default class MazeManager{
         return instance;
     }
 
-    Init(){
+    static OperationMode(){
+        return operationMode;
     }
 
     Update(){
@@ -135,6 +140,7 @@ export default class MazeManager{
 
     Destroy(){
         EventUtil.GetInstance().RemoveEventListener("FreeTouch", this.onFreeTouchHandler);
+        EventUtil.GetInstance().RemoveEventListener("GuideEnd", this.onGuideEndHandler);
         this.MapReady = false;
     }
 
@@ -143,6 +149,8 @@ export default class MazeManager{
     	//因此把FreeTouch事件的监听放在start函数里
 	    this.onFreeTouchHandler = this.onFreeTouch.bind(this);
         EventUtil.GetInstance().AddEventListener("FreeTouch", this.onFreeTouchHandler);
+        this.onGuideEndHandler = this.onGuideEnd.bind(this);
+        EventUtil.GetInstance().AddEventListener("GuideEnd", this.onGuideEndHandler);
 
         this.MapReady = false;
         this.container = container;
@@ -234,7 +242,7 @@ export default class MazeManager{
     }
 
     Move(dir) {
-        if(this.MapReady && this.TouchEnable && GuideManager.HasGuide("mazeFirstStep"))
+        if(this.MapReady && this.TouchEnable && (GuideManager.HasGuide("mazeFirstStep") || GuideManager.HasGuide("mazeFirstSlideStep")))
         {
             var row = this.player.row;
             var column = this.player.column;
@@ -508,6 +516,20 @@ export default class MazeManager{
             // UIUtil.Confirm("厉害！平原完全探索完毕", function(){
             //     new LevelManager().SwitchLevel("battle");
             // }, "回到星球");
+        }
+    }
+
+    onGuideEnd(guideKey){
+        if(guideKey == "mazeCost")
+        {
+            if(this.operationMode == MazeManager.OperationMode().CLICK)
+            {
+                GuideManager.AddGuide("mazeStepLeft", SceneManager.GetInstance().rootCanvas());
+            }
+            else
+            {
+                GuideManager.AddGuide("mazeStepSlideLeft", SceneManager.GetInstance().rootCanvas());
+            }
         }
     }
 }

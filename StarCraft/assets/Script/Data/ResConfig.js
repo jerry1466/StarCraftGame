@@ -215,7 +215,6 @@ let asyncList =
         "gameSearchMeteor",
         "video",
         "nextStar",
-        "wellDone",
         "unlock",
         "normal",
         "unFreeze",
@@ -236,11 +235,11 @@ export default class ResConfig{
         }
     }
 
-    static GetSyncRes(){
+    static GetSyncRes(curStarId){
         var resList = [];
         for(var mainKey in res){
             for(var subKey in res[mainKey]){
-                if(asyncList.indexOf(subKey) < 0) {
+                if(asyncList.indexOf(subKey) < 0 || subKey == "star_" + curStarId || subKey == "broke_" + curStarId) {
                     var url = this.GetBaseUrl() + res[mainKey][subKey];
                     if (resList.indexOf(url) < 0)
                         resList.push(url)

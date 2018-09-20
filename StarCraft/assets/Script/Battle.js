@@ -128,7 +128,7 @@ cc.Class({
     },
 
     onSearchClick(){
-        new LevelManager().SwitchLevel("maze");
+        new LevelManager().SwitchLevel("maze", true);
         //new LevelManager().SwitchLevel("game")
     },
 

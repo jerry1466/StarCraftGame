@@ -79,6 +79,6 @@ export default class GuideManager{
     }
 
     static HasGuide(key){
-        return databus.userInfo.guidedList.indexOf(key) >= 0
+        return databus.guideEnable == false || databus.userInfo.guidedList.indexOf(key) >= 0
     }
 }

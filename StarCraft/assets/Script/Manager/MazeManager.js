@@ -44,6 +44,17 @@ export default class MazeManager{
         }
     }
 
+    segementSplitK(segments, k){
+        if(k < 0.5 * segments)
+        {
+            return k;
+        }
+        else
+        {
+            return segments - k;
+        }
+    }
+
     UpdateFogShader(){
         if(this.MapReady)
         {
@@ -51,20 +62,71 @@ export default class MazeManager{
             var mask = this.fogMask.addComponent(cc.Mask);
             mask.type = cc.Mask.Type.RECT;
             this.maskStencil = mask._clippingStencil;
+            var segments = 20;
+            var lineWidth = 4;
+            var tension = 5;
+            var expand = 0.015;
             for(var i = 0; i < this.cells.length; i++)
             {
                 for(var j = 0; j < this.cells[i].length; j++)
                 {
+                    var node = this.cells[i][j].node;
+                    var xMin = node.x - 0.5*node.width*node.scaleX;
+                    var xMax = node.x + 0.5*node.width*node.scaleX;
+                    var yMin = node.y - 0.5*node.height*node.scaleY;
+                    var yMax = node.y + 0.5*node.height*node.scaleY;
                     var affair = this.cells[i][j].affair;
                     if(affair.triggered != true && affair.fogCover == true)
                     {
-                        var node = this.cells[i][j].node;
-                        var xMin = node.x - 0.5*node.width*node.scaleX;
-                        var xMax = node.x + 0.5*node.width*node.scaleX;
-                        var yMin = node.y - 0.5*node.height*node.scaleY;
-                        var yMax = node.y + 0.5*node.height*node.scaleY;
                         var rectangle = [cc.v2(xMin, yMin), cc.v2(xMax, yMin), cc.v2(xMax, yMax), cc.v2(xMin, yMax)];
                         this.maskStencil.drawPoly(rectangle, STENCIL_COLOR, 0, STENCIL_COLOR);
+                    }
+                    else
+                    {
+                        var width = node.width * node.scaleX;
+                        var height = node.height * node.scaleY;
+                        //检查四个邻接格子有哪几个是有雾的
+                        var polies =[];
+                        //左
+                        if(this.checkCellExist(i, j - 1) && this.cells[i][j - 1].affair.fogCover == true)
+                        {
+                            var config = [];
+                            for(var m = 0; m <= segments; m++)
+                            {
+                                config.push(cc.v2(xMin + this.segementSplitK(segments, m) * 0.02 * segments * expand * width, yMin + m * (1 / segments) * height));
+                            }
+                            this.maskStencil.drawCardinalSpline(config, tension, segments, lineWidth, STENCIL_COLOR)
+                        }
+                        //上
+                        if(this.checkCellExist(i - 1, j) && this.cells[i - 1][j].affair.fogCover == true)
+                        {
+                            var config = [];
+                            for(var m = 0; m <= segments; m++)
+                            {
+                                config.push(cc.v2(xMin + m * (1 / segments) * width, yMax - this.segementSplitK(segments, m) * 0.02 * segments * expand * height));
+                            }
+                            this.maskStencil.drawCardinalSpline(config, tension, segments, lineWidth, STENCIL_COLOR)
+                        }
+                        //右
+                        if(this.checkCellExist(i, j + 1) && this.cells[i][j + 1].affair.fogCover == true)
+                        {
+                            var config = [];
+                            for(var m = 0; m <= segments; m++)
+                            {
+                                config.push(cc.v2(xMax - this.segementSplitK(segments, m) * 0.02 * segments * expand * width, yMax - m * (1 / segments) * height));
+                            }
+                            this.maskStencil.drawCardinalSpline(config, tension, segments, lineWidth, STENCIL_COLOR)
+                        }
+                        //下
+                        if(this.checkCellExist(i + 1, j) && this.cells[i + 1][j].affair.fogCover == true)
+                        {
+                            var config = [];
+                            for(var m = 0; m <= segments; m++)
+                            {
+                                config.push(cc.v2(xMax - m * (1 / segments) * width, yMin + this.segementSplitK(segments, m) * 0.02 * segments * expand * height));
+                            }
+                            this.maskStencil.drawCardinalSpline(config, tension, segments, lineWidth, STENCIL_COLOR)
+                        }
                     }
                 }
             }
@@ -279,7 +341,7 @@ export default class MazeManager{
             case "up":
                 foreCells.push(cc.v2(row - 1, col - 1));
                 forwardCells.push(cc.v2(row - 1, col));
-                forwardCells.push(cc.v2(row - 1, col));
+                forwardCells.push(cc.v2(row - 2, col));
                 oneSideCells.push(cc.v2(row - 2, col - 1));
                 otherSideCells.push(cc.v2(row, col - 1));
                 foreCells.push(cc.v2(row - 1, col));
@@ -291,7 +353,7 @@ export default class MazeManager{
             case "down":
                 foreCells.push(cc.v2(row + 1, col - 1));
                 forwardCells.push(cc.v2(row + 1, col));
-                forwardCells.push(cc.v2(row + 1, col));
+                forwardCells.push(cc.v2(row + 2, col));
                 oneSideCells.push(cc.v2(row + 2, col - 1));
                 otherSideCells.push(cc.v2(row, col - 1));
                 foreCells.push(cc.v2(row + 1, col));
@@ -431,7 +493,7 @@ export default class MazeManager{
         {
             for(var j = 0; j < this.cells[i].length; j++)
             {
-                if(this.cells[i][j].affair.triggered != true)
+                if(this.cells[i][j].affair.type != AffairConstant.AffairEnum().NONE)
                 {
                     allCompelte = false;
                     break;

@@ -37,7 +37,7 @@ cc.Class({
     },
 
     onConfirm(){
-        new LevelManager().SwitchLevel("maze");
+        new LevelManager().SwitchLevel("maze", true);
     },
 
     onClose(){

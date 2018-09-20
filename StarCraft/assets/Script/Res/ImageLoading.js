@@ -1,16 +1,18 @@
-import BasicResLoading from 'BasicResLoading'
-import ResConfig from 'ResConfig'
+import BasicResLoading from 'BasicResLoading';
+import ResConfig from 'ResConfig';
+import Databus from 'Databus';
 
+let databus = new Databus();
 cc.Class({
     extends:BasicResLoading,
     Load(){
         if(CC_WECHATGAME)
         {
-            cc.loader.load(ResConfig.GetSyncRes(), this.progressCallback.bind(this), this.completeCallback.bind(this))
+            cc.loader.load(ResConfig.GetSyncRes(databus.userInfo.curStarId), this.progressCallback.bind(this), this.completeCallback.bind(this))
         }
         else
         {
-            var resList = ResConfig.GetSyncRes();
+            var resList = ResConfig.GetSyncRes(databus.userInfo.curStarId);
             this.loadedCount = 0;
             this.totalCount = resList.length;
             this._progress = 0;

@@ -15,7 +15,6 @@ import BuffBase from 'BuffBase';
 import Coin from "Coin";
 import Player from "Player";
 import UIUtil from "UIUtil";
-import GuideManager from "GuideManager";
 
 let databus = new Databus()
 cc.Class({
@@ -58,15 +57,22 @@ cc.Class({
     },
 
     start(){
-        UIUtil.ShowTextNotice("<color=#ED6BF8>流星平原开启中...\n大量流星来袭</c>", cc.v2(0, 100));
-        this.btnExit.node.active = false;
-        this.mazeBg.node.active = false;
-        var that = this;
-        setTimeout(function() {
-            that.btnExit.node.active = true;
-            that.mazeBg.node.active = true;
-            MazeManager.GetInstance().Start(that.map, that.player, that.fogMask);
-        }, 1000);
+        if(new LevelManager().CurrentLevelParam == true)
+        {
+            UIUtil.ShowTextNotice("<color=#ED6BF8>流星平原开启中...\n大量流星来袭</c>", cc.v2(0, 100));
+            this.btnExit.node.active = false;
+            this.mazeBg.node.active = false;
+            var that = this;
+            setTimeout(function() {
+                that.btnExit.node.active = true;
+                that.mazeBg.node.active = true;
+                MazeManager.GetInstance().Start(that.map, that.player, that.fogMask);
+            }, 1000);
+        }
+        else
+        {
+            MazeManager.GetInstance().Start(this.map, this.player, this.fogMask);
+        }
     },
 
     Init() {

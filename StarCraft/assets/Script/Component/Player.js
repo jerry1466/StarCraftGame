@@ -57,9 +57,10 @@ cc.Class({
     Move(tarCell, callback){
         this.row = tarCell.row;
         this.column = tarCell.column;
-        var tweenPos = TweenPosition.begin(this.node, this.node.position, tarCell.node.position, 0.2);
+        var tweenPos = TweenPosition.begin(this.node, this.node.position, tarCell.node.position, 0.15);
         var that = this;
         tweenPos.onFinishCallBack = function(){
+            that.node.setPosition(tarCell.node.position);
             that.node.y -= 4;
             callback();
         };

@@ -55,6 +55,7 @@ cc.Class({
             this.btnView.node.active = true;
             this.rtProductivity.node.active = true;
             this.rtProductivity.string = "<color=#EDF700>产量：" + Productor.GetInstance().GetStarProductivity(config, databus.userInfo.brokeFixIndex) + "</c><color=#FFFFFF>/秒</c>";
+            this.spIcon.node.color = new cc.Color(255, 255, 255);
         }
         /*
         else if(databus.IsCurStarFixed() && config.id == databus.userInfo.curStarId + 1)
@@ -73,6 +74,7 @@ cc.Class({
             this.btnView.node.active = false;
             this.rtProductivity.node.active = false;
             this.lbStatus.string = "未解锁";
+            this.spIcon.node.color = new cc.Color(0, 0, 0);
         }
     },
 

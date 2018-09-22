@@ -70,7 +70,10 @@ export default class GuideManager{
             databus.userInfo.guidedList.push(curGuideKey);
         }
         var guideCom = this.GetGuideInst().getComponent("Guide");
-        this.GetGuideInst().removeFromParent();
+        if(this.GetGuideInst().parent)
+        {
+            this.GetGuideInst().removeFromParent();
+        }
         guideCom.Dispose();
         var guideConfig = GuideConfig.GetGuideConfig(curGuideKey)
         if(guideConfig && guideConfig["next"])

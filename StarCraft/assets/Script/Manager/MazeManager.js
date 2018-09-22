@@ -492,9 +492,18 @@ export default class MazeManager{
 
     onFreeTouch(){
         this.TouchEnable = true;
-        if(GuideManager.HasGuide("mazeFirstStep"))
+        if(GuideManager.HasGuide("mazeFirstStep") || GuideManager.HasGuide("mazeFirstSlideStep"))
         {
-            EventUtil.GetInstance().DispatchEvent("MazeShowNotice", "请点击，来决策下一步的移动方向");
+            var tip = null;
+            if(MazeManager.GetInstance().operationMode == MazeManager.OperationMode().CLICK)
+            {
+                tip = "请点击屏幕，决定移动方向";
+            }
+            else
+            {
+                tip = "请滑动手指，决定移动方向";
+            }
+            EventUtil.GetInstance().DispatchEvent("MazeShowNotice", tip);
         }
         var allCompelte = true;
         for(var i = 0; i < this.cells.length; i++)

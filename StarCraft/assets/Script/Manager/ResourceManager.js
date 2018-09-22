@@ -20,7 +20,9 @@ export default class ResourceManager {
         if(spCom)
         {
             var frame = new cc.SpriteFrame(cc.loader.getRes(imageUrl));
-            spCom.spriteFrame = frame
+            spCom.trim = false;
+            spCom.type = cc.Sprite.Type.SIMPLE;
+            spCom.spriteFrame = frame;
         }
     }
 }

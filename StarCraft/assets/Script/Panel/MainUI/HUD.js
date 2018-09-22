@@ -21,8 +21,9 @@ cc.Class({
     },
 
     start(){
-        this.DiamondCon.Init(ResConfig.DiamondConBg());
+        this.DiamondCon.Init(ResConfig.ConBg());
         this.ProductivityCon.Init(ResConfig.ProductivityConBg(), "/秒");
+        this.DiamondCon.InitIcon(ResConfig.DiamondIcon());
         this.ProductivityCon.InitIcon(ResConfig.DiamondIcon());
     },
 

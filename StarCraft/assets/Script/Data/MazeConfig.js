@@ -4,8 +4,8 @@ let data =
         {
             "row":18,
             "column":11,
-            "get star":4,
-            "star game":1,
+            "get star":20,
+            "star game":5,
             "ice game":0,
             "cards":0,
         },
@@ -13,8 +13,8 @@ let data =
         {
             "row":18,
             "column":11,
-            "get star":5,
-            "star game":1,
+            "get star":25,
+            "star game":7,
             "ice game":1,
             "cards":0,
         },

@@ -19,7 +19,8 @@ cc.Class({
     },
 
     Init(moduleName){
-        this.moduleName = moduleName
+        this.moduleName = moduleName;
+        this.blankClose = false;
     },
 
     RegisterBlankClose(blankClose){

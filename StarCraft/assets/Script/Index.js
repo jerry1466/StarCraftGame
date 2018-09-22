@@ -30,6 +30,7 @@ cc.Class({
 
 
     onLoad() {
+        cc.view.enableRetina(true);
         SceneManager.GetInstance().SetRoot(this.node);
         //ResourceManager.LoadRemoteSprite(this.spBg, "https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png")
         var that = this

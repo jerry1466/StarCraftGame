@@ -180,7 +180,7 @@ export default class UIUtil {
         parent.addChild(diamondNode);
         diamondNode.setPosition(pos.x, pos.y);
         var spriteCon = diamondNode.addComponent(cc.Sprite);
-        spriteCon.spriteFrame = new cc.SpriteFrame(cc.url.raw('resources/Image/diamond_icon.png'));
+        spriteCon.spriteFrame = new cc.SpriteFrame(cc.url.raw('resources/Image/diamond_icon2.png'));
         var uiPath = null;
         if(new LevelManager().IsBattleLevel())
         {

@@ -40,7 +40,8 @@ cc.Class({
         SceneManager.GetInstance().SetRoot(this.node);
         this.stepCostCon.Init(ResConfig.ConBg());
         this.stepCostCon.InitIcon(ResConfig.DiamondIcon());
-        this.diamondCon.Init(ResConfig.DiamondConBg());
+        this.diamondCon.Init(ResConfig.ConBg());
+        this.diamondCon.InitIcon(ResConfig.DiamondIcon());
         this.registerEventHandler();
     },
 

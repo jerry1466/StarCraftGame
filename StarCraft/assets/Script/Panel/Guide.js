@@ -65,7 +65,7 @@ cc.Class({
     Dispose() {
         this.node.off(cc.Node.EventType.TOUCH_START, this.onTouchBg, this);
         databus.gamePause = false;
-        if(this.delay)
+        if(null != this.delay)
         {
             clearTimeout(this.delay);
             this.delay = null;

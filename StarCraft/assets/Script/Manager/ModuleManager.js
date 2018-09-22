@@ -47,23 +47,23 @@ export default class ModuleManager {
             }
             else
             {
-                this.loadModule(this, moduleName, param)
+                this.loadModule(temp, moduleName, param)
             }
         }
     }
 
     loadModule(object, moduleName, param){
+        object.mask.parent = SceneManager.GetInstance().rootCanvas()
+        object.mask.width = SceneManager.GetInstance().rootCanvas().width
+        object.mask.height = SceneManager.GetInstance().rootCanvas().height
+        object.mask.x = object.mask.y = 0
+        var panelMask = object.mask.getComponent("PanelMask")
+        panelMask.Init(moduleName)
         var prefabUrl = ModuleConstant.GetInstance().GetModuleUrl(moduleName)
         PrefabUtil.GetPrefabInstance(prefabUrl, function(success, instance){
             if(success)
             {
                 object.moduleMap[moduleName] = instance
-                object.mask.parent = SceneManager.GetInstance().rootCanvas()
-                object.mask.width = SceneManager.GetInstance().rootCanvas().width
-                object.mask.height = SceneManager.GetInstance().rootCanvas().height
-                object.mask.x = object.mask.y = 0
-                var panelMask = object.mask.getComponent("PanelMask")
-                panelMask.Init(moduleName)
                 instance.parent = SceneManager.GetInstance().rootCanvas()
                 instance.x = 0
                 instance.y = 0
@@ -96,7 +96,7 @@ export default class ModuleManager {
             instance.destroy()
             instance = null
             delete this.moduleMap[moduleName];
-            this.mask.removeFromParent()
+            this.mask.x = 1000000;
             EventUtil.GetInstance().DispatchEvent("HidePanel", moduleName)
         }
     }

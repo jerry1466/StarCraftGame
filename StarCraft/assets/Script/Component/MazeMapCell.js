@@ -65,7 +65,7 @@ cc.Class({
 
     RemoveFog(callback){
         this.affair.fogCover = false;
-        setTimeout(callback, 300);
+        setTimeout(callback, 40);
     },
 
     Trigger(){

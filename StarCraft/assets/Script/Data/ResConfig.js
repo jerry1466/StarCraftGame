@@ -27,7 +27,7 @@ let res=
     },
     "icon":
     {
-        "diamond":"diamond_icon.png",
+        "diamond":"diamond_icon2.png",
         "meteor":"meteor_icon.png",
         "hp":"gameHp_bg.png",
         "blackhole":"Broke.png",

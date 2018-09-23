@@ -2,8 +2,9 @@ import BasicResLoading from 'BasicResLoading'
 import UIUtil from "UIUtil";
 import GuideManager from "GuideManager";
 import UnitManager from "UnitManager";
+import ModuleManager from "../Manager/ModuleManager";
 
-let PrefabInitNum = 4
+let PrefabInitNum = 5
 cc.Class({
     extends:BasicResLoading,
     Load(){
@@ -28,6 +29,11 @@ cc.Class({
             that._loadedIndex++;
             UnitManager.GetInstance().SetMazeMapCellPrefab(loadRes);
             console.log("MazeMapCell Loaded");
+        });
+        this.loadRes("Panel/PanelMask", function(errMsg, loadRes){
+            that._loadedIndex++;
+            ModuleManager.GetInstance().SetMask(loadRes);
+            console.log("PanelMask Loaded");
         });
     },
     GetProgress(){return this._loadedIndex / PrefabInitNum},

@@ -65,17 +65,21 @@ cc.Class({
             this.mazeBg.node.active = false;
             var that = this;
             setTimeout(function() {
-                UIUtil.ConfirmCancel("请选择你想使用的操作方式", function(){
-                    MazeManager.GetInstance().operationMode = MazeManager.OperationMode().CLICK;
-                    that.btnExit.node.active = true;
-                    that.mazeBg.node.active = true;
-                    MazeManager.GetInstance().Start(that.map, that.player, that.fogMask);
-                }, function(){
-                    MazeManager.GetInstance().operationMode = MazeManager.OperationMode().SLIDE;
-                    that.btnExit.node.active = true;
-                    that.mazeBg.node.active = true;
-                    MazeManager.GetInstance().Start(that.map, that.player, that.fogMask);
-                }, "用点击", "用滑动")
+                // UIUtil.ConfirmCancel("请选择你想使用的操作方式", function(){
+                //     MazeManager.GetInstance().operationMode = MazeManager.OperationMode().CLICK;
+                //     that.btnExit.node.active = true;
+                //     that.mazeBg.node.active = true;
+                //     MazeManager.GetInstance().Start(that.map, that.player, that.fogMask);
+                // }, function(){
+                //     MazeManager.GetInstance().operationMode = MazeManager.OperationMode().SLIDE;
+                //     that.btnExit.node.active = true;
+                //     that.mazeBg.node.active = true;
+                //     MazeManager.GetInstance().Start(that.map, that.player, that.fogMask);
+                // }, "用点击", "用滑动")
+                MazeManager.GetInstance().operationMode = MazeManager.OperationMode().SLIDE;
+                that.btnExit.node.active = true;
+                that.mazeBg.node.active = true;
+                MazeManager.GetInstance().Start(that.map, that.player, that.fogMask);
             }, 1000);
         }
         else

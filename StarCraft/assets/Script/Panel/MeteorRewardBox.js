@@ -2,6 +2,7 @@ import ModuleManager from "ModuleManager";
 import BasePanel from "BasePanel";
 import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig";
+import EventUtil from "EventUtil";
 
 cc.Class({
     extends: BasePanel,
@@ -10,6 +11,10 @@ cc.Class({
         btnConfirm:cc.Button,
         lbMeteor:cc.Label,
         icon:cc.Sprite,
+    },
+
+    onDestroy(){
+        EventUtil.GetInstance().DispatchEvent("FreeTouch");
     },
 
     onLoad(){

@@ -75,9 +75,13 @@ cc.Class({
         var that = this;
         setTimeout(function(){
             doTrigger(that);
-        }, 100);
+        }, 500);
 
         function doTrigger(_this){
+            if(_this.affair == null)
+            {
+                return;
+            }
             if (!_this.affair_active) {
                 _this.ClearAffair();
 				EventUtil.GetInstance().DispatchEvent("FreeTouch")
@@ -100,21 +104,23 @@ cc.Class({
             }
             else if(_this.affair.type == AffairConstant.AffairEnum().GAME)
             {
-                setTimeout(function(){
-                    EventUtil.GetInstance().DispatchEvent("TriggerGame", _this.affair)
-                }, 20)
+                EventUtil.GetInstance().DispatchEvent("TriggerGame", _this.affair);
+                EventUtil.GetInstance().DispatchEvent("FreeTouch")
             }
             else if(_this.affair.type == AffairConstant.AffairEnum().CARD)
             {
                 //EventUtil.GetInstance().DispatchEvent("TriggerCard", _this.affair);
             }
+            else
+            {
+                EventUtil.GetInstance().DispatchEvent("FreeTouch")
+            }
 
             _this.ClearAffair();
-            EventUtil.GetInstance().DispatchEvent("FreeTouch");
         }
 
         function removeIcon(icon){
-            var tweenAlpha = TweenAlpha.begin(icon, 255, 0, 1, 1);
+            var tweenAlpha = TweenAlpha.begin(icon, 255, 0, 0.5, 1);
             tweenAlpha.onFinishCallBack = function()
             {
                 icon.node.removeFromParent();

@@ -10,6 +10,7 @@ import TweenPosition from 'TweenPosition'
 import EventUtil from "EventUtil";
 
 let instance
+let maskPrefab
 let mask
 export default class ModuleManager {
     constructor() {
@@ -20,9 +21,20 @@ export default class ModuleManager {
         if (instance == null) {
             instance = new ModuleManager()
             instance.moduleMap = {}
-            instance.mask = null
         }
         return instance
+    }
+
+    SetMask(prefab){
+        maskPrefab = prefab;
+    }
+
+    GetMask(){
+        if(mask == null)
+        {
+            mask = cc.instantiate(maskPrefab);
+        }
+        return mask;
     }
 
     ShowModule(moduleName, param){
@@ -33,31 +45,16 @@ export default class ModuleManager {
         }
         else
         {
-            var temp = this
-            if(this.mask == null)
-            {
-                var maskUrl = ModuleConstant.GetInstance().GetModuleUrl("PanelMask")
-                PrefabUtil.GetPrefabInstance(maskUrl, function(success, instance){
-                    if(success)
-                    {
-                        temp.mask = instance
-                        temp.loadModule(temp, moduleName, param)
-                    }
-                })
-            }
-            else
-            {
-                this.loadModule(temp, moduleName, param)
-            }
+            this.loadModule(this, moduleName, param)
         }
     }
 
     loadModule(object, moduleName, param){
-        object.mask.parent = SceneManager.GetInstance().rootCanvas()
-        object.mask.width = SceneManager.GetInstance().rootCanvas().width
-        object.mask.height = SceneManager.GetInstance().rootCanvas().height
-        object.mask.x = object.mask.y = 0
-        var panelMask = object.mask.getComponent("PanelMask")
+        this.GetMask().parent = SceneManager.GetInstance().rootCanvas()
+        this.GetMask().width = SceneManager.GetInstance().rootCanvas().width
+        this.GetMask().height = SceneManager.GetInstance().rootCanvas().height
+        this.GetMask().x = this.GetMask().y = 0
+        var panelMask = mask.getComponent("PanelMask")
         panelMask.Init(moduleName)
         var prefabUrl = ModuleConstant.GetInstance().GetModuleUrl(moduleName)
         PrefabUtil.GetPrefabInstance(prefabUrl, function(success, instance){
@@ -92,11 +89,11 @@ export default class ModuleManager {
         var instance = this.moduleMap[moduleName]
         if(instance)
         {
-            instance.removeFromParent()
-            instance.destroy()
+            instance.removeFromParent();
+            instance.destroy();
             instance = null
             delete this.moduleMap[moduleName];
-            this.mask.x = 1000000;
+            this.GetMask().removeFromParent();
             EventUtil.GetInstance().DispatchEvent("HidePanel", moduleName)
         }
     }

@@ -22,10 +22,14 @@ cc.Class({
         lbContent: cc.Label,
         circleNode:cc.Node,
         pointNode:cc.Node,
+        arrowUp:cc.Node,
+        arrowDown:cc.Node,
+        arrowLeft:cc.Node,
+        arrowRight:cc.Node,
     },
 
     onLoad(){
-        ResourceManager.LoadRemoteSprite(this.bgContent, ResConfig.BigBtn());
+        // ResourceManager.LoadRemoteSprite(this.bgContent, ResConfig.BigBtn());
         ResourceManager.LoadRemoteSprite(this.cover, ResConfig.FogIcon());
         this.cover.node.width = this.cover.node.height = 3000;
         this.node.width = this.node.height = 3000;
@@ -33,6 +37,7 @@ cc.Class({
 
     refresh(){
         this.lbContent.string = this.guideConfig["text"];
+        var offset = cc.v2(this.guideConfig["offset"][0], this.guideConfig["offset"][1]);
         this.bgContent.node.setPosition(cc.v2(this.guideConfig["offset"][0], this.guideConfig["offset"][1]));
         this.mask.width = this.tarNode.width * this.tarNode.scaleX;
         this.mask.height = this.tarNode.height * this.tarNode.scaleY;
@@ -50,6 +55,10 @@ cc.Class({
             this.circleNode.width = this.mask.width + 20;
             this.circleNode.height = this.mask.height + 20;
         }
+        this.arrowUp.active = offset.y < 0 && Math.abs(offset.y) > Math.abs(offset.x);
+        this.arrowDown.active = offset.y > 0 && Math.abs(offset.y) > Math.abs(offset.x);
+        this.arrowLeft.active = offset.x > 0 && Math.abs(offset.x) > Math.abs(offset.y);
+        this.arrowRight.active = offset.x < 0 && Math.abs(offset.x) > Math.abs(offset.y);
         this.notice();
     },
 

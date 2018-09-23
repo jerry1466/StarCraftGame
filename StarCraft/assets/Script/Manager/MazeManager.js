@@ -10,6 +10,7 @@ import LevelManager from "LevelManager";
 import GuideManager from "GuideManager";
 import SceneManager from "SceneManager";
 import UnitManager from "UnitManager";
+import UIUtil from "UIUtil";
 
 let instance;
 let databus = new Databus();
@@ -521,10 +522,11 @@ export default class MazeManager{
         {
             databus.userInfo.mazeComplete = 1;
             databus.userInfo.mazeStarId = 0;
-            new LevelManager().SwitchLevel("battle");
-            // UIUtil.Confirm("厉害！平原完全探索完毕", function(){
-            //     new LevelManager().SwitchLevel("battle");
-            // }, "回到星球");
+            UIUtil.Confirm("厉害！平原完全探索完毕", function(){
+                setTimeout(function() {
+                    new LevelManager().SwitchLevel("battle");
+                }, 50);
+            }, "回到星球");
         }
     }
 

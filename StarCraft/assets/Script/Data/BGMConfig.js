@@ -36,7 +36,7 @@ let res =
 
 let wxBaseUrl = "https://cdn-game.2zhuji.cn/uploads/wdxq/audio/";//微信环境下用这个
 let baseUrl = "Audio/";
-
+let curBgm;
 export default class BGMConfig{
     static GetBgm(name) {
 		return res[name]
@@ -44,6 +44,17 @@ export default class BGMConfig{
 
     static GetStarBgm(id){
         return res["star_" + id.toString()];
+    }
+
+    static Register(){
+        if (CC_WECHATGAME) {
+            wx.onShow(function(){
+                if(curBgm)
+                {
+                    curBgm.play();
+                }
+            });
+        }
     }
 
 	static BgmInit(bgm, loop) {
@@ -57,6 +68,10 @@ export default class BGMConfig{
 		} else {
 			sound = baseUrl + bgm
 		}
+		if(loop)
+        {
+            curBgm = sound;
+        }
 		return sound
 	}
 

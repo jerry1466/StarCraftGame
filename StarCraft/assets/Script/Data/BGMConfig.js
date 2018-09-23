@@ -46,15 +46,14 @@ export default class BGMConfig{
         return res["star_" + id.toString()];
     }
 
-    static Register(){
-        if (CC_WECHATGAME) {
-            wx.onShow(function(){
-                if(curBgm)
-                {
-                    curBgm.play();
-                }
-            });
-        }
+    static BgmRegister() {
+		if (CC_WECHATGAME) {
+			wx.onShow(function () {
+				if (curBgm) {
+					curBgm.play();
+				}
+			});
+		}
     }
 
 	static BgmInit(bgm, loop) {
@@ -64,7 +63,6 @@ export default class BGMConfig{
 			sound = wx.createInnerAudioContext()
     		sound.src = wxBaseUrl + bgm;
             sound.loop = loop;
-    		sound.autoplay = true
 		} else {
 			sound = baseUrl + bgm
 		}
@@ -72,15 +70,16 @@ export default class BGMConfig{
         {
             curBgm = sound;
         }
-		return sound
+		return sound;
 	}
 
 	static BgmPlay(sound) {
 		if (CC_WECHATGAME) {
-			sound.play()
+			sound.play();
+			sound.autoplay = true;
 		} else {
 			cc.loader.loadRes(sound, function (err, audio) {
-				cc.audioEngine.play(audio, false, 1)
+				cc.audioEngine.play(audio, false, 1);
 			})
 		}
 	}

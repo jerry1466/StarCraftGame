@@ -13,6 +13,7 @@ import NetUtil from "NetUtil";
 import Productor from "Productor";
 import StarConfig from "StarConfig";
 import AysncImageLoading from "AysncImageLoading";
+import BGMConfig from "BGMConfig"
 
 let databus = new Databus()
 cc.Class({
@@ -43,6 +44,7 @@ cc.Class({
         this.lbCompany.string = "有來有趣网络科技"
         databus.userInfo.curStarId = parseInt(StarConfig.GetStarIds()[0]);
         BuffBase.Init();
+        BGMConfig.BgmRegister();
     },
 
     start(){

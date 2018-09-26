@@ -12,7 +12,7 @@ import EventUtil from "EventUtil";
 import ModuleManager from "ModuleManager";
 import GuideManager from "GuideManager";
 import SceneManager from "SceneManager";
-import UIUtil from "../Lib/UIUtil";
+import Productor from "Productor";
 
 let databus = new Databus()
 let rotation = 0.05;
@@ -95,6 +95,7 @@ cc.Class({
         var broke = this._brokeSpList[curFixIndex].getComponent("Broke");
         broke.Select(false);
         broke.SetFixed(true);
+        GuideManager.AddGuide("brokeDisappear", SceneManager.GetInstance().rootCanvas());
         var tweenAlpha = TweenAlpha.begin(this._brokeSpList[curFixIndex], 255, 0, 1.5, 1);
         var that = this
         tweenAlpha.onFinishCallBack = function(){
@@ -102,13 +103,20 @@ cc.Class({
             that._brokeSpList[curFixIndex].removeFromParent();
             var curStarId = databus.userInfo.curStarId;
             var brokeList = StarConfig.GetStarBrokeList(curStarId);
+            var preProductivity = Productor.GetInstance().GetTotalProductivity();
+            var nextProductivity = preProductivity + 1;
             if(databus.userInfo.brokeFixIndex < brokeList.length - 2)
             {
                 databus.userInfo.brokeFixIndex += 1;
                 that.selectBroke(databus.userInfo.brokeFixIndex + 1);
-                UIUtil.Confirm("黑洞已修复！\n星球钻石产量 + 1/秒", function(){
-                    GuideManager.AddGuide("fixCostMeteor", SceneManager.GetInstance().rootCanvas());
-                }, "太棒了");
+                ModuleManager.GetInstance().ShowModule("ProductivityImprovePanel",
+                {
+                    pre:preProductivity,
+                    next:nextProductivity,
+                    callback:function(){
+                        GuideManager.AddGuide("fixCostMeteor", SceneManager.GetInstance().rootCanvas());
+                    }
+                });
             }
             else
             {
@@ -118,9 +126,14 @@ cc.Class({
                 {
                     databus.userInfo.maxStarId = curStarId + 1;
                 }
-                UIUtil.Confirm("黑洞已修复！\n星球钻石产量 + 1/秒", function(){
-                    ModuleManager.GetInstance().ShowModule("FixCompleteBox", curStarId);
-                }, "太棒了");
+                ModuleManager.GetInstance().ShowModule("ProductivityImprovePanel",
+                {
+                    pre:preProductivity,
+                    next:nextProductivity,
+                    callback:function(){
+                        ModuleManager.GetInstance().ShowModule("FixCompleteBox", curStarId);
+                    }
+                });
             }
         }
 

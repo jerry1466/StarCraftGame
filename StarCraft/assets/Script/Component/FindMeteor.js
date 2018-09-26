@@ -7,7 +7,7 @@ import MathUtil from "MathUtil"
 import PrefabUtil from "PrefabUtil";
 import Meteor from "Meteor"
 import ModuleManager from "ModuleManager"
-
+import LevelManager from "LevelManager"
 
 let databus = new Databus()
 let instance
@@ -167,8 +167,11 @@ export default class FindMeteor {
 		{
 			return;
 		}
-        this.gameOver = true
-        ModuleManager.GetInstance().ShowModule("GameResultPanel", this.totalCollectMeteor)
+        this.gameOver = true;
+        // ModuleManager.GetInstance().ShowModule("GameResultPanel", this.totalCollectMeteor)
+        ModuleManager.GetInstance().ShowModule("MeteorSettleBox", {title:"游戏结束", meteorNum:this.totalCollectMeteor, function(){
+			new LevelManager().SwitchLevel("maze");
+		}});
     }
 }
 

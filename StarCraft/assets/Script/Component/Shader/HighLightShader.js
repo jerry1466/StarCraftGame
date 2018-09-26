@@ -17,15 +17,15 @@ cc.Class({
         if(this._program)
         {
             this._program.use();
-            // if (cc.sys.isNative) {
-            //     var glProgram_state = cc.GLProgramState.getOrCreateWithGLProgram(this._program);
-            //     glProgram_state.setUniformFloat( "time", this._time );
-            //     this.sprite._sgNode.setGLProgramState(glProgram_state);
-            // } else {
+            if (cc.sys.isNative) {
+                var glProgram_state = cc.GLProgramState.getOrCreateWithGLProgram(this._program);
+                glProgram_state.setUniformFloat( "time", this._time );
+                this.sprite._sgNode.setGLProgramState(glProgram_state);
+            } else {
                 let time = this._program.getUniformLocationForName("time");
                 gl.uniform1f(time, this._time);
                 this.sprite._sgNode.setShaderProgram(this._program);
-            // }
+            }
         }
         if(this._time >= 0.4)
         {
@@ -44,17 +44,17 @@ cc.Class({
     onLoad() {
         this.sprite = this.node.getComponent(cc.Sprite);
         this._program = new cc.GLProgram();
-        // if(cc.sys.isNative)
-        // {
+        if(cc.sys.isNative)
+        {
             this._program.initWithString(highLightShader.vShader, highLightShader.fShader);
-        // }
-        // else
-        // {
-        //     this._program.initWithVertexShaderByteArray(highLightShader.vShader, highLightShader.fShader);
-            this._program.addAttribute(cc.macro.ATTRIBUTE_NAME_POSITION, cc.macro.VERTEX_ATTRIB_POSITION);
-            this._program.addAttribute(cc.macro.ATTRIBUTE_NAME_COLOR, cc.macro.VERTEX_ATTRIB_COLOR);
-            this._program.addAttribute(cc.macro.ATTRIBUTE_NAME_TEX_COORD, cc.macro.VERTEX_ATTRIB_TEX_COORDS);
-        // }
+        }
+        else
+        {
+            this._program.initWithVertexShaderByteArray(highLightShader.vShader, highLightShader.fShader);
+        }
+        this._program.addAttribute(cc.macro.ATTRIBUTE_NAME_POSITION, cc.macro.VERTEX_ATTRIB_POSITION);
+        this._program.addAttribute(cc.macro.ATTRIBUTE_NAME_COLOR, cc.macro.VERTEX_ATTRIB_COLOR);
+        this._program.addAttribute(cc.macro.ATTRIBUTE_NAME_TEX_COORD, cc.macro.VERTEX_ATTRIB_TEX_COORDS);
         this._program.link();
         this._program.updateUniforms();
         this.sprite._sgNode.shaderProgram = this._program;

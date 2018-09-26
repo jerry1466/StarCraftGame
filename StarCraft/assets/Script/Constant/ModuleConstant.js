@@ -35,6 +35,8 @@ export default class ModuleConstant {
         this.moduleNames["NewStarPanel"] = "Panel/NewStarPanel";
         this.moduleNames["GameResultPanel"] = "Panel/GameResultPanel";
         this.moduleNames["CardGamePanel"] = "Panel/CardGamePanel";
+        this.moduleNames["ProductivityImprovePanel"] = "Panel/ProductivityImprovePanel";
+        this.moduleNames["MeteorSettleBox"] = "Panel/MeteorSettleBox";
     }
 
     GetModuleUrl(moduleName){

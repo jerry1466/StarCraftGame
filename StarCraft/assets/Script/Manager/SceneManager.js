@@ -24,7 +24,7 @@ export default class SceneManager {
             sceneNode.addComponent("Scene");
         }
         rootCanvas = sceneNode;
-        console.log("SceneManager SetRoot", rootCanvas)
+        console.log("SceneManager SetRoot", rootCanvas);
     }
 
     rootCanvas(){

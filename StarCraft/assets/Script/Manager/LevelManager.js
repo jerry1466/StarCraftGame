@@ -1,9 +1,9 @@
 import Databus from 'Databus'
 import ModuleManager from "ModuleManager";
 import GuideManager from "GuideManager";
+import SceneManager from "SceneManager";
 
 let databus = new Databus()
-
 let instance
 export default class LevelManager {
     constructor(){
@@ -13,11 +13,10 @@ export default class LevelManager {
     }
 
     SwitchLevel(lvName, levelParam){
-        GuideManager.RemoveGuide()
+        GuideManager.ClearGuideInst();
         ModuleManager.GetInstance().PopAllModule();
         this.CurrentLevelName = lvName;
-        this.CurrentLevelParam = levelParam
-        console.log("SwitchLevel:" + lvName)
+        this.CurrentLevelParam = levelParam;
         cc.director.loadScene(lvName)
     }
 

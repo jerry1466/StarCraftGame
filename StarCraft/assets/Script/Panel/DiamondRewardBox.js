@@ -1,11 +1,12 @@
 import ModuleManager from "ModuleManager";
 import BasePanel from "BasePanel"
+import AnimationManager from "AnimationManager";
 
 cc.Class({
     extends: BasePanel,
     properties: {
         btnConfirm:cc.Button,
-        lbDiamond:"",
+        lbDiamond:cc.Label,
     },
 
     Init(rewardDiamond){

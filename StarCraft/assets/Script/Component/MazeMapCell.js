@@ -8,6 +8,7 @@ import EventUtil from "EventUtil";
 import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig";
 import TweenAlpha from "TweenAlpha";
+import AnimationManager from "AnimationManager";
 
 let databus = new Databus()
 cc.Class({
@@ -64,8 +65,20 @@ cc.Class({
     },
 
     RemoveFog(callback){
-        this.affair.fogCover = false;
-        setTimeout(callback, 40);
+        var foreFogCover = this.affair.fogCover;
+        if(foreFogCover == true)
+        {
+            AnimationManager.PlayAnim("fogRemove", this.node.parent.parent, this.node.position, callback, false);
+            this.affair.fogCover = false;
+        }
+        else
+        {
+            this.affair.fogCover = false;
+            if(callback)
+            {
+                callback();
+            }
+        }
     },
 
     Trigger(){
@@ -109,7 +122,7 @@ cc.Class({
             }
             else if(_this.affair.type == AffairConstant.AffairEnum().CARD)
             {
-                //EventUtil.GetInstance().DispatchEvent("TriggerCard", _this.affair);
+                EventUtil.GetInstance().DispatchEvent("TriggerCard", _this.affair);
             }
             else
             {

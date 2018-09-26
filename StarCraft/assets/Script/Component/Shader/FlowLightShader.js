@@ -22,8 +22,14 @@ cc.Class({
 
     _use : function(){
         this._program = new cc.GLProgram();
-        // this._program.initWithVertexShaderByteArray( vert_file, frag_file);
-        this._program.initWithString(vert_file, frag_file);
+        if(cc.sys.isNative)
+        {
+            this._program.initWithString(vert_file, frag_file);
+        }
+        else
+        {
+            this._program.initWithVertexShaderByteArray( vert_file, frag_file);
+        }
         // 添加程序属性至GLSL中
         this._program.addAttribute(cc.macro.ATTRIBUTE_NAME_POSITION, cc.macro.VERTEX_ATTRIB_POSITION);
         this._program.addAttribute(cc.macro.ATTRIBUTE_NAME_COLOR, cc.macro.VERTEX_ATTRIB_COLOR);
@@ -34,8 +40,12 @@ cc.Class({
         this._program.use();
         this.updateGLParameters();
 
-        // this._program.setUniformLocationWith1f(this._program.getUniformLocationForName("sys_time"),this._time);
-        gl.uniform1f(this._program.getUniformLocationForName("sys_time"),this._time);
+        if(cc.sys.isNative) {
+            (cc.GLProgramState.getOrCreateWithGLProgram(this._program)).setUniformFloat("sys_time", this._time);
+        }
+        else{
+            gl.uniform1f(this._program.getUniformLocationForName("sys_time"), this._time);
+        }
         this.setProgram(this.node._sgNode, this._program);
     },
 
@@ -43,15 +53,18 @@ cc.Class({
 
         this._time += 2*dt;
         if(this._program){
-            this._program.use();
             this._sin = Math.sin(this._time) * 10;
             if(this._sin >= 9.9){
                 this._sin = 0;
                 this._time = 0;
             }
             this._sin = Math.ceil(this._sin);
-            //  this._program.setUniformLocationWith1f(this._program.getUniformLocationForName("sys_time"), this._sin);
-            gl.uniform1f(this._program.getUniformLocationForName("sys_time"), this._sin);
+            if(cc.sys.isNative) {
+                (cc.GLProgramState.getOrCreateWithGLProgram(this._program)).setUniformFloat("sys_time", this._sin);
+            }
+            else{
+                gl.uniform1f(this._program.getUniformLocationForName("sys_time"), this._sin);
+            }
         }
     },
 

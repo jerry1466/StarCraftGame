@@ -233,7 +233,7 @@ cc.Class({
     },
 
     triggerCardHandler(affair){
-        ModuleManager.GetInstance().ShowModule("CardGamePanel");
+        new LevelManager().SwitchLevel("card", affair);
     },
 
     showNotice(text){

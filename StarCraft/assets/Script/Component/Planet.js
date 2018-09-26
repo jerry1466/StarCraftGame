@@ -54,15 +54,17 @@ cc.Class({
     },
 
     onTouchStart(event) {
-    	this.startX = event.getLocation().x
-    	this.startY = event.getLocation().y
-    	this.onTouchMoveHandler = this.onTouchMove.bind(this)
-    	this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMoveHandler)
-		this.onTouchEndHandler = this.onTouchEnd.bind(this);
-		this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler)
-		this.onTouchCancelHandler = this.onTouchCancel.bind(this)
-		this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler)
-
+    	if(FindMeteor.GetInstance().cdFinish)
+		{
+            this.startX = event.getLocation().x
+            this.startY = event.getLocation().y
+            this.onTouchMoveHandler = this.onTouchMove.bind(this)
+            this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMoveHandler)
+            this.onTouchEndHandler = this.onTouchEnd.bind(this);
+            this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler)
+            this.onTouchCancelHandler = this.onTouchCancel.bind(this)
+            this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler)
+		}
     },
 
 	onTouchMove(event) {

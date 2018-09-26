@@ -75,6 +75,9 @@ cc.Class({
                 affair.meteor = 100;
                 new LevelManager().SwitchLevel("game", affair);
                 break;
+            case "card":
+                new LevelManager().SwitchLevel("card");
+                break;
         }
     }
 })    

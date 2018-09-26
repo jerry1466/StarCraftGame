@@ -6,6 +6,8 @@ import EventUtil from "EventUtil";
 
 let guideInst;
 let curGuideKey;
+let targetNode;
+let guideNodeInfo = {};
 let databus = new Databus();
 export default class GuideManager{
     static SetGuidePrefab(res){
@@ -19,6 +21,14 @@ export default class GuideManager{
             guideInst = cc.instantiate(this.guidePrefab);
         }
         return guideInst;
+    }
+
+    static ClearGuideInst(){
+        if(guideInst)
+        {
+            guideInst.removeFromParent();
+            guideInst = null;
+        }
     }
 
     static AddGuide(key, root){
@@ -48,15 +58,20 @@ export default class GuideManager{
             }
         }
         var nodeName = guideCfg["uiName"];
-        var targetNode = UIUtil.FindNodeRecursion(root, nodeName);
+        targetNode = UIUtil.FindNodeRecursion(root, nodeName);
         if(targetNode)
         {
             curGuideKey = key;
             this.GetGuideInst().parent = SceneManager.GetInstance().rootCanvas();
+            guideNodeInfo["parent"] = targetNode.parent;
+            guideNodeInfo["pos"] = targetNode.position;
+            guideNodeInfo["zIndex"] = targetNode.zIndex;
             var worldPos = UIUtil.ToCanvasCoord(targetNode);
             this.GetGuideInst().setPosition(worldPos);
             var guideCom = this.GetGuideInst().getComponent("Guide");
             guideCom.Init(guideCfg, targetNode);
+            targetNode.parent = SceneManager.GetInstance().rootCanvas();
+            targetNode.setPosition(worldPos);
         }
         else
         {
@@ -69,13 +84,20 @@ export default class GuideManager{
         {
             databus.userInfo.guidedList.push(curGuideKey);
         }
+        if(targetNode)
+        {
+            targetNode.parent = guideNodeInfo["parent"];
+            targetNode.setPosition(guideNodeInfo["pos"]);
+            targetNode.zIndex = guideNodeInfo["zIndex"];
+        }
         var guideCom = this.GetGuideInst().getComponent("Guide");
         if(this.GetGuideInst().parent)
         {
             this.GetGuideInst().removeFromParent();
         }
         guideCom.Dispose();
-        var guideConfig = GuideConfig.GetGuideConfig(curGuideKey)
+        var guideConfig = GuideConfig.GetGuideConfig(curGuideKey);
+        if(curGuideKey == "fixBtn") console.error("guideConfig:", guideConfig, guideConfig["next"]);
         if(guideConfig && guideConfig["next"])
         {
             GuideManager.AddGuide(guideConfig["next"], SceneManager.GetInstance().rootCanvas());

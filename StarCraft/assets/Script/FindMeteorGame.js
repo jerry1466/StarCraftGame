@@ -32,7 +32,8 @@ cc.Class({
     onLoad() {
     	console.log("game start")
         SceneManager.GetInstance().SetRoot(this.node);
-        this.gameMeteorCon.Init(ResConfig.MeteorConBg());
+        this.gameMeteorCon.Init(ResConfig.ConBg());
+        this.gameMeteorCon.InitIcon(ResConfig.MeteorIcon());
         this.gameHpCon.Init(ResConfig.GameHpConBg());
         this.countDownStart = false
         this.countDown.node.active = false

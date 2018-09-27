@@ -46,6 +46,10 @@ cc.Class({
         this.execute("Meteor " + num);
     },
 
+    SwitchGuide(_, value){
+        databus.guideEnable = value == "true";
+    },
+
     onConfirm(){
         var content = this.ebGm.string;
         console.log("onConfirm", content);

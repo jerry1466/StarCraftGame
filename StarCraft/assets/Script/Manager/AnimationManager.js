@@ -17,17 +17,17 @@ let AnimConfig =
     "cardSuccess":
     {
         "key":"cardSuccess/cardSuccess",
-        "length":5,
+        "length":54,
     },
     "cardFail":
     {
         "key":"cardFail/cardFail",
-        "length":5,
+        "length":7,
     },
     "cardPerfect":
     {
         "key":"cardPerfect/cardPerfect",
-        "length":5,
+        "length":33,
     }
 }
 export default class AnimationManager {
@@ -35,10 +35,15 @@ export default class AnimationManager {
 
     }
 
-    static PlayAnim(animName, parent, offset, callback, isLoop) {
+    static PlayAnim(animName, parent, offset, callback, isLoop, scale) {
         var node = new cc.Node();
         node.addComponent(cc.Sprite);
         node.parent = parent;
+        if(scale == null)
+        {
+            scale = cc.v2(1, 1);
+        }
+        node.setScale(scale);
         node.setPosition(offset);
         var animation = node.addComponent(cc.Animation);
         var cfg = AnimConfig[animName];

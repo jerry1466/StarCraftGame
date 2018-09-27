@@ -169,7 +169,7 @@ export default class FindMeteor {
 		}
         this.gameOver = true;
         // ModuleManager.GetInstance().ShowModule("GameResultPanel", this.totalCollectMeteor)
-        ModuleManager.GetInstance().ShowModule("MeteorSettleBox", {title:"游戏结束", meteorNum:this.totalCollectMeteor, function(){
+        ModuleManager.GetInstance().ShowModule("MeteorSettleBox", {title:"游戏结束", meteorNum:this.totalCollectMeteor, callback:function(){
 			new LevelManager().SwitchLevel("maze");
 		}});
     }

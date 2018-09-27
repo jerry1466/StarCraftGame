@@ -5,12 +5,13 @@
 import GuideManager from "GuideManager";
 import PrefabUtil from "PrefabUtil";
 import SceneManager from "SceneManager";
-import ArrayUtil from "ArrayUtil";
+import ResConfig from "ResConfig";
 import EventUtil from "EventUtil";
 import AnimationManager from "AnimationManager";
 import ModuleManager from "ModuleManager";
 import LevelManager from "LevelManager";
 import MathUtil from "./Lib/MathUtil";
+import ResourceManager from "ResourceManager";
 
 let STANDARD_NUMBER = 9;
 let CARD_NUM = 5;
@@ -28,18 +29,23 @@ cc.Class({
     properties: {
         cardContainer:cc.Node,
         lbNum:cc.Label,
+        btnEnd:cc.Button,
     },
 
     onLoad(){
+        SceneManager.GetInstance().SetRoot(this.node);
+        ResourceManager.LoadRemoteSprite(this.btnEnd, ResConfig.BigBtn());
         this.lbNum.string = "0";
+        this.lbNum.node.color = new cc.Color(255, 255, 255);
+        this.btnEnd.node.active = false;
         this.registerEventHandler();
         this.cardList = [];
         this.numList = [];
-        var curNum = Math.floor(Math.random() * 10);
+        var curNum = Math.floor(Math.random() * 9) + 1;
         while(this.numList.length < CARD_NUM)
         {
             this.numList.push(curNum);
-            curNum = Math.floor(Math.random() * 10);
+            curNum = Math.floor(Math.random() * 9) + 1;
         }
         this.loadCard(this, 0);
     },
@@ -103,7 +109,7 @@ cc.Class({
                  combineList.push(swapPos[i - layPos.length]);
              }
          }
-         let finalPosList = MathUtil.Shuffle(layPos);
+         let finalPosList = MathUtil.Shuffle(layPos.concat());
          for(let i = 0; i < CARD_NUM; i++)
          {
              var card = this.cardList[i];
@@ -128,6 +134,10 @@ cc.Class({
         }
     },
 
+    onEnd(){
+        this.gameEnd(true, false);
+    },
+
     showSomeCard(){
         this.cardList[0].showNum();
         this.cardList[1].showNum();
@@ -142,30 +152,35 @@ cc.Class({
     },
 
     gameEnd(success, perfect){
+        this.btnEnd.node.active = false;
         var animName = null;
+        var confirmLabel = null;
         if(success)
         {
             if(perfect)
             {
                 animName = "cardPerfect";
+                confirmLabel = "太棒了"
             }
             else
             {
-                animName = "cardSuccess";
+                animName = "cardPerfect";
+                confirmLabel = "好的"
             }
         }
         else
         {
             animName = "cardFail";
+            confirmLabel = "太遗憾了"
         }
-        AnimationManager.PlayAnim(animName, SceneManager.GetInstance().rootCanvas(), cc.v2(0, 0), this.settle, false);
-    },
-
-    settle(){
-        var total = parseInt(this.lbNum.string);
-        ModuleManager.GetInstance().ShowModule("MeteorSettleBox", {title:"游戏结束", meteorNum:total, function(){
-            new LevelManager().SwitchLevel("maze");
-        }});
+        var that = this;
+        AnimationManager.PlayAnim(animName, this.node, this.lbNum.node.position, function(){
+            var total = parseInt(that.lbNum.string);
+            total = total > 9?0:total;
+            ModuleManager.GetInstance().ShowModule("MeteorSettleBox", {title:"游戏结束", meteorNum:total*100, confirmLabel:confirmLabel, callback:function(){
+                    new LevelManager().SwitchLevel("maze");
+                }});
+        }, false, cc.v2(2, 2));
     },
 
     onCardSummary(){
@@ -177,6 +192,10 @@ cc.Class({
             {
                 total += card.num;
             }
+        }
+        if(total > 0)
+        {
+            this.btnEnd.node.active = true;
         }
         this.lbNum.string = total.toString();
         if(total < STANDARD_NUMBER)
@@ -193,9 +212,5 @@ cc.Class({
             this.lbNum.node.color = new cc.Color(255, 0, 0);
             this.gameEnd(false, false);
         }
-    },
-
-    onEndClick(){
-        this.gameEnd(true, false);
     },
 })    

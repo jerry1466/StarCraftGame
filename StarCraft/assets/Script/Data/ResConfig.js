@@ -194,7 +194,6 @@ let asyncList =
         "broke_1028",
         "broke_1029",
         "broke_1030",
-        "messagebox",
         "starListItemBg",
         "mazeBg",
         "starListPanel",

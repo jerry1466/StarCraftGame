@@ -49,6 +49,7 @@ var TweenPosition = cc.Class({
         );
 
         if (this.timer >= this.time) {
+            this.node.setPosition(this.to);
             this.isDone = true;
 
             if (this.onFinishCallBack) {

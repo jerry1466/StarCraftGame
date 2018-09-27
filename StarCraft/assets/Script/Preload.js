@@ -136,6 +136,22 @@ cc.Class({
         }
     },
 
+    onGmClick(){
+        if(this._gmClickCount == null)
+        {
+            this._gmClickCount = 1;
+        }
+        else
+        {
+            this._gmClickCount++;
+        }
+        if(this._gmClickCount >= 3)
+        {
+            ModuleManager.GetInstance().ShowModule("CheatPanel");
+            this._gmClickCount = 0;
+        }
+    },
+
     onEnterClick(){
         new LevelManager().SwitchLevel("battle")
     },

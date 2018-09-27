@@ -5,9 +5,9 @@ let data =
             "row":18,
             "column":11,
             "get star":30,
-            "star game":19,
+            "star game":14,
             "ice game":0,
-            "cards":0,
+            "cards":5,
         },
     "1002":
         {

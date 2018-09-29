@@ -212,6 +212,15 @@ let data =
             "offset":[0, -150],
             "timeout":2.5,
         },
+    "dropGuide":
+        {
+            "slide":true,
+            "text":"左右滑动，移动你的星球~",
+            "uiName":"planet",
+            "offset":[0, 150],
+            "sliderOffset":[60, 0],
+            "timeout":3,
+        }
 }
 
 export default class GuideConfig

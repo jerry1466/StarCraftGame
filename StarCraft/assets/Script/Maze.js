@@ -103,6 +103,8 @@ cc.Class({
         EventUtil.GetInstance().AddEventListener("TriggerGame", this.onTriggerGameHandler);
         this.onTriggerCardHandler = this.triggerCardHandler.bind(this);
         EventUtil.GetInstance().AddEventListener("TriggerCard", this.onTriggerCardHandler);
+        this.onTriggerDropHandler = this.triggerDropHandler.bind(this);
+        EventUtil.GetInstance().AddEventListener("TriggerDrop", this.onTriggerDropHandler);
         this.onShowNoticeHandler = this.showNotice.bind(this);
         EventUtil.GetInstance().AddEventListener("MazeShowNotice", this.onShowNoticeHandler);
         this.onTouchStartHandler = this.onTouchStart.bind(this);
@@ -115,6 +117,7 @@ cc.Class({
         EventUtil.GetInstance().RemoveEventListener("TriggerRob", this.onTriggerRobHandler);
         EventUtil.GetInstance().RemoveEventListener("TriggerGame", this.onTriggerGameHandler);
         EventUtil.GetInstance().RemoveEventListener("TriggerCard", this.onTriggerCardHandler);
+        EventUtil.GetInstance().RemoveEventListener("TriggerDrop", this.onTriggerDropHandler);
         EventUtil.GetInstance().RemoveEventListener("MazeShowNotice", this.onShowNoticeHandler);
         this.node.off(cc.Node.EventType.TOUCH_START, this.onTouchStartHandler);
     },
@@ -234,6 +237,10 @@ cc.Class({
 
     triggerCardHandler(affair){
         new LevelManager().SwitchLevel("card", affair);
+    },
+
+    triggerDropHandler(affair){
+
     },
 
     showNotice(text){

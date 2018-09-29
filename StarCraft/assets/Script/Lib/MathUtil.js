@@ -8,6 +8,10 @@ export default class MathUtil {
 
     }
 
+    static RandomRange(min, max){
+    	return min + Math.random() * (max - min);
+	}
+
     static Clamp(val, min, max){
         if (val < min) return min;
         if (val > max) return max;

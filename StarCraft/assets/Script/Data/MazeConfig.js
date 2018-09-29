@@ -8,6 +8,7 @@ let data =
             "star game":14,
             "ice game":0,
             "cards":5,
+            "drop":5,
         },
     "1002":
         {
@@ -16,7 +17,8 @@ let data =
             "get star":30,
             "star game":17,
             "ice game":1,
-            "cards":0,
+            "cards":3,
+            "drop":5,
         },
     "1003":
         {
@@ -26,6 +28,7 @@ let data =
             "star game":13,
             "ice game":1,
             "cards":0,
+            "drop":5,
         },
     "1004":
         {
@@ -35,6 +38,7 @@ let data =
             "star game":15,
             "ice game":1,
             "cards":0,
+            "drop":5,
         },
     "1005":
         {
@@ -44,6 +48,7 @@ let data =
             "star game":4,
             "ice game":3,
             "cards":0,
+            "drop":5,
         },
     "1006":
         {
@@ -53,6 +58,7 @@ let data =
             "star game":6,
             "ice game":3,
             "cards":0,
+            "drop":5,
         },
     "1007":
         {
@@ -62,6 +68,7 @@ let data =
             "star game":4,
             "ice game":3,
             "cards":0,
+            "drop":8,
         },
     "1008":
         {
@@ -71,6 +78,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":5,
         },
     "1009":
         {
@@ -80,6 +88,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":3,
         },
     "1010":
         {
@@ -89,6 +98,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":5,
         },
     "1011":
         {
@@ -98,6 +108,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":7,
         },
     "1012":
         {
@@ -107,6 +118,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":5,
         },
     "1013":
         {
@@ -116,6 +128,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":5,
         },
     "1014":
         {
@@ -134,6 +147,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":5,
         },
     "1016":
         {
@@ -143,6 +157,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":5,
         },
     "1017":
         {
@@ -152,6 +167,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":5,
         },
     "1018":
         {
@@ -161,6 +177,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":5,
         },
     "1019":
         {
@@ -170,6 +187,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":3,
         },
     "1020":
         {
@@ -179,6 +197,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":5,
         },
     "1021":
         {
@@ -188,6 +207,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":5,
         },
     "1022":
         {
@@ -197,6 +217,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":5,
         },
     "1023":
         {
@@ -206,6 +227,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":5,
         },
     "1024":
         {
@@ -215,6 +237,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":5,
         },
     "1025":
         {
@@ -224,6 +247,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":5,
         },
     "1026":
         {
@@ -233,6 +257,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":5,
         },
     "1027":
         {
@@ -242,6 +267,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":5,
         },
     "1028":
         {
@@ -251,6 +277,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":5,
         },
     "1029":
         {
@@ -260,6 +287,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":5,
         },
     "1030":
         {
@@ -269,6 +297,7 @@ let data =
             "star game":3,
             "ice game":3,
             "cards":3,
+            "drop":5,
         },
 }
 let noFogArea = [5, 5]

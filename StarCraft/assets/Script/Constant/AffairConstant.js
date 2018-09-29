@@ -12,6 +12,7 @@ let affairEnum = {
     GAME:11,
     CARD:12,
     FREEZE:13,
+    DROP:14,
 }
 
 let affairHardLevel = {
@@ -73,6 +74,9 @@ export default class AffairConstant {
                 break;
             case "cards":
                 return affairEnum.CARD;
+                break;
+            case "drop":
+                return affairEnum.DROP;
                 break;
             default:
                 return affairEnum.NONE;

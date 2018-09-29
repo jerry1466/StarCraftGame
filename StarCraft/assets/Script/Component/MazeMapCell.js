@@ -124,6 +124,11 @@ cc.Class({
             {
                 EventUtil.GetInstance().DispatchEvent("TriggerCard", _this.affair);
             }
+            else if(_this.affair.type == AffairConstant.AffairEnum().DROP)
+            {
+                EventUtil.GetInstance().DispatchEvent("TriggerDrop", _this.affair);
+                EventUtil.GetInstance().DispatchEvent("FreeTouch")
+            }
             else
             {
                 EventUtil.GetInstance().DispatchEvent("FreeTouch")

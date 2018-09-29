@@ -103,6 +103,7 @@ let res=
         "affair_11":"affair/affair_11.png",
         "affair_12":"affair/affair_12.png",
         "affair_13":"affair/affair_13.png",
+        "affair_14":"affair/affair_14.png",
     },
     "btn":
     {

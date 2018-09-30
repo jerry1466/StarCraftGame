@@ -43,6 +43,10 @@ cc.Class({
         this.diamondCon.Init(ResConfig.ConBg());
         this.diamondCon.InitIcon(ResConfig.DiamondIcon());
         this.registerEventHandler();
+        if(databus.showFog == false)
+        {
+            this.fog.node.opacity = 0;
+        }
     },
 
     update() {
@@ -240,7 +244,7 @@ cc.Class({
     },
 
     triggerDropHandler(affair){
-
+        new LevelManager().SwitchLevel("drop", affair);
     },
 
     showNotice(text){

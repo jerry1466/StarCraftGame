@@ -46,6 +46,10 @@ cc.Class({
         this.execute("Meteor " + num);
     },
 
+    NoFog(){
+        databus.showFog = false;
+    },
+
     SwitchGuide(_, value){
         databus.guideEnable = value == "true";
     },
@@ -81,6 +85,9 @@ cc.Class({
                 break;
             case "card":
                 new LevelManager().SwitchLevel("card");
+                break;
+            case "drop":
+                new LevelManager().SwitchLevel("drop");
                 break;
         }
     }

@@ -21,7 +21,7 @@ let affairHardLevel = {
     Hard:1000,
 }
 
-let AFFAIR_EVENT_NAMES = ["get star", "star game", "ice game", "cards"];
+let AFFAIR_EVENT_NAMES = ["get star", "star game", "ice game", "cards", "drop"];
 
 export default class AffairConstant {
     static AffairEnum(){

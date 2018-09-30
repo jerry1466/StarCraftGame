@@ -10,8 +10,9 @@ import EventUtil from "EventUtil";
 import AnimationManager from "AnimationManager";
 import ModuleManager from "ModuleManager";
 import LevelManager from "LevelManager";
-import MathUtil from "./Lib/MathUtil";
+import MathUtil from "MathUtil";
 import ResourceManager from "ResourceManager";
+import Databus from 'Databus';
 
 let STANDARD_NUMBER = 9;
 let CARD_NUM = 5;
@@ -24,6 +25,7 @@ let layPos =
         [130, 0],
     ];
 let swapPos = [[0, 115], [0, -115]];
+let databus = new Databus();
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -173,10 +175,10 @@ cc.Class({
             animName = "cardFail";
             confirmLabel = "太遗憾了"
         }
-        var that = this;
+        var total = parseInt(this.lbNum.string);
+        total = total > 9?0:total;
+        databus.AddMoney(2, total*100);
         AnimationManager.PlayAnim(animName, this.node, this.lbNum.node.position, function(){
-            var total = parseInt(that.lbNum.string);
-            total = total > 9?0:total;
             ModuleManager.GetInstance().ShowModule("MeteorSettleBox", {title:"游戏结束", meteorNum:total*100, confirmLabel:confirmLabel, callback:function(){
                     new LevelManager().SwitchLevel("maze");
                 }});

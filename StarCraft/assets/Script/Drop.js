@@ -5,7 +5,7 @@
 import Databus from "Databus"
 import MathUtil from "MathUtil";
 import SceneManager from "SceneManager";
-import TweenPosition from "TweenPosition";
+import ModuleManager from "ModuleManager";
 import EventUtil from "EventUtil";
 import ResourceManager from "ResourceManager";
 import Coin from "Coin";
@@ -13,6 +13,7 @@ import ResConfig from "ResConfig";
 import UIUtil from "UIUtil";
 import GuideManager from "GuideManager";
 import Cd from "Cd";
+import LevelManager from "LevelManager";
 
 let databus = new Databus();
 cc.Class({
@@ -33,7 +34,10 @@ cc.Class({
         this.meteorCon.SetCoinType(2);
         this.registerEventHandler();
         this.gameStarted = false;
+        this.gameEnd = false;
         this.countDown.node.active = false;
+        this.meteorComList = [];
+        this.blackHoleComList = [];
     },
 
     onDestroy(){
@@ -54,19 +58,51 @@ cc.Class({
         }
     },
 
-    update(){
+    update(dt){
         this.meteorCon.UpdateCoin(databus.userInfo.meteor, true);
+        if(this.gameEnd) return;
         if(this.gameStarted)
         {
             if(this.meteorCD.Tick())
             {
-                var newMeteor = this.meteor.clone();
+                var newMeteor = cc.instantiate(this.meteor);
+                newMeteor.parent = this.container;
                 newMeteor.setPosition(this.getDropPosition());
+                var meteorCom = newMeteor.getComponent("DropMeteor");
+                this.meteorComList.push(meteorCom);
+                meteorCom.SetMeteor(MathUtil.RandomRange(10, 50));
             }
             if(this.blackHoleCD.Tick())
             {
-                var newBlackHole = this.blackHole.clone();
+                var newBlackHole = cc.instantiate(this.blackHole);
+                newBlackHole.parent = this.container;
                 newBlackHole.setPosition(this.getDropPosition());
+                var blackHoleCom = newBlackHole.getComponent("DropBlackHole");
+                this.blackHoleComList.push(blackHoleCom);
+                blackHoleCom.SetBlackHole(500, MathUtil.RandomRange(1, 1.25));
+            }
+            this.blackHoleCD.duration = MathUtil.Clamp(this.blackHoleCD.duration - dt * 80, 250, 10000);
+
+            for(var i = this.meteorComList.length - 1; i >= 0; i--)
+            {
+                if(MathUtil.HitTestWithScale(this.meteorComList[i].node, this.planet))
+                {
+                    this.collectTotal += this.meteorComList[i].num;
+                    databus.AddMoney(2, this.meteorComList[i].num);
+                    this.meteorComList[i].Hit();
+                    this.meteorComList.splice(i, 1);
+                }
+            }
+
+            for(var i = this.blackHoleComList.length - 1; i >= 0; i--)
+            {
+                if(MathUtil.HitTestWithScale(this.blackHoleComList[i].node, this.planet))
+                {
+                    this.blackHoleComList[i].Hit();
+                    this.blackHoleComList.splice(i, 1);
+                    this.gameOver();
+                    break;
+                }
             }
         }
     },
@@ -91,6 +127,7 @@ cc.Class({
 
     touchStartHandler(event){
         this.touchStartLocation = event.getLocation();
+        console.log("touchStartHandler", this.touchStartLocation);
         this.onTouchMoveHandler = this.touchMoveHandler.bind(this);
         this.container.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMoveHandler);
         this.onTouchEndHandler = this.touchEndHandler.bind(this);
@@ -99,7 +136,11 @@ cc.Class({
 
     touchMoveHandler(event){
         this.touchMoveLocation = event.getLocation();
-        this.planet.x += this.touchMoveLocation.x - this.touchStartLocation.x;
+        console.log("touchMoveHandler", this.touchMoveLocation);
+        var pos = this.planet.position;
+        pos.x += this.touchMoveLocation.x - this.touchStartLocation.x;
+        this.planet.position = pos;
+        this.touchStartLocation = this.touchMoveLocation;
     },
 
     touchEndHandler(event){
@@ -122,6 +163,7 @@ cc.Class({
         this.gameStarted = true;
         this.meteorCD = new Cd(2000);
         this.blackHoleCD = new Cd(2500);
+        this.collectTotal = 0;
     },
 
     getDropPosition(){
@@ -129,5 +171,12 @@ cc.Class({
         var x = MathUtil.RandomRange(-halfScreen, halfScreen);
         var y = databus.screenHeight * 0.5;
         return cc.v2(x, y);
+    },
+
+    gameOver(){
+        this.gameEnd = true;
+        ModuleManager.GetInstance().ShowModule("MeteorSettleBox", {title:"游戏结束", meteorNum:this.collectTotal, confirmLabel:"下次加油", callback:function(){
+            new LevelManager().SwitchLevel("maze");
+        }});
     }
 })

@@ -46,4 +46,8 @@ export default class LevelManager {
     IsMazeLevel(){
         return this.CurrentLevelName == "maze"
     }
+
+    IsDropLevel(){
+        return this.CurrentLevelName == "drop"
+    }
 }

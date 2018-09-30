@@ -176,18 +176,23 @@ export default class UIUtil {
     }
 
     static flyDiamond(parent, pos){
+        if(new LevelManager().IsDropLevel())
+        {
+            return;
+        }
         var diamondNode = new cc.Node();
         parent.addChild(diamondNode);
         diamondNode.setPosition(pos.x, pos.y);
         var spriteCon = diamondNode.addComponent(cc.Sprite);
-        spriteCon.spriteFrame = new cc.SpriteFrame(cc.url.raw('resources/Image/diamond_icon2.png'));
         var uiPath = null;
         if(new LevelManager().IsBattleLevel())
         {
+            spriteCon.spriteFrame = new cc.SpriteFrame(cc.url.raw('resources/Image/diamond_icon2.png'));
             uiPath = "Hud.DiamondCon";
         }
         else if(new LevelManager().IsMazeLevel())
         {
+            spriteCon.spriteFrame = new cc.SpriteFrame(cc.url.raw('resources/Image/diamond_icon2.png'));
             uiPath = "DiamondCon";
         }
         if(uiPath)

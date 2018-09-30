@@ -31,6 +31,7 @@ export default class Databus{
         this.bgMusic = "";
         this.shareRewardDiamond = 2000;
         this.guideEnable = true;
+        this.showFog = true;
         /**************用户数据*************/
         this.userInfo = {
             curStarId:1001,

@@ -1,14 +1,14 @@
 {
   "ver": "1.0.0",
-  "uuid": "08b1e380-8d95-4219-9d6c-1776bdac7bfc",
+  "uuid": "440acf4a-dfae-476f-aee3-01e661e27b52",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
   "subMetas": {
-    "affair_14": {
+    "meteor_icon": {
       "ver": "1.0.3",
-      "uuid": "536e4c23-7347-4725-bbed-cc740de5204c",
-      "rawTextureUuid": "08b1e380-8d95-4219-9d6c-1776bdac7bfc",
+      "uuid": "58c45938-82e7-47e4-aba1-ec235d5b2d21",
+      "rawTextureUuid": "440acf4a-dfae-476f-aee3-01e661e27b52",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
@@ -16,10 +16,10 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 54,
-      "height": 43,
-      "rawWidth": 54,
-      "rawHeight": 43,
+      "width": 29,
+      "height": 28,
+      "rawWidth": 29,
+      "rawHeight": 28,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,

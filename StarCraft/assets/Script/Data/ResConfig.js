@@ -37,6 +37,7 @@ let res=
         "broke":"Broke.png",
         "newStar_1":"newStar_icon1.png",
         "newStar_2":"newStar_icon2.png",
+        "infer":"infer",
         "star":"Star.png",
         "star_1001":"star/star_1001.png",
         "star_1002":"star/star_1002.png",
@@ -294,6 +295,10 @@ export default class ResConfig{
     static FrameBg(){
         return this.GetBaseUrl() + res["bg"]["frame"]
     }
+
+    static InferIcon(){
+        return this.GetBaseUrl() + res["icon"]["infer"]
+    }
     
     static DiamondIcon(){
         return this.GetBaseUrl() + res["icon"]["diamond"]
@@ -396,7 +401,8 @@ export default class ResConfig{
     }
 
     static AffairIcon(type){
-        return this.GetBaseUrl() + res["icon"]["affair_" + type];
+        return this.MeteorIcon();
+        //return this.GetBaseUrl() + res["icon"]["affair_" + type];
     }
 
     static ViewStarBtn(){

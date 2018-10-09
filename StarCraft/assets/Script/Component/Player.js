@@ -19,7 +19,7 @@ cc.Class({
     },
 
     onLoad(){
-        ResourceManager.LoadRemoteSprite(this.head, ResConfig.GetStarIcon(databus.userInfo.curStarId));
+        ResourceManager.LoadRemoteSprite(this.head, ResConfig.InferIcon());
         if(CC_WECHATGAME)
         {
             let avatarUrl = databus.wxUserInfo.avatarUrl;
@@ -54,7 +54,7 @@ cc.Class({
 
     },
 
-    Move(tarCell, callback){
+    Move(tarCell, dir, callback){
         this.row = tarCell.row;
         this.column = tarCell.column;
         var tweenPos = TweenPosition.begin(this.node, this.node.position, tarCell.node.position, 0.15);
@@ -64,6 +64,23 @@ cc.Class({
             that.node.y -= 4;
             callback();
         };
+        var rotation = 0;
+        switch(dir)
+        {
+            case "up":
+                rotation = 0;
+                break;
+            case "right":
+                rotation = 90;
+                break;
+            case "down":
+                rotation = 180;
+                break;
+            case "left":
+                rotation = 270;
+                break;
+        }
+        this.head.rotation = rotation * Math.PI / 180;
     },
 
     JumpTo(tarCell, callback){

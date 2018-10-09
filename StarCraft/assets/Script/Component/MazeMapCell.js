@@ -52,7 +52,8 @@ cc.Class({
         else{
             this.icon.node.active = true;
         }
-        ResourceManager.LoadRemoteSprite(this.icon, ResConfig.AffairIcon(this.affair.type));
+        //ResourceManager.LoadRemoteSprite(this.icon, ResConfig.AffairIcon(this.affair.type));
+        ResourceManager.LoadRemoteSprite(this.icon, ResConfig.MeteorIcon());
     },
 
     GetAffair(){
@@ -68,7 +69,7 @@ cc.Class({
         var foreFogCover = this.affair.fogCover;
         if(foreFogCover == true)
         {
-            AnimationManager.PlayAnim("fogRemove", this.node.parent.parent, this.node.position, callback, false);
+            //AnimationManager.PlayAnim("fogRemove", this.node.parent.parent, this.node.position, callback, false);
             this.affair.fogCover = false;
         }
         else

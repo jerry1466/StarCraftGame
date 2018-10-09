@@ -290,12 +290,13 @@ export default class MazeManager{
                 else
                 {
                     databus.AddMoney(1, 0 - affair.cost);
+                    UIUtil.ShowMoneyNotice(1, 0 - affair.cost, this.container, this.player.node.position);
                     var relatedCells = this.getRelatedCells(databus.userInfo.mazeCurLoc, dir);
                     databus.userInfo.mazeCurLoc = tarCell.row * this.mazeCol + tarCell.column;
                     var that = this;
                     tarCell.RemoveFog(function(){
                         EventUtil.GetInstance().DispatchEvent("MazeShowNotice", "");
-                        that.player.Move(tarCell, function(){
+                        that.player.Move(tarCell, dir, function(){
                             tarCell.Trigger();
                         })
                     });

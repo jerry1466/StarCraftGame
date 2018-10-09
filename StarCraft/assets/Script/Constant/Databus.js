@@ -27,7 +27,8 @@ export default class Databus{
         this.gameRegion = cc.v2(370, 550);
         this.mazeRow = 15;
         this.mazeColumn = 10;
-        this.gameMaxHp = 3;
+        this.gameTimeLimit = 60;
+        this.gameMaxHp = 1;
         this.bgMusic = "";
         this.shareRewardDiamond = 2000;
         this.guideEnable = true;

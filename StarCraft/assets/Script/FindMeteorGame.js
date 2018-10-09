@@ -27,6 +27,8 @@ cc.Class({
         gameMeteorCon:Coin,
         gameHpCon:GameHpCon,
         countDown:cc.Sprite,
+        timeLimitCon:cc.Node,
+        timeLimitTxt:cc.Label,
     },
 
     onLoad() {
@@ -36,7 +38,8 @@ cc.Class({
         this.gameMeteorCon.InitIcon(ResConfig.MeteorIcon());
         this.gameHpCon.Init(ResConfig.GameHpConBg());
         this.countDownStart = false
-        this.countDown.node.active = false
+        this.countDown.node.active = false;
+        this.updateTimeLimit(databus.gameTimeLimit);
     	//加载流星平原背景
         ResourceManager.LoadRemoteSprite(this.bg, ResConfig.FindMeteorBg())
         //var param = new LevelManager().CurrentLevelParam
@@ -72,6 +75,11 @@ cc.Class({
 			this.findMeteor.CreateBlackHole(this, 1)
 			this.findMeteor.ReCreateBlackHoleCntDel()
         }
+
+        if(this.findMeteor.cdFinish == true && this.findMeteor.gameOver != true)
+        {
+            this.updateTimeLimit();
+        }
     },
 
     onDestroy() {
@@ -93,6 +101,38 @@ cc.Class({
 
     start() {
 	    this.gameMeteorCon.UpdateCoin(0);
+    },
+
+    updateTimeLimit(timeLimit){
+        if(timeLimit)
+        {
+            this.totalTL = timeLimit;
+        }
+        else
+        {
+            this.totalTL--;
+            if(this.totalTL < 0)
+            {
+                this.totalTL = 0;
+            }
+        }
+        if(this.totalTL >= 0 && this.totalTL <= 5)
+        {
+            this.timeLimitTxt.node.color = "#ff0000";
+        }
+        else if(this.totalTL >= 6 && this.totalTL <= 10)
+        {
+            this.timeLimitTxt.node.color = "#ffff00";
+        }
+        else
+        {
+            this.timeLimitTxt.node.color = "#33ff00";
+        }
+        this.timeLimitTxt.string = this.totalTL + "秒";
+        if(this.totalTL <= 0)
+        {
+            this.findMeteor.GameOver();
+        }
     },
 
     catchMeteorHandler(meteor){

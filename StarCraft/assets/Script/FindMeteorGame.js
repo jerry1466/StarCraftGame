@@ -29,6 +29,8 @@ cc.Class({
         countDown:cc.Sprite,
         timeLimitCon:cc.Node,
         timeLimitTxt:cc.Label,
+        rtOperationTip:cc.RichText,
+        tipIcon:cc.Sprite,
     },
 
     onLoad() {
@@ -50,7 +52,9 @@ cc.Class({
         this.findMeteor.gameTop = this.gameHpCon.node.y - this.gameHpCon.node.height / 2 - 5
         this.findMeteor.gameButtom = 0 - this.findMeteor.gameTop
         this.findMeteor.gameRight = databus.screenRight - 17
-        this.findMeteor.gameLeft = 0 - this.findMeteor.gameRight
+        this.findMeteor.gameLeft = 0 - this.findMeteor.gameRight;
+        this.rtOperationTip.string = "<color=#FFFFFF>手指滑动   </c><color=#FFFFFF>，收集</c>";
+        ResourceManager.LoadRemoteSprite(this.tipIcon, ResConfig.GetStarIcon(databus.userInfo.curStarId));
 
         var that = this
         this.findMeteor.CreatePlanet(this, function(){
@@ -65,7 +69,7 @@ cc.Class({
         this.registerEventHandler();
     },
 
-    update() {
+    update(dt) {
 		if (GuideManager.HasGuide("gameBlackHole") && !this.countDownStart) {
 			this.countDownStart = true
 			this.countDownTimer()
@@ -78,7 +82,7 @@ cc.Class({
 
         if(this.findMeteor.cdFinish == true && this.findMeteor.gameOver != true)
         {
-            this.updateTimeLimit();
+            this.updateTimeLimit(dt);
         }
     },
 
@@ -104,13 +108,13 @@ cc.Class({
     },
 
     updateTimeLimit(timeLimit){
-        if(timeLimit)
+        if(timeLimit > 1)
         {
             this.totalTL = timeLimit;
         }
         else
         {
-            this.totalTL--;
+            this.totalTL -= timeLimit;
             if(this.totalTL < 0)
             {
                 this.totalTL = 0;
@@ -118,17 +122,17 @@ cc.Class({
         }
         if(this.totalTL >= 0 && this.totalTL <= 5)
         {
-            this.timeLimitTxt.node.color = "#ff0000";
+            this.timeLimitTxt.node.color = new cc.Color(255, 0, 0);
         }
         else if(this.totalTL >= 6 && this.totalTL <= 10)
         {
-            this.timeLimitTxt.node.color = "#ffff00";
+            this.timeLimitTxt.node.color = new cc.Color(255,255, 0);
         }
         else
         {
-            this.timeLimitTxt.node.color = "#33ff00";
+            this.timeLimitTxt.node.color = new cc.Color(51, 255, 0);
         }
-        this.timeLimitTxt.string = this.totalTL + "秒";
+        this.timeLimitTxt.string = Math.ceil(this.totalTL) + "秒";
         if(this.totalTL <= 0)
         {
             this.findMeteor.GameOver();

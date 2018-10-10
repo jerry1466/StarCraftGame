@@ -401,8 +401,7 @@ export default class ResConfig{
     }
 
     static AffairIcon(type){
-        return this.MeteorIcon();
-        //return this.GetBaseUrl() + res["icon"]["affair_" + type];
+        return this.GetBaseUrl() + res["icon"]["affair_" + type];
     }
 
     static ViewStarBtn(){

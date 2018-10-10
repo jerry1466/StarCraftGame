@@ -52,8 +52,22 @@ cc.Class({
         else{
             this.icon.node.active = true;
         }
-        //ResourceManager.LoadRemoteSprite(this.icon, ResConfig.AffairIcon(this.affair.type));
-        ResourceManager.LoadRemoteSprite(this.icon, ResConfig.MeteorIcon());
+		if(databus.showMazeIcon)
+		{
+			ResourceManager.LoadRemoteSprite(this.icon, ResConfig.AffairIcon(this.affair.type));
+		}
+		else
+		{
+			if(this.affair.type == AffairConstant.AffairEnum().NONE)
+			{
+				this.icon.node.active = false;
+			}
+			else
+			{
+				this.icon.node.active = true;
+				ResourceManager.LoadRemoteSprite(this.icon, ResConfig.MeteorIcon());
+			}
+		}
     },
 
     GetAffair(){

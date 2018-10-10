@@ -89,6 +89,9 @@ cc.Class({
             case "drop":
                 new LevelManager().SwitchLevel("drop");
                 break;
+			case "showMazeIcon":
+				databus.showMazeIcon = true;
+				break;
         }
     }
 })    

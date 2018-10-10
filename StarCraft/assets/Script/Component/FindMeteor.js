@@ -70,6 +70,7 @@ export default class FindMeteor {
 	}
 
     RemoveMeteor(meteor) {
+		console.log("RemoveMeteor", this.meteorList.length);
         this.meteorList.splice(this.meteorList.indexOf(meteor), 1);
         meteor.node.removeFromParent(true)
         meteor.node.destroy()

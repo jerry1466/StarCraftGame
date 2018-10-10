@@ -19,7 +19,7 @@ cc.Class({
     },
 
     onLoad(){
-        ResourceManager.LoadRemoteSprite(this.head, ResConfig.InferIcon());
+        //ResourceManager.LoadRemoteSprite(this.head, ResConfig.InferIcon());
         if(CC_WECHATGAME)
         {
             let avatarUrl = databus.wxUserInfo.avatarUrl;
@@ -80,7 +80,7 @@ cc.Class({
                 rotation = 270;
                 break;
         }
-        this.head.rotation = rotation * Math.PI / 180;
+        this.head.node.rotation = rotation;
     },
 
     JumpTo(tarCell, callback){

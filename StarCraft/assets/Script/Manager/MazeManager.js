@@ -290,7 +290,7 @@ export default class MazeManager{
                 else
                 {
                     databus.AddMoney(1, 0 - affair.cost);
-                    UIUtil.ShowMoneyNotice(1, 0 - affair.cost, this.container, this.player.node.position);
+                    UIUtil.ShowMoneyNotice(1, 0 - affair.cost, SceneManager.GetInstance().rootCanvas(), this.player.node.position);
                     var relatedCells = this.getRelatedCells(databus.userInfo.mazeCurLoc, dir);
                     databus.userInfo.mazeCurLoc = tarCell.row * this.mazeCol + tarCell.column;
                     var that = this;

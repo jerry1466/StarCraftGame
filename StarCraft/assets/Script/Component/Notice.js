@@ -16,16 +16,19 @@ cc.Class({
     },
 
     onLoad(){
-
-        this.num.string = this.numText;
+		if(this.numText)
+		{
+			this.num.string = this.numText;
+		}
     },
 
     onDestroy() {
 
     },
 
-    Init(res, numText) {
-        this.res = res
+    Init(res, moneyNum, numText) {
+        this.res = res;
+		this.moneyNum = moneyNum;
         this.numText = numText;
         this.refresh();
     },

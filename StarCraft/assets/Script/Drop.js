@@ -1,5 +1,5 @@
 /**
- * Card
+ * Drop
  * @author lijun
  **/
 import Databus from "Databus"
@@ -14,6 +14,8 @@ import UIUtil from "UIUtil";
 import GuideManager from "GuideManager";
 import Cd from "Cd";
 import LevelManager from "LevelManager";
+import AnimationManager from "AnimationManager";
+import BGMConfig from "BGMConfig";
 
 let databus = new Databus();
 cc.Class({
@@ -25,10 +27,13 @@ cc.Class({
         meteorCon:Coin,
         container:cc.Node,
         countDown:cc.Sprite,
+        rtOperationTip:cc.RichText,
+        tipIcon:cc.Sprite,
     },
 
     onLoad(){
         SceneManager.GetInstance().SetRoot(this.node);
+		this.planet.active = true;
         ResourceManager.LoadRemoteSprite(this.planet, ResConfig.GetStarIcon(databus.userInfo.curStarId));
         this.meteorCon.Init(ResConfig.ConBg());
         this.meteorCon.SetCoinType(2);
@@ -38,6 +43,10 @@ cc.Class({
         this.countDown.node.active = false;
         this.meteorComList = [];
         this.blackHoleComList = [];
+        this.rtOperationTip.string = "<color=#FFFFFF>手指左右移动   </c><color=#FFFFFF>，收集</c>";
+        ResourceManager.LoadRemoteSprite(this.tipIcon, ResConfig.GetStarIcon(databus.userInfo.curStarId));
+		this.meteorSoundChnl = BGMConfig.BgmInit(BGMConfig.GetBgm("collectMeteor"));
+		this.blackHoleSoundChnl = BGMConfig.BgmInit(BGMConfig.GetBgm("hitBlackHole"));
     },
 
     onDestroy(){
@@ -45,17 +54,17 @@ cc.Class({
     },
 
     start(){
-        if(!GuideManager.HasGuide("dropGuide"))
-        {
-            UIUtil.ShowTextNotice("<color=#FFFF00>欢迎来到流星雨境</c>", cc.v2(0, 100));
-            this.onGuideEndHandler = this.onGuideEnd.bind(this);
-            EventUtil.GetInstance().AddEventListener("GuideEnd", this.onGuideEndHandler);
-            GuideManager.AddGuide("dropGuide", SceneManager.GetInstance().rootCanvas());
-        }
-        else
-        {
+        // if(!GuideManager.HasGuide("dropGuide"))
+        // {
+            // UIUtil.ShowTextNotice("<color=#FFFF00>欢迎来到流星雨境</c>", cc.v2(0, 100));
+            // this.onGuideEndHandler = this.onGuideEnd.bind(this);
+            // EventUtil.GetInstance().AddEventListener("GuideEnd", this.onGuideEndHandler);
+            // GuideManager.AddGuide("dropGuide", SceneManager.GetInstance().rootCanvas());
+        // }
+        // else
+        // {
             this.countDownTimer();
-        }
+        // }
     },
 
     update(dt){
@@ -91,6 +100,7 @@ cc.Class({
                     databus.AddMoney(2, this.meteorComList[i].num);
                     this.meteorComList[i].Hit();
                     this.meteorComList.splice(i, 1);
+					BGMConfig.BgmPlay(this.meteorSoundChnl);
                 }
             }
 
@@ -100,6 +110,7 @@ cc.Class({
                 {
                     this.blackHoleComList[i].Hit();
                     this.blackHoleComList.splice(i, 1);
+					BGMConfig.BgmPlay(this.blackHoleSoundChnl);
                     this.gameOver();
                     break;
                 }
@@ -175,6 +186,8 @@ cc.Class({
 
     gameOver(){
         this.gameEnd = true;
+		this.planet.active = false;
+		AnimationManager.PlayAnim("cardFail", this.planet.parent, this.planet.position, null);
         ModuleManager.GetInstance().ShowModule("MeteorSettleBox", {title:"游戏结束", meteorNum:this.collectTotal, confirmLabel:"下次加油", callback:function(){
             new LevelManager().SwitchLevel("maze");
         }});

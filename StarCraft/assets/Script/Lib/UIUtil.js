@@ -131,6 +131,10 @@ export default class UIUtil {
         {
             moneyIconRes = ResConfig.DiamondIcon();
             color = "<color=#EDF700>";
+			if(moneyNum < 0)
+			{
+				color = "<color=#FF0000>";
+			}
         }
         else
         {
@@ -138,9 +142,13 @@ export default class UIUtil {
             color = "<color=#FFD700>";
         }
         var noticeText = color + " + " + moneyNum + "</c>";
+        if(moneyNum < 0)
+        {
+            noticeText = color + moneyNum + "</c>";
+        }
         var notice = this.GetNoticeInst();
         var noticeCom = notice.getComponent("Notice");
-        noticeCom.Init(moneyIconRes, noticeText);
+        noticeCom.Init(moneyIconRes, moneyNum, noticeText);
         noticeList.push(notice);
         notice.x = offset.x;
         notice.y = offset.y;
@@ -161,11 +169,12 @@ export default class UIUtil {
 
     static displayNotice(noticeLabel){
         noticeLabel.active = true;
-        var tweenPos = TweenPosition.begin(noticeLabel, noticeLabel.position, cc.v2(noticeLabel.x, noticeLabel.y + 20), 1)
+		var noticeCom = noticeLabel.getComponent("Notice");
+        var tweenPos = TweenPosition.begin(noticeLabel, noticeLabel.position, cc.v2(noticeLabel.x, noticeLabel.y + 20 * (noticeCom.moneyNum < 0?-1:1)), 1)
         var that = this;
         tweenPos.onFinishCallBack = function(){
             var noticeCom = noticeLabel.getComponent("Notice");
-            if(noticeCom.res)
+            if(noticeCom.res && noticeCom.moneyNum >= 0)
             {
                 that.flyDiamond(noticeLabel.parent, cc.v2(noticeLabel.position.x - 25, noticeLabel.position.y - 15));
             }

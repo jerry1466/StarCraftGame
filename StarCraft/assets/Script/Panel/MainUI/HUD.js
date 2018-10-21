@@ -22,7 +22,7 @@ cc.Class({
 
     start(){
         this.DiamondCon.Init(ResConfig.ConBg());
-        this.ProductivityCon.Init(ResConfig.ProductivityConBg(), "/秒");
+        this.ProductivityCon.Init(ResConfig.TextConBg(), "/秒", "总产量");
         this.DiamondCon.InitIcon(ResConfig.DiamondIcon());
         this.ProductivityCon.InitIcon(ResConfig.DiamondIcon());
     },

@@ -14,7 +14,8 @@ cc.Class({
         spBg:cc.Sprite,
         spIcon:cc.Node,
         lbNum:cc.Label,
-        btnAdd:cc.Button
+        btnAdd:cc.Button,
+        lbTitle:cc.Label,
     },
 
     onLoad(){
@@ -22,10 +23,11 @@ cc.Class({
         this._coinType = 0;
     },
 
-    Init(resBg, measureName){
+    Init(resBg, measureName, titleName){
         ResourceManager.LoadRemoteSprite(this.spBg, resBg);
         this.tweening = false;
-        this.measureName = measureName || ""
+        this.measureName = measureName || "";
+        this.titleName = titleName || "";
     },
 
     InitIcon(resIcon){
@@ -34,6 +36,10 @@ cc.Class({
 
     UpdateCoin(coinNum, doTween){
         this.lbNum.string = coinNum + this.measureName;
+        if(this.lbTitle)
+        {
+            this.lbTitle.string = this.titleName;
+        }
         if(doTween && this._coinNum > 0 && coinNum > this._coinNum && !this.tweening)
         {
             this.tweening = true;

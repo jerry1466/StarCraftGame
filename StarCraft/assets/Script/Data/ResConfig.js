@@ -4,6 +4,7 @@ let res=
     {
         "main":"battle_bg.jpg",
         "con":"coin_bg.png",
+        "textCon":"textCon_bg.png",
         "diamondCon":"diamondCon_bg.png",
         "productivityCon":"productivityCon_bg.png",
         "meteorCon":"gameMeteor_bg.png",
@@ -270,6 +271,10 @@ export default class ResConfig{
 
     static ConBg(){
         return this.GetBaseUrl() + res["bg"]["con"]
+    }
+
+    static TextConBg(){
+        return this.GetBaseUrl() + res["bg"]["textCon"]
     }
 
     static DiamondConBg(){

@@ -31,7 +31,7 @@ cc.Class({
     },
 
     start(){
-        this.productivityCon.Init(ResConfig.ProductivityConBg(), "/秒");
+        this.productivityCon.Init(ResConfig.TextConBg(), "/秒", "总产量");
         this.productivityCon.InitIcon(ResConfig.DiamondIcon());
         this.refreshList();
         var that = this;

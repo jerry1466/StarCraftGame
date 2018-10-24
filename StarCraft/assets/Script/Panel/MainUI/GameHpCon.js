@@ -35,9 +35,9 @@ cc.Class({
     UpdateHp(num) {
         for(var i = num; i < databus.gameMaxHp; i++)
         {
-            if(this._hpList[i]){
-                this._hpList[i].active = false;
-            }
+            // if(this._hpList[i]){
+            //     this._hpList[i].active = false;
+            // }
         }
     }
 })

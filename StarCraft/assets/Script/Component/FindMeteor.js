@@ -3,11 +3,13 @@
  * @auhor clairli
  */
 import Databus from "Databus";
-import MathUtil from "MathUtil"
+import MathUtil from "MathUtil";
 import PrefabUtil from "PrefabUtil";
-import Meteor from "Meteor"
-import ModuleManager from "ModuleManager"
-import LevelManager from "LevelManager"
+import Meteor from "Meteor";
+import ModuleManager from "ModuleManager";
+import LevelManager from "LevelManager";
+import SceneManager from "SceneManager";
+import AnimationManager from "AnimationManager";
 
 let databus = new Databus()
 let instance
@@ -35,36 +37,50 @@ export default class FindMeteor {
     Destroy(){
     	this.gameOver = false;
         this.totalCollectMeteor = 0;
+		this.scheduleTimes = 0;
 	}
 
-	CreatePlanet(component, callback) {
+	ScheduleCreateMeteorAndBlackHole(){
+        if(this.scheduleTimes == null)
+        {
+            this.scheduleTimes = 1;
+        }
+        else
+        {
+            this.scheduleTimes++;
+        }
+        this.CreateMeteor(10);
+        this.CreateBlackHole(1 + 2 * this.scheduleTimes);
+    }
+
+	CreatePlanet(callback) {
 		var _this = this
 		
 		this.loadRes("Planet", function(instance) {
 			var planet = instance.addComponent("Planet")
-			planet.Init()
-			_this.planet = planet
-			component.node.addChild(instance);
+			planet.Init();
+			_this.planet = planet;
+			SceneManager.GetInstance().rootCanvas().addChild(instance);
 			callback();
 		})
 	}
 
 	GetPlanet() {
-		return this.planet
+		return this.planet;
 	}
 
-	CreateMeteor(component, num) {
+	CreateMeteor(num) {
 		var blockList = MathUtil.spliteScreenToBlock(this.gameTop - this.gameButtom, this.gameRight - this.gameLeft, num)
 		//在每个分块里面随机出来一个流星
 		var meteor = null
 		var _this = this
 		for (let i = blockList.length - 1; i >= 0; i--) {
 			this.loadRes("Meteor", function(instance) {
-				meteor = instance.addComponent("Meteor")
-				component.node.addChild(instance)
-				var blocktmp = blockList[i]
-				meteor.Init(blocktmp.top, blocktmp.buttom, blocktmp.left, blocktmp.right)
-				_this.meteorList.push(meteor)
+				meteor = instance.addComponent("Meteor");
+				SceneManager.GetInstance().rootCanvas().addChild(instance);
+				var blocktmp = blockList[i];
+				meteor.Init(blocktmp.top, blocktmp.buttom, blocktmp.left, blocktmp.right);
+				_this.meteorList.push(meteor);
 			})
 		}
 	}
@@ -72,11 +88,8 @@ export default class FindMeteor {
     RemoveMeteor(meteor) {
 		console.log("RemoveMeteor", this.meteorList.length);
         this.meteorList.splice(this.meteorList.indexOf(meteor), 1);
-        meteor.node.removeFromParent(true)
-        meteor.node.destroy()
-		if(this.meteorList.length == 0) {
-        	this.GameOver();
-		}
+        meteor.node.removeFromParent(true);
+        meteor.node.destroy();
     }
 
     ClearAllMeteor() {
@@ -86,18 +99,18 @@ export default class FindMeteor {
         }
     }
 
-    CreateBlackHole(component, num) {
+    CreateBlackHole(num) {
 		var blockList = MathUtil.spliteScreenToBlock(this.gameTop - this.gameButtom, this.gameRight - this.gameLeft, num)
 
 		var blackhole = null
 		var _this = this
 		for (let i = blockList.length - 1; i >= 0; i--) {
 			this.loadRes("BlackHole", function(instance) {
-				blackhole = instance.addComponent("BlackHole")
-				component.node.addChild(instance)
-				var blocktmp = blockList[i]
-				blackhole.Init(blocktmp.top, blocktmp.buttom, blocktmp.left, blocktmp.right)
-				_this.blackholeList.push(blackhole)
+				blackhole = instance.addComponent("BlackHole");
+				SceneManager.GetInstance().rootCanvas().addChild(instance);
+				var blocktmp = blockList[i];
+				blackhole.Init(blocktmp.top, blocktmp.buttom, blocktmp.left, blocktmp.right);
+				_this.blackholeList.push(blackhole);
 			})
 		}
     }
@@ -115,19 +128,19 @@ export default class FindMeteor {
 	}
 
 	ChangeBlackHoleSpeed() {
-		for (var i = this.blackholeList.length - 1; i >= 0; i--) {
-			if (this.blackholeList[i].speed_x >= 0) {
-				this.blackholeList[i].speed_x += 0.5
-			} else {
-				this.blackholeList[i].speed_x -= 0.5
-			}
+		// for (var i = this.blackholeList.length - 1; i >= 0; i--) {
+		// 	if (this.blackholeList[i].speed_x >= 0) {
+		// 		this.blackholeList[i].speed_x += 0.5
+		// 	} else {
+		// 		this.blackholeList[i].speed_x -= 0.5
+		// 	}
 
-			if (this.blackholeList[i].speed_y >= 0) {
-				this.blackholeList[i].speed_y += 0.5
-			} else {
-				this.blackholeList[i].speed_y -= 0.5
-			}
-		}
+		// 	if (this.blackholeList[i].speed_y >= 0) {
+		// 		this.blackholeList[i].speed_y += 0.5
+		// 	} else {
+		// 		this.blackholeList[i].speed_y -= 0.5
+		// 	}
+		// }
 	}
 
 	RemoveBlackHole(blackhole) {
@@ -169,6 +182,8 @@ export default class FindMeteor {
 			return;
 		}
         this.gameOver = true;
+		this.planet.node.active = false;
+		AnimationManager.PlayAnim("cardFail", this.planet.node.parent, this.planet.node.position, null);
         // ModuleManager.GetInstance().ShowModule("GameResultPanel", this.totalCollectMeteor)
         ModuleManager.GetInstance().ShowModule("MeteorSettleBox", {title:"游戏结束", meteorNum:this.totalCollectMeteor, callback:function(){
 			new LevelManager().SwitchLevel("maze");

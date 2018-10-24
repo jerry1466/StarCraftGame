@@ -51,6 +51,28 @@ export default class MathUtil {
             return false
 	}
 
+	static HitTestWithBlendingScale(node1, node2, blendScale1 = 1, blendScale2 = 1){
+		var x01 = node1.x - node1.width * 0.5 * node1.scaleX * blendScale1;
+        var x02 = node1.x + node1.width * 0.5 * node1.scaleX * blendScale1;
+        var x11 = node2.x - node2.width * 0.5 * node2.scaleX * blendScale2;
+        var x12 = node2.x + node2.width * 0.5 * node2.scaleX * blendScale2;
+        var y01 = node1.y - node1.height * 0.5 * node1.scaleY * blendScale1;
+        var y02 = node1.y + node1.height * 0.5 * node1.scaleY * blendScale1;
+        var y11 = node2.y - node2.height * 0.5 * node2.scaleY * blendScale2;
+        var y12 = node2.y + node2.height * 0.5 * node2.scaleY * blendScale2;
+        //console.log("this.left:", x01, "this.right:", x02, "this.top:", y02, "this.buttom:", y01)
+        //console.log("planet.left:", x11, "planet.right:", x12, "planet.top:", y12, "planet.buttom:", y11)
+
+        var zx = Math.abs(x01 + x02 - x11 - x12);
+        var x = Math.abs(x01 - x02) + Math.abs(x11 - x12);
+        var zy = Math.abs(y01 + y02 - y11 - y12);
+        var y = Math.abs(y01 - y02) + Math.abs(y11 - y12);
+        if (zx <= x && zy <= y)
+            return true;
+        else
+            return false;
+	}
+
     static HitTest(node1, node2){
         var x01 = node1.x - node1.width * 0.5
         var x02 = node1.x + node1.width * 0.5

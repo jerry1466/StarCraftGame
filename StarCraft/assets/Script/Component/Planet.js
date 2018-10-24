@@ -88,8 +88,8 @@ cc.Class({
 	},
 
     GetOneMeteor() {
-		this.node.scaleX += 0.05
-		this.node.scaleY += 0.05
+		this.node.scaleX += 0.03;
+		this.node.scaleY += 0.03;
     },
 
 	ReduceLife() {

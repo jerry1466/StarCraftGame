@@ -453,7 +453,8 @@
     "lbNum": {
       "__id__": 7
     },
-    "btnAdd": null
+    "btnAdd": null,
+    "lbTitle": null
   },
   {
     "__type__": "cc.Widget",
@@ -844,7 +845,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 19,
-      "y": 305
+      "y": 330
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1014,7 +1015,7 @@
     "_alignFlags": 1,
     "_left": 0,
     "_right": 0,
-    "_top": 120,
+    "_top": 95,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
@@ -1083,7 +1084,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": -250
+      "y": -400
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1357,7 +1358,7 @@
     "_left": 0,
     "_right": 0,
     "_top": 0,
-    "_bottom": 150,
+    "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
     "_isAbsLeft": true,

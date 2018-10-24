@@ -54,7 +54,7 @@ cc.Class({
         ResourceManager.LoadRemoteSprite(this.btnFix, ResConfig.FixBtn());
         this.meteorCon.Init(ResConfig.ConBg());
         this.meteorCon.SetCoinType(2);
-        this.fixCostCon.Init(ResConfig.FixConBg());
+        this.fixCostCon.Init(ResConfig.TextConBg(), "", "消耗");
         this.fixCostCon.SetCoinType(2);
         this.registerEventHandler();
     },

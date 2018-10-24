@@ -94,7 +94,7 @@ cc.Class({
 
             for(var i = this.meteorComList.length - 1; i >= 0; i--)
             {
-                if(MathUtil.HitTestWithScale(this.meteorComList[i].node, this.planet))
+                if(MathUtil.HitTestWithBlendingScale(this.meteorComList[i].node, this.planet, 0.8))
                 {
                     this.collectTotal += this.meteorComList[i].num;
                     databus.AddMoney(2, this.meteorComList[i].num);
@@ -106,7 +106,7 @@ cc.Class({
 
             for(var i = this.blackHoleComList.length - 1; i >= 0; i--)
             {
-                if(MathUtil.HitTestWithScale(this.blackHoleComList[i].node, this.planet))
+                if(MathUtil.HitTestWithBlendingScale(this.blackHoleComList[i].node, this.planet, 0.8))
                 {
                     this.blackHoleComList[i].Hit();
                     this.blackHoleComList.splice(i, 1);

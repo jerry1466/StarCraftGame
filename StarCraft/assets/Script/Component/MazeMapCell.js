@@ -85,6 +85,10 @@ cc.Class({
         {
             //AnimationManager.PlayAnim("fogRemove", this.node.parent.parent, this.node.position, callback, false);
             this.affair.fogCover = false;
+            if(callback)
+            {
+                callback();
+            }
         }
         else
         {
@@ -132,17 +136,18 @@ cc.Class({
             }
             else if(_this.affair.type == AffairConstant.AffairEnum().GAME)
             {
-                EventUtil.GetInstance().DispatchEvent("TriggerGame", _this.affair);
                 EventUtil.GetInstance().DispatchEvent("FreeTouch")
+                EventUtil.GetInstance().DispatchEvent("TriggerGame", _this.affair);
             }
             else if(_this.affair.type == AffairConstant.AffairEnum().CARD)
             {
+                EventUtil.GetInstance().DispatchEvent("FreeTouch")
                 EventUtil.GetInstance().DispatchEvent("TriggerCard", _this.affair);
             }
             else if(_this.affair.type == AffairConstant.AffairEnum().DROP)
             {
-                EventUtil.GetInstance().DispatchEvent("TriggerDrop", _this.affair);
                 EventUtil.GetInstance().DispatchEvent("FreeTouch")
+                EventUtil.GetInstance().DispatchEvent("TriggerDrop", _this.affair);
             }
             else
             {

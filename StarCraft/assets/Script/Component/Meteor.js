@@ -34,7 +34,7 @@ cc.Class({
         }
 
 		var planet = findMeteor.GetPlanet()
-		if (MathUtil.HitTestWithScale(this.node, planet.node)) {
+		if (MathUtil.HitTestWithBlendingScale(this.node, planet.node, 0.8, 1)) {
 			this.is_valid = false
 			BGMConfig.BgmPlay(this.soundChnl)
 			EventUtil.GetInstance().DispatchEvent("CatchMeteor", this)
@@ -70,7 +70,7 @@ cc.Class({
 				this.node.y = buttom + this.node.height / 2 + 5
 			}
 
-			if (MathUtil.HitTestWithScale(this.node, planet.node)) {
+			if (MathUtil.HitTestWithBlendingScale(this.node, planet.node, 1.5, 1)) {
 				continue;
 			}
 			this.is_valid = true;

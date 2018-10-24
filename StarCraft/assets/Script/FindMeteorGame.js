@@ -39,31 +39,27 @@ cc.Class({
         this.gameMeteorCon.Init(ResConfig.ConBg());
         this.gameMeteorCon.InitIcon(ResConfig.MeteorIcon());
         this.gameHpCon.Init(ResConfig.GameHpConBg());
-        this.countDownStart = false
+        this.countDownStart = false;
         this.countDown.node.active = false;
         this.updateTimeLimit(databus.gameTimeLimit);
     	//加载流星平原背景
-        ResourceManager.LoadRemoteSprite(this.bg, ResConfig.FindMeteorBg())
+        ResourceManager.LoadRemoteSprite(this.bg, ResConfig.FindMeteorBg());
         //var param = new LevelManager().CurrentLevelParam
-        this.findMeteor = FindMeteor.GetInstance()
-        this.findMeteor.gameOver = false
-        this.findMeteor.cdFinish = false
+        this.findMeteor = FindMeteor.GetInstance();
+        this.findMeteor.gameOver = false;
+        this.findMeteor.cdFinish = false;
         //根据生命值的框计算出游戏场景最上沿的坐标
-        this.findMeteor.gameTop = this.gameHpCon.node.y - this.gameHpCon.node.height / 2 - 5
-        this.findMeteor.gameButtom = 0 - this.findMeteor.gameTop
-        this.findMeteor.gameRight = databus.screenRight - 17
+        this.findMeteor.gameTop = this.timeLimitCon.y - this.timeLimitTxt.node.height / 4 - 10;
+        this.findMeteor.gameButtom = 0 - this.findMeteor.gameTop;//this.rtOperationTip.node.parent.y + this.rtOperationTip.node.parent.height / 2 + 10;
+        console.error(this.findMeteor.gameTop, this.findMeteor.gameButtom);
+        this.findMeteor.gameRight = databus.screenRight - 25;
         this.findMeteor.gameLeft = 0 - this.findMeteor.gameRight;
         this.rtOperationTip.string = "<color=#FFFFFF>手指滑动   </c><color=#FFFFFF>，收集</c>";
         ResourceManager.LoadRemoteSprite(this.tipIcon, ResConfig.GetStarIcon(databus.userInfo.curStarId));
 
-        var that = this
-        this.findMeteor.CreatePlanet(this, function(){
-            that.findMeteor.CreateMeteor(that, 5);
-            /*var blackholeNum = param["level"] * 2 + 3
-            if (blackholeNum > 9) {
-                blackholeNum = 9
-            }*/
-            that.findMeteor.CreateBlackHole(that, 3);
+        var that = this;
+        this.findMeteor.CreatePlanet(function(){
+            that.findMeteor.ScheduleCreateMeteorAndBlackHole();
             that.guide();
         });
         this.registerEventHandler();
@@ -142,13 +138,16 @@ cc.Class({
     catchMeteorHandler(meteor){
 	    var meteorNum = StarConfig.GetGameMeteorIncome(databus.userInfo.maxStarId);
 	    databus.AddMoney(2, meteorNum);
+        this.findMeteor.AddCollectMeteor(meteorNum);
 	    //在这里加飞行动画，在动画的回调里调用下面这两行
         var that = this;
         var tweenPosition = TweenPosition.begin(meteor.node, meteor.node.position, this.gameMeteorCon.node.position, 0.3);
         tweenPosition.onFinishCallBack = function() {
             var findMeteor = FindMeteor.GetInstance();
-            that.findMeteor.AddCollectMeteor(meteorNum);
             findMeteor.RemoveMeteor(meteor);
+            if(findMeteor.meteorList.length == 0) {
+                findMeteor.ScheduleCreateMeteorAndBlackHole();
+            }
             findMeteor.ChangeBlackHoleSpeed();
             that.gameMeteorCon.UpdateCoin(that.findMeteor.totalCollectMeteor, true);
         }

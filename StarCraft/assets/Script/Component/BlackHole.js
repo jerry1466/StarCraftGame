@@ -35,7 +35,7 @@ cc.Class({
 		}
 
     	var planet = FindMeteor.GetInstance().GetPlanet()
-    	if (MathUtil.HitTestWithScale(this.node, planet.node)) {
+    	if (MathUtil.HitTestWithBlendingScale(this.node, planet.node, 0.8, 1)) {
     		BGMConfig.BgmPlay(this.soundChnl)
 			planet.ReduceLife()
 			this.is_valid = false
@@ -55,7 +55,8 @@ cc.Class({
 		var width = Math.abs(right - left)
 		var planet = FindMeteor.GetInstance().GetPlanet();
 
-    	while (!this.is_valid) {
+		var iter = 0;
+    	while (!this.is_valid && iter <= 2000) {
 			var c = Math.floor(Math.random() * 100)
 			this.node.x = left + (width * c / 100)
 			c = Math.floor(Math.random() * 100)
@@ -77,7 +78,8 @@ cc.Class({
 				this.node.y = buttom + this.node.height / 2 + 5	
 			}
 
-			if (MathUtil.HitTestWithScale(this.node, planet.node)) {
+			iter++;
+			if (MathUtil.HitTestWithBlendingScale(this.node, planet.node, 2.5, 1)) {
 				continue;
 			}
 			this.is_valid = true;

@@ -68,16 +68,16 @@ cc.Class({
         switch(dir)
         {
             case "up":
-                rotation = 0;
-                break;
-            case "right":
                 rotation = 90;
                 break;
-            case "down":
+            case "right":
                 rotation = 180;
                 break;
-            case "left":
+            case "down":
                 rotation = 270;
+                break;
+            case "left":
+                rotation = 0;
                 break;
         }
         this.head.node.rotation = rotation;

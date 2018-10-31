@@ -13,8 +13,9 @@ let res=
 		"findmeteor":"gamePanel_bg.png",
         "messagebox":"window_bg1.png",
         "starListItemBg":"starListItem_bg.png",
+        "battleBg":"battle_self_bg.jpg",
         "mazeBg":"battle_bg.jpg",
-        "preloadBg":"battle_bg.jpg",
+        "preloadBg":"battle_bg2.jpg",
         "cutscene":"battle_bg.jpg",
         "starListPanel":"myStar_bg.png",
         "guideDiamondBox":"window_bg3.png",
@@ -327,6 +328,10 @@ export default class ResConfig{
 
     static StarListItemBg(){
         return this.GetBaseUrl() + res["bg"]["starListItemBg"]
+    }
+
+    static BattleBg(){
+        return this.GetBaseUrl() + res["bg"]["battleBg"];
     }
 
     static MazeBg(){

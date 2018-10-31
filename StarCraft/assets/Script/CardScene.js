@@ -16,6 +16,7 @@ import Databus from 'Databus';
 
 let STANDARD_NUMBER = 9;
 let CARD_NUM = 5;
+let SHOW_CARD_NUM = 5;
 let layPos =
     [
         [-130, 0],
@@ -141,12 +142,16 @@ cc.Class({
     },
 
     showSomeCard(){
-        this.cardList[0].showNum();
-        this.cardList[1].showNum();
+        for(var i = 0; i < SHOW_CARD_NUM; i++)
+        {
+            this.cardList[i].showNum();
+        }
         var that = this;
         setTimeout(function(){
-            that.cardList[0].hideNum();
-            that.cardList[1].hideNum();
+            for(var i = 0; i < SHOW_CARD_NUM; i++)
+            {
+                that.cardList[i].hideNum();
+            }
             setTimeout(function(){
                 that.shuffle();
             }, 1000);

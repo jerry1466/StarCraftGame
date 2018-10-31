@@ -47,7 +47,7 @@ cc.Class({
     onLoad () {
         SceneManager.GetInstance().SetRoot(this.node);
         this.tex = new cc.Texture2D();
-        ResourceManager.LoadRemoteSprite(this.bg, ResConfig.MainBg())
+        ResourceManager.LoadRemoteSprite(this.bg, ResConfig.BattleBg())
         ResourceManager.LoadRemoteSprite(this.btnSearch, ResConfig.SearchMeteorBtn());
         ResourceManager.LoadRemoteSprite(this.btnMyStars, ResConfig.MyStarListBtn());
         ResourceManager.LoadRemoteSprite(this.btnExit, ResConfig.ExitBtn());

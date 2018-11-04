@@ -41,6 +41,9 @@ cc.Class({
     	    databus.Reset();
     	    that.startLoad();
         });
+        databus.cfgData = null;
+        databus.Reset();
+        that.startLoad();
         this.lbCompany.string = "有來有趣网络科技"
         databus.userInfo.curStarId = parseInt(StarConfig.GetStarIds()[0]);
         BuffBase.Init();

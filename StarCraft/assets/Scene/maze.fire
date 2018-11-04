@@ -68,20 +68,20 @@
         "__id__": 23
       },
       {
-        "__id__": 35
+        "__id__": 36
       },
       {
-        "__id__": 40
+        "__id__": 41
       }
     ],
     "_tag": -1,
     "_active": true,
     "_components": [
       {
-        "__id__": 42
+        "__id__": 44
       },
       {
-        "__id__": 43
+        "__id__": 45
       }
     ],
     "_prefab": null,
@@ -872,6 +872,9 @@
     "_components": [
       {
         "__id__": 34
+      },
+      {
+        "__id__": 35
       }
     ],
     "_prefab": null,
@@ -902,7 +905,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 49
+      "y": 43.5
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1299,6 +1302,32 @@
     "_atlas": null
   },
   {
+    "__type__": "cc.Widget",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 23
+    },
+    "_enabled": true,
+    "isAlignOnce": true,
+    "_target": null,
+    "_alignFlags": 1,
+    "_left": 0,
+    "_right": 0,
+    "_top": 100,
+    "_bottom": 0,
+    "_verticalCenter": 0,
+    "_horizontalCenter": 0,
+    "_isAbsLeft": true,
+    "_isAbsRight": true,
+    "_isAbsTop": true,
+    "_isAbsBottom": true,
+    "_isAbsHorizontalCenter": true,
+    "_isAbsVerticalCenter": true,
+    "_originalWidth": 0,
+    "_originalHeight": 0
+  },
+  {
     "__type__": "cc.Node",
     "_name": "BtnExit",
     "_objFlags": 0,
@@ -1310,13 +1339,13 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 36
-      },
-      {
         "__id__": 37
       },
       {
-        "__id__": 39
+        "__id__": 38
+      },
+      {
+        "__id__": 40
       }
     ],
     "_prefab": null,
@@ -1347,7 +1376,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": -146,
-      "y": -287
+      "y": 370.5
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1361,7 +1390,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 35
+      "__id__": 36
     },
     "_enabled": true,
     "_spriteFrame": null,
@@ -1385,7 +1414,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 35
+      "__id__": 36
     },
     "_enabled": true,
     "transition": 0,
@@ -1407,7 +1436,7 @@
     "zoomScale": 1.2,
     "clickEvents": [
       {
-        "__id__": 38
+        "__id__": 39
       }
     ],
     "_N$interactable": true,
@@ -1443,7 +1472,7 @@
       "__uuid__": "29158224-f8dd-4661-a796-1ffab537140e"
     },
     "_N$target": {
-      "__id__": 35
+      "__id__": 36
     }
   },
   {
@@ -1460,7 +1489,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 35
+      "__id__": 36
     },
     "_enabled": true,
     "isAlignOnce": true,
@@ -1470,7 +1499,7 @@
     "_alignFlags": 9,
     "_left": 7.5,
     "_right": 0,
-    "_top": 677.5,
+    "_top": 20,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
@@ -1495,7 +1524,10 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 41
+        "__id__": 42
+      },
+      {
+        "__id__": 43
       }
     ],
     "_prefab": null,
@@ -1526,7 +1558,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": -254
+      "y": -208
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1540,7 +1572,7 @@
     "_name": "",
     "_objFlags": 0,
     "node": {
-      "__id__": 40
+      "__id__": 41
     },
     "_enabled": true,
     "_useOriginalSize": false,
@@ -1556,6 +1588,32 @@
     "_N$verticalAlign": 1,
     "_N$fontFamily": "黑体",
     "_N$overflow": 0
+  },
+  {
+    "__type__": "cc.Widget",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 41
+    },
+    "_enabled": true,
+    "isAlignOnce": true,
+    "_target": null,
+    "_alignFlags": 1,
+    "_left": 0,
+    "_right": 0,
+    "_top": 624.5,
+    "_bottom": 0,
+    "_verticalCenter": 0,
+    "_horizontalCenter": 0,
+    "_isAbsLeft": true,
+    "_isAbsRight": true,
+    "_isAbsTop": true,
+    "_isAbsBottom": true,
+    "_isAbsHorizontalCenter": true,
+    "_isAbsVerticalCenter": true,
+    "_originalWidth": 0,
+    "_originalHeight": 0
   },
   {
     "__type__": "cc.Canvas",
@@ -1594,7 +1652,7 @@
       "__id__": 21
     },
     "btnExit": {
-      "__id__": 37
+      "__id__": 38
     },
     "map": {
       "__id__": 24
@@ -1609,7 +1667,7 @@
       "__id__": 31
     },
     "tip": {
-      "__id__": 41
+      "__id__": 42
     }
   }
 ]

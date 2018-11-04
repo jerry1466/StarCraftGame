@@ -43,7 +43,7 @@ cc.Class({
         this.countDown.node.active = false;
         this.updateTimeLimit(databus.gameTimeLimit);
     	//加载流星平原背景
-        ResourceManager.LoadRemoteSprite(this.bg, ResConfig.FindMeteorBg());
+        // ResourceManager.LoadRemoteSprite(this.bg, ResConfig.FindMeteorBg());
         //var param = new LevelManager().CurrentLevelParam
         this.findMeteor = FindMeteor.GetInstance();
         this.findMeteor.gameOver = false;
@@ -51,10 +51,9 @@ cc.Class({
         //根据生命值的框计算出游戏场景最上沿的坐标
         this.findMeteor.gameTop = this.timeLimitCon.y - this.timeLimitTxt.node.height / 4 - 10;
         this.findMeteor.gameButtom = 0 - this.findMeteor.gameTop;//this.rtOperationTip.node.parent.y + this.rtOperationTip.node.parent.height / 2 + 10;
-        console.error(this.findMeteor.gameTop, this.findMeteor.gameButtom);
         this.findMeteor.gameRight = databus.screenRight - 25;
         this.findMeteor.gameLeft = 0 - this.findMeteor.gameRight;
-        this.rtOperationTip.string = "<color=#FFFFFF>手指滑动   </c><color=#FFFFFF>，收集</c>";
+        this.rtOperationTip.string = "<color=#FFFF24>手指滑动   </c><color=#FFFF24>，收集</c>";
         ResourceManager.LoadRemoteSprite(this.tipIcon, ResConfig.GetStarIcon(databus.userInfo.curStarId));
 
         var that = this;

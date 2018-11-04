@@ -9,6 +9,14 @@ import EventUtil from "EventUtil";
 import StatisticManager from "StatisticManager";
 import TweenPosition from "TweenPosition"
 import ResConfig from "ResConfig";
+import ImageLoading from 'ImageLoading'
+import PrefabLoading from "PrefabLoading"
+import BuffBase from "BuffBase";
+import NetUtil from "NetUtil";
+import Productor from "Productor";
+import StarConfig from "StarConfig";
+import AysncImageLoading from "AysncImageLoading";
+import BGMConfig from "BGMConfig"
 
 let databus = new Databus()
 
@@ -19,6 +27,12 @@ cc.Class({
             default: null,
             type: cc.Sprite,
         },
+
+        index:cc.Node,
+        barloading:cc.ProgressBar,
+        lbTip:cc.Label,
+
+        preload:cc.Node,
         btnEnter:{
             default: null,
             type:cc.Button,
@@ -41,8 +55,88 @@ cc.Class({
     },
 
     onLoad:function(){
-        var temp = this
+        cc.view.enableRetina(true);
+        this.index.active = true;
+        this.preload.active = false;
         SceneManager.GetInstance().SetRoot(this.node);
+        //ResourceManager.LoadRemoteSprite(this.spBg, "https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png")
+        var that = this;
+        this.barloading.progress = 0;
+        NetUtil.Request(databus.cfgUrl, {}, function(data){
+    	    databus.cfgData = data;
+    	    databus.Reset();
+    	    that.startLoad();
+            if(CC_WECHATGAME)
+            {
+                InterfaceManager.GetInstance().RegisterShareAppMessageHandler();
+            }
+        });
+        databus.userInfo.curStarId = parseInt(StarConfig.GetStarIds()[0]);
+        BuffBase.Init();
+        BGMConfig.BgmRegister();
+    },
+
+    start(){
+        Productor.GetInstance().Start();
+    },
+
+    update(){
+        if(databus.cfgData)
+        {
+            var nowTime = new Date();
+            var lbTipStr = "精彩即将呈现";
+            var dotCnt = Math.floor(nowTime.getSeconds() % 3) + 1;
+            for(var i = 0; i < dotCnt; i++)
+            {
+                lbTipStr = lbTipStr + ".";
+            }
+            this.lbTip.string = lbTipStr;
+
+            if(this.loadList && this.loadList.length > 0)
+            {
+                var blockPercent = 1 / this.loadList.length;
+                if(this.loadIndex < this.loadList.length){
+                    var currentResLoading = this.loadList[this.loadIndex];
+                    var totalPerent = (this.loadIndex - 1) * blockPercent + currentResLoading.GetProgress();
+                    this.barloading.progress = totalPerent < 0? 0 : totalPerent;
+
+                    if(currentResLoading.IsComplete())
+                    {
+                        this.loadIndex++;
+                        this.doLoad();
+                    }
+                }
+                else{
+                    if(this.loadIndex != 0)
+                    {
+                        this.barloading.progress = 1
+                    }
+                    else
+                    {
+                        this.barloading.progress = 0
+                    }
+                }
+            }
+        }
+    },
+
+    startLoad(){
+        this.loadList = [new ImageLoading(), new PrefabLoading()]
+        this.loadIndex = 0;
+        this.doLoad();
+    },
+
+    doLoad(){
+        if(this.loadIndex >= this.loadList.length){
+            this.onLoadComplete();
+            AysncImageLoading.Load();
+        }
+        else{
+            this.loadList[this.loadIndex].Load()
+        }
+    },
+
+    onLoadComplete(){
         if(CC_WECHATGAME)
         {
             wx.getSystemInfo({
@@ -54,8 +148,8 @@ cc.Class({
                     databus.screenLeft = 0 - databus.screenWidth / 2
                     databus.screenRight = databus.screenWidth / 2
                     databus.isIphoneX = (databus.screenWidth == 375) && (databus.screenHeight == 812)
-                    //temp.bg.node.width = res.windowWidth
-                    //temp.bg.node.height = res.windowHeight
+                    //that.bg.node.width = res.windowWidth
+                    //that.bg.node.height = res.windowHeight
                     console.log("设备分辨率:", databus.screenWidth, databus.screenHeight, databus.screenRatio, databus.isIphoneX)
 
                 }
@@ -63,7 +157,7 @@ cc.Class({
             EventUtil.GetInstance().AddEventListener("EnterBattle", function(){
                 ModuleManager.GetInstance().HideModule("LoginPanel")
             })
-            this.lbSubscribe.label = databus.cfgData.set.subscribe_text
+            this.lbSubscribe.label = databus.cfgData.set.subscribe_text;
             if(databus.cfgData.audit == 1)
             {
                 this.btnShare.node.active = false
@@ -92,7 +186,8 @@ cc.Class({
             this.lbSubscribe.label = "";
             this.btnShare.node.active = false;
         }
-        ResourceManager.LoadRemoteSprite(this.bg, ResConfig.PreloadBg());
+        this.index.active = false;
+        this.preload.active = true;
         ResourceManager.LoadRemoteSprite(this.btnEnter, ResConfig.BigBtn());
         ResourceManager.LoadRemoteSprite(this.btnShare, ResConfig.BigBtn());
         ResourceManager.LoadRemoteSprite(this.infer, ResConfig.BubbleBtn());
@@ -103,9 +198,6 @@ cc.Class({
         ResourceManager.LoadRemoteSprite(this.btnSound, ResConfig.AudioBtn());
         ResourceManager.LoadRemoteSprite(this.btnAd, ResConfig.AdBtn());
         this.tweenStage1()
-    },
-
-    update(){
     },
 
     tweenStage1(){
@@ -125,15 +217,6 @@ cc.Class({
     },
 
     onDestroy(){
-    },
-
-    start(){
-        if(CC_WECHATGAME)
-        {
-            setTimeout(function(){
-                InterfaceManager.GetInstance().RegisterShareAppMessageHandler()
-            }, 300)
-        }
     },
 
     onGmClick(){

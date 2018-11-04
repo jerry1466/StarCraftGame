@@ -39,7 +39,6 @@ let res=
         "broke":"Broke.png",
         "newStar_1":"newStar_icon1.png",
         "newStar_2":"newStar_icon2.png",
-        "infer":"infer",
         "star":"Star.png",
         "star_1001":"star/star_1001.png",
         "star_1002":"star/star_1002.png",
@@ -133,6 +132,29 @@ let res=
     "item":
     {
         "unFreeze":"unfreeze_icon.png",
+    },
+    "number":
+    {
+        "smallNum0":"number/smallNum_0.png",
+        "smallNum1":"number/smallNum_1.png",
+        "smallNum2":"number/smallNum_2.png",
+        "smallNum3":"number/smallNum_3.png",
+        "smallNum4":"number/smallNum_4.png",
+        "smallNum5":"number/smallNum_5.png",
+        "smallNum6":"number/smallNum_6.png",
+        "smallNum7":"number/smallNum_7.png",
+        "smallNum8":"number/smallNum_8.png",
+        "smallNum9":"number/smallNum_9.png",
+        "bigNum0":"number/bigNum_0.png",
+        "bigNum1":"number/bigNum_1.png",
+        "bigNum2":"number/bigNum_2.png",
+        "bigNum3":"number/bigNum_3.png",
+        "bigNum4":"number/bigNum_4.png",
+        "bigNum5":"number/bigNum_5.png",
+        "bigNum6":"number/bigNum_6.png",
+        "bigNum7":"number/bigNum_7.png",
+        "bigNum8":"number/bigNum_8.png",
+        "bigNum9":"number/bigNum_9.png",
     }
 }
 
@@ -300,10 +322,6 @@ export default class ResConfig{
 
     static FrameBg(){
         return this.GetBaseUrl() + res["bg"]["frame"]
-    }
-
-    static InferIcon(){
-        return this.GetBaseUrl() + res["icon"]["infer"]
     }
     
     static DiamondIcon(){
@@ -488,6 +506,14 @@ export default class ResConfig{
     }
 
     static AdBtn(){
-        return this.GetBaseUrl() + res["btn"]["ad"]
+        return this.GetBaseUrl() + res["btn"]["ad"];
+    }
+
+    static SmallNum(num){
+        return this.GetBaseUrl() + res["number"]["smallNum" + num];
+    }
+
+    static BigNum(num){
+        return this.GetBaseUrl() + res["number"]["bigNum" + num];
     }
 }

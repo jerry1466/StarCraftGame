@@ -28,7 +28,12 @@ let AnimConfig =
     {
         "key":"cardPerfect/cardPerfect",
         "length":33,
-    }
+    },
+    "fix":
+    {
+        "key":"fix/fix",
+        "length":8,
+    },
 }
 export default class AnimationManager {
     constructor() {

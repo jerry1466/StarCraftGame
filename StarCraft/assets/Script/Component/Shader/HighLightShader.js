@@ -27,7 +27,7 @@ cc.Class({
                 this.sprite._sgNode.setShaderProgram(this._program);
             }
         }
-        if(this._time >= 0.4)
+        if(this._time >= 0.2)
         {
             this.symbol *= -1;
         }

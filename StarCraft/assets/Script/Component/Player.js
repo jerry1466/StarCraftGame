@@ -19,7 +19,6 @@ cc.Class({
     },
 
     onLoad(){
-        //ResourceManager.LoadRemoteSprite(this.head, ResConfig.InferIcon());
         if(CC_WECHATGAME)
         {
             let avatarUrl = databus.wxUserInfo.avatarUrl;

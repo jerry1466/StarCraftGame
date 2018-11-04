@@ -12,6 +12,7 @@ import EventUtil from "EventUtil";
 import ModuleManager from "ModuleManager";
 import GuideManager from "GuideManager";
 import SceneManager from "SceneManager";
+import AnimationManager from "AnimationManager";
 import Productor from "Productor";
 
 let databus = new Databus()
@@ -96,6 +97,8 @@ cc.Class({
         broke.Select(false);
         broke.SetFixed(true);
         GuideManager.AddGuide("brokeDisappear", SceneManager.GetInstance().rootCanvas());
+        AnimationManager.PlayAnim("fix", this._brokeSpList[curFixIndex].parent, 
+            new cc.v2(this._brokeSpList[curFixIndex].position.x - 15, this._brokeSpList[curFixIndex].position.y + 10));
         var tweenAlpha = TweenAlpha.begin(this._brokeSpList[curFixIndex], 255, 0, 1.5, 1);
         var that = this
         tweenAlpha.onFinishCallBack = function(){

@@ -43,7 +43,7 @@ cc.Class({
         this.countDown.node.active = false;
         this.meteorComList = [];
         this.blackHoleComList = [];
-        this.rtOperationTip.string = "<color=#FFFFFF>手指左右移动   </c><color=#FFFFFF>，收集</c>";
+        this.rtOperationTip.string = "<color=#FFFF24>手指左右移动   </c><color=#FFFF24>，收集</c>";
         ResourceManager.LoadRemoteSprite(this.tipIcon, ResConfig.GetStarIcon(databus.userInfo.curStarId));
 		this.meteorSoundChnl = BGMConfig.BgmInit(BGMConfig.GetBgm("collectMeteor"));
 		this.blackHoleSoundChnl = BGMConfig.BgmInit(BGMConfig.GetBgm("hitBlackHole"));
@@ -86,6 +86,7 @@ cc.Class({
                 var newBlackHole = cc.instantiate(this.blackHole);
                 newBlackHole.parent = this.container;
                 newBlackHole.setPosition(this.getDropPosition());
+                ResourceManager.LoadRemoteSprite(newBlackHole, ResConfig.BrokeIcon(databus.userInfo.maxStarId));
                 var blackHoleCom = newBlackHole.getComponent("DropBlackHole");
                 this.blackHoleComList.push(blackHoleCom);
                 blackHoleCom.SetBlackHole(500, MathUtil.RandomRange(1, 1.25));

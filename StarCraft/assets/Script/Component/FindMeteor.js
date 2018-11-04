@@ -148,6 +148,13 @@ export default class FindMeteor {
 		blackhole.node.removeFromParent(true)
 		blackhole.node.destroy()
 	}
+
+	ClearAllMeteor() {
+		for(var i = this.meteorList.length - 1; i >= 0; i--)
+		{
+			this.RemoveBlackHole(this.meteorList[i]);
+		}
+	}
     
 	ClearAllBlackHole() {
 		for(var i = this.blackholeList.length - 1; i >= 0; i--)
@@ -183,6 +190,8 @@ export default class FindMeteor {
 		}
         this.gameOver = true;
 		this.planet.node.active = false;
+		this.ClearAllMeteor();
+		this.ClearAllBlackHole();
 		AnimationManager.PlayAnim("cardFail", this.planet.node.parent, this.planet.node.position, null);
         // ModuleManager.GetInstance().ShowModule("GameResultPanel", this.totalCollectMeteor)
         ModuleManager.GetInstance().ShowModule("MeteorSettleBox", {title:"游戏结束", meteorNum:this.totalCollectMeteor, callback:function(){

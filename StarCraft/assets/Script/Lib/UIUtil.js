@@ -114,7 +114,7 @@ export default class UIUtil {
     static ShowTextNotice(content, offset){
         var notice = this.GetNoticeInst();
         var noticeCom = notice.getComponent("Notice");
-        noticeCom.Init(null, content);
+        noticeCom.Init(null, 0, content);
         noticeList.push(notice);
         notice.x = offset.x;
         notice.y = offset.y;

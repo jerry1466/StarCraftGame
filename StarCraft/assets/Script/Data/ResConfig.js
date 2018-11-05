@@ -135,6 +135,7 @@ let res=
     },
     "number":
     {
+        "symbol":"number/smallNum_symbol.png",
         "smallNum0":"number/smallNum_0.png",
         "smallNum1":"number/smallNum_1.png",
         "smallNum2":"number/smallNum_2.png",
@@ -507,6 +508,10 @@ export default class ResConfig{
 
     static AdBtn(){
         return this.GetBaseUrl() + res["btn"]["ad"];
+    }
+
+    static Symbol(){
+        return this.GetBaseUrl() + res["number"]["symbol"];
     }
 
     static SmallNum(num){

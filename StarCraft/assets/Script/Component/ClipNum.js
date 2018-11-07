@@ -15,19 +15,19 @@ cc.Class({
     Init(num, showSymbol = true, style = 0){
         this.symbol.active = showSymbol;
         if(showSymbol){
-            ResourceManager.LoadRemoteSprite(thisp["num" + i], ResConfig.Symbol());
+            ResourceManager.LoadRemoteSprite(this["num" + i], ResConfig.Symbol());
         }
         var numStr = num.toString();
         for(var i = 0; i < 5; i++){
             if(i < numStr.length){
-                this["num" + i].active = true;
+                // this["num" + i].active = true;
                 if(style == 0){
-                    ResourceManager.LoadRemoteSprite(thisp["num" + i], ResConfig.SmallNum(parseInt(numstr[i])));
+                    ResourceManager.LoadRemoteSprite(this["num" + i], ResConfig.SmallNum(parseInt(numStr[i])));
                 }else{
-                    ResourceManager.LoadRemoteSprite(thisp["num" + i], ResConfig.BigNum(parseInt(numstr[i])));
+                    ResourceManager.LoadRemoteSprite(this["num" + i], ResConfig.BigNum(parseInt(numStr[i])));
                 }
             }else{
-                this["num" + i].active = false;
+                // this["num" + i].active = false;
             }
         }
     }

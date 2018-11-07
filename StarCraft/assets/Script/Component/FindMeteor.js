@@ -152,7 +152,7 @@ export default class FindMeteor {
 	ClearAllMeteor() {
 		for(var i = this.meteorList.length - 1; i >= 0; i--)
 		{
-			this.RemoveBlackHole(this.meteorList[i]);
+			this.RemoveMeteor(this.meteorList[i]);
 		}
 	}
     

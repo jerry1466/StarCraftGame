@@ -14,6 +14,7 @@ import Coin from "Coin"
 import StarConfig from "StarConfig";
 import TweenPosition from "TweenPosition"
 import GuideManager from "GuideManager"
+import ClipNum from "ClipNum"
 
 let databus = new Databus()
 cc.Class({
@@ -28,13 +29,12 @@ cc.Class({
         gameHpCon:GameHpCon,
         countDown:cc.Sprite,
         timeLimitCon:cc.Node,
-        timeLimitTxt:cc.Label,
+        timeLimit:ClipNum,
         rtOperationTip:cc.RichText,
         tipIcon:cc.Sprite,
     },
 
     onLoad() {
-    	console.log("game start")
         SceneManager.GetInstance().SetRoot(this.node);
         this.gameMeteorCon.Init(ResConfig.ConBg());
         this.gameMeteorCon.InitIcon(ResConfig.MeteorIcon());
@@ -49,7 +49,7 @@ cc.Class({
         this.findMeteor.gameOver = false;
         this.findMeteor.cdFinish = false;
         //根据生命值的框计算出游戏场景最上沿的坐标
-        this.findMeteor.gameTop = this.timeLimitCon.y - this.timeLimitTxt.node.height / 4 - 10;
+        this.findMeteor.gameTop = this.timeLimitCon.y - this.timeLimit.node.height / 4 - 10;
         this.findMeteor.gameButtom = 0 - this.findMeteor.gameTop;//this.rtOperationTip.node.parent.y + this.rtOperationTip.node.parent.height / 2 + 10;
         this.findMeteor.gameRight = databus.screenRight - 25;
         this.findMeteor.gameLeft = 0 - this.findMeteor.gameRight;
@@ -65,6 +65,7 @@ cc.Class({
     },
 
     update(dt) {
+        if(this.findMeteor == null) return;
 		if (GuideManager.HasGuide("gameBlackHole") && !this.countDownStart) {
 			this.countDownStart = true
 			this.countDownTimer()
@@ -115,19 +116,19 @@ cc.Class({
                 this.totalTL = 0;
             }
         }
-        if(this.totalTL >= 0 && this.totalTL <= 5)
-        {
-            this.timeLimitTxt.node.color = new cc.Color(255, 0, 0);
-        }
-        else if(this.totalTL >= 6 && this.totalTL <= 10)
-        {
-            this.timeLimitTxt.node.color = new cc.Color(255,255, 0);
-        }
-        else
-        {
-            this.timeLimitTxt.node.color = new cc.Color(51, 255, 0);
-        }
-        this.timeLimitTxt.string = Math.ceil(this.totalTL) + "秒";
+        // if(this.totalTL >= 0 && this.totalTL <= 5)
+        // {
+        //     this.timeLimitTxt.node.color = new cc.Color(255, 0, 0);
+        // }
+        // else if(this.totalTL >= 6 && this.totalTL <= 10)
+        // {
+        //     this.timeLimitTxt.node.color = new cc.Color(255,255, 0);
+        // }
+        // else
+        // {
+        //     this.timeLimitTxt.node.color = new cc.Color(51, 255, 0);
+        // }
+        this.timeLimit.Init(this.totalTL, false, 1);
         if(this.totalTL <= 0)
         {
             this.findMeteor.GameOver();

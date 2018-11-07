@@ -19,7 +19,11 @@ cc.Class({
     },
 
 	onLoad(){
-        ResourceManager.LoadRemoteSprite(this.icon, ResConfig.BrokeIcon(databus.userInfo.maxStarId));
+        
+	},
+
+	start() {
+		// ResourceManager.LoadRemoteSprite(this.icon, ResConfig.BrokeIcon(databus.userInfo.maxStarId));
 	},
 
     update() {

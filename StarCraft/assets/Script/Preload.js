@@ -81,40 +81,37 @@ cc.Class({
     },
 
     update(){
-        if(databus.cfgData)
+        var nowTime = new Date();
+        var lbTipStr = "精彩即将呈现";
+        var dotCnt = Math.floor(nowTime.getSeconds() % 3) + 1;
+        for(var i = 0; i < dotCnt; i++)
         {
-            var nowTime = new Date();
-            var lbTipStr = "精彩即将呈现";
-            var dotCnt = Math.floor(nowTime.getSeconds() % 3) + 1;
-            for(var i = 0; i < dotCnt; i++)
-            {
-                lbTipStr = lbTipStr + ".";
-            }
-            this.lbTip.string = lbTipStr;
+            lbTipStr = lbTipStr + ".";
+        }
+        this.lbTip.string = lbTipStr;
 
-            if(this.loadList && this.loadList.length > 0)
-            {
-                var blockPercent = 1 / this.loadList.length;
-                if(this.loadIndex < this.loadList.length){
-                    var currentResLoading = this.loadList[this.loadIndex];
-                    var totalPerent = (this.loadIndex - 1) * blockPercent + currentResLoading.GetProgress();
-                    this.barloading.progress = totalPerent < 0? 0 : totalPerent;
+        if(this.loadList && this.loadList.length > 0)
+        {
+            var blockPercent = 1 / this.loadList.length;
+            if(this.loadIndex < this.loadList.length){
+                var currentResLoading = this.loadList[this.loadIndex];
+                var totalPerent = (this.loadIndex - 1) * blockPercent + currentResLoading.GetProgress();
+                this.barloading.progress = totalPerent < 0? 0 : totalPerent;
 
-                    if(currentResLoading.IsComplete())
-                    {
-                        this.loadIndex++;
-                        this.doLoad();
-                    }
+                if(currentResLoading.IsComplete())
+                {
+                    this.loadIndex++;
+                    this.doLoad();
                 }
-                else{
-                    if(this.loadIndex != 0)
-                    {
-                        this.barloading.progress = 1
-                    }
-                    else
-                    {
-                        this.barloading.progress = 0
-                    }
+            }
+            else{
+                if(this.loadIndex != 0)
+                {
+                    this.barloading.progress = 1
+                }
+                else
+                {
+                    this.barloading.progress = 0
                 }
             }
         }

@@ -253,12 +253,16 @@ export default class ResConfig{
     static GetBaseUrl(){
         if(CC_WECHATGAME)
         {
-            return wxBaseUrl;
+            return wx.env.USER_DATA_PATH + "/";
         }
         else
         {
             return baseUrl;
         }
+    }
+
+    static GetZipRes(){
+        return wxBaseUrl + "Texture.zip";
     }
 
     static GetSyncRes(curStarId){

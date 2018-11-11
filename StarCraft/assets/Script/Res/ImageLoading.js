@@ -8,7 +8,33 @@ cc.Class({
     Load(){
         if(CC_WECHATGAME)
         {
-            cc.loader.load(ResConfig.GetSyncRes(databus.userInfo.curStarId), this.progressCallback.bind(this), this.completeCallback.bind(this))
+            // cc.loader.load(ResConfig.GetSyncRes(databus.userInfo.curStarId), this.progressCallback.bind(this), this.completeCallback.bind(this))
+            var that = this;
+            console.log("zipUrl:" + ResConfig.GetZipRes());
+            var downLoadTask = wx.downloadFile({
+                url:ResConfig.GetZipRes(),
+                success:function(res){
+                    var filePath = res.tempFilePath;
+                    var fileManager = wx.getFileSystemManager();
+                    fileManager.unzip({
+                        zipFilePath:filePath,
+                        targetPath:wx.env.USER_DATA_PATH,
+                        success:function(res){
+                            that._complete = true;
+                        },
+                        fail:function(res){
+                           console.error("解压资源失败"); 
+                        }
+                    })
+                },
+                fail:function(res){
+                    wx.showToast({title:'加载资源失败，请检查您的网络设置'})
+                }
+            });
+            downLoadTask.onProgressUpdate((res) => {
+                that._progress = res.progress * 0.01; // 下载的进度
+                console.log("WX Image Loading progress:", that._progress);
+            });
         }
         else
         {

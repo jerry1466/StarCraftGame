@@ -19,10 +19,19 @@ export default class ResourceManager {
         }
         if(spCom)
         {
-            var frame = new cc.SpriteFrame(cc.loader.getRes(imageUrl));
-            spCom.trim = false;
-            spCom.type = cc.Sprite.Type.SIMPLE;
-            spCom.spriteFrame = frame;
+            if(CC_WECHATGAME){
+                cc.loader.load(imageUrl, function(err, texture){
+                    var frame = new cc.SpriteFrame(texture);
+                    spCom.trim = false;
+                    spCom.type = cc.Sprite.Type.SIMPLE;
+                    spCom.spriteFrame = frame;    
+                });
+            }else{
+                var frame = new cc.SpriteFrame(cc.loader.getRes(imageUrl));
+                spCom.trim = false;
+                spCom.type = cc.Sprite.Type.SIMPLE;
+                spCom.spriteFrame = frame;
+            }
         }
     }
 }

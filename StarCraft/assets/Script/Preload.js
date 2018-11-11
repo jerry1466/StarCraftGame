@@ -126,7 +126,9 @@ cc.Class({
     doLoad(){
         if(this.loadIndex >= this.loadList.length){
             this.onLoadComplete();
-            AysncImageLoading.Load();
+            if(!CC_WECHATGAME){
+                AysncImageLoading.Load();
+            }
         }
         else{
             this.loadList[this.loadIndex].Load()

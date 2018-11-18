@@ -41,6 +41,7 @@ cc.Class({
         this.gameStarted = false;
         this.gameEnd = false;
         this.countDown.node.active = false;
+        this.collectTotal = 0;
         this.meteorComList = [];
         this.blackHoleComList = [];
         this.rtOperationTip.string = "<color=#FFFF24>手指左右移动   </c><color=#FFFF24>，收集</c>";
@@ -68,7 +69,7 @@ cc.Class({
     },
 
     update(dt){
-        this.meteorCon.UpdateCoin(databus.userInfo.meteor, true);
+        this.meteorCon.UpdateCoin(this.collectTotal, true);
         if(this.gameEnd) return;
         if(this.gameStarted)
         {

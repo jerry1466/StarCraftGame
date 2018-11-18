@@ -20,11 +20,15 @@ export default class ResourceManager {
         if(spCom)
         {
             if(CC_WECHATGAME){
+                console.log("start load imageUrl:", imageUrl);
                 cc.loader.load(imageUrl, function(err, texture){
+                    console.log("loaded imageUrl:", imageUrl);
                     var frame = new cc.SpriteFrame(texture);
-                    spCom.trim = false;
-                    spCom.type = cc.Sprite.Type.SIMPLE;
-                    spCom.spriteFrame = frame;    
+                    if(spCom && spCom.node){
+                        spCom.trim = false;
+                        spCom.type = cc.Sprite.Type.SIMPLE;
+                        spCom.spriteFrame = frame;    
+                    }
                 });
             }else{
                 var frame = new cc.SpriteFrame(cc.loader.getRes(imageUrl));

@@ -253,7 +253,7 @@ export default class ResConfig{
     static GetBaseUrl(){
         if(CC_WECHATGAME)
         {
-            return wx.env.USER_DATA_PATH + "/";
+            return wx.env.USER_DATA_PATH + "/Texture/";
         }
         else
         {

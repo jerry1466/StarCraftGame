@@ -20,7 +20,13 @@ cc.Class({
                         zipFilePath:filePath,
                         targetPath:wx.env.USER_DATA_PATH,
                         success:function(res){
-                            that._complete = true;
+                            fileManager.readdir({
+                                dirPath:wx.env.USER_DATA_PATH + "/Texture",
+                                success:function(res){
+                                    that._complete = true;
+                                    console.error("解压资源成功", res); 
+                                }
+                            })
                         },
                         fail:function(res){
                            console.error("解压资源失败"); 

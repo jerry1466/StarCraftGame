@@ -9,7 +9,7 @@ import FindMeteor from 'FindMeteor'
 import ResourceManager from "ResourceManager";
 import ResConfig from "ResConfig";
 
-let databus = new Databus()
+let databus = new Databus();
 cc.Class({
     extends: cc.Component,
     properties: {
@@ -24,7 +24,7 @@ cc.Class({
 
     update() {
 		if (!this.is_valid || !FindMeteor.GetInstance().cdFinish)
-			return
+			return;
 
         if(FindMeteor.GetInstance().gameOver){
             this.node.removeFromParent();
@@ -32,59 +32,63 @@ cc.Class({
         }
 
 		if (this.life <= 0) {
-			this.is_valid = false
+			this.is_valid = false;
 			console.log("Game over");
-            this.node.off(cc.Node.EventType.TOUCH_START, this.onTouchStartHandler);
-            this.node.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMoveHandler);
-            this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
-            this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
+            this.node.parent.off(cc.Node.EventType.TOUCH_START, this.onTouchStartHandler);
+            this.node.parent.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMoveHandler);
+            this.node.parent.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
+            this.node.parent.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
 			FindMeteor.GetInstance().GameOver();
 		}
     },
 
     Init() {
-    	this.node.x = 0
-    	this.node.y = 0
-    	this.is_valid = true
+    	this.node.x = 0;
+    	this.node.y = 0;
+    	this.is_valid = true;
 		this.life = databus.gameMaxHp;
-		this.node.zIndex = 50
+		this.node.zIndex = 50;
 
-		this.onTouchStartHandler = this.onTouchStart.bind(this)
-        this.node.on(cc.Node.EventType.TOUCH_START, this.onTouchStartHandler)
+		this.onTouchStartHandler = this.onTouchStart.bind(this);
+        this.node.parent.on(cc.Node.EventType.TOUCH_START, this.onTouchStartHandler)
     },
 
     onTouchStart(event) {
     	if(FindMeteor.GetInstance().cdFinish)
 		{
-            this.startX = event.getLocation().x
-            this.startY = event.getLocation().y
-            this.onTouchMoveHandler = this.onTouchMove.bind(this)
-            this.node.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMoveHandler)
+            this.startX = event.getLocation().x;
+            this.startY = event.getLocation().y;
+            this.onTouchMoveHandler = this.onTouchMove.bind(this);
+            this.node.parent.on(cc.Node.EventType.TOUCH_MOVE, this.onTouchMoveHandler);
             this.onTouchEndHandler = this.onTouchEnd.bind(this);
-            this.node.on(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler)
-            this.onTouchCancelHandler = this.onTouchCancel.bind(this)
-            this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler)
+            this.node.parent.on(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
+            this.onTouchCancelHandler = this.onTouchCancel.bind(this);
+            this.node.parent.on(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler)
 		}
     },
 
 	onTouchMove(event) {
-    	this.setPosition(event.getLocation())
+    	this.moveX = event.getLocation().x;
+    	this.moveY = event.getLocation().y;
+    	this.setPosition(this.moveX - this.startX, this.moveY - this.startY);
+        this.startX = this.moveX;
+        this.startY = this.moveY;
 	},
 
 	onTouchEnd(event) {
-		this.node.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMoveHandler)
-		this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler)
-		this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler)
-		this.startX = 0
-		this.StartY = 0
+		this.node.parent.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMoveHandler);
+		this.node.parent.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
+		this.node.parent.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
+		this.startX = 0;
+		this.StartY = 0;
 	},
 
 	onTouchCancel(event) {
-		this.node.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMoveHandler)
-		this.node.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler)
-		this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler)
-		this.startX = 0
-		this.StartY = 0
+		this.node.parent.off(cc.Node.EventType.TOUCH_MOVE, this.onTouchMoveHandler);
+		this.node.parent.off(cc.Node.EventType.TOUCH_END, this.onTouchEndHandler);
+		this.node.parent.off(cc.Node.EventType.TOUCH_CANCEL, this.onTouchCancelHandler);
+		this.startX = 0;
+		this.StartY = 0;
 	},
 
     GetOneMeteor() {
@@ -93,19 +97,17 @@ cc.Class({
     },
 
 	ReduceLife() {
-		this.life -= 1
+		this.life -= 1;
         EventUtil.GetInstance().DispatchEvent("HpChange", this.life);
 	},
 
-	setPosition(position) {
-		this.node.x += position.x - this.startX
-		this.node.y += position.y - this.startY
-		this.startX = position.x
-		this.startY = position.y
+	setPosition(x, y) {
+		this.node.x += x;
+		this.node.y += y;
 
-		var width = this.node.width * this.node.scaleX
-		var height = this.node.height * this.node.scaleY
-		var findMeteor = FindMeteor.GetInstance()
+		var width = this.node.width * this.node.scaleX;
+		var height = this.node.height * this.node.scaleY;
+		var findMeteor = FindMeteor.GetInstance();
 
 		if (MathUtil.LeftBoundaryHitTest(this.node.x - width / 2, findMeteor.gameLeft)) {
 			this.node.x = findMeteor.gameLeft + width / 2

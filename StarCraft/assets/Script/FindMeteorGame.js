@@ -7,7 +7,7 @@ import Databus from 'Databus'
 import ResourceManager from "ResourceManager"
 import FindMeteor from "FindMeteor"
 import ResConfig from 'ResConfig'
-import LevelManager from 'LevelManager'
+import TweenScale from 'TweenScale'
 import SceneManager from 'SceneManager'
 import GameHpCon from "GameHpCon"
 import Coin from "Coin"
@@ -66,9 +66,10 @@ cc.Class({
 
     update(dt) {
         if(this.findMeteor == null) return;
+        if(this.findMeteor.GetPlanet() == null) return;
 		if (GuideManager.HasGuide("gameBlackHole") && !this.countDownStart) {
-			this.countDownStart = true
-			this.countDownTimer()
+			this.countDownStart = true;
+			this.countDownTimer();
 		}
     
         if (this.findMeteor.GetReCreateBlackHoleCnt() > 0) {
@@ -162,11 +163,17 @@ cc.Class({
     },
 
     countDownTimer() {
-    	this.countDown.node.active = true;
-    	this.countDown.node.zIndex = 100;
-    	this.cdanim = this.countDown.node.getComponent(cc.Animation);
-    	this.cdanim.on('finished', this.countDownFinish, this);
-		this.cdanim.play('countDown');
+	    var that = this;
+	    // var planetNode = this.findMeteor.GetPlanet().node;
+	    // var originScale = cc.v2(planetNode.scaleX, planetNode.scaleY);
+	    // var tweenScale = TweenScale.begin(this.findMeteor.GetPlanet().node, cc.v2(3.5, 3.5), originScale, 0.35, 1);
+	    // tweenScale.onFinishCallBack = function(){
+            that.countDown.node.active = true;
+            that.countDown.node.zIndex = 100;
+            that.cdanim = that.countDown.node.getComponent(cc.Animation);
+            that.cdanim.on('finished', that.countDownFinish, that);
+            that.cdanim.play('countDown');
+        // }
     },
 
     countDownFinish() {

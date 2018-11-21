@@ -57,10 +57,10 @@ export default class FindMeteor {
 		var _this = this
 		
 		this.loadRes("Planet", function(instance) {
-			var planet = instance.addComponent("Planet")
-			planet.Init();
-			_this.planet = planet;
+			var planet = instance.addComponent("Planet");
 			SceneManager.GetInstance().rootCanvas().addChild(instance);
+            planet.Init();
+            _this.planet = planet;
 			callback();
 		})
 	}

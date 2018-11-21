@@ -31,14 +31,15 @@ export default class Databus{
         this.gameMaxHp = 1;
         this.bgMusic = "";
         this.shareRewardDiamond = 2000;
-        this.guideEnable = false;
+        this.guideEnable = true;
         this.showFog = true;
 		this.showMazeIcon = false;
+		this.resLoaded = false;
         /**************用户数据*************/
         this.userInfo = {
             curStarId:1001,
             maxStarId:1001,
-            diamond:0,
+            diamond:1000,
             meteor:0,
             brokeFixIndex:-1,
             mazeComplete:1,

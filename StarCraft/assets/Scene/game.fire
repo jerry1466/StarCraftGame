@@ -254,8 +254,8 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -118.5,
-      "y": 403
+      "x": -93.5,
+      "y": 378
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -471,9 +471,9 @@
       "__id__": 2
     },
     "_alignFlags": 9,
-    "_left": 0,
+    "_left": 25,
     "_right": 0,
-    "_top": 0,
+    "_top": 25,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,

@@ -216,7 +216,7 @@
       }
     ],
     "_tag": -1,
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 12
@@ -620,7 +620,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 110,
+      "x": -32.5,
       "y": 373
     },
     "_skewX": 0,
@@ -838,7 +838,7 @@
     },
     "_alignFlags": 33,
     "_left": 218.5,
-    "_right": 7.5,
+    "_right": 150,
     "_top": 30,
     "_bottom": 0,
     "_verticalCenter": 0,

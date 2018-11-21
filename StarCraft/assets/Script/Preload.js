@@ -55,63 +55,74 @@ cc.Class({
     },
 
     onLoad:function(){
-        cc.view.enableRetina(true);
-        this.index.active = true;
-        this.preload.active = false;
-        SceneManager.GetInstance().SetRoot(this.node);
-        //ResourceManager.LoadRemoteSprite(this.spBg, "https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png")
-        var that = this;
-        this.barloading.progress = 0;
-        NetUtil.Request(databus.cfgUrl, {}, function(data){
-    	    databus.cfgData = data;
-    	    databus.Reset();
-    	    that.startLoad();
-            if(CC_WECHATGAME)
-            {
-                InterfaceManager.GetInstance().RegisterShareAppMessageHandler();
-            }
-        });
-        databus.userInfo.curStarId = parseInt(StarConfig.GetStarIds()[0]);
-        BuffBase.Init();
-        BGMConfig.BgmRegister();
+        if(!databus.resLoaded){
+            cc.view.enableRetina(true);
+            this.index.active = true;
+            this.preload.active = false;
+            SceneManager.GetInstance().SetRoot(this.node);
+            //ResourceManager.LoadRemoteSprite(this.spBg, "https://cdn-game.2zhuji.cn/uploads/yxhzbzk/inner_bg.png")
+            var that = this;
+            this.barloading.progress = 0;
+            NetUtil.Request(databus.cfgUrl, {}, function(data){
+                databus.cfgData = data;
+                databus.Reset();
+                that.startLoad();
+                if(CC_WECHATGAME)
+                {
+                    InterfaceManager.GetInstance().RegisterShareAppMessageHandler();
+                }
+            });
+            databus.userInfo.curStarId = parseInt(StarConfig.GetStarIds()[0]);
+            BuffBase.Init();
+            BGMConfig.BgmRegister();
+        }
+        else{
+            this.onLoadComplete();
+        }
     },
 
     start(){
-        Productor.GetInstance().Start();
+        if(!databus.resLoaded)
+        {
+            Productor.GetInstance().Start();
+        }
     },
 
     update(){
-        var nowTime = new Date();
-        var lbTipStr = "精彩即将呈现";
-        var dotCnt = Math.floor(nowTime.getSeconds() % 3) + 1;
-        for(var i = 0; i < dotCnt; i++)
+        if(!databus.resLoaded)
         {
-            lbTipStr = lbTipStr + ".";
-        }
-        this.lbTip.string = lbTipStr;
-
-        if(this.loadList && this.loadList.length > 0)
-        {
-            var blockPercent = 1 / this.loadList.length;
-            if(this.loadIndex < this.loadList.length){
-                var currentResLoading = this.loadList[this.loadIndex];
-                var totalPerent = (this.loadIndex - 1) * blockPercent + currentResLoading.GetProgress();
-                this.barloading.progress = totalPerent < 0? 0 : totalPerent;
-
-                if(currentResLoading.IsComplete())
-                {
-                    this.loadIndex++;
-                    this.doLoad();
-                }
+            var nowTime = new Date();
+            var lbTipStr = "精彩即将呈现";
+            var dotCnt = Math.floor(nowTime.getSeconds() % 3) + 1;
+            for(var i = 0; i < dotCnt; i++)
+            {
+                lbTipStr = lbTipStr + ".";
             }
-            else{
-                if(this.loadIndex != 0)
-                {
-                    this.barloading.progress = 1
+            this.lbTip.string = lbTipStr;
+
+            if(this.loadList && this.loadList.length > 0)
+            {
+                var blockPercent = 1 / this.loadList.length;
+                if(this.loadIndex < this.loadList.length){
+                    var currentResLoading = this.loadList[this.loadIndex];
+                    var totalPerent = (this.loadIndex - 1) * blockPercent + currentResLoading.GetProgress();
+                    this.barloading.progress = totalPerent < 0? 0 : totalPerent;
+
+                    if(currentResLoading.IsComplete())
+                    {
+                        this.loadIndex++;
+                        this.doLoad();
+                    }
                 }
-                else
-                {
-                    this.barloading.progress = 0
+                else{
+                    if(this.loadIndex != 0)
+                    {
+                        this.barloading.progress = 1
+                    }
+                    else
+                    {
+                        this.barloading.progress = 0
+                    }
                 }
             }
         }
@@ -136,6 +147,7 @@ cc.Class({
     },
 
     onLoadComplete(){
+        databus.resLoaded = true;
         if(CC_WECHATGAME)
         {
             wx.getSystemInfo({

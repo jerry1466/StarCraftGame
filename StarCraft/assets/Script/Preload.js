@@ -157,8 +157,10 @@ cc.Class({
                     databus.screenTop = databus.screenHeight / 2
                     databus.screenButtom = 0 - databus.screenHeight / 2
                     databus.screenLeft = 0 - databus.screenWidth / 2
-                    databus.screenRight = databus.screenWidth / 2
-                    databus.isIphoneX = (databus.screenWidth == 375) && (databus.screenHeight == 812)
+                    databus.screenRight = databus.screenWidth / 2;
+                    var model = res.model;
+                    var machine = model.substring(0, model.lastIndexOf("X")) + "X";
+                    databus.isIphoneX = machine == "iPhoneX";
                     //that.bg.node.width = res.windowWidth
                     //that.bg.node.height = res.windowHeight
                     console.log("设备分辨率:", databus.screenWidth, databus.screenHeight, databus.screenRatio, databus.isIphoneX)

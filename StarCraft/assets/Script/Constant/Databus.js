@@ -15,6 +15,7 @@ export default class Databus{
         this.productName = "我的星球";
         this.shortProductName = "StarCraft";
         this.cfgUrl = "https://wxa.05babay.cn/index.php?g=Wap&m=WxaGame&a=get_config&token=fktd1531820173";
+        this.isIphoneX = false;
         this.soundEnable = true;
         this.screenWidth = 375;
         this.screenHeight = 850;

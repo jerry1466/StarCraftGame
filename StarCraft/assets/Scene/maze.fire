@@ -833,9 +833,7 @@
     },
     "_enabled": true,
     "isAlignOnce": true,
-    "_target": {
-      "__id__": 2
-    },
+    "_target": null,
     "_alignFlags": 33,
     "_left": 218.5,
     "_right": 150,
@@ -905,7 +903,7 @@
     "_position": {
       "__type__": "cc.Vec2",
       "x": 0,
-      "y": 43.5
+      "y": 53.5
     },
     "_skewX": 0,
     "_skewY": 0,
@@ -1314,7 +1312,7 @@
     "_alignFlags": 1,
     "_left": 0,
     "_right": 0,
-    "_top": 100,
+    "_top": 90,
     "_bottom": 0,
     "_verticalCenter": 0,
     "_horizontalCenter": 0,
@@ -1493,9 +1491,7 @@
     },
     "_enabled": true,
     "isAlignOnce": true,
-    "_target": {
-      "__id__": 2
-    },
+    "_target": null,
     "_alignFlags": 9,
     "_left": 7.5,
     "_right": 0,

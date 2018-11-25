@@ -57,6 +57,11 @@ cc.Class({
         this.fixCostCon.Init(ResConfig.TextConBg(), "", "消耗");
         this.fixCostCon.SetCoinType(2);
         this.registerEventHandler();
+        this.adjustWidget(this.hud.node);
+        this.adjustWidget(this.star.node);
+        this.adjustWidget(this.btnMyStars.node);
+        this.adjustWidget(this.btnExit.node);
+        this.adjustWidget(this.fixCon);
     },
 
     // 刷新子域的纹理
@@ -105,10 +110,20 @@ cc.Class({
 
     start() {
         this.refreshStar();
+        var that = this;
         setTimeout(function(){
             GuideManager.AddGuide("diamond", SceneManager.GetInstance().rootCanvas());
             GuideManager.AddGuide("myStarList", SceneManager.GetInstance().rootCanvas());
         }, 100)
+    },
+
+    adjustWidget(node){
+        if(!databus.isIphoneX){
+            var widget = node.getComponent(cc.Widget);
+            if(widget){
+                widget.top -= 17;
+            }
+        }
     },
 
     registerEventHandler(){

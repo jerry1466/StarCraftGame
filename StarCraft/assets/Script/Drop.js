@@ -48,6 +48,7 @@ cc.Class({
         ResourceManager.LoadRemoteSprite(this.tipIcon, ResConfig.GetStarIcon(databus.userInfo.curStarId));
 		this.meteorSoundChnl = BGMConfig.BgmInit(BGMConfig.GetBgm("collectMeteor"));
 		this.blackHoleSoundChnl = BGMConfig.BgmInit(BGMConfig.GetBgm("hitBlackHole"));
+        EventUtil.GetInstance().DispatchEvent("SwitchBgMusic", "drop.mp3");
     },
 
     onDestroy(){

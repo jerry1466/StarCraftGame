@@ -33,8 +33,9 @@ cc.Class({
         {
             return;
         }
+        if(this.soundChnl) this.soundChnl.stop();
         databus.bgMusic = musicName;
         this.soundChnl = BGMConfig.BgmInit(musicName, true);
-        BGMConfig.BgmPlay(this.soundChnl);
+        BGMConfig.BgmPlay(this.soundChnl, true);
     }
 })    

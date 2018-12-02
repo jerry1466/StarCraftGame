@@ -15,6 +15,7 @@ import BuffBase from 'BuffBase';
 import Coin from "Coin";
 import Player from "Player";
 import UIUtil from "UIUtil";
+import BGMConfig from "BGMConfig"
 
 let databus = new Databus()
 cc.Class({
@@ -47,6 +48,8 @@ cc.Class({
         {
             this.fog.node.opacity = 0;
         }
+        EventUtil.GetInstance().DispatchEvent("SwitchBgMusic", "game.mp3");
+        this.rewardSoundChnl = BGMConfig.BgmInit(BGMConfig.GetBgm("reward"));
     },
 
     update() {
@@ -213,6 +216,7 @@ cc.Class({
     triggerRewardHandler(affair){
         databus.AddMoney(2, affair.meteor);
         ModuleManager.GetInstance().ShowModule("MeteorRewardBox", affair.meteor);
+        BGMConfig.BgmPlay(this.rewardSoundChnl);
     },
 
     triggerFreezeHandler(affair){

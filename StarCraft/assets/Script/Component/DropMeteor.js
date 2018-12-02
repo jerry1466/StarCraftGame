@@ -10,8 +10,8 @@ cc.Class({
     SetMeteor(num){
         this.num = Math.floor(num);
         this.speed = num * 10;
-        this.node.width = this.node.width * (1 + num / 75);
-        this.node.height = this.node.width * (1 + num / 75);
+        this.node.scaleX = (1 + num / 75);
+        this.node.scaleY = (1 + num / 75);
     },
 
     update(dt){

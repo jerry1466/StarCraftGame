@@ -49,7 +49,7 @@ cc.Class({
         this.findMeteor.gameOver = false;
         this.findMeteor.cdFinish = false;
         //根据生命值的框计算出游戏场景最上沿的坐标
-        this.findMeteor.gameTop = this.timeLimitCon.y - this.timeLimit.node.height / 4 - 10;
+        this.findMeteor.gameTop = this.timeLimitCon.y - this.timeLimit.node.height / 4 - 40;
         this.findMeteor.gameButtom = 0 - this.findMeteor.gameTop;//this.rtOperationTip.node.parent.y + this.rtOperationTip.node.parent.height / 2 + 10;
         this.findMeteor.gameRight = databus.screenRight - 25;
         this.findMeteor.gameLeft = 0 - this.findMeteor.gameRight;
@@ -62,6 +62,7 @@ cc.Class({
             that.guide();
         });
         this.registerEventHandler();
+        EventUtil.GetInstance().DispatchEvent("SwitchBgMusic", "findMeteor.mp3");
     },
 
     update(dt) {

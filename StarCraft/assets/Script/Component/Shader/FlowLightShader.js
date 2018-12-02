@@ -14,7 +14,7 @@ cc.Class({
     },
 
     onLoad : function(){
-
+        this.sprite = this.node.getComponent(cc.Sprite);
         this._time = 0;
         this._sin = 0;
         this._use();
@@ -37,8 +37,8 @@ cc.Class({
 
         this._program.link();
         this._program.updateUniforms();
-        this._program.use();
         this.updateGLParameters();
+        this.sprite._sgNode.shaderProgram = this._program;
 
         if(cc.sys.isNative) {
             (cc.GLProgramState.getOrCreateWithGLProgram(this._program)).setUniformFloat("sys_time", this._time);
@@ -46,7 +46,7 @@ cc.Class({
         else{
             gl.uniform1f(this._program.getUniformLocationForName("sys_time"), this._time);
         }
-        this.setProgram(this.node._sgNode, this._program);
+        
     },
 
     update : function( dt){
@@ -59,6 +59,7 @@ cc.Class({
                 this._time = 0;
             }
             this._sin = Math.ceil(this._sin);
+            this._program.use();
             if(cc.sys.isNative) {
                 (cc.GLProgramState.getOrCreateWithGLProgram(this._program)).setUniformFloat("sys_time", this._sin);
             }

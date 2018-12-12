@@ -29,13 +29,22 @@ cc.Class({
     },
 
     onSwitchBgMusic(musicName){
+        console.warn("onSwitchBgMusic", databus.bgMusic, musicName, databus.soundChnl);
         if(databus.bgMusic == musicName)
         {
             return;
         }
-        if(this.soundChnl) this.soundChnl.stop();
+        if(CC_WECHATGAME){
+            if(databus.soundChnl) databus.soundChnl.stop();
+        } else{
+            if(databus.soundChnl != null){
+                cc.audioEngine.stop(databus.soundChnl);
+            }
+        }
         databus.bgMusic = musicName;
-        this.soundChnl = BGMConfig.BgmInit(musicName, true);
-        BGMConfig.BgmPlay(this.soundChnl, true);
+        setTimeout(function() {
+            databus.soundChnl = BGMConfig.BgmInit(musicName, true);
+            BGMConfig.BgmPlay(databus.soundChnl, true);
+        }, 100);
     }
 })    

@@ -1,3 +1,4 @@
+import Databus from "Databus"
 let res =
 {
 	"hitBlackHole":"hitBlackHole.mp3",
@@ -38,6 +39,7 @@ let res =
 let wxBaseUrl = "https://cdn-game.2zhuji.cn/uploads/wdxq/audio/";//微信环境下用这个
 let baseUrl = "Audio/";
 let curBgm;
+let databus = new Databus();
 export default class BGMConfig{
     static GetBgm(name) {
 		return res[name]
@@ -81,7 +83,7 @@ export default class BGMConfig{
             sound.loop = loop;
 		} else {
 			cc.loader.loadRes(sound, function (err, audio) {
-				cc.audioEngine.play(audio, loop, 1);
+				databus.soundChnl = cc.audioEngine.play(audio, loop, 1);
 			})
 		}
 	}

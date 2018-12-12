@@ -31,6 +31,7 @@ export default class Databus{
         this.gameTimeLimit = 60;
         this.gameMaxHp = 1;
         this.bgMusic = "";
+        this.soundChnl = null;
         this.shareRewardDiamond = 2000;
         this.guideEnable = true;
         this.showFog = true;

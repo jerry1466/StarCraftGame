@@ -11,7 +11,7 @@ let data =
                     [-55, -45, 5, 432],
                     [55, -45, 10, 864],
                 ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
 
     "1002":
@@ -25,7 +25,7 @@ let data =
                     [-55, -45, 30, 2160],
                     [55, -45, 100, 3024],
                 ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
     "1003":
         {
@@ -38,7 +38,7 @@ let data =
                     [-55, -45, 360, 5184],
                     [55, -45, 770, 6480],
                 ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
     "1004":
         {
@@ -51,7 +51,7 @@ let data =
                     [-55, -45, 1050, 9504],
                     [55, -45, 1190, 11232],
                 ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
     "1005":
         {
@@ -64,7 +64,7 @@ let data =
                     [-55, -45, 1470, 15120],
                     [55, -45, 1610, 17280],
                 ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
     "1006":
         {
@@ -77,7 +77,7 @@ let data =
                     [-55, -45, 1890, 22032],
                     [55, -45, 2030, 24624],
                 ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
     "1007":
         {
@@ -90,7 +90,7 @@ let data =
                     [-55, -45, 2310, 30240],
                     [55, -45, 2450, 33264],
                 ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
     "1008":
         {
@@ -103,7 +103,7 @@ let data =
                     [-55, -45, 2730, 36432],
                     [55, -45, 2870, 43200],
                 ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
     "1009":
         {
@@ -116,7 +116,7 @@ let data =
                     [-55, -45, 3150, 50544],
                     [55, -45, 3290, 54432],
                 ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
     "1010":
         {
@@ -129,7 +129,7 @@ let data =
                     [-55, -45, 3570, 62640],
                     [55, -45, 3710, 66960],
                 ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
     "1011":
         {
@@ -142,7 +142,7 @@ let data =
                 [-55, -45, 3990, 76032],
                 [55, -45, 4130, 80784],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
     "1012":
         {
@@ -155,7 +155,7 @@ let data =
                 [-55, -45, 4410, 90720],
                 [55, -45, 4550, 95904],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
 
     "1013":
@@ -169,7 +169,7 @@ let data =
                 [-55, -45, 4830, 106704],
                 [55, -45, 4970, 112320],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
 
     "1014":
@@ -183,7 +183,7 @@ let data =
                 [-55, -45, 5250, 123984],
                 [55, -45, 5390, 130032],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
 
     "1015":
@@ -197,7 +197,7 @@ let data =
                 [-55, -45, 5670, 142560],
                 [55, -45, 5810, 149040],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
 
     "1016":
@@ -211,7 +211,7 @@ let data =
                 [-55, -45, 6090, 162432],
                 [55, -45, 6230, 169344],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
 
     "1017":
@@ -225,7 +225,7 @@ let data =
                 [-55, -45, 6510, 183600],
                 [55, -45, 6650, 190944],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
 
     "1018":
@@ -239,7 +239,7 @@ let data =
                 [-55, -45, 6930, 206064],
                 [55, -45, 7070, 213840],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
 
     "1019":
@@ -253,7 +253,7 @@ let data =
                 [-55, -45, 7350, 229824],
                 [55, -45, 7490, 238032],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
 
     "1020":
@@ -267,7 +267,7 @@ let data =
                 [-55, -45, 7770, 254880],
                 [55, -45, 7910, 263520],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
 
     "1021":
@@ -281,7 +281,7 @@ let data =
                 [-55, -45, 8190, 281232],
                 [55, -45, 8330, 290304],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
 
     "1022":
@@ -295,7 +295,7 @@ let data =
                 [-55, -45, 8610, 308880],
                 [55, -45, 8750, 318384],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
 
     "1023":
@@ -309,7 +309,7 @@ let data =
                 [-55, -45, 9030, 337824],
                 [55, -45, 9170, 347760],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
 
 
@@ -324,7 +324,7 @@ let data =
                 [-55, -45, 9450, 368064],
                 [55, -45, 9590, 378432],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
 
     "1025":
@@ -338,7 +338,7 @@ let data =
                 [-55, -45, 9870, 399600],
                 [55, -45, 10010, 410400],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
 
     "1026":
@@ -352,7 +352,7 @@ let data =
                 [-55, -45, 10290, 432432],
                 [55, -45, 10430, 443664],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
 
     "1027":
@@ -366,7 +366,7 @@ let data =
                 [-55, -45, 10710, 466560],
                 [55, -45, 10850, 478224],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
 
     "1028":
@@ -380,7 +380,7 @@ let data =
                 [-55, -45, 11130, 501984],
                 [55, -45, 11270, 514080],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
 
     "1029":
@@ -394,7 +394,7 @@ let data =
                 [-55, -45, 11550, 538704],
                 [55, -45, 11690, 551232],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         },
 
     "1030":
@@ -408,7 +408,7 @@ let data =
                 [-55, -45, 11970, 576720],
                 [55, -45, 12110, 589680],
             ],
-            "game_meteor_income":100,
+            "game_meteor_income":50,
         }
 }
 

@@ -74,6 +74,7 @@ cc.Class({
         if(this.gameEnd) return;
         if(this.gameStarted)
         {
+            this.totalTime += dt;
             if(this.meteorCD.Tick())
             {
                 var newMeteor = cc.instantiate(this.meteor);
@@ -81,7 +82,7 @@ cc.Class({
                 newMeteor.setPosition(this.getDropPosition());
                 var meteorCom = newMeteor.getComponent("DropMeteor");
                 this.meteorComList.push(meteorCom);
-                meteorCom.SetMeteor(MathUtil.RandomRange(10, 50));
+                meteorCom.SetMeteor(MathUtil.RandomRange(10, 50), (1 + this.totalTime / 18));
             }
             if(this.blackHoleCD.Tick())
             {
@@ -165,6 +166,7 @@ cc.Class({
     countDownTimer() {
         this.countDown.node.active = true;
         this.countDown.node.zIndex = 100;
+        this.totalTime = 0;
         this.cdanim = this.countDown.node.getComponent(cc.Animation);
         this.cdanim.on('finished', this.countDownFinish, this);
         this.cdanim.play('countDown');

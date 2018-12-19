@@ -1356,7 +1356,7 @@
       "__id__": 1
     },
     "_enabled": true,
-    "openAnim": 1,
+    "openAnim": 0,
     "blankClose": true,
     "bg": {
       "__id__": 3
